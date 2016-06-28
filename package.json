@@ -1,0 +1,33 @@
+{
+  "name": "tdp-invest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "karma.conf.js",
+  "dependencies": {
+    "bower-installer": "^1.2.0",
+    "bower": "^1.7.9",
+    "karma": "^1.1.0",
+    "jasmine-core": "^2.4.1",
+    "karma-chrome-launcher": "^1.0.1",
+    "karma-jasmine": "^1.0.2"
+  },
+  "devDependencies": {
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.1",
+    "karma-requirejs": "^1.0.0",
+    "karma-safari-launcher": "^1.0.0"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wojciechh-kainos/tdp-invest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/wojciechh-kainos/tdp-invest/issues"
+  },
+  "homepage": "https://github.com/wojciechh-kainos/tdp-invest#readme"
+}
