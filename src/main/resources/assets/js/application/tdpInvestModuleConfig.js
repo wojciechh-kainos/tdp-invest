@@ -22,11 +22,5 @@ define(['angular'
             });
     });
 
-//    .run(function($rootScope) {
-//        $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-//            console.log(fromState, toState);
-//        });
-//    });
-
     return tdpInvestModule;
 });
