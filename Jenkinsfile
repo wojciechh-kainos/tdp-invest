@@ -7,4 +7,8 @@ node {
 
     stage 'gradle assemble'
     sh 'gradle assemble'
+
+    stage 'gradle run'
+    sh 'gradle run'
+
 }
