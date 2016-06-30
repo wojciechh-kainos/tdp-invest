@@ -1,5 +1,6 @@
 #!groovy
 
 node {
-    echo 'Hello from Pipeline'
+    echo 'Starting assembly task'
+    sh "gradle assembly"
 }
