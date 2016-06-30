@@ -1,7 +1,10 @@
 #!groovy
 
 node {
-    stage 'gradle assemble'
+
+    stage 'checkout repository'
     checkout scm
+
+    stage 'gradle assemble'
     sh 'gradle assemble'
 }
