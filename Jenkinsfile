@@ -1,10 +1,7 @@
 #!groovy
 
 node {
-    stage 'init'
-    echo 'Starting assembly task'
-    sh 'ls'
-
     stage 'gradle assemble'
+    checkout scm
     sh 'gradle assemble'
 }
