@@ -21,3 +21,5 @@ tdp-invest.iml
 build/
 node_modules/
 src/main/main.iml
+.DS_Store
+src/main/resources/assets/js/lib/
