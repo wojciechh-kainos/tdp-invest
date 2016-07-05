@@ -78,10 +78,8 @@ task startServer(type: SpawnProcessTask) {
     ready "Server: Started"
 }
 
-task stopServer(type: KillProcessTask)
-
-run {
-    args 'server', './src/main/resources/app_config.yml'
+task stopServer(type: Exec) {
+    commandLine "pkill", " -9", "java"
 }
 
 artifacts {
