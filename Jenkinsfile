@@ -2,6 +2,10 @@
 
 node {
 
+    stage 'try to kill server'
+    sh ' value=$(<pidFile.text) ' +
+            'kill -9 $value '
+
     stage 'checkout'
     checkout scm
 
