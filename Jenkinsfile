@@ -17,12 +17,9 @@ node {
     stage 'stop server'
     sh 'gradle stopServer || echo "server not running"'
 
-
+    stage 'stop server #2'
+    sh 'gradle stopServer || echo "server not running"'
 
     stage 'start server'
-    sh 'gradle startServer'
-
-
-    stage 'stop server'
     sh 'gradle startServer'
 }
