@@ -18,7 +18,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-        classpath 'com.wiredforcode:gradle-spawn-plugin:0.7.0'
+        classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
     }
 }
 
@@ -74,7 +74,8 @@ task oneJar(type: OneJar) {
 }
 
 task startServer(type: SpawnProcessTask) {
-    command "gradle run > /var/log/tdp-invest.log"
+    command "gradle run"
+    ready "Server: Started"
 }
 
 task stopServer(type: KillProcessTask)
