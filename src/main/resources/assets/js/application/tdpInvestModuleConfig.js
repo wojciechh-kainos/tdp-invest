@@ -19,7 +19,14 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            });
+            }).state("empty-state", {
+                url: "/empty-state",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-empty-state.html"
+                    }
+                }
+        });
     });
 
     return tdpInvestModule;
