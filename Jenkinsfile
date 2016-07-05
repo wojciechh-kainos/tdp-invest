@@ -1,6 +1,9 @@
 #!groovy
 
 node {
+    stage 'try to kill server'
+    sh 'if value=$(<.pid.lock); ' +
+        'then kill -9 $value; fi'
 
     stage 'checkout'
     checkout scm
@@ -16,10 +19,6 @@ node {
 
     stage 'stop server'
     sh 'gradle stopServer || echo "server not running"'
-
-    stage 'try to kill server'
-    sh ' value=$(<.pid.lock) ' +
-            'kill -9 $value '
 
     stage 'start server'
     sh 'gradle startServer'
