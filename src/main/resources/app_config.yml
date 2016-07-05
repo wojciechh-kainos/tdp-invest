@@ -4,4 +4,6 @@ server:
   applicationConnectors:
     - type: http
       port: 9000
-      adminPort: 9014
+  adminConnectors:
+    - type: http
+      port: 9500
