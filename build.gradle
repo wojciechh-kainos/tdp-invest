@@ -18,7 +18,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-        classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
+        classpath 'com.wiredforcode:gradle-spawn-plugin:0.7.0'
     }
 }
 
@@ -78,7 +78,7 @@ task startServer(type: SpawnProcessTask) {
     ready "Server: Started"
 }
 
-task stopServer(type: KillProcessTask)
+//task stopServer(type: KillProcessTask)
 
 run {
     args 'server', './src/main/resources/app_config.yml'
