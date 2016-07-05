@@ -74,8 +74,7 @@ task oneJar(type: OneJar) {
 }
 
 task startServer(type: SpawnProcessTask) {
-    command "gradle run"
-    ready "Server: Started"
+    command "gradle run > /var/log/tdp-invest.log"
 }
 
 task stopServer(type: KillProcessTask)
