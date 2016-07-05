@@ -78,6 +78,11 @@ task startServer(type: SpawnProcessTask) {
     ready "Server: Started"
 }
 
+task myTask() {
+    description = 'this is a useless task'
+    println 'myTask is working'
+}
+
 task stopServer(type: KillProcessTask)
 
 run {
