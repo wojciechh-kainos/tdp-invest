@@ -78,7 +78,7 @@ task startServer(type: SpawnProcessTask) {
     ready "Server: Started"
 }
 
-//task stopServer(type: KillProcessTask)
+task stopServer(type: KillProcessTask)
 
 run {
     args 'server', './src/main/resources/app_config.yml'
