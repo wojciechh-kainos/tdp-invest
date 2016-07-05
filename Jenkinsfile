@@ -5,6 +5,9 @@ node {
     stage 'checkout'
     checkout scm
 
+    stage 'do nothing'
+    sh 'echo NOTHING'
+
     stage 'assemble'
     sh 'gradle assemble'
 
