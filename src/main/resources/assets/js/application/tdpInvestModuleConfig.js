@@ -1,6 +1,7 @@
 define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
+    , 'application/controllers/tdpInvestInvestmentController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -17,6 +18,14 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-person.html",
                         controller: "tdpInvestPersonController"
+                    }
+                }
+            }).state("tdp.investment", {
+                url: "/investment/{investmentId}",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-investment.html",
+                        controller: "tdpInvestInvestmentController"
                     }
                 }
             });
