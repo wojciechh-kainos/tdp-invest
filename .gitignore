@@ -20,3 +20,4 @@ tdp-invest.iml
 build/
 node_modules/
 lib/
+.pid.lock
