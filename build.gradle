@@ -75,7 +75,7 @@ task oneJar(type: OneJar) {
 
 task startServer(type: SpawnProcessTask) {
     command "gradle run"
-    ready "Server: Started"
+    ready "gradle run is ready."
 }
 
 task stopServer(type: KillProcessTask)
