@@ -4,4 +4,4 @@ server:
   applicationConnectors:
     - type: http
       port: 9005
-      adminPort: 9515
+      adminPort: 9505
