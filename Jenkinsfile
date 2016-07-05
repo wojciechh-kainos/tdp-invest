@@ -20,7 +20,4 @@ node {
     stage 'start server'
     sh 'gradle startServer'
 
-    stage 'start server 2'
-    sh 'gradle startServer'
-
 }
