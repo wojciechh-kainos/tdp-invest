@@ -3,7 +3,8 @@
 node {
     stage 'try to kill server'
     sh 'if value=$(<.pid.lock); ' +
-        'then kill -9 $value; fi'
+        'then kill -9 $value; ' +
+        'rm .pid.lock; fi'
 
     stage 'checkout'
     checkout scm
