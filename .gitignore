@@ -17,3 +17,6 @@ tdp-invest.iml
 .gradle
 .idea
 
+
+node_modules/
+build/
