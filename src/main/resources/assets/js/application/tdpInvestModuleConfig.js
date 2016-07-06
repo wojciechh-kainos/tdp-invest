@@ -20,7 +20,7 @@ define(['angular'
                     }
                 }
             }).state("emptysta", {
-                url: "/emptysta",
+                url: "/empty",
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-empty.html",
