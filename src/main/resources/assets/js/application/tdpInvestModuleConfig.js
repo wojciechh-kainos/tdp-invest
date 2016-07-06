@@ -19,11 +19,11 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            }).state("empty-state", {
-                url: "/empty-state",
+            }).state("tdp.page", {
+                url: "/page",
                 views: {
                     "@": {
-                        templateUrl: "html/partials/tdp-invest-empty-state.html"
+                        templateUrl: "html/partials/tdp-invest-page.html"
                     }
                 }
         });
@@ -31,3 +31,4 @@ define(['angular'
 
     return tdpInvestModule;
 });
+
