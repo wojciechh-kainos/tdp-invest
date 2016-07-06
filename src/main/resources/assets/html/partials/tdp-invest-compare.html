@@ -1,1 +1,21 @@
 <h4>compare view</h4>
+
+<div>
+    <input ng-model="name" />
+    <input ng-model="val" />
+    <button ng-click="addInvestment(name, val)">Add</button>
+    <br />
+</div>
+
+<div>
+    <h3>Investments</h3>
+    <ul>
+        <div ng-init="investments = getInvestments()">
+            <li ng-repeat="inv in investments">
+                <a ng-click="delInvestment(inv.id)" ng-mouseover="inv.id">
+                    {{inv.name}}: {{inv.val}}%
+                </a>
+            </li>
+        </div>
+    </ul>
+</div>
