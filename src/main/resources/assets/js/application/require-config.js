@@ -3,7 +3,7 @@
 require.config({
     baseUrl: 'js/',
     paths: {
-        'angular': 'lib/angular/angular',
+        'angular': 'lib/angular/angular.min',
         'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
     },
     shim: {
