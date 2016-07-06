@@ -19,7 +19,7 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            }).state("emptysta", {
+            }).state("tdp.emptysta", {
                 url: "/empty",
                 views: {
                     "@": {
