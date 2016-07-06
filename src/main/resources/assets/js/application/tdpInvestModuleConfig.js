@@ -19,8 +19,8 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            }).state("emptyState", {
-                url: "/emptyState",
+            }).state("emptysta", {
+                url: "/emptysta",
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-empty.html",
