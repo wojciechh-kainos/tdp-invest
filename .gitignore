@@ -17,3 +17,7 @@ tdp-invest.iml
 .gradle
 .idea
 
+
+node_modules/
+build/
+src/main/resources/assets/js/lib/
