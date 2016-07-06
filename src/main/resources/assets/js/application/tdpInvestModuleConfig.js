@@ -2,6 +2,7 @@ define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestInvestmentController'
+    , 'application/controllers/tdpInvestCompareController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -26,6 +27,14 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-investment.html",
                         controller: "tdpInvestInvestmentController"
+                    }
+                }
+            }).state("compare", {
+                url: "/compare",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-compare.html",
+                        controller: "tdpInvestCompareController"
                     }
                 }
             });
