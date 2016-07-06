@@ -28,7 +28,15 @@ define(['angular'
                                       controller: "tdpInvestTestStateController"
                                   }
                               }
-                          });
+                          })
+            .state("thing",{
+                url: "/thing",
+                views: {
+                   "@": {
+                    templateUrl: "html/partials/tdp-invest-thing.html"
+                   }
+                }
+            });
     });
 
     return tdpInvestModule;
