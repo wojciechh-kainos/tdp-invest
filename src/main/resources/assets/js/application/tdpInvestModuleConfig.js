@@ -19,6 +19,13 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
+            }).state("thing",{
+                url: "/thing",
+                views: {
+                   "@": {
+                    templateUrl: "html/partials/tdp-invest-thing.html"
+                   }
+                }
             });
     });
 
