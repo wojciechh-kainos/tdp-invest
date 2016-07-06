@@ -21,3 +21,4 @@ build/
 classes/
 node_modules/
 src/main/resources/assets/js/lib/
+.pid.lock
