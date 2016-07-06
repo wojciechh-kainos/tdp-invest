@@ -33,6 +33,13 @@ define(['angular'
                         templateUrl: "html/partials/tdp-invest-another.html"
                     }
                 }
+            }).state("compare", {
+                url: "/compare",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-compare.html"
+                    }
+                }
             });
     });
 
