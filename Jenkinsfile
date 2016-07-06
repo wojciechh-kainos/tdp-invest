@@ -13,7 +13,4 @@ node {
     stage 'bower install'
     sh 'bower install --allow-root'
 
-    stage 'start server'
-    sh 'gradle startServer'
-
 }
