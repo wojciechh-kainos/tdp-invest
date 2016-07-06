@@ -20,6 +20,15 @@ define(['angular'
                     }
                 }
             });
+            $stateProvider.state("compare", {
+                url: "/compare",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-compare.html"
+                    }
+
+                }
+            })
     });
 
     return tdpInvestModule;
