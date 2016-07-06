@@ -26,6 +26,13 @@ define(['angular'
                         templateUrl: "html/partials/tdp-invest-empty.html"
                     }
                 }
+            }).state("another", {
+                url: "/another",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-another.html"
+                    }
+                }
             });
     });
 
