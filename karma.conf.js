@@ -19,7 +19,7 @@ module.exports = function(config) {
       'lib/angular-mocks/angular-mocks.js',
       'lib/angular-ui-router/release/angular-ui-router.min.js',
       'lib/highcharts/highcharts.js',
-      'lib/highcharts-ng/dist/highcharts-ng.min',
+      'lib/highcharts-ng/dist/highcharts-ng.min.js',
       {pattern: "test/**/*.js", included: false},
       {pattern: "application/**/*.js", included: false}
     ],
