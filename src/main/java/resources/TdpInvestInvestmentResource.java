@@ -10,5 +10,5 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestInvestmentResource {
     @GET
-    public String fetch(@PathParam("investmentId") String investmentId) { return investmentId; }
+    public String fetch(@PathParam("investmentId") String investmentId) { return investmentId + "aaa"; }
 }
