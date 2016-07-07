@@ -1,17 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>TDP Invest</title>
 
     <link rel="stylesheet" href="js/lib/angular-material/angular-material.min.css">
+    <link rel="stylesheet" href="stylesheets/main.css">
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
 </head>
-<body>
-<h1>Application header</h1>
-<a ui-sref="compare">Compare</a>
-<div ui-view></div>
-<footer>Application footer</footer>
 
+<body>
+<div layout="column" layout-fill>
+    <md-toolbar layout-align="center center">
+        <h1>TDP Invest</h1>
+    </md-toolbar>
+    <md-content flex>
+        <a ui-sref="another">Form</a>
+
+        <div ui-view></div>
+    </md-content>
+
+    <footer>
+        <div layout="row" layout-align="center center"><h2>Application footer</h2></div>
+    </footer>
+</div>
 </body>
+
 </html>
