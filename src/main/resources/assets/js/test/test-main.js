@@ -26,7 +26,7 @@ require.config({
       'angular': {
           exports: 'angular'
       },
-      'angular-mocks': ['angular'],
+      'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
       'highcharts-ng': ['angular', 'highcharts']
   },
