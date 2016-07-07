@@ -19,6 +19,8 @@ require.config({
       'angular': 'lib/angular/angular.min',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
+      'highcharts': 'lib/highcharts/highcharts',
+      'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min'
   },
   shim: {
       'angular': {
@@ -26,6 +28,7 @@ require.config({
       },
       'angular-mocks': ['angular'],
       'uiRouter' : ['angular'],
+      'highcharts-ng': ['angular', 'highcharts']
   },
   // dynamically load all test files
   deps: allTestFiles,
