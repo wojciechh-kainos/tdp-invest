@@ -1,3 +1,3 @@
-define(['angular', 'uiRouter'], function(angular) {
-    return angular.module("tdpInvestModule", ['ui.router']);
+define(['angular', 'uiRouter', 'angular-chart'], function(angular) {
+    return angular.module("tdpInvestModule", ['ui.router', 'chart.js']);
 });
