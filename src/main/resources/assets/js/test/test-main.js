@@ -19,7 +19,7 @@ require.config({
       'angular': 'lib/angular/angular.min',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
-      'highcharts' : 'lib/highcharts/highcharts.js',
+      'highcharts' : 'lib/highcharts/highcharts',
       'highcharts-ng' : 'lib/highcharts-ng/dist/highcharts-ng.min',
   },
   shim: {
