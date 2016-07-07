@@ -28,9 +28,6 @@ require.config({
       },
       'angular-mocks': ['angular'],
       'uiRouter' : ['angular'],
-      'highcharts' : {
-            exports: 'highcharts'
-      }
       'highcharts-ng' : ['angular', 'highcharts']
   },
   // dynamically load all test files
