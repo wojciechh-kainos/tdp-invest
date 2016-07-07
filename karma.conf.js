@@ -14,19 +14,17 @@ module.exports = function(config) {
 
     // list of files / patterns to load in the browser
     files: [
-      'test/test-main.js',
-      'lib/angular/angular.min.js',
-      'lib/angular-mocks/angular-mocks.js',
-      'lib/angular-ui-router/release/angular-ui-router.min.js',
-      'lib/highcharts/highcharts.js',
-      'lib/highcharts-ng/dist/highcharts-ng.min.js',
+      {pattern: 'lib/**/*.js', included: false},
       {pattern: "test/**/*.js", included: false},
-      {pattern: "application/**/*.js", included: false}
+      {pattern: "application/**/*.js", included: false},
+      'test/test-main.js'
     ],
 
 
     // list of files to exclude
-    exclude: [],
+    exclude: [
+      'application/require-config.js'
+    ],
 
 
     // preprocess matching files before serving them to the browser
