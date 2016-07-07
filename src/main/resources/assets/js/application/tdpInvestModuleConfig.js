@@ -3,7 +3,6 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestInvestmentController'
     , 'application/controllers/tdpInvestCompareController'
-    , 'app'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
