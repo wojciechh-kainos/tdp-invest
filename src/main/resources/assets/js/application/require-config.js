@@ -4,7 +4,7 @@ require.config({
     baseUrl: 'js/',
     paths: {
         'angular': 'lib/angular/angular.min',
-        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
+        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
         'highcharts': 'lib/highcharts/highcharts',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstock' : 'lib/highcharts/highstock'
@@ -13,7 +13,6 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-
         'uiRouter' : ['angular'],
         'highcharts-ng': ['angular', 'highstock']
     },
