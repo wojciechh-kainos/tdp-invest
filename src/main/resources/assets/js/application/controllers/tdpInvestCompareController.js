@@ -27,7 +27,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         var getInvestmentIndex = function(arrId){
             return investments.map(function(x){ return x.id; }).indexOf(arrId);
-        }
+        };
 
         $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
         $scope.series = ['Series A', 'Series B'];
@@ -55,7 +55,9 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                         position: 'right'
                     }
                 ]
-            }
+            },
+            responsive: false,
+            maintainAspectRatio: false
         };
     })
 });
