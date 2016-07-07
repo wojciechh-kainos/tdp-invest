@@ -14,7 +14,7 @@ define(['angular'
                     }
                 }
             }).state("tdp.person", {
-                url: "/person/{personId: [0-9]+}",
+                url: "/person/{personId}",
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-person.html",
