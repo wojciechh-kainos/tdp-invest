@@ -12,7 +12,7 @@
     <ul>
         <div ng-init="investments = getInvestments()">
             <li ng-repeat="inv in investments">
-                <a ng-click="delInvestment(inv.id)" ng-mouseover="inv.id">
+                <a ng-click="delInvestment(inv.id)">
                     {{inv.name}}: {{inv.val}}%
                 </a>
             </li>

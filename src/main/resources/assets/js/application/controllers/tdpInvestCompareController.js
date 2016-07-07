@@ -9,12 +9,12 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         $scope.getInvestments = function(){
             return investments;
-        }
+        };
 
         $scope.addInvestment = function(name, val){
             var len = investments.length;
             investments.push({id: len + 1, name: name, val: val})
-        }
+        };
 
         $scope.delInvestment = function(id){
             if (investments.length > 0) {
@@ -23,10 +23,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                     investments.splice(invId, 1);
                 }
             }
-        }
+        };
 
         var getInvestmentIndex = function(arrId){
             return investments.map(function(x){ return x.id; }).indexOf(arrId);
         }
     })
-})
+});
