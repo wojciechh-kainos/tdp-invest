@@ -28,14 +28,13 @@ require.config({
       },
       'angular-mocks': ['angular'],
       'uiRouter' : ['angular'],
-      'highcharts' : {
-            exports: 'highcharts'
-      }
       'highcharts-ng' : ['angular', 'highcharts']
   },
   // dynamically load all test files
-  deps: allTestFiles,
+  deps: { allTestFiles,
+  },
 
   // we have to kickoff jasmine, as it is asynchronous
-  callback: window.__karma__.start
+  callback: { window.__karma__.start
+  }
 })

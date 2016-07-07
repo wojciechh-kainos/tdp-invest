@@ -13,9 +13,6 @@ require.config({
             exports: 'angular'
         },
         'uiRouter' : ['angular'],
-        'highcharts': {
-            exports: 'highcharts'
-        },
         'highcharts-ng' : ['angular', 'highcharts']
     },
     deps: ['application/bootstrap']
