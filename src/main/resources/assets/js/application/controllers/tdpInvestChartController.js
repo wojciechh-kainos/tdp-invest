@@ -50,8 +50,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
     $scope.makeData = function() {
         data = [];
-        var percentPerMonth = $scope.investmentPercent / 12;
-        var value = $scope.investmentValue;
+        var percentPerMonth = parseInt($scope.investmentPercent) / 12;
+        var value = parseInt($scope.investmentValue);
         for(i = 1; i < 13; i++) {
             data.push(value);
             value += value * percentPerMonth/100;
