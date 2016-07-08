@@ -1,10 +1,8 @@
 define(['angular'
     , 'application/tdpInvestModule'
-    , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/chartController'
-    , 'application/controllers/multiplyController'
-    , 'application/controllers/RowController'
-    , 'application/controllers/tableController'
+    , 'application/controllers/DataController'
+
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -16,51 +14,22 @@ define(['angular'
                     }
                 }
             })
-                .state("tdp.person", {
-                    url: "/person/{personId}",
-                    views: {
-                        "@": {
-                            templateUrl: "html/partials/tdp-invest-person.html",
-                            controller: "tdpInvestPersonController"
-                        }
-                    }
-                })
-                .state("tdp.emptysta", {
-                    url: "/empty",
-                    views: {
-                        "@": {
-                            templateUrl: "html/partials/tdp-invest-empty.html",
-                        }
-                    }
-                })
-
-            .state("multiply", {
-                url: "/multiply",
+            .state("tdp.home", {
+                url: "/home",
                 views: {
-                    "@": {
-                        templateUrl: "html/partials/multiply.html",
-                        controller: "multiplyController"
-                        }
+                     "chart@tdp.compare": {
+                         templateUrl: "html/partials/chart.html",
+                          controller: "chartController"
+                          },
+                     "table@tdp.compare": {
+                         templateUrl: "html/partials/DataTablePage.html",
+                          controller: "DataController"
+                          },
+                     "compare@": {
+                         templateUrl: "html/partials/tdp-invest-compare.html",
                     }
                 }
-            ).state("row", {
-                url: "/row",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/row.html",
-                        controller: "RowController"
-                        }
-                    }
-                }
-            ).state("multiply.display", {
-                url: "/display",
-                views: {
-                    "example@multiply": {
-                        templateUrl: "html/partials/display.html",
-                        }
-                    }
-                }
-            )
+            })
             .state("tdp.compare", {
                 url: "/compare",
                 views: {
@@ -69,12 +38,12 @@ define(['angular'
                           controller: "chartController"
                           },
                      "table@tdp.compare": {
-                         templateUrl: "html/partials/table.html",
-                          controller: "tableController"
+                         templateUrl: "html/partials/DataTablePage.html",
+                          controller: "DataController"
                           },
                      "compare@": {
                          templateUrl: "html/partials/tdp-invest-compare.html",
-                          }
+                    }
                 }
             });
 
