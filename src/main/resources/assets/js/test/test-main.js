@@ -24,7 +24,7 @@ require.config({
       'angular': {
           exports: 'angular'
       },
-      'angular-mocks': ['angular'],
+      'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
   },
   // dynamically load all test files

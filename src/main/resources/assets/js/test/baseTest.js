@@ -1,4 +1,4 @@
-define(['application/controllers/tdpInvestPersonController'], function(module, controller) {
+define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonController'], function(angular) {
 
     describe('tdpInvestPersonController', function() {
         beforeEach(angular.mock.module('tdpInvestModule'));
