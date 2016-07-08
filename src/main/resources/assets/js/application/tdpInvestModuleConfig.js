@@ -4,7 +4,7 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+    tdpInvestModule.config(function($stateProvider, RestangularProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -30,6 +30,9 @@ define(['angular'
                     }
                 }
             });
+
+        RestangularProvider.setBaseUrl('/api');
+
     });
 
     return tdpInvestModule;
