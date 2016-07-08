@@ -1,7 +1,7 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.factory('chartFactory', function() {
-        var ChartConfig = function(series, categories, title, subtitle) {
-            this.config = {
+    tdpInvestModule.factory('ChartConfigFactory', function() {
+        var config =  function(title, subtitle, series, categories) {
+            return {
 
               options: {
                   chart: {
@@ -19,7 +19,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                   text: subtitle
               },
               xAxis: {
-                  categories: categories
+                  categories: categories,
               },
               yAxis: {
                   title: {
@@ -40,8 +40,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
               }
             };
         };
-
-        return ChartConfig;
+    return config;
     });
 
-)};
+});
