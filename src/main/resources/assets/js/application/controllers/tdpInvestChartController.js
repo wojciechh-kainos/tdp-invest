@@ -5,48 +5,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
     $scope.investmentPercent = 3;
     var data = [];
 
-    $scope.chartConfig = {
-
-          options: {
-              chart: {
-                  type: 'spline'
-              },
-              tooltip: {
-                  valueSuffix: ' PLN'
-              },
-          },
-
-          title: {
-              text: 'Income'
-          },
-          subtitle: {
-              text: 'Much money wow'
-          },
-          xAxis: {
-              categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-          },
-          yAxis: {
-              title: {
-                  text: 'Value [PLN]'
-              },
-              minorGridLineWidth: 0,
-              gridLineWidth: 0,
-              alternateGridColor: null
-          },
-          tooltip: {
-              valueSuffix: ' PLN'
-          },
-          series: [{
-              name: 'Bank investment',
-              data: data
-
-          }],
-          navigation: {
-              menuItemStyle: {
-                  fontSize: '10px'
-              }
-          }
-        };
+    categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
 
     $scope.makeData = function() {
         data = [];
