@@ -17,11 +17,11 @@ define(['angular'
             .state("tdp.data", {
                 url: "/home",
                 views: {
-                     "chart@tdp.compare": {
+                     "chart@tdp.data": {
                          templateUrl: "html/partials/chart.html",
                           controller: "chartController"
                           },
-                     "table@tdp.compare": {
+                     "table@tdp.data": {
                          templateUrl: "html/partials/DataTablePage.html",
                           controller: "DataController"
                           },
