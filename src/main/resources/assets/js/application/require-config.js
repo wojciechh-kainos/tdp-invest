@@ -1,28 +1,20 @@
 'use strict';
 
+//noinspection JSFileReferences
 require.config({
     baseUrl: 'js/',
     paths: {
         'angular': 'lib/angular/angular',
         'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
-        'angular-material': 'lib/angular-material/angular-material',
-        'angular-aria': 'lib/angular-aria/angular-aria.min',
-        'angular-animate': 'lib/angular-animate/angular-animate.min',
-        'angular-chart' : 'lib/angular-chart.js/dist/angular-chart',
-        'chart': 'lib/Chart.js/Chart'
+        'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
+        'highstocks': 'lib/highcharts/highstock'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
-        'chart':{
-            exports: 'Chart'
-        },
         'uiRouter' : ['angular'],
-        'angular-material' : ['angular', 'angular-animate', 'angular-aria'],
-        'angular-aria': ['angular'],
-        'angular-animate': ['angular'],
-        'angular-chart': ['angular','chart']
+        'highcharts-ng' : ['angular', 'highstocks']
     },
     deps: ['application/bootstrap']
 });

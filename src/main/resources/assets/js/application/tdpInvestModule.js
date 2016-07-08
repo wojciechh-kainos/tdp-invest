@@ -1,4 +1,4 @@
-define(['angular', 'uiRouter', 'angular-chart'], function(angular) {
-    return angular.module("tdpInvestModule", ['ui.router', 'ngMaterial', 'chart.js']);
+define(['angular', 'uiRouter', 'highcharts-ng'], function(angular) {
+    return angular.module("tdpInvestModule", ['ui.router', 'highcharts-ng']);
 });
 

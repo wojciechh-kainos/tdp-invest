@@ -1,3 +1,4 @@
+//noinspection JSAnnotator
 define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonController'], function(angular) {
 
     describe('tdpInvestPersonController', function() {

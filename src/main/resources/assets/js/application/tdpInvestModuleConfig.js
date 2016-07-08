@@ -3,9 +3,10 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainViewController'
+    , 'application/services/tdpInvestStockDataService'
 
-], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+], function (angular, tdpInvestModule) {
+    tdpInvestModule.config(function ($stateProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -16,36 +17,42 @@ define(['angular'
                     }
                 }
             }).state("tdp.person", {
-                url: "/person/{personId}",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-person.html",
-                        controller: "tdpInvestPersonController"
+            url: "/person/{personId}",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-person.html",
+                    controller: "tdpInvestPersonController"
+                }
+            }
+        }).state("tdp.empty", {
+            url: "/empty",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-empty.html"
+                }
+            }
+        }).state("another", {
+            url: "/another",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-another.html"
+                }
+            }
+        }).state("compare", {
+            url: "/compare",
+            views: {
+                "@": {
+
+                    templateUrl: "html/partials/tdp-invest-compare.html",
+                    controller: "tdpInvestCompareController",
+                    resolve: {
+                        stockDataService: "stockData",
+                        stockDataPromise: function (stockDataService) {
+                            return stockDataService.promise;
+                        }
                     }
                 }
-            }).state("tdp.empty", {
-                url: "/empty",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-empty.html"
-                    }
-                }
-            }).state("another", {
-                url: "/another",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-another.html"
-                    }
-                }
-            }).state("compare", {
-                url: "/compare",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-compare.html",
-                        controller: "tdpInvestCompareController"
-                    }
-                }
-            });
+            }});
     });
 
     return tdpInvestModule;
