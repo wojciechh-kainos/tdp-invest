@@ -9,7 +9,8 @@ require.config({
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstock': 'lib/highcharts/highstock',
         'data': 'charts/input-data',
-        'chart-config': 'charts/chart-config'
+        'chart-config': 'charts/chart-config',
+        'ng-table': 'lib/ng-table/dist/ng-table'
     },
     shim: {
         'angular': {
@@ -23,7 +24,11 @@ require.config({
             deps: ['data']
         },
         'uiRouter': ['angular'],
-        'highcharts-ng': ['angular', 'highstock']
+        'highcharts-ng': ['angular', 'highstock'],
+        'ng-table': {
+            exports: 'NgTableParams',
+            deps: ['angular']
+        }
     },
     deps: ['application/bootstrap']
 });

@@ -11,14 +11,10 @@
 </div>
 
 <div>
-    <table>
-        <tr>
-            <th>Date</th>
-            <th>Value</th>
-        </tr>
-        <tr ng-repeat="row in inputData">
-            <td>{{row[0] | date: 'yyyy-MM-dd'}}</td>
-            <td>{{row[1]}}</td>
+    <table ng-table="tableConfig.params" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td title="'Date'" filter="{ date: 'number' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>
+            <td title="'Value'" filter="{ val: 'text' }" sortable="'val'">{{ row.val }}</td>
         </tr>
     </table>
 </div>
