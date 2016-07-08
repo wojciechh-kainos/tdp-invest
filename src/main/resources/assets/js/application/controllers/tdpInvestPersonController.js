@@ -6,6 +6,5 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpPerso
             }, function(error) {
                 $scope.message = error;
             });
-
     });
 });
