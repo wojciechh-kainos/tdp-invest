@@ -14,7 +14,7 @@ define(['angular'
                     }
                 }
             })
-            .state("tdp.home", {
+            .state("tdp.data", {
                 url: "/home",
                 views: {
                      "chart@tdp.compare": {

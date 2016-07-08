@@ -11,11 +11,11 @@ import java.util.Date;
 import java.util.List;
 
 @Path("/rows")
-@Produces(MediaType.TEXT_HTML)
+@Produces(MediaType.APPLICATION_JSON)
 public class DataResource {
 
     @GET
-    @Path("/get/data")
+    @Path("/get/tdp.data")
     public List<Row> fetchData() {
         Database myDb = new LameMemoryDatabase();
         DatabaseInitializer init = new LameDatabaseInitializer();
@@ -27,7 +27,7 @@ public class DataResource {
     }
 
     @GET
-    @Path("/get/compare")
+    @Path("/get/tdp.compare")
     public List<CalculatedRow> fetchCompare() {
         CalculatedRow row1 = new CalculatedRow(new Date(), new BigDecimal(377), new BigDecimal(123));
 
