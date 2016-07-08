@@ -1,6 +1,6 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("DataController", function($scope, $state, DataService) {
-        DataService.getRows($state.current.name)
+    tdpInvestModule.controller("DataController", function($scope, $state, DataService, dataUrl) {
+        DataService.getRows(dataUrl)
             .then(function(response) {
             $scope.message = response.data;
                 $scope.data = response.data;

@@ -20,6 +20,11 @@ define(['angular'
                      "compare@": {
                          templateUrl: "html/partials/tdp-invest-compare.html",
                     }
+                },
+                resolve: {
+                    dataUrl: function() {
+                        return "/api/rows/get/data"
+                    }
                 }
             })
             .state("compare", {
@@ -38,6 +43,11 @@ define(['angular'
                     },
                     "userData@": {
                          templateUrl: "html/partials/userData.html",
+                    }
+                },
+                resolve: {
+                    dataUrl: function() {
+                        return "api/rows/get/compare"
                     }
                 }
             });
