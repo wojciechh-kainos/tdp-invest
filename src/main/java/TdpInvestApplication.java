@@ -4,6 +4,7 @@ import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.TdpInvestPersonResource;
+import resources.TdpInvestPriceResource;
 
 
 public class TdpInvestApplication extends Application<TdpInvestApplicationConfiguration> {
@@ -16,6 +17,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         environment.jersey().register(new TdpInvestPersonResource());
+        environment.jersey().register(new TdpInvestPriceResource());
     }
 
     public static void main(final String[] args) throws Exception {
