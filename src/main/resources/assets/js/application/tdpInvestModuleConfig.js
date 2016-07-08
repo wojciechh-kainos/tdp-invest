@@ -4,6 +4,7 @@ define(['angular'
     , 'application/controllers/chartController'
     , 'application/controllers/multiplyController'
     , 'application/controllers/RowController'
+    , 'application/controllers/tableController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -61,11 +62,18 @@ define(['angular'
                 }
             )
             .state("tdp.compare", {
-                url: "/chart",
+                url: "/compare",
                 views: {
-                     "@": {
+                     "chart@tdp.compare": {
                          templateUrl: "html/partials/chart.html",
                           controller: "chartController"
+                          },
+                     "table@tdp.compare": {
+                         templateUrl: "html/partials/table.html",
+                          controller: "tableController"
+                          },
+                     "compare@": {
+                         templateUrl: "html/partials/tdp-invest-compare.html",
                           }
                 }
             });

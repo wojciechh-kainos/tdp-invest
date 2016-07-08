@@ -6,19 +6,28 @@
     <title>TDP Invest</title>
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
     <link href="js/lib/angular-material/angular-material.css" rel="stylesheet" />
-    <md-toolbar>
-        <div class="md-toolbar-tools">
-            <md-button aria-label="Home">
-                <a ui-sref="tdp">Home</a>
-            </md-button>
-            <md-button aria-label="Chart">
-                <a ui-sref="tdp.compare">Compare</a>
-            </md-button>
-        </div>
-    </md-toolbar>
 </head>
-<body>
-    <div ui-view></div>
-    <footer>Index view</footer>
+<body layout="column">
+<md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+        <md-button aria-label="Home">
+            <a ui-sref="tdp">Home</a>
+        </md-button>
+        <md-button aria-label="Chart">
+            <a ui-sref="tdp.compare">Compare</a>
+        </md-button>
+    </div>
+</md-toolbar>
+<div flex layout="row">
+    <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
+        <div>
+            <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+                       md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+            <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+                       md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
+        </div>
+    </md-sidenav>
+        <div flex layout="row" ui-view="compare"></div>
+</div>
 </body>
 </html>
