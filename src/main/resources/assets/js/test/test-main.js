@@ -21,6 +21,9 @@ require.config({
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
       'highcharts' : 'lib/highcharts/highcharts',
       'highcharts-ng' : 'lib/highcharts-ng/dist/highcharts-ng.min',
+      'ngMaterial' : 'lib/angular-material/angular-material',
+      'ngAnimate' : 'lib/angular-aria/angular-aria',
+      'ngAria' : 'lib/angular-animate/angular-animate',
   },
   shim: {
       'angular': {
@@ -28,7 +31,10 @@ require.config({
       },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
-      'highcharts-ng' : ['angular', 'highcharts']
+      'highcharts-ng' : ['angular', 'highcharts'],
+      'ngAnimate' : ['angular'],
+      'ngAria' : ['angular'],
+      'ngMaterial' : ['angular','ngAria', 'ngAnimate']
   },
   // dynamically load all test files
   deps:  allTestFiles,
