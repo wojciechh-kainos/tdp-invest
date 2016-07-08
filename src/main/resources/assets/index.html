@@ -5,18 +5,25 @@
     <meta charset="UTF-8">
     <title>TDP Invest</title>
     <link rel="stylesheet" href="stylesheets/main.css">
+    <link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.css">
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
 </head>
 
 <body>
 <div>
+    <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+        <div class="container"><span class="navbar-brand">TDP Invest</span>
+            <div class="row">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a ui-sref="tdp">Chart</a></li>
+                    <li><a ui-sref="compare">Compare</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <a ui-sref="another">Form</a>
 
-        <h1>TDP Invest</h1>
-
-
-        <a ui-sref="another">Form</a>
-
-        <div ui-view></div>
+    <div ui-view></div>
 
 
     <footer>

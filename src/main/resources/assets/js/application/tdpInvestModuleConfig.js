@@ -13,7 +13,13 @@ define(['angular'
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html",
-                        controller: "tdpInvestMainViewController"
+                        controller: "tdpInvestMainViewController",
+                        resolve: {
+                            stockDataService: "stockData",
+                            stockDataPromise: function (stockDataService) {
+                                return stockDataService.promise;
+                            }
+                        }
                     }
                 }
             }).state("tdp.person", {
