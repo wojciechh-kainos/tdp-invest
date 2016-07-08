@@ -2,5 +2,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
     tdpInvestModule.controller("tdpInvestMainController", function($scope) {
 
         $scope.chartConfig = chartConfig;
+
+        $scope.inputData = inputData;
     });
 });

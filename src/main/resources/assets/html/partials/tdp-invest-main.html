@@ -5,4 +5,20 @@
 <div> Main template here </div>
 <a ui-sref="compare">Compare</a>
 </br>
-<highchart config="chartConfig"></highchart>
+
+<div>
+    <highchart config="chartConfig"></highchart>
+</div>
+
+<div>
+    <table>
+        <tr>
+            <th>Date</th>
+            <th>Value</th>
+        </tr>
+        <tr ng-repeat="row in inputData">
+            <td>{{row[0] | date: 'yyyy-MM-dd'}}</td>
+            <td>{{row[1]}}</td>
+        </tr>
+    </table>
+</div>
