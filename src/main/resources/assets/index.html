@@ -11,21 +11,22 @@
 <md-toolbar layout="row">
     <div class="md-toolbar-tools">
         <md-button aria-label="Home">
-            <a ui-sref="tdp.data">Home</a>
+            <a ui-sref="data">Home</a>
         </md-button>
         <md-button aria-label="Chart">
-            <a ui-sref="tdp.compare">Compare</a>
+            <a ui-sref="compare">Compare</a>
         </md-button>
     </div>
 </md-toolbar>
 <div flex layout="row">
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
         <div>
-            <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+            <md-datepicker ng-model="beginDate" md-placeholder="Date from:"
                        md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
-            <md-datepicker ng-model="myDate" md-placeholder="Enter date"
+            <md-datepicker ng-model="endDate" md-placeholder="Date to:"
                        md-min-date="minDate" md-max-date="maxDate"></md-datepicker>
         </div>
+        <div ui-view="userData"></div>
     </md-sidenav>
         <div flex layout="row" ui-view="compare"></div>
 </div>

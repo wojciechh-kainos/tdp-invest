@@ -6,22 +6,14 @@ define(['angular'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
-            .state("tdp", {
-                url: "/tdp",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-main.html"
-                    }
-                }
-            })
-            .state("tdp.data", {
+            .state("data", {
                 url: "/home",
                 views: {
-                     "chart@tdp.data": {
+                     "chart@data": {
                          templateUrl: "html/partials/chart.html",
                           controller: "chartController"
                           },
-                     "table@tdp.data": {
+                     "table@data": {
                          templateUrl: "html/partials/DataTablePage.html",
                           controller: "DataController"
                           },
@@ -30,19 +22,22 @@ define(['angular'
                     }
                 }
             })
-            .state("tdp.compare", {
+            .state("compare", {
                 url: "/compare",
                 views: {
-                     "chart@tdp.compare": {
+                     "chart@compare": {
                          templateUrl: "html/partials/chart.html",
                           controller: "chartController"
                           },
-                     "table@tdp.compare": {
+                     "table@compare": {
                          templateUrl: "html/partials/DataTablePage.html",
                           controller: "DataController"
                           },
                      "compare@": {
                          templateUrl: "html/partials/tdp-invest-compare.html",
+                    },
+                    "userData@": {
+                         templateUrl: "html/partials/userData.html",
                     }
                 }
             });

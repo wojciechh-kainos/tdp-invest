@@ -15,7 +15,7 @@ import java.util.List;
 public class DataResource {
 
     @GET
-    @Path("/get/tdp.data")
+    @Path("/get/data")
     public List<Row> fetchData() {
         Database myDb = new LameMemoryDatabase();
         DatabaseInitializer init = new LameDatabaseInitializer();
@@ -27,7 +27,7 @@ public class DataResource {
     }
 
     @GET
-    @Path("/get/tdp.compare")
+    @Path("/get/compare")
     public List<CalculatedRow> fetchCompare() {
         CalculatedRow row1 = new CalculatedRow(new Date(), new BigDecimal(377), new BigDecimal(123));
 
