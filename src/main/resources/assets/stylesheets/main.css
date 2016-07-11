@@ -15,11 +15,13 @@ footer {
     background-color: #f5f5f5;
 }
 
-tbody, thead{
-    display: block;
+
+.content {
+    height:400px;
+    overflow: auto;
 }
 
-tr{
+tr {
     width: 100%;
 }
 
