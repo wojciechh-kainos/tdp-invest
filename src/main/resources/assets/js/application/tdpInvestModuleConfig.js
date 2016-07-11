@@ -10,6 +10,9 @@ define(['angular'
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"
+                    },
+                    "navbar": {
+                        templateUrl: "html/partials/tdp-invest-navbar.html"
                     }
                 }
             }).state("tdp.person", {
@@ -18,6 +21,9 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-person.html",
                         controller: "tdpInvestPersonController"
+                    },
+                    "navbar": {
+                        templateUrl: "html/partials/tdp-invest-navbar.html"
                     }
                 }
             })
@@ -27,7 +33,10 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-compare.html",
                         controller: "tdpInvestCompareController"
-                    }
+                    },
+                     "navbar": {
+                         templateUrl: "html/partials/tdp-invest-navbar.html"
+                     }
 
                 }
             })
@@ -36,6 +45,9 @@ define(['angular'
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-login.html"
+                    },
+                    "navbar":{
+                        templateUrl: "html/partials/tdp-invest-navbar-logout.html"
                     }
                 }
             })
