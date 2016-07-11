@@ -1,6 +1,7 @@
 define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestMainViewController", function ($scope, stockData) {
         $scope.test = "hello";
+        $scope.mydata = stockData.getData();
         $scope.chartConfig = {
             options: {
                 chart: {
@@ -25,7 +26,7 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
 
         $scope.chartConfig.series.push({
                 id: 1,
-                data: stockData.getData()
+                data: $scope.mydata
             }
         );
     })

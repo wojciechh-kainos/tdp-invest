@@ -1,21 +1,29 @@
-footer{
-    background-color: #d1d1d1;
+html {
+    position: relative;
+    min-height: 100%;
+}
+#content {
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
+}
+footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    /* Set the fixed height of the footer here */
+    height: 60px;
+    background-color: #f5f5f5;
 }
 
-.navbar .divider-vertical {
-    height: 50px;
-    margin: 0 9px;
-    border-right: 1px solid #ffffff;
-    border-left: 1px solid #f2f2f2;
+tbody, thead{
+    display: block;
 }
 
-.navbar-inverse .divider-vertical {
-    border-right-color: #222222;
-    border-left-color: #111111;
+tr{
+    width: 100%;
 }
 
-@media (max-width: 767px) {
-    .navbar-collapse .nav > .divider-vertical {
-        display: none;
-    }
+tbody{
+    height: 100px;
+    overflow: auto;
 }

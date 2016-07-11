@@ -10,26 +10,26 @@
 </head>
 
 <body>
-<div>
+<div id="content">
+
     <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
         <div class="container"><span class="navbar-brand">TDP Invest</span>
             <div class="row">
                 <ul class="nav navbar-nav navbar-right">
-                    <li><a ui-sref="tdp">Chart</a></li>
-                    <li><a ui-sref="compare">Compare</a></li>
+                    <li ui-sref-active="active"><a ui-sref="tdp">Chart</a></li>
+                    <li ui-sref-active="active"><a ui-sref="compare">Compare</a></li>
                 </ul>
             </div>
         </div>
     </nav>
-    <a ui-sref="another">Form</a>
 
     <div ui-view></div>
 
-
-    <footer>
-        <h2>Application footer</h2>
-    </footer>
 </div>
+
+<footer class="modal-footer">
+    Application footer
+</footer>
 </body>
 
 </html>
