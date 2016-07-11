@@ -4,10 +4,27 @@
     <meta charset="UTF-8">
     <title>TDP Invest</title>
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" src="css/style.css">
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 </head>
 <body>
-    <h1>Application header</h1>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#/tdp">TDP Invest</a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li><a href="#/tdp">Home</a></li>
+                <li class=""><a href="#/compare">Compare</a></li>
+            </ul>
+        </div>
+    </nav>
     <div ui-view></div>
-    <footer>Application footer</footer>
 </body>
 </html>

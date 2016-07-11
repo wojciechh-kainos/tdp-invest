@@ -1,1 +1,19 @@
 <div> Compare</div>
+<div class="col-md-12">
+    <div class="col-md-6 col-md-offset-3">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th><a ng-click="sortTable('date');">Date</a></th>
+                    <th><a ng-click="sortTable('price');">Price</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in collection | orderBy:sort:reverse">
+                    <td>{{item.date}}</td>
+                    <td>{{item.price}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
