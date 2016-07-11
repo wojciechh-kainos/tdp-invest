@@ -1,16 +1,35 @@
-define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams, tdpDataService) {
 
-                Highcharts.chart('container', {
-				    xAxis: {
-				        categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-				            'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-				    },
+                tdpDataService.getInvestData().then(function(response){
+                    $scope.investData = response.data;
 
-				    series: [{
-				        data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-				    }]
-				});
+                    dateList = []
+                    valuesList = []
+                    for (i = 0; i < response.data.length; i++) {
+                        dateList.push(response.data[i].date.month);
+                        valuesList.push(response.data[i].value)
+                    }
 
+                    Highcharts.chart('container', {
+                        xAxis: {
+                            title: {
+                                 text: 'Miesiąc'
+                            },
+                            categories: dateList
+                        },
+
+                        yAxis: {
+                             title: {
+                                    text: 'Wartości'
+                             }
+                        },
+
+                        series: [{
+                            data: valuesList
+                        }]
+                    });
+
+        });
     });
 });
