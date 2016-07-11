@@ -1,20 +1,30 @@
-<div>
+<div class="row">
+    <div>
     PersonId: <input type="text" ng-model="id">
     <a href="javascript:void(0);" ui-sref="tdp.person({personId: id})">Go!</a>
+    </div>
 </div>
-<div id="container">Placeholder for chart</div>
+<div class="row">
+    <div id="container">Placeholder for chart</div>
+</div>
+<div class="row">
+    <p>
+        Search:
+        <input ng-model= "query">
+    </p>
 
-<table>
-    <tr>
-        <td>Dzień</td>
-        <td>Miesiąc</td>
-        <td>Rok</td>
-        <td>Wartość</td>
-    </tr>
-    <tr ng-repeat="score in investData">
-        <td>{{score.date.dayOfMonth}}</td>
-        <td>{{score.date.month}}</td>
-        <td>{{score.date.year}}</td>
-        <td>{{score.value}}</td>
-    </tr>
-</table>
+    <table class="table investScoreTable">
+        <tr>
+            <td><a href="#" ng-click="sortType = 'day'; sortReverse = !sortReverse">Day</a></td>
+            <td><a href="#" ng-click="sortType = 'month'; sortReverse = !sortReverse">Month</a></td>
+            <td><a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">Year</a></td>
+            <td><a href="#" ng-click="sortType = 'value'; sortReverse = !sortReverse">Value</a></td>
+        </tr>
+        <tr ng-repeat="score in investData | orderBy:sortType:sortReverse | filter: query ">
+            <td>{{score.date.dayOfMonth}}</td>
+            <td>{{score.date.month}}</td>
+            <td>{{score.date.year}}</td>
+            <td>{{score.value}}</td>
+        </tr>
+    </table>
+</div>

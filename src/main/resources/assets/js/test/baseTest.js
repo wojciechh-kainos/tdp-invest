@@ -1,14 +1,14 @@
-define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonController'], function(angular) {
-
-    describe('tdpInvestPersonController', function() {
-        beforeEach(angular.mock.module('tdpInvestModule'));
-
-        var $controller;
-        beforeEach(inject(function(_$controller_){
-            $controller = _$controller_;
-        }));
-
-        var id = 4;
+//define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonController'], function(angular) {
+//
+//    describe('tdpInvestPersonController', function() {
+//        beforeEach(angular.mock.module('tdpInvestModule'));
+//
+//        var $controller;
+//        beforeEach(inject(function(_$controller_){
+//            $controller = _$controller_;
+//        }));
+//
+//        var id = 4;
 
 //        describe('$scope.parentId', function() {
 //            it('is being set to a proper value', function() {
@@ -37,6 +37,27 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonContr
 //                expect($scope.getPersonId()).toEqual(id);
 //            });
 //        });
-    });
-});
+//    });
+//});
 
+//define(['angular', 'angularMocks', 'application/controllers/tdpInvestMainController'], function(angular) {
+//
+//    describe('tdpInvestMainController', function(){
+//
+//     beforeEach(angular.mock.module('tdpInvestModule'));
+//
+//     var $controller;
+//
+//     beforeEach(inject(function(_$controller_){
+//        $controller = _$controller_;
+//     }));
+//
+//     it('should create a invest scores list with 2 scores', function() {
+//           var $scope = {};
+//           var controller = $controller('tdpInvestMainController', { $scope: $scope});
+//           expect($controller.investData.length).toBe(5);
+//         });
+//
+//    });
+//
+//});

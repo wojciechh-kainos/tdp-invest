@@ -14,14 +14,14 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     Highcharts.chart('container', {
                         xAxis: {
                             title: {
-                                 text: 'Miesiąc'
+                                 text: 'Month'
                             },
                             categories: dateList
                         },
 
                         yAxis: {
                              title: {
-                                    text: 'Wartości'
+                                    text: 'Value'
                              }
                         },
 

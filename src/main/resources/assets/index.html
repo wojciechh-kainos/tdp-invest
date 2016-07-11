@@ -4,12 +4,21 @@
     <meta charset="UTF-8">
     <title>TDP Invest</title>
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
-    <!--<script src="http://code.highcharts.com/highcharts.src.js"></script>-->
+    <link rel="stylesheet" href="js/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="html/partials/css/style.css">
 </head>
 <body>
-    <h1>Tdp invest</h1>
-    <!--<a href="#/tdp" ui-sref="tdp">Go to main</a>-->
-    <!--<a href="#/person" ui-sref="tdp.person({personId: '1'})">Go to person</a>-->
-    <div ui-view></div>
+    <nav class="navbar navbar-default">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <span class="glyphicon glyphicon-usd" aria-hidden="true"></span>
+                    Tdp Invest
+                </a>
+            </div>
+        </div>
+    </nav>
+    <div class="container" ui-view></div>
+
 </body>
 </html>
