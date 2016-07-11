@@ -14,6 +14,10 @@ node {
     stage 'bower install'
     sh 'bower install --allow-root'
 
-    stage 'stop server'
-    sh 'gradle stopServer || echo "server not running"'
+    stage 'test'
+    sh 'gradle test'
+
+    stage 'karma test'
+    sh './node_modules/karma/bin/karma start karma.conf.js'
+
 }
