@@ -21,6 +21,7 @@ require.config({
       'angularMocks': 'lib/angular-mocks/angular-mocks',
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
       'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
+      'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap',
       'highstocks': 'lib/highcharts/highstock'
   },
   shim: {
@@ -30,7 +31,8 @@ require.config({
 
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
-      'highcharts-ng' : ['angular', 'highstocks']
+      'highcharts-ng' : ['angular', 'highstocks'],
+      'ui-bootstrap' : ['angular']
 
   },
   // dynamically load all test files
