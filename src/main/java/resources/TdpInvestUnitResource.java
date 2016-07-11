@@ -22,7 +22,7 @@ public class TdpInvestUnitResource {
             this.value = b;
         }
 
-        
+
     }
 
     @GET
