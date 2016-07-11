@@ -2,20 +2,15 @@ package framework;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import configuration.DummyTestModule;
-import org.junit.Before;
+import configuration.TestModule;
 import org.junit.BeforeClass;
 
-/**
- * Created by mateuszpi on 11/07/16.
- */
 public class BaseTest {
 
+    protected static Injector injector;
 
-protected Injector injector;
-    @Before
-public void setup(){
-        injector = Guice.createInjector(new DummyTestModule());
-        injector.injectMembers(this);
+    @BeforeClass
+    public static void createInjector() {
+        injector = Guice.createInjector(new TestModule());
     }
 }

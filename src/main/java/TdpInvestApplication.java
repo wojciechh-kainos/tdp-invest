@@ -4,7 +4,7 @@ import configuration.TdpInvestApplicationConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import configuration.DummyModule;
+import configuration.TdpInvestModule;
 import resources.TdpInvestPersonResource;
 
 
@@ -14,8 +14,9 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
+
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
-                .addModule(new DummyModule())
+                .addModule(new TdpInvestModule())
                 .setConfigClass(TdpInvestApplicationConfiguration.class)
                 .build();
         bootstrap.addBundle(guiceBundle);
@@ -23,6 +24,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
+
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
 
     }

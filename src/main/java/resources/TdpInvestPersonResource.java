@@ -1,9 +1,7 @@
 package resources;
 
 import com.google.inject.Inject;
-import com.google.inject.name.Named;
 import services.DummyJob;
-
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -27,6 +25,6 @@ public class TdpInvestPersonResource {
 
     @GET
     public String fetch(@PathParam("personId") String personId) {
-        return personId+ myJob.sayStm();
+        return personId;
     }
 }
