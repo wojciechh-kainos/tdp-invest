@@ -20,8 +20,8 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            });
-            $stateProvider.state("compare", {
+            })
+            .state("compare", {
                 url: "/compare",
                 views: {
                     "@": {
@@ -29,6 +29,14 @@ define(['angular'
                         controller: "tdpInvestCompareController"
                     }
 
+                }
+            })
+            .state("login",{
+                url:"/login",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-login.html"
+                    }
                 }
             })
     });

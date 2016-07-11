@@ -4,8 +4,15 @@
         <table class="table">
             <thead>
                 <tr>
-                    <th><a ng-click="sortTable('date');">Date</a></th>
-                    <th><a ng-click="sortTable('price');">Price</a></th>
+                    <th>
+                        <a ng-click="sortTable('date');">Date</a>
+                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sort == 'date', 'glyphicon glyphicon-arrow-down' : !reverse && sort == 'date', '' : sort != 'date'}"></span>
+                    </th>
+
+                    <th>
+                        <a ng-click="sortTable('price');">Price</a>
+                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sort == 'price', 'glyphicon glyphicon-arrow-down' : !reverse && sort == 'price', '' : sort != 'price'}"></span>
+                    </th>
                 </tr>
             </thead>
             <tbody>
