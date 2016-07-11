@@ -1,7 +1,16 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpConvertService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, Upload, $timeout) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpConvertService', 'ng-table'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, Upload, $timeout, NgTableParams) {
 
         $scope.chartConfig = chartConfig;
+
+        //tablea
+        $scope.inputData = inputData;
+
+        var data = inputData.map(function(row){ return {date: row[0], val: row[1]}; });
+
+        $scope.tableConfig  = {
+            params: new NgTableParams({count: 25}, { counts: [5, 10, 25], data: data })
+        };
 
         //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
         $scope.$watch('files', function () {

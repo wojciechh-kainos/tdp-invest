@@ -5,6 +5,7 @@
 <div> Main template here </div>
 <a ui-sref="compare">Compare</a>
 </br>
+
 <highchart config="chartConfig"></highchart>
 
 
@@ -12,3 +13,12 @@ Drop File:
     <div ngf-drop ngf-select ng-model="files" class="drop-box"
      ngf-drag-over-class="'dragover'" ngf-allow-dir="false"
      accept="csv" ngf-pattern="'image/*,application/pdf'">Drop CSV file here or click to upload</div>
+
+<div>
+    <table ng-table="tableConfig.params" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td title="'Date'" filter="{ date: 'number' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>
+            <td title="'Value'" filter="{ val: 'text' }" sortable="'val'">{{ row.val }}</td>
+        </tr>
+    </table>
+</div>
