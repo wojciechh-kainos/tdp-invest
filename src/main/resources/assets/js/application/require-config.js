@@ -19,7 +19,7 @@ require.config({
         'highcharts-ng' : ['angular', 'highcharts'],
         'ngAnimate' : ['angular'],
         'ngAria' : ['angular'],
-        'ngMaterial' : ['angular','ngAria', 'ngAnimate'],
+        'ngMaterial' : ['angular', 'ngAria', 'ngAnimate'],
 
     },
     deps: ['application/bootstrap']
