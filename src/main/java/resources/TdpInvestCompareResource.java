@@ -16,6 +16,7 @@ import java.util.*;
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestCompareResource {
 
+    //funkcja wysyłająca dane do angulara :)
     @GET
     public List<StockPrice> fetch() {
         List<StockPrice> collection = new ArrayList<>();
@@ -23,6 +24,7 @@ public class TdpInvestCompareResource {
         return collection;
     }
 
+    //generate - funkcja generująca dane date + price
     private List<StockPrice> generate(int n, float maxX, float minX){
 
         List<StockPrice> collection = new ArrayList<>();

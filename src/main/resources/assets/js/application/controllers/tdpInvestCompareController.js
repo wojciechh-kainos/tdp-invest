@@ -3,6 +3,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         tdpCompareService.getData()
         .then(function(response) {
+            //dane z Javy dojdą to wykonuejmy wszysko :)
+
             $scope.message = response.data;
 
 
@@ -106,6 +108,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         });
     }, function(error) {
+        // W przypadku nie dojścia danych z javy
         $scope.message = error;
     });
 });
