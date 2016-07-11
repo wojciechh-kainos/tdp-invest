@@ -3,28 +3,24 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonContr
     describe('tdpInvestPersonController', function() {
         beforeEach(angular.mock.module('tdpInvestModule'));
 
-        var $controller;
-        beforeEach(inject(function(_$controller_){
+        var $controller, id, $scope, httpMock;
+        beforeEach(inject(function(_$controller_, $httpBackend){
             $controller = _$controller_;
+            httpMock = $httpBackend;
+            $scope = {};
+            id = '4';
         }));
 
-        var id = 4;
-
-        describe('$scope.parentId', function() {
+        describe('$scope.message', function() {
             it('is being set to a proper value', function() {
-                var $scope = {};
-                var controller = $controller('tdpInvestPersonController', { $scope: $scope, $stateParams: {personId: id} });
-                expect($scope.personId).toEqual(id);
-            });
-        });
-
-        describe('$scope.getMsg', function() {
-            it('returns a proper value', function() {
-                var $scope = {};
-                var controller = $controller('tdpInvestPersonController', { $scope: $scope, $stateParams: {personId: id} });
-                expect($scope.getPersonId()).toEqual(id);
+                httpMock.expectGET("/api/person/" + id).respond(id);
+                var ctrl = $controller('tdpInvestPersonController', {
+                    $scope: $scope,
+                    $stateParams: {personId: id}
+                });
+                httpMock.flush();
+                expect($scope.message.data).toBe(id);
             });
         });
     });
 });
-
