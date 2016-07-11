@@ -1,9 +1,8 @@
-define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpConvertService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestMainController", function($scope, Upload, $timeout) {
 
         $scope.chartConfig = chartConfig;
 
-        {/*
         //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
         $scope.$watch('files', function () {
                 $scope.upload($scope.files);
@@ -23,7 +22,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                   var file = files[i];
                   if (!file.$error) {
                     Upload.upload({
-                        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
+                        url: 'http://localhost:9005/#/tdp',
                         data: {
                           file: file
                         }
@@ -45,6 +44,6 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 }
             }
         };
-*/}
+
     });
 });
