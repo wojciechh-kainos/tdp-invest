@@ -24,7 +24,7 @@ public class TdpInvestCompareResource {
     }
 
     //generate - funkcja generująca dane date + price
-    private List<StockPrice> generate(int n, float maxX, float minX){
+    public List<StockPrice> generate(int n, float maxX, float minX){
 
         List<StockPrice> collection = new ArrayList<>();
         Random rand = new Random();

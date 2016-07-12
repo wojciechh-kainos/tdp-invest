@@ -25,6 +25,6 @@ public class TdpInvestPersonResource {
 
     @GET
     public String fetch(@PathParam("personId") String personId) {
-        return personId;
+        return myJob.sayStm();
     }
 }

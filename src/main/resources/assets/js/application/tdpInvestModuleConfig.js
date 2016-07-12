@@ -2,6 +2,7 @@ define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
+    , 'application/controllers/tdpInvestCalendarController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -36,6 +37,10 @@ define(['angular'
                     },
                      "navbar": {
                          templateUrl: "html/partials/tdp-invest-navbar.html"
+                     },
+                     "calendar@compare":{
+                        templateUrl: "html/partials/tdp-invest-calendar.html",
+                        controller : "tdpInvestCalendarController"
                      }
 
                 }
