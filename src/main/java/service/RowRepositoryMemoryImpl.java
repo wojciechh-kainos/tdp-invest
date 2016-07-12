@@ -17,8 +17,6 @@ public class RowRepositoryMemoryImpl implements RowRepository {
     private DateTransformer tra = new DateTransformer();
 
     public RowRepositoryMemoryImpl() {
-
-
         repo.add(new Row(tra.getDate("12/02/2013"), new BigDecimal(12)));
         repo.add(new Row(tra.getDate("13/02/2013"), new BigDecimal(244)));
         repo.add(new Row(tra.getDate("14/02/2013"), new BigDecimal(1124)));

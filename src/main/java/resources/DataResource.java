@@ -33,15 +33,7 @@ public class DataResource {
     public List<Row> fetchData(@PathParam("startDate") String startDate,
                                @PathParam("endDate") String endDate) {
 
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date startDateObj = null;
-        Date endDateObj = null;
-        try {
-            startDateObj = sdf.parse(startDate);
-            endDateObj = sdf.parse(endDate);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
+
 
         return repo.getAllRows();
     }
