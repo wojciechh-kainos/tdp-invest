@@ -29,7 +29,7 @@ public class TdpInvestPersonResource {
     @GET
     @Path("/{personId}")
     public String fetch(@PathParam("personId") String personId) {
-        return personId+55;
+        return personId;
     }
 
     @POST

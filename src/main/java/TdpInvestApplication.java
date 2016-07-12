@@ -30,6 +30,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
 
+        environment.jersey().register(new TdpInvestPersonResource());
         environment.jersey().register(new TdpInvestInvestmentResource());
         environment.jersey().register(MultiPartFeature.class);
         environment.jersey().register(new TdpInvestConvertResource());
