@@ -9,6 +9,4 @@ public class TdpInvestModule extends AbstractModule {
     protected void configure() {
         bind(DummyJob.class).to(FirstImplementation.class);
     }
-
-
 }

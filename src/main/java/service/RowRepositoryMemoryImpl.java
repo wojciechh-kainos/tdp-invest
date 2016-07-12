@@ -14,13 +14,17 @@ public class RowRepositoryMemoryImpl implements RowRepository {
 
     private List<Row> repo = new ArrayList<>();
 
+    private DateTransformer tra = new DateTransformer();
+
     public RowRepositoryMemoryImpl() {
-        repo.add(new Row(new Date(), new BigDecimal(12)));
-        repo.add(new Row(new Date(), new BigDecimal(244)));
-        repo.add(new Row(new Date(), new BigDecimal(1124)));
-        repo.add(new Row(new Date(), new BigDecimal(54)));
-        repo.add(new Row(new Date(), new BigDecimal(722)));
-        repo.add(new Row(new Date(), new BigDecimal(555)));
+
+
+        repo.add(new Row(tra.getDate("12/02/2013"), new BigDecimal(12)));
+        repo.add(new Row(tra.getDate("13/02/2013"), new BigDecimal(244)));
+        repo.add(new Row(tra.getDate("14/02/2013"), new BigDecimal(1124)));
+        repo.add(new Row(tra.getDate("15/02/2013"), new BigDecimal(54)));
+        repo.add(new Row(tra.getDate("16/02/2013"), new BigDecimal(722)));
+        repo.add(new Row(tra.getDate("17/02/2013"), new BigDecimal(555)));
     }
 
     @Override
