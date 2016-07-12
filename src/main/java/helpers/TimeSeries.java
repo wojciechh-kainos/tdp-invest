@@ -10,7 +10,17 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class TimeSeries {
-    public List<Fund> createTimeSeries(Date startDate, Date endDate, double amount, double annualRate){
+    List<Fund> timeSeries;
+
+    public TimeSeries(Date startDate, Date endDate, double amount, double annualRate){
+        this.timeSeries = createTimeSeries(startDate, endDate, amount, annualRate);
+    }
+
+    public List<Fund> getTimeSeries(){
+        return this.timeSeries;
+    }
+
+    private List<Fund> createTimeSeries(Date startDate, Date endDate, double amount, double annualRate){
         return Stream
                 .iterate(startDate, date -> addDays(date, 1))
                 .limit(datesDiffInDays(startDate, endDate) + 1)

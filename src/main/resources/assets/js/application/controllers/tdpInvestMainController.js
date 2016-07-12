@@ -10,6 +10,8 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
             params: new NgTableParams({count: 100}, { counts: [25, 50, 100], data: data })
         };
 
+        $scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
+
         //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
         $scope.uploadFiles = function(file, errFiles) {
                 $scope.f = file;
@@ -24,7 +26,6 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
                         $timeout(function () {
                             file.result = response.data;
                             $scope.result = response.data;
-
                             $scope.chartConfig.series.push({
                                                                    name: "Fund",
                                                                    data: response.data,
