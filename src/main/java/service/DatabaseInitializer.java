@@ -1,4 +1,4 @@
-package resources;
+package service;
 
 /**
  * Created by radoslawl on 08/07/16.
