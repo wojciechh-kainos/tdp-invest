@@ -1,32 +1,13 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
     tdpInvestModule.service("DataService", function($http) {
-        var startDate, endDate, input, percentage;
-
-        var data;
-
-        this.setStartDate = function (date) {
-            this.startDate = date;
-        };
-
-        this.setEndDate = function (date) {
-            this.endDate = date;
-        };
-
-        this.setInput = function (input) {
-            this.input = input;
-        }
-
-        this.setPercentage = function (input) {
-            this.percentage = percentage;
-        }
-
-        this.getRows = function(url) {
-            if(url == "/api/rows/get/data") {
+        this.getRowsForHome = function(url, startDate, endDate) {
                 var result = $http.get(url, {params: {startDate: startDate, endDate: endDate}});
-            } else {
+                return result;
+                }
+
+        this.getRowsForCompare = function(url, startDate, endDate, input, percentage) {
                 var result = $http.get(url, {params: {startDate: startDate, endDate: endDate, input: input, percentage: percentage}});
-           }
-            return result;
+                return result;
         }
     })
 });

@@ -5,6 +5,7 @@ define(['angular'
     , 'application/controllers/DateController'
     , 'application/controllers/IndexController'
     , 'application/controllers/UserDataController'
+    , 'application/controllers/ButtonController'
 
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
@@ -12,7 +13,9 @@ define(['angular'
             .state("root", {
                 url: "",
                 templateUrl: 'index.html',
-                controller: 'IndexController'
+                controller: 'IndexController',
+                receivedData: "data"
+
             })
                 .state("root.data", {
                     url: "/home",
@@ -35,7 +38,12 @@ define(['angular'
                               },
                          "compare@": {
                              templateUrl: "html/partials/tdp-invest-compare.html",
-                        }
+                                },
+                         "submitButton@": {
+                            templateUrl: "html/partials/button.html",
+                            controller: "ButtonController"
+                         }
+
                     },
                     resolve: {
                         dataUrl: function() {
@@ -49,7 +57,8 @@ define(['angular'
                         startDate: "startDateCompareVal",
                         endDate: "endDateCompareVal",
                         input: "inputCompareVal",
-                        percentage: "percentageCompareVal"
+                        percentage: "percentageCompareVal",
+                        receivedData: "data"
                     },
                     views: {
                          "chart@root.compare": {
@@ -70,7 +79,11 @@ define(['angular'
                          "userData@": {
                              templateUrl: "html/partials/userData.html",
                              controller: "UserDataController"
-                             }
+                             },
+                             "submitButton@": {
+                                                         templateUrl: "html/partials/button.html",
+                                                         controller: "ButtonController"
+                                                      }
                     },
                     resolve: {
                         dataUrl: function() {

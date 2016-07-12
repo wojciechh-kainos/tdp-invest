@@ -22,8 +22,7 @@
     <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
         <div ui-view="DateSegment"></div>
         <div ui-view="userData"></div>
-        <div ng-model="value"></div>
-        <p>{{$state.current.data}}</p>
+        <div ui-view="submitButton"></div>
     </md-sidenav>
         <div flex layout="row" ui-view="compare"></div>
 </div>
