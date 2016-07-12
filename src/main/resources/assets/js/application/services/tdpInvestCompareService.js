@@ -1,15 +1,36 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.factory('get_all', ['$stateParams', function($stateParams) {
-        return function() {
-            var testArray = [];
+    tdpInvestModule.service('compareData', ['$http', '$stateParams', function($http, $stateParams) {
+        var dataReturned;
 
-            testArray.push({x: -10, y: -10});
-            testArray.push({x: 0, y: 0});
-            testArray.push({x: 10, y: 10});
-            testArray.push({x: 10, y: 20});
-            testArray.push({x: 20, y: 30});
-            testArray.push({x: 30, y: 30});
-            return testArray;
+        this.getData = function () {
+            return dataReturned;
+        };
+
+        var config = {
+            value_investment: 1000,
+            value_capitalization: 30,
+            value_percentage: 0.07,
+        };
+
+        this.setConfig = function(newConfig) {
+            config = newConfig;
+        }
+
+        this.refresh = function() {
+
+            promise = $http({
+                url: '/staticdata/stock.json',
+                method: "GET",
+                params: config
+            }).then(
+                function (response) {
+                    data = response.data;
+                    return data;
+                },
+                function (error) {
+                    return data;
+                }
+            );
         }
     }]);
 });

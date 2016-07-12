@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', function($scope, $stateParams, stockData) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'application/services/tdpInvestCompareService', 'ui-bootstrap'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', 'compareData', function($scope, $stateParams, stockData, compareData) {
         $scope.data = stockData.getData();
 
         $scope.dateOptions = {
@@ -52,6 +52,16 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             return '';
         }
 
+        function formatData(data) {
+            var curr_date = data.getDate();
+            var curr_month = data.getMonth() + 1;
+            var curr_year = data.getFullYear();
+            if (curr_month <= 9) curr_month = "0" + curr_month;
+            if (curr_date <= 9) curr_date = "0" + curr_date;
+
+            return curr_date + "/" + curr_month + "/" + curr_year;
+        }
+
         $scope.chartConfig = {
             options: {
                 chart: {
@@ -64,7 +74,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                     enabled: true
                 },
                 tooltip: {
-                    pointFormat: "Value: {point.y:.2f}"
+                    pointFormat: "Value: {point.y:.2f} "
                 }
             },
             series: [],
@@ -78,6 +88,17 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
 
         $scope.submit = function() {
+            var compareDataConfig = {
+                start_date: formatData($scope.start_date),
+                end_date: formatData($scope.end_date),
+                value_investment: $scope.value_investment,
+                value_capitalization: $scope.value_capitalization,
+                value_percentage: $scope.value_percentage
+            }
+
+            compareData.setConfig(compareDataConfig);
+            compareData.refresh();
+
             var calculated = JSON.parse(JSON.stringify( $scope.data )); // copy array
 
             calculated[0][1] = $scope.value_investment;
