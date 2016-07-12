@@ -21,3 +21,4 @@ build/
 node_modules/
 lib/
 .pid.lock
+.DS_STORE
