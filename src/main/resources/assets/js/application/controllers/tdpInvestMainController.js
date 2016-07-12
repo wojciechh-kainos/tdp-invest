@@ -35,6 +35,5 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpConve
                 }
             }
 
-
     });
 });
