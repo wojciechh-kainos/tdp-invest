@@ -3,6 +3,20 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         this.getData = function() {
             return $http.get("/api/compare");
         };
+
+        this.getDataRange = function(dateFrom, dateTo) {
+            var data = {
+                        dateFrom: dateFrom,
+                        dateTo: dateTo
+                    };
+
+                    var config = {
+                        headers : {
+                            'Content-Type': 'application/json;charset=utf-8;'
+                        }
+                    }
+            return $http.post("/api/compare", data, config);
+        };
     })
 });
 
