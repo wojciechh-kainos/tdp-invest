@@ -23,11 +23,9 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         this.getRows = function(url) {
             if(url == "/api/rows/get/data") {
                 var result = $http.get(url, {params: {startDate: startDate, endDate: endDate}});
-            } else if (url == "/api/rows/get/compare") {
-                var result = $http.get(url, {params: {startDate: startDate, endDate: endDate, input: input, percentage: percentage}});
             } else {
-                console.log("Unknown url");
-            }
+                var result = $http.get(url, {params: {startDate: startDate, endDate: endDate, input: input, percentage: percentage}});
+           }
             return result;
         }
     })
