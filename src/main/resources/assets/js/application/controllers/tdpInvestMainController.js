@@ -2,12 +2,12 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout) {
 
         $scope.chartConfig = chartConfig;
-        $scope.inputData = inputData;
+        //$scope.inputData = inputData;
 
         var data = inputData.map(function(row){ return {date: row[0], val: row[1]}; });
 
         $scope.tableConfig  = {
-            params: new NgTableParams({count: 50}, { counts: [25, 50, 100], data: data })
+            params: new NgTableParams({count: 100}, { counts: [25, 50, 100], data: data })
         };
 
         //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
@@ -24,8 +24,16 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
                         $timeout(function () {
                             file.result = response.data;
                             $scope.result = response.data;
+
                             $scope.chartConfig.series.push({
-                                    data: response.data});
+                                                                   name: "Fund",
+                                                                   data: response.data,
+                                                                   tooltip: {
+                                                                       valueDecimals: 2,
+                                                                       valuePrefix: "$",
+                                                                       xDateFormat: '%y-%m-%d'
+                                                                   }
+                                                               });
                         });
                     }, function (response) {
                         if (response.status > 0)
