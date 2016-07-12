@@ -16,16 +16,20 @@ require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: '/base',
   paths: {
-      'angular': 'lib/angular/angular.min',
-      'angularMocks': 'lib/angular-mocks/angular-mocks',
-      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
+        'angular': 'lib/angular/angular.min',
+        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
+        'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
+        'highcharts': 'http://code.highcharts.com/highcharts.src',
+        'angularMocks': 'lib/angular-mocks/angular-mocks',
+        'angular-bootstrap': 'http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min'
   },
   shim: {
       'angular': {
           exports: 'angular'
       },
       'angularMocks': ['angular'],
-      'uiRouter' : ['angular'],
+      'highcharts-ng': ['angular', 'highcharts'],
+      'uiRouter' : ['angular']
   },
   // dynamically load all test files
   deps: allTestFiles,
