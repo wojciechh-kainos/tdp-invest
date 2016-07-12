@@ -1,9 +1,9 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpConvertService', 'ng-table'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, Upload, $timeout, NgTableParams) {
+define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams) {
 
         $scope.chartConfig = chartConfig;
         $scope.inputData = inputData;
-        //
+
         var data = inputData.map(function(row){ return {date: row[0], val: row[1]}; });
 
         $scope.tableConfig  = {
