@@ -1,30 +1,33 @@
 package configuration;
 
-import DAO.TdpIUnitDAO;
 import com.google.inject.AbstractModule;
-import com.google.inject.ProvisionException;
-import com.google.inject.Singleton;
 import com.google.inject.Provides;
-import domain.TdpIUnit;
-import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.hibernate.HibernateBundle;
+import com.google.inject.ProvisionException;
 import org.hibernate.SessionFactory;
 import services.DummyJob;
 import services.FirstImplementation;
 
 public class TdpInvestModule extends AbstractModule {
 
-    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernate;
+    private SessionFactory sessionFactory;
 
-    public TdpInvestModule(HibernateBundle<TdpInvestApplicationConfiguration> hibernate) {
-        this.hibernate = hibernate;
+    @Provides
+    SessionFactory providesSessionFactory() {
+
+        if (sessionFactory == null) {
+            throw new ProvisionException("The Hibernate session factory has not yet been set. This is likely caused by forgetting to call setSessionFactory during Application.run()");
+        }
+
+        return sessionFactory;
+    }
+
+    public void setSessionFactory(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
     }
 
     @Override
     protected void configure() {
         bind(DummyJob.class).to(FirstImplementation.class);
-        bind(TdpIUnitDAO.class).toInstance(new TdpIUnitDAO(hibernate.getSessionFactory()));
+
     }
-
-
 }

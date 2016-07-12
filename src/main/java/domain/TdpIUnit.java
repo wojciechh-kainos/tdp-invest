@@ -8,7 +8,7 @@ import java.util.Date;
 @Entity
 @Table(name = "unit")
 @NamedQueries({
-		@NamedQuery(name = "domain.TdpIUnit.findAll",
+		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u")})
 public class TdpIUnit {
 	@Id
