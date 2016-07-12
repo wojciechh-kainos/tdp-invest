@@ -38,7 +38,6 @@ define(['angular'
                       }
                   }
               });
-        //TODO: don't work
         $urlRouterProvider.otherwise("/login");
     });
 

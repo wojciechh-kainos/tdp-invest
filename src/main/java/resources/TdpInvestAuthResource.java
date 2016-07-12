@@ -1,9 +1,7 @@
 package resources;
 
-import auth.TdpInvestAuthenticator;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
-import io.dropwizard.auth.basic.BasicCredentials;
 import model.User;
 
 import javax.ws.rs.Consumes;
@@ -11,7 +9,8 @@ import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.MediaType;
-import com.google.common.base.Optional;
+import javax.ws.rs.core.Response;
+
 
 @Path("/")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -26,15 +25,12 @@ public class TdpInvestAuthResource {
     @POST
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public String login(User user) throws AuthenticationException {
-        TdpInvestAuthenticator auth = new TdpInvestAuthenticator();
-        // TODO: add char array for password
-        Optional<User> res = auth.authenticate(new BasicCredentials(user.getName(), user.getName()));
+    public Response login(User user) throws AuthenticationException {
 
-        if (res.isPresent()) {
-            return "SUCCESS";
+        if (user.getPassword().equals("secret")) {
+            return Response.status(Response.Status.ACCEPTED).build();
         } else {
-            return "Unable to log in with those credentials!";
+            return Response.status(Response.Status.NOT_FOUND).build();
         }
     }
 
