@@ -33,8 +33,6 @@ public class DataResource {
     public List<Row> fetchData(@PathParam("startDate") String startDate,
                                @PathParam("endDate") String endDate) {
 
-
-
         return repo.getAllRows();
     }
 

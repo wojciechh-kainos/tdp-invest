@@ -3,7 +3,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
 
         $scope.startDate = new Date(2013/05/03);
         $scope.endDate= new Date(2013/05/03);
-        $scope.receivedData;
+        $scope.receivedData = [];
         $scope.input = 100;
         $scope.percentage = 2;
 
