@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout) {
 
         $scope.chartConfig = chartConfig;
         $scope.inputData = inputData;
