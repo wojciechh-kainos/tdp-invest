@@ -4,17 +4,23 @@ var chartConfig = {
             zoomType: 'x'
         },
         rangeSelector: {
-            enabled: true
+            inputEnabled: false
         },
         navigator: {
             enabled: true
         }
     },
     series: [{
-        data: inputData
+        name: "Fund",
+        data: inputData,
+        tooltip: {
+            valueDecimals: 2,
+            valuePrefix: "$",
+            xDateFormat: '%y-%m-%d'
+        }
     }],
-        title: {
-    text: 'Time series'
-},
+    title: {
+        text: 'Time series'
+    },
     useHighStocks: true
 };
