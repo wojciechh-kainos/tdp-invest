@@ -17,5 +17,4 @@ public class User implements Principal{
         return (int) (Math.random() * 100);
     }
 
-
 }
