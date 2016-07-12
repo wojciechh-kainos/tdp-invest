@@ -7,7 +7,11 @@ import org.junit.BeforeClass;
 
 public class BaseTest {
 
-    protected static Injector injector;
+    private static Injector injector;
+
+    public Injector getInjector() {
+        return injector;
+    }
 
     @BeforeClass
     public static void createInjector() {
