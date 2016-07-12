@@ -21,7 +21,7 @@ define(['angular'
                        percentage: "percentageCompareVal",
                        receivedData: "data"
                 },
-            })
+            }) //asdasd
                 .state("root.data", {
                     url: "/home",
                     views: {
