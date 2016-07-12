@@ -3,6 +3,7 @@ import configuration.TdpInvestApplicationConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import resources.TdpInvestCompareResource;
 import resources.TdpInvestPersonResource;
 
 
@@ -16,6 +17,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         environment.jersey().register(new TdpInvestPersonResource());
+        environment.jersey().register(new TdpInvestCompareResource());
+        //dodajemy taką linię przy każdym endpoincie :)
     }
 
     public static void main(final String[] args) throws Exception {
