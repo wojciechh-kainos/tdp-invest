@@ -5,8 +5,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         $scope.dateOptions = {
             dateDisabled: disabled,
             formatYear: 'yy',
-            maxDate: new Date(2020, 5, 22),
-            minDate: new Date(1970, 1, 1),
             startingDay: 1
         };
 
@@ -53,6 +51,47 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
             return '';
         }
+
+        $scope.chartConfig = {
+            options: {
+                chart: {
+                    zoomType: 'x'
+                },
+                rangeSelector: {
+                    enabled: true
+                },
+                navigator: {
+                    enabled: true
+                },
+                tooltip: {
+                    pointFormat: "Value: {point.y:.2f}"
+                }
+            },
+            series: [],
+            useHighStocks: true
+        };
+
+        $scope.chartConfig.series.push({
+            id: 1,
+            data: $scope.data
+        });
+
+
+        $scope.submit = function() {
+            var calculated = JSON.parse(JSON.stringify( $scope.data )); // copy array
+
+            calculated[0][1] = $scope.value_investment;
+
+            calculated.forEach(function(element, index, array) {
+                if(index == 0) return;
+                calculated[index][1] = calculated[index - 1][1] + 0.01;
+            });
+
+            $scope.chartConfig.series.push({
+                id: 2,
+                data: calculated
+            });
+        };
         
     }]);
 
