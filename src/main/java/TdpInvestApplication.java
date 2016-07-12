@@ -26,7 +26,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
 
-        environment.jersey().register(new TdpInvestPersonResource());
         environment.jersey().register(new DataResource());
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
 

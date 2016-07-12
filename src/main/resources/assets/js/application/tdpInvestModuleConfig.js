@@ -4,23 +4,22 @@ define(['angular'
     , 'application/controllers/DataController'
     , 'application/controllers/DateController'
     , 'application/controllers/IndexController'
+    , 'application/controllers/UserDataController'
 
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
             .state("root", {
                 url: "",
-                data: {
-                    startDate: "startDateVal",
-                    endDate: "endDateVal",
-                    input: "inputVal",
-                    percentage: "percentageVal"
-                     },
-                template: 'index.html',
+                templateUrl: 'index.html',
                 controller: 'IndexController'
             })
                 .state("root.data", {
                     url: "/home",
+                    data: {
+                        startDate: "startDateVal",
+                        endDate: "endDateVal"
+                    },
                     views: {
                          "chart@root.data": {
                              templateUrl: "html/partials/chart.html",
@@ -46,6 +45,12 @@ define(['angular'
                 })
                 .state("root.compare", {
                     url: "/compare",
+                    data: {
+                        startDate: "startDateCompareVal",
+                        endDate: "endDateCompareVal",
+                        input: "inputCompareVal",
+                        percentage: "percentageCompareVal"
+                    },
                     views: {
                          "chart@root.compare": {
                              templateUrl: "html/partials/chart.html",
@@ -64,6 +69,7 @@ define(['angular'
                              },
                          "userData@": {
                              templateUrl: "html/partials/userData.html",
+                             controller: "UserDataController"
                              }
                     },
                     resolve: {
