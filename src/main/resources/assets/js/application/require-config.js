@@ -25,7 +25,6 @@ require.config({
             deps: ['data']
         },
         'uiRouter': ['angular'],
-        'highcharts-ng': ['angular', 'highstock'],
         'ngFileUpload': ['angular'],
         'highcharts-ng': ['angular', 'highstock'],
         'ng-table': {
