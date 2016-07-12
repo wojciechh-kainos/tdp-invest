@@ -51,10 +51,11 @@ sourceSets {
 
 
 dependencies {
-    compile (
-        'io.dropwizard:dropwizard-core:' + dropwizardVersion,
-        'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
-        'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2'
+    compile(
+            'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+            'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
+            'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2',
+            'com.google.code.gson:gson:2.7'
     )
 
     /* Google Guice - Dependency Injection */

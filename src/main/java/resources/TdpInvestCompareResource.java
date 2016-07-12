@@ -1,9 +1,10 @@
 package resources;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,5 +42,17 @@ public class TdpInvestCompareResource {
 
         return collection;
     }
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void fetchRange(String json) {
+        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+        System.out.println(jsonObject.get("dateFrom").getAsString());
+        System.out.println(jsonObject.get("dateTo").getAsString());
+
+
+    }
+
+
 
 }
