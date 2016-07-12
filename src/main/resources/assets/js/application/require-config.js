@@ -10,6 +10,7 @@ require.config({
         'highstock': 'lib/highcharts/highstock',
         'data': 'charts/input-data',
         'chart-config': 'charts/chart-config',
+        'ngFileUpload' : 'lib/ng-file-upload-shim/ng-file-upload',
         'ng-table': 'lib/ng-table/dist/ng-table'
     },
     shim: {
@@ -24,6 +25,8 @@ require.config({
             deps: ['data']
         },
         'uiRouter': ['angular'],
+        'highcharts-ng': ['angular', 'highstock'],
+        'ngFileUpload': ['angular'],
         'highcharts-ng': ['angular', 'highstock'],
         'ng-table': {
             exports: 'NgTableParams',

@@ -3,6 +3,8 @@ import configuration.TdpInvestApplicationConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.media.multipart.MultiPartFeature;
+import resources.TdpInvestConvertResource;
 import resources.TdpInvestInvestmentResource;
 import resources.TdpInvestPersonResource;
 
@@ -18,6 +20,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         environment.jersey().register(new TdpInvestPersonResource());
         environment.jersey().register(new TdpInvestInvestmentResource());
+        environment.jersey().register(MultiPartFeature.class);
+        environment.jersey().register(new TdpInvestConvertResource());
     }
 
     public static void main(final String[] args) throws Exception {

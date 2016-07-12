@@ -6,6 +6,22 @@
 <a ui-sref="compare">Compare</a>
 </br>
 
+
+<div>
+<h4>Upload on file select</h4>
+<button type="file" ngf-select="uploadFiles($file, $invalidFiles)">
+    Select File</button>
+<br><br>
+File:
+<div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
+      <span class="progress" ng-show="f.progress >= 0"><br><br>Progress:
+          <div style="width:{{f.progress}}%"
+               ng-bind="f.progress + '%'"></div>
+      </span>
+</div>
+{{errorMsg}}
+</div>
+
 <div>
     <highchart config="chartConfig"></highchart>
 </div>
