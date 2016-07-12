@@ -51,6 +51,17 @@ define(['angular'
                     }
                 }
             })
+            .state("sign-in",{
+                url:"/sign-in",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-sign-in.html"
+                    },
+                    "navbar":{
+                        templateUrl: "html/partials/tdp-invest-navbar-logout.html"
+                    }
+                }
+            })
     });
 
     return tdpInvestModule;
