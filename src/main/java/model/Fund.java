@@ -4,9 +4,12 @@ import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.validator.constraints.NotEmpty;
 
+import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Fund {
+public class Fund implements Serializable {
     private final Date date;
     private final double value;
 
@@ -26,5 +29,10 @@ public class Fund {
     @JsonProperty("value")
     public double getValue() {
         return value;
+    }
+
+    @Override
+    public String toString(){
+        return this.date + " " + this.value;
     }
 }
