@@ -2,11 +2,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
     tdpInvestModule.controller("UserDataController", function($scope, $state, DataService, dataUrl) {
 
         $scope.$watch('input', function() {
-            $state.current.data.input = $scope.input;
+            $scope.$parent.input = $scope.input;
         })
 
         $scope.$watch('percentage', function() {
-            $state.current.data.percentage = $scope.percentage;
+            $scope.$parent.percentage = $scope.percentage;
         })
     });
 });

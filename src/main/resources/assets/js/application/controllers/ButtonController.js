@@ -3,31 +3,21 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
 
         $scope.submitRequest = function() {
             if(dataUrl == "/api/rows/get/data") {
-                DataService.getRowsForHome(dataUrl,
-                                           $state.current.data.startDate,
-                                           $state.current.data.endDate)
+                DataService.getRowsForHome(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate)
                 .then(function(response) {
-                    $state.current.data.receivedData = response.data;
+                    $scope.$parent.receivedData = response.data;
                 }, function(error) {
-                    alert("Error! Request not handled properly! ButtonController")
+                    alert("Error! ButtonController")
                 });
             } else {
-                DataService.getRowsForCompare(dataUrl,
-                                              $state.current.data.startDate,
-                                              $state.current.data.endDate,
-                                              $state.current.data.input,
-                                              $state.current.data.percentage)
-                .then(function(response) {
-                     $state.current.data.receivedData = response.data;
-                }, function(error) {
-                     alert("Error! Request not handled properly! ButtonController")
-                });
+                DataService.getRowsForCompare(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate,
+                                                $scope.$parent.input, $scope.$parent.percentage).then(function(response) {
+                     $scope.$parent.receivedData = response.data;
+                      }, function(error) {
+                              alert("Error! ButtonController")
+                      });
             }
-            $scope.test = $state.current.data.receivedData;
-
-            $scope.start = $state.current.data.startDate;
-            $scope.end = $state.current.data.endDate;
-            $scope.input = $state.current.data.input;
+             $scope.test = $scope.$parent.receivedData;
         }
     });
 });

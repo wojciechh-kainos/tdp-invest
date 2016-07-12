@@ -14,13 +14,6 @@ define(['angular'
                 url: "/tdp",
                 templateUrl: 'html/partials/tdp.html',
                 controller: 'IndexController',
-                data: {
-                       startDate: new Date(2013/05/03),
-                       endDate: new Date(2013/05/03),
-                       input: "inputCompareVal",
-                       percentage: "percentageCompareVal",
-                       receivedData: "data"
-                },
             }) //asdasd
                 .state("root.data", {
                     url: "/home",

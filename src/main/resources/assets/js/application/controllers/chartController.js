@@ -9,8 +9,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
     }
 
     $scope.changeTitle = function(){
-        this.chartConfig.title.text = $filter('date')($scope.beginDate, 'yyyy-MM-dd');
+        this.chartConfig.title.text = $scope.$parent.receivedData[0].date;
     }
+
+
 
     $scope.chartConfig = {
 
