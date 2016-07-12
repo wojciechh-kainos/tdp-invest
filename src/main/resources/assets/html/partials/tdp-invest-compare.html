@@ -1,1 +1,34 @@
+<div>
+    <form class="form-horizontal" name="investmentForm">
+        <div class="form-group">
+            <label for="startDate">Begin date:</label>
+            <input class="form-control" type="date" id="startDate" ng-model="start" placeholder="yyyy-MM-dd">
+            <label for="endDate">End date:</label>
+            <input class="form-control" type="date" id="endDate" ng-model="end" placeholder="yyyy-MM-dd">
+        </div>
+
+        <div class="form-group">
+            <label for="annualInterest">Annual interest:</label>
+            <div class="input-group">
+                <div class="input-group-addon">%</div>
+                <input class="form-control" type="number" id="annualInterest" ng-model="annualInterest" placeholder="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="amount">Amount:</label>
+            <div class="input-group">
+                <div class="input-group-addon">$</div>
+                <input class="form-control" type="number" id="amount" ng-model="amount" placeholder="0">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button class="btn btn-default" type="submit" ng-click="submit()">Submit</button>
+        </div>
+    </form>
+</div>
+<div class="alert alert-success">
+    <p>Zysk z lokaty: {{gain}}</p>
+</div>
 <div id="container">Placeholder for chart</div>

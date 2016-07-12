@@ -22,15 +22,15 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            }).state("tdp.compare", {
-                              url: "/compare",
-                              views: {
-                                  "@": {
-                                      templateUrl: "html/partials/tdp-invest-compare.html",
-                                      controller: "tdpInvestCompareController"
-                                  }
-                              }
-                          });
+            }).state("compare", {
+                url: "/compare",
+                views: {
+                  "@": {
+                      templateUrl: "html/partials/tdp-invest-compare.html",
+                      controller: "tdpInvestCompareController"
+                  }
+                }
+            });
     });
 
     return tdpInvestModule;
