@@ -3,58 +3,38 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         tdpCompareService.getData()
         .then(function(response) {
-            //dane z Javy dojdą to wykonuejmy wszysko :)
+            //data came from java ;)
 
             $scope.message = response.data;
 
 
             //data
             var collection = $scope.message;
-            console.log(collection);
-            //sort on date
+
+            //sort on price first
+            //sort - which column should be sorted
             $scope.sort = 'price';
+            //reverse - if sort should be reverse or not
             $scope.reverse = false;
+            //we can sort only one column in one time
 
             $scope.sortTable = function (sort){
-                console.log($scope.sort);
-                console.log(sort);
                 if($scope.sort === sort){
+                    //if the same as previously sort should me reverse
                     $scope.reverse = !$scope.reverse;
                 }
                 $scope.sort = sort;
             }
-
-            //temporary data generator
-            function generate(n){
-                var collection = [];
-
-                var date = new Date();
-                var dd = date.getDate();
-                var mm = date.getMonth() + 1;
-                var y = date.getFullYear();
-
-                for(var i = 0; i < n; i++){
-                    date = dd + "-" + mm + "-" + y;
-                    price = (Math.random() * (3.120 - 0.0200) + 0.0200).toFixed(4);
-                    collection.push({date : date, price : price});
-                    dd++;
-                 }
-                 return collection;
-            }
-
-            //collection = generate(20);
             $scope.collection = collection;
 
-            //for chart
+            //create data arrays for chart
             var prices = [];
             var dates = [];
             for(i=0; i<$scope.collection.length; i++){
                 prices.push(parseFloat(collection[i].price));
                 dates.push(collection[i].date);
             }
-
-            console.log(prices);
-
+//------------- chart ------------------------
             $scope.chartConfig = {
 
               options: {
@@ -105,10 +85,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                //setup some logic for the chart
               }
             };
+//------------------ end of chart -------------------------
 
         });
     }, function(error) {
-        // W przypadku nie dojścia danych z javy
+        // Data income fails
         $scope.message = error;
     });
 });
