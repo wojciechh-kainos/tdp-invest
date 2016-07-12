@@ -23,7 +23,7 @@ public class DataResource {
 
     @GET
     @Path("/get/data")
-    public List<Row> fetchData(@PathParam("startDate" Date startDate)) {
+    public List<Row> fetchData(@PathParam("startDate") Date startDate) {
         Database myDb = new LameMemoryDatabase();
         DatabaseInitializer init = new LameDatabaseInitializer();
         init.initializeDatabase(myDb);

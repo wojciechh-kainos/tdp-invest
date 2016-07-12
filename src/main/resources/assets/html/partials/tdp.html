@@ -1,0 +1,18 @@
+<md-toolbar layout="row">
+    <div class="md-toolbar-tools">
+        <md-button aria-label="Home" ui-sref="root.data">
+            <a >Home</a>
+        </md-button>
+        <md-button aria-label="Chart" ui-sref="root.compare">
+            <a >Compare</a>
+        </md-button>
+    </div>
+</md-toolbar>
+<div flex layout="row">
+    <md-sidenav md-is-locked-open="true">
+        <div ui-view="DateSegment"></div>
+        <div ui-view="userData"></div>
+        <div ui-view="submitButton"></div>
+    </md-sidenav>
+    <div flex layout="row" ui-view="compare"></div>
+</div>

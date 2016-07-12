@@ -11,25 +11,26 @@ define(['angular'
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
             .state("root", {
-                url: "",
-                templateUrl: 'index.html',
+                url: "/tdp",
+                templateUrl: 'html/partials/tdp.html',
                 controller: 'IndexController',
-                receivedData: "data"
+                data: {
+                       startDate: new Date(2013/05/03),
+                       endDate: new Date(2013/05/03),
+                       input: "inputCompareVal",
+                       percentage: "percentageCompareVal",
+                       receivedData: "data"
+                },
 
             })
                 .state("root.data", {
                     url: "/home",
-                    data: {
-                        startDate: "startDateVal",
-                        endDate: "endDateVal",
-                        receivedData: "data"
-                    },
                     views: {
                          "chart@root.data": {
                              templateUrl: "html/partials/chart.html",
                               controller: "chartController"
                               },
-                         "DateSegment@": {
+                         "DateSegment@root": {
                              templateUrl: "html/partials/DateSegment.html",
                               controller: "DateController"
                               },
@@ -37,10 +38,10 @@ define(['angular'
                              templateUrl: "html/partials/DataTablePage.html",
                               controller: "DataController"
                               },
-                         "compare@": {
+                         "compare@root": {
                              templateUrl: "html/partials/tdp-invest-compare.html",
                                 },
-                         "submitButton@": {
+                         "submitButton@root": {
                             templateUrl: "html/partials/button.html",
                             controller: "ButtonController"
                          }
@@ -54,19 +55,12 @@ define(['angular'
                 })
                 .state("root.compare", {
                     url: "/compare",
-                    data: {
-                        startDate: "startDateCompareVal",
-                        endDate: "endDateCompareVal",
-                        input: "inputCompareVal",
-                        percentage: "percentageCompareVal",
-                        receivedData: "data"
-                    },
                     views: {
                          "chart@root.compare": {
                              templateUrl: "html/partials/chart.html",
                               controller: "chartController"
                               },
-                          "DateSegment@": {
+                          "DateSegment@root": {
                              templateUrl: "html/partials/DateSegment.html",
                               controller: "DateController"
                               },
@@ -74,14 +68,14 @@ define(['angular'
                              templateUrl: "html/partials/DataTablePage.html",
                               controller: "DataController"
                               },
-                         "compare@": {
+                         "compare@root": {
                              templateUrl: "html/partials/tdp-invest-compare.html",
                              },
-                         "userData@": {
+                         "userData@root": {
                              templateUrl: "html/partials/userData.html",
                              controller: "UserDataController"
                              },
-                         "submitButton@": {
+                         "submitButton@root": {
                              templateUrl: "html/partials/button.html",
                              controller: "ButtonController"
                              }
