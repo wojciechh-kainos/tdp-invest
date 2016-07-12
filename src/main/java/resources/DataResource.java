@@ -9,6 +9,7 @@ import service.LameMemoryDatabase;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
@@ -22,7 +23,7 @@ public class DataResource {
 
     @GET
     @Path("/get/data")
-    public List<Row> fetchData() {
+    public List<Row> fetchData(@PathParam("startDate" Date startDate)) {
         Database myDb = new LameMemoryDatabase();
         DatabaseInitializer init = new LameDatabaseInitializer();
         init.initializeDatabase(myDb);

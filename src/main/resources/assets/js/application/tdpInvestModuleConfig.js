@@ -21,7 +21,8 @@ define(['angular'
                     url: "/home",
                     data: {
                         startDate: "startDateVal",
-                        endDate: "endDateVal"
+                        endDate: "endDateVal",
+                        receivedData: "data"
                     },
                     views: {
                          "chart@root.data": {
@@ -80,10 +81,10 @@ define(['angular'
                              templateUrl: "html/partials/userData.html",
                              controller: "UserDataController"
                              },
-                             "submitButton@": {
-                                                         templateUrl: "html/partials/button.html",
-                                                         controller: "ButtonController"
-                                                      }
+                         "submitButton@": {
+                             templateUrl: "html/partials/button.html",
+                             controller: "ButtonController"
+                             }
                     },
                     resolve: {
                         dataUrl: function() {

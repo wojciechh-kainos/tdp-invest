@@ -1,12 +1,14 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("DateController", function($scope, $state, DataService, dataUrl) {
+    tdpInvestModule.controller("DateController", function($scope, $state, $filter, DataService, dataUrl) {
 
         $scope.$watch('startDate', function() {
-            $state.current.data.startDate = $scope.startDate;
+            var date = $filter('date')($scope.startDate, "yyyy-MM-dd")
+            $state.current.data.startDate = date;
         })
 
         $scope.$watch('endDate', function() {
-            $state.current.data.endDate = $scope.endDate;
+            var date = $filter('date')($scope.endDate, "yyyy-MM-dd")
+            $state.current.data.endDate = date;
         })
     });
 });
