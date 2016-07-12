@@ -1,4 +1,5 @@
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
+import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -11,10 +12,17 @@ import resources.TdpInvestPersonResource;
 
 
 public class TdpInvestApplication extends Application<TdpInvestApplicationConfiguration> {
+        private GuiceBundle<TdpInvestApplicationConfiguration> guiceBundle;
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
+
+        guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
+                .addModule(new TdpInvestModule())
+                .setConfigClass(TdpInvestApplicationConfiguration.class)
+                .build();
+        bootstrap.addBundle(guiceBundle);
     }
 
     @Override
@@ -22,7 +30,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
 
-        environment.jersey().register(new TdpInvestPersonResource());
         environment.jersey().register(new TdpInvestInvestmentResource());
         environment.jersey().register(MultiPartFeature.class);
         environment.jersey().register(new TdpInvestConvertResource());
