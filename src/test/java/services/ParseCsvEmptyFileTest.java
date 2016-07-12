@@ -1,6 +1,7 @@
+package services;
+
 import model.InvestScore;
 import org.junit.Test;
-import services.CsvToModelParser;
 
 import java.io.IOException;
 import java.util.List;

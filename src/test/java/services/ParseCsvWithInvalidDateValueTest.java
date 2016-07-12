@@ -1,8 +1,9 @@
+package services;
+
 import model.InvestScore;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import services.CsvToModelParser;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;

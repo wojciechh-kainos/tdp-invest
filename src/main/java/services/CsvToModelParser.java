@@ -3,7 +3,6 @@ package services;
 import model.InvestScore;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
-import org.apache.commons.logging.impl.Log4JLogger;
 import org.apache.log4j.Logger;
 
 import java.io.*;
@@ -12,7 +11,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 
 /**
@@ -46,7 +44,7 @@ public class CsvToModelParser {
                 LocalDate date = prepareDate(record.get(dateHeader));
                 if(date != null)
                     investScores.add(new InvestScore(date,
-                            Integer.parseInt(record.get(valueHeader))));
+                            Float.parseFloat(record.get(valueHeader))));
             }
         }
         return investScores;
