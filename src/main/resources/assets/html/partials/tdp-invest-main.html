@@ -36,7 +36,7 @@
             <td><a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">Year</a></td>
             <td><a href="#" ng-click="sortType = 'value'; sortReverse = !sortReverse">Value</a></td>
         </tr>
-        <tr ng-repeat="score in investData | orderBy:sortType:sortReverse | filter: query ">
+        <tr ng-repeat="score in tableData | orderBy:sortType:sortReverse | filter: query ">
             <td>{{score.date.dayOfMonth}}</td>
             <td>{{score.date.month}}</td>
             <td>{{score.date.year}}</td>
