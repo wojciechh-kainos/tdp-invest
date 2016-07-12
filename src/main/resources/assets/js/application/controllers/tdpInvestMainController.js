@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams) {
+define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpTableService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, tdpTableService) {
 
         $scope.chartConfig = chartConfig;
         $scope.inputData = inputData;
@@ -9,6 +9,8 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
         $scope.tableConfig  = {
             params: new NgTableParams({count: 50}, { counts: [25, 50, 100], data: data })
         };
+
+        $scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
 
         //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
         $scope.uploadFiles = function(file, errFiles) {
