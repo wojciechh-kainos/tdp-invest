@@ -1,13 +1,12 @@
 package resources;
 
+import configuration.TdpConfig;
 import model.InvestScore;
-
+import services.CsvToModelParser;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,17 +15,13 @@ import java.util.List;
 public class TdpInvestMainResource {
 
     @GET
-    public List<InvestScore> fetch() {
-        InvestScore investData1 = new InvestScore(LocalDate.now(), 300);
-        InvestScore investData2 = new InvestScore(LocalDate.now().plus(1, ChronoUnit.MONTHS), 400);
-        InvestScore investData3 = new InvestScore(LocalDate.now().plus(2, ChronoUnit.MONTHS), 500);
-        InvestScore investData4 = new InvestScore(LocalDate.now().plus(3, ChronoUnit.MONTHS), 600);
-        InvestScore investData5 = new InvestScore(LocalDate.now().plus(4, ChronoUnit.MONTHS), 700);
-        return new ArrayList<InvestScore>(){{
-            add(investData1);
-            add(investData2);
-            add(investData3);
-            add(investData4);
-            add(investData5);}};
+    public List<InvestScore> fetch(){
+        try{
+            CsvToModelParser csvToModelParser = new CsvToModelParser(TdpConfig.pathToData);
+            return csvToModelParser.parse();
+        }
+        catch (Exception ex){
+            return new ArrayList<InvestScore>();
+        }
     }
 }
