@@ -1,7 +1,9 @@
 package resources;
 
+import auth.TdpInvestAuthenticator;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
+import io.dropwizard.auth.basic.BasicCredentials;
 import model.User;
 
 import javax.ws.rs.Consumes;
@@ -16,6 +18,9 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TdpInvestAuthResource {
 
+    // TODO: use dependency injection
+    TdpInvestAuthenticator auth = new TdpInvestAuthenticator();
+
     @GET
     @Path("/valid")
     public String valid(@Auth User user) throws AuthenticationException {
@@ -26,8 +31,9 @@ public class TdpInvestAuthResource {
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(User user) throws AuthenticationException {
+        BasicCredentials credentials = new BasicCredentials(user.getMail(), user.getPassword());
 
-        if (user.getPassword().equals("secret")) {
+        if (auth.authenticate(credentials).isPresent()) {
             return Response.status(Response.Status.ACCEPTED).build();
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
