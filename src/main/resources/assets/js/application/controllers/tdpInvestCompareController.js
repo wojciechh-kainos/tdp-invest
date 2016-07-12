@@ -34,8 +34,20 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
              return collection;
         }
 
+$scope.filteredCollection = [];
+          $scope.currentPage = 1;
+          $scope.numPerPage = 10;
+          $scope.maxSize = 5;
+
         collection = generate(20);
         $scope.collection = collection;
+
+        $scope.$watch('currentPage + numPerPage', function() {
+                    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+                    , end = begin + $scope.numPerPage;
+
+                    $scope.filteredCollection = $scope.collection.slice(begin, end);
+                  });
 
         //for chart
         var prices = [];
@@ -90,7 +102,6 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
           useHighStocks: false,
           //size (optional) if left out the chart will default to size of the div or something sensible.
           size: {
-           width: 1200,
            height: 400
           },
           //function (optional)
@@ -98,6 +109,13 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
            //setup some logic for the chart
           }
         };
+
+        //pagination
+
+
+
+
+
 
     });
 });

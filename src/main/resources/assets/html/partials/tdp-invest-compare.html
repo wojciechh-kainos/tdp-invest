@@ -25,11 +25,18 @@
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in collection | orderBy:sort:reverse">
+                <tr ng-repeat="item in filteredCollection | orderBy:sort:reverse">
                     <td>{{item.date}}</td>
                     <td>{{item.price}}</td>
                 </tr>
             </tbody>
         </table>
+
     </div>
+    <div class="col-md-6 col-md-offset-3 center"><pagination
+            ng-model="currentPage"
+            total-items="collection.length"
+            max-size="maxSize"
+            boundary-links="true">
+    </pagination></div>
 </div>

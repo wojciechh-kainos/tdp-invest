@@ -6,14 +6,17 @@ require.config({
         'angular': 'lib/angular/angular.min',
         'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
-        'highcharts': 'http://code.highcharts.com/highcharts.src'
+        'highcharts': 'http://code.highcharts.com/highcharts.src',
+        'angular-bootstrap': 'http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min'
+
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
         'uiRouter' : ['angular'],
-        'highcharts-ng': ['angular', 'highcharts']
+        'highcharts-ng': ['angular', 'highcharts'],
+        'angular-bootstrap': ['angular']
     },
     deps: ['application/bootstrap']
 });
