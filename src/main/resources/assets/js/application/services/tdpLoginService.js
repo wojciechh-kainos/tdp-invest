@@ -5,34 +5,18 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
 
                     service.Login = function (username, password, callback) {
 
-                        /* Dummy authentication for testing, uses $timeout to simulate api call
-                         ----------------------------------------------*/
                         $timeout(function(){
-                        //     var response = { success: username === 'test' && password === 'test' };
-                        //     if(!response.success) {
-                        //         response.message = 'Username or password is incorrect';
-                        //     }
-                        //     callback(response);
-
-                            /* Use this for real authentication
-                             ----------------------------------------------*/
                             $http.post('/api/login', { mail: username, password: password })
                                 .then(function (response) {
 
-                                    console.log(response.status);
+                                    response.success = true;
+                                    callback(response);
+                                }, function(response){
 
-                                    if(response.status == 202){
-                                        response.success = true;
-                                        console.log("IF");
-                                    }
-
-
-                                    
+                                    response.message = "Email or password incorrect.";
                                     callback(response);
                                 });
                         }, 1000);
-
-
 
 
                     };
@@ -62,54 +46,5 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
 
 
 });
-        
-        
-        
-        
-        // this.user = {};
-        //
-        // this.storeToSession = function() {
-        //     $cookieStore.put('userHeader', this.user.header);
-        // };
-        //
-        // this.loadFromSession = function() {
-        //     var userHeader = $cookieStore.get('userHeader');
-        //     if ( userHeader ) {
-        //         this.loadCurrentUser(userHeader);
-        //     }
-        // };
-        //
-        // this.loadCurrentUser = function(loadCurrentUser) {
-        //     /* $http get to load user info with given header */
-        // };
-        //
-        // this.login = function(email,password,ctrl) {
-        //     var userIn = {
-        //         username : "test",
-        //         password : "password"
-        //     }
-        //     var that = this;
-        //     $http.post('./api/login', userIn).success(function(data) {
-        //         if (data.success === true) {
-        //             that.user.username = userIn.username;
-        //             that.user.header = btoa(userIn.username + ':' + userIn.password);
-        //             ctrl.errorMessage = '';
-        //             that.storeToSession();
-        //         } else {
-        //             /* show error and logout user */
-        //         }
-        //     }).error(function(arg) {
-        //         /* show error and logout user */
-        //     });
-        //
-        //     console.log("test");
-        // }
-        //
-        // this.logout = function() {
-        //     this.user = {};
-        //     this.storeToSession();
-        // }
-        //
-        // this.loadFromSession();
 
 

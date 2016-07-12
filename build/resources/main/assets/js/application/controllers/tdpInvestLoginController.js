@@ -11,7 +11,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpLogin
                                 tdpLoginService.SetCredentials($scope.username, $scope.password);
                                 $location.path('/tdp');
                             } else {
-                                $location.path('/bla');
                                 $scope.error = response.message;
                                 $scope.dataLoading = false;
                             }

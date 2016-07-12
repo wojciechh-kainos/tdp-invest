@@ -7,7 +7,7 @@ define(['angular'
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
-                authenticate: true,
+                // authenticate: true,
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"
@@ -38,8 +38,7 @@ define(['angular'
                       }
                   }
               });
-        //TODO: don't work
-        $urlRouterProvider.otherwise("/login");
+        // $urlRouterProvider.otherwise("/login");
     });
 
     return tdpInvestModule;
