@@ -1,10 +1,10 @@
 <md-toolbar layout="row">
     <div class="md-toolbar-tools">
         <md-button aria-label="Home" ui-sref="root.data">
-            <a >Home</a>
+            <a>Home</a>
         </md-button>
         <md-button aria-label="Chart" ui-sref="root.compare">
-            <a >Compare</a>
+            <a>Compare</a>
         </md-button>
     </div>
 </md-toolbar>
@@ -14,5 +14,8 @@
         <div ui-view="userData"></div>
         <div ui-view="submitButton"></div>
     </md-sidenav>
-    <div flex layout="row" ui-view="compare"></div>
+    <div flex layout="row">
+        <div flex ui-view="chart"></div>
+        <div flex="30" ui-view="table"></div>
+    </div>
 </div>

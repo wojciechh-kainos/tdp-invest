@@ -21,12 +21,11 @@ define(['angular'
                        percentage: "percentageCompareVal",
                        receivedData: "data"
                 },
-
             })
                 .state("root.data", {
                     url: "/home",
                     views: {
-                         "chart@root.data": {
+                         "chart@root": {
                              templateUrl: "html/partials/chart.html",
                               controller: "chartController"
                               },
@@ -34,13 +33,10 @@ define(['angular'
                              templateUrl: "html/partials/DateSegment.html",
                               controller: "DateController"
                               },
-                         "table@root.data": {
+                         "table@root": {
                              templateUrl: "html/partials/DataTablePage.html",
                               controller: "DataController"
                               },
-                         "compare@root": {
-                             templateUrl: "html/partials/tdp-invest-compare.html",
-                                },
                          "submitButton@root": {
                             templateUrl: "html/partials/button.html",
                             controller: "ButtonController"
@@ -56,7 +52,7 @@ define(['angular'
                 .state("root.compare", {
                     url: "/compare",
                     views: {
-                         "chart@root.compare": {
+                         "chart@root": {
                              templateUrl: "html/partials/chart.html",
                               controller: "chartController"
                               },
@@ -64,13 +60,10 @@ define(['angular'
                              templateUrl: "html/partials/DateSegment.html",
                               controller: "DateController"
                               },
-                         "table@root.compare": {
+                         "table@root": {
                              templateUrl: "html/partials/DataTablePage.html",
                               controller: "DataController"
                               },
-                         "compare@root": {
-                             templateUrl: "html/partials/tdp-invest-compare.html",
-                             },
                          "userData@root": {
                              templateUrl: "html/partials/userData.html",
                              controller: "UserDataController"

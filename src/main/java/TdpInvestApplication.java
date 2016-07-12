@@ -1,5 +1,6 @@
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
+import configuration.DataResourceModule;
 import configuration.TdpInvestApplicationConfiguration;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
@@ -18,6 +19,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(new TdpInvestModule())
+                .addModule(new DataResourceModule())
                 .setConfigClass(TdpInvestApplicationConfiguration.class)
                 .build();
         bootstrap.addBundle(guiceBundle);
@@ -25,10 +27,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
-
-        environment.jersey().register(new DataResource());
+        environment.jersey().register(guiceBundle.getInjector().getInstance(DataResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
-
     }
 
     public static void main(final String[] args) throws Exception {

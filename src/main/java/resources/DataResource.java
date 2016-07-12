@@ -2,17 +2,17 @@ package resources;
 
 import api.CalculatedRow;
 import api.Row;
-import service.Database;
-import service.DatabaseInitializer;
-import service.LameDatabaseInitializer;
-import service.LameMemoryDatabase;
+import service.*;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -21,21 +21,45 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class DataResource {
 
+    private RowRepository repo;
+
+    @Inject
+    DataResource(RowRepository repo) {
+        this.repo = repo;
+    }
+
     @GET
     @Path("/get/data")
-    public List<Row> fetchData(@PathParam("startDate") Date startDate) {
-        Database myDb = new LameMemoryDatabase();
-        DatabaseInitializer init = new LameDatabaseInitializer();
-        init.initializeDatabase(myDb);
+    public List<Row> fetchData(@PathParam("startDate") String startDate,
+                               @PathParam("endDate") String endDate) {
 
-        List<Row> result = myDb.getAllRows();
+//        Database myDb = new LameMemoryDatabase();
+//        DatabaseInitializer init = new LameDatabaseInitializer();
+//        init.initializeDatabase(myDb);
+//
+//        List<Row> result = myDb.getAllRows();
+//
+//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+//        Date startDateObj = null;
+//        Date endDateObj = null;
+//        try {
+//            startDateObj = sdf.parse(startDate);
+//            endDateObj = sdf.parse(endDate);
+//        } catch (ParseException e) {
+//            e.printStackTrace();
+//        }
 
-        return result;
+        //result.get(0).setDate(startDateObj);
+
+        return repo.getAllRows();
     }
 
     @GET
     @Path("/get/compare")
-    public List<CalculatedRow> fetchCompare() {
+    public List<CalculatedRow> fetchCompare(@PathParam("startDate") String startDate,
+                                            @PathParam("endDate") String endDate,
+                                            @PathParam("input") int input,
+                                            @PathParam("percentage") int percentage) {
         CalculatedRow row1 = new CalculatedRow(new Date(), new BigDecimal(377), new BigDecimal(123));
 
         List<CalculatedRow> calcs = new ArrayList<>();
