@@ -24,6 +24,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpConve
                         $timeout(function () {
                             file.result = response.data;
                             $scope.result = response.data;
+                            $scope.chartConfig.series.push({
+                                    data: response.data});
                         });
                     }, function (response) {
                         if (response.status > 0)

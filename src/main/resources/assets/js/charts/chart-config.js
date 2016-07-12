@@ -12,7 +12,7 @@ var chartConfig = {
     },
     series: [{
         name: "Fund",
-        data: inputData,
+        //data: inputData,
         tooltip: {
             valueDecimals: 2,
             valuePrefix: "$",
