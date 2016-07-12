@@ -33,23 +33,15 @@ public class DataResource {
     public List<Row> fetchData(@PathParam("startDate") String startDate,
                                @PathParam("endDate") String endDate) {
 
-//        Database myDb = new LameMemoryDatabase();
-//        DatabaseInitializer init = new LameDatabaseInitializer();
-//        init.initializeDatabase(myDb);
-//
-//        List<Row> result = myDb.getAllRows();
-//
-//        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//        Date startDateObj = null;
-//        Date endDateObj = null;
-//        try {
-//            startDateObj = sdf.parse(startDate);
-//            endDateObj = sdf.parse(endDate);
-//        } catch (ParseException e) {
-//            e.printStackTrace();
-//        }
-
-        //result.get(0).setDate(startDateObj);
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date startDateObj = null;
+        Date endDateObj = null;
+        try {
+            startDateObj = sdf.parse(startDate);
+            endDateObj = sdf.parse(endDate);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
 
         return repo.getAllRows();
     }
