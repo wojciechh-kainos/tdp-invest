@@ -3,10 +3,11 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
+                authenticate: true,
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"
@@ -37,6 +38,8 @@ define(['angular'
                       }
                   }
               });
+        //TODO: don't work
+        $urlRouterProvider.otherwise("/login");
     });
 
     return tdpInvestModule;

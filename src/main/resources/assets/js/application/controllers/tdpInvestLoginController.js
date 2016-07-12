@@ -1,6 +1,22 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestLoginController", function($scope, $stateParams, tdpUserService) {
-        // TODO: read this data from form in LoginController
-        tdpUserService.login(user, password, this);
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpLoginService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestLoginController", function($scope, $rootScope, $location, $stateParams, tdpLoginService) {
+
+
+                    tdpLoginService.ClearCredentials();
+
+                    $scope.login = function () {
+                        $scope.dataLoading = true;
+                        tdpLoginService.Login($scope.username, $scope.password, function(response) {
+                            if(response.success) {
+                                tdpLoginService.SetCredentials($scope.username, $scope.password);
+                                $location.path('/tdp');
+                            } else {
+                                $scope.error = response.message;
+                                $scope.dataLoading = false;
+                            }
+                        });
+                    };
+
+
     });
 });
