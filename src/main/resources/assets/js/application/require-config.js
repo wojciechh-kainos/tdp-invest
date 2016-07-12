@@ -8,7 +8,7 @@ require.config({
         'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstocks': 'lib/highcharts/highstock',
-        'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap'
+        'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls'
     },
     shim: {
         'angular': {
