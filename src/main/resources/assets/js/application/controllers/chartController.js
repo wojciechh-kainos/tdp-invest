@@ -1,5 +1,18 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("chartController", function($scope, $stateParams) {
+    tdpInvestModule.controller("chartController", function($scope, $stateParams,$filter,DataService, dataUrl) {
+
+    $scope.swapChartType = function() {
+        if(this.chartConfig.options.chart.type == 'spline')
+            this.chartConfig.options.chart.type = 'bar';
+        else
+            this.chartConfig.options.chart.type = 'spline';
+    }
+
+    $scope.changeTitle = function(){
+        this.chartConfig.title.text = $filter('date')($scope.beginDate, 'yyyy-MM-dd');
+    }
+
+
 
     $scope.chartConfig = {
 
