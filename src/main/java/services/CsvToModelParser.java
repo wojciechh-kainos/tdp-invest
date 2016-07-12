@@ -3,12 +3,16 @@ package services;
 import model.InvestScore;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
+import org.apache.commons.logging.impl.Log4JLogger;
+import org.apache.log4j.Logger;
+
 import java.io.*;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 
 /**
@@ -20,8 +24,11 @@ public class CsvToModelParser {
     private final String dateHeader = "Date";
     private final String valueHeader = "Value";
     private final int HEADER = 1;
+    private static Logger log;
+
 
     public CsvToModelParser(String path) throws FileNotFoundException {
+        log = Logger.getLogger(getClass().getName());
         URL url = getClass().getResource(path);
         if (url != null) {
             reader = new FileReader(url.getPath());
@@ -36,8 +43,10 @@ public class CsvToModelParser {
         Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(dateHeader, valueHeader).parse(reader);
         for (CSVRecord record : records) {
             if(record.getRecordNumber() != HEADER){
-                investScores.add(new InvestScore(prepareDate(record.get(dateHeader)),
-                        Integer.parseInt(record.get(valueHeader))));
+                LocalDate date = prepareDate(record.get(dateHeader));
+                if(date != null)
+                    investScores.add(new InvestScore(date,
+                            Integer.parseInt(record.get(valueHeader))));
             }
         }
         return investScores;
@@ -45,6 +54,11 @@ public class CsvToModelParser {
 
     private LocalDate prepareDate(String date) {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        return  LocalDate.parse(date, dateTimeFormatter);
+        try{
+            return LocalDate.parse(date, dateTimeFormatter);
+        }catch (Exception exception){
+            log.error("RECORD WAS INGNORED: Incorrect date format", exception);
+            return null;
+        }
     }
 }
