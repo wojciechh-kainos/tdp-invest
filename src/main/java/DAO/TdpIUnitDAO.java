@@ -1,6 +1,7 @@
 package DAO;
 
 
+import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
@@ -9,6 +10,7 @@ import java.util.List;
 
 public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
+	@Inject
 	public TdpIUnitDAO(SessionFactory sessionFactory) {
 		super(sessionFactory);
 	}

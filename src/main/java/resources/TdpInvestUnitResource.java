@@ -2,6 +2,7 @@ package resources;
 
 
 import DAO.TdpIUnitDAO;
+import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
@@ -18,11 +19,9 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestUnitResource {
 
-	/**
-	 * The DAO object to manipulate units.
-	 */
 	private TdpIUnitDAO tdpIUnitDAO;
 
+	@Inject
 	public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO) {
 		this.tdpIUnitDAO = tdpIUnitDAO;
 	}
@@ -30,8 +29,6 @@ public class TdpInvestUnitResource {
 	@GET
 	@UnitOfWork
 	public List<TdpIUnit> fetchAll() {
-		System.out.println("test");
-		System.out.println(tdpIUnitDAO.findById(1L));
 		return tdpIUnitDAO.findAll();
 	}
 
