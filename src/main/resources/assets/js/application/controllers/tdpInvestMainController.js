@@ -13,7 +13,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         tdpDataService.getInvestData().then(function(response){
             prepareChart(response.data)
-
+            investData = response.data;
             $scope.$watch("[currentPage + numPerPage, dataChanged]", function() {
                 var begin = (($scope.currentPage - 1) * $scope.numPerPage);
                 var end = begin + $scope.numPerPage;
@@ -25,11 +25,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
         });
 
         $scope.submitRange = function(){
-              startDate = new Date($scope.startDate);
-              endDate = new Date ($scope.endDate);
-              prepareChart($scope.dataForView)
-                $scope.dataChanged = true;
-                $scope.currentPage = 1;
+            startDate = new Date($scope.startDate);
+            endDate = new Date ($scope.endDate);
+            prepareChart(investData)
+            $scope.dataChanged = true;
+            $scope.currentPage = 1;
         }
 
         function dateFilter(record){
@@ -60,21 +60,21 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         function createChart(dateList, valuesList){
             Highcharts.chart('container', {
+
                 xAxis: {
                     title: {
                         text: 'Month'
                     },
                     categories: dateList
-                    },
-                    yAxis: {
-                         title: {
-                                text: 'Value'
-                         }
-                    },
-
-                    series: [{
-                        data: valuesList
-                    }]
+                },
+                yAxis: {
+                     title: {
+                            text: 'Value'
+                     }
+                },
+                series: [{
+                    data: valuesList
+                }]
                 });
         };
 
