@@ -13,10 +13,6 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html",
                         controller: "tdpInvestMainController"
-                    },
-                    "mainTable": {
-                        templateUrl: "html/partials/tdp-invest-main-table.html",
-                        controller: "tdpInvestMainController"
                     }
                 }
             }).state("tdp.person", {

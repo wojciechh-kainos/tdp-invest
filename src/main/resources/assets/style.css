@@ -1,0 +1,16 @@
+html, body{
+    height: 100%;
+}
+
+h1{
+    text-align: center;
+}
+
+.ui-template{
+    height: 100%;
+}
+
+footer{
+    text-align: center;
+}
+

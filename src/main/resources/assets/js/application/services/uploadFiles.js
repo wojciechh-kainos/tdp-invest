@@ -1,4 +1,4 @@
-function(file, errFiles) {
+require(['angular'],function($scope, file, errFiles, Upload, $timeout) {
                 $scope.f = file;
                 $scope.errFile = errFiles && errFiles[0];
                 if (file) {
@@ -22,4 +22,4 @@ function(file, errFiles) {
                                                  evt.loaded / evt.total));
                     });
                 }
-            }
+            });

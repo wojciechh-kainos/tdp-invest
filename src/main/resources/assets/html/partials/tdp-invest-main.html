@@ -1,27 +1,20 @@
-<div>
-    PersonId: <input type="text" ng-model="id">
-    <a href="javascript:void(0);" ui-sref="tdp.person({personId: id})">Go!</a>
-</div>
-<div> Main template here </div>
-<a ui-sref="compare">Compare</a>
-</br>
-
-
-<div>
-<h4>Upload chart data</h4>
-<button type="file" ngf-select="uploadFiles($file, $invalidFiles)">
-    Select File</button>
-<br><br>
-File:
-<div style="font:smaller">{{f.name}} {{errFile.name}} {{errFile.$error}} {{errFile.$errorParam}}
-      <span class="progress" ng-show="f.progress >= 0"><br><br>Progress:
-          <div style="width:{{f.progress}}%"
-               ng-bind="f.progress + '%'"></div>
-      </span>
-</div>
-{{errorMsg}}
-</div>
-
-<div class="col-lg-6">
+<div class="col-lg-8">
     <highchart config="chartConfig"></highchart>
+</div>
+
+<div class="col-lg-4">
+    <table ng-table="tableConfig.params" class="table table-condensed table-bordered table-striped" show-filter="true">
+        <tr ng-repeat="row in $data">
+            <td title="'Date'" filter="{ date: 'number' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>
+            <td title="'Value'" filter="{ val: 'text' }" sortable="'val'">{{ row.val }}</td>
+        </tr>
+    </table>
+
+</div>
+
+<div class="select col-lg-12">
+    <button class="btn btn-danger" type="file" ngf-select="uploadFiles($file, $invalidFiles)">
+        Select CSV File<br> to upload</button>
+    <br>
+    {{errorMsg}}
 </div>

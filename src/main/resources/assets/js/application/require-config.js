@@ -10,7 +10,7 @@ require.config({
         'highstock': 'lib/highcharts/highstock',
         'data': 'charts/input-data',
         'chart-config': 'charts/chart-config',
-        'ngFileUpload' : 'lib/ng-file-upload-shim/ng-file-upload',
+        'ngFileUpload' : 'lib/ng-file-upload/ng-file-upload',
         'ng-table': 'lib/ng-table/dist/ng-table'
     },
     shim: {

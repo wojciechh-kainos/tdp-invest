@@ -1,19 +1,20 @@
 define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpTableService'], function(angular, tdpInvestModule) {
+    var chartData = []
+
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpTableService) {
-
+git 
+        //***chart***
         $scope.chartConfig = chartConfig;
-        $scope.inputData = inputData;
 
-        //$scope.inputData = tdpTableService.getInvestmentTimeSeries(883958400000, 1401235200000, 1000.0, 0.04);
-
-        var data = inputData.map(function(row){ return {date: row[0], value: row[1]}; });
-
+        //***table***
+        var data = chartData.map(function(row){ return {date: row[0], val: row[1]}; });
         $scope.tableConfig  = {
-            params: new NgTableParams({count: 5}, { counts: [25, 50, 100], data: data })
+            params: new NgTableParams({count: 10}, { counts: [], data: data })
         };
 
+        //$scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
 
-        //file upload copied from DEMO: https://github.com/danialfarid/ng-file-upload
+        //***file upload***
         $scope.uploadFiles = function(file, errFiles) {
                 $scope.f = file;
                 $scope.errFile = errFiles && errFiles[0];
@@ -25,17 +26,20 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
 
                     file.upload.then(function (response) {
                         $timeout(function () {
-                            file.result = response.data;
-                            $scope.result = response.data;
                             $scope.chartConfig.series.push({
-                                                                   name: "Fund",
-                                                                   data: response.data,
-                                                                   tooltip: {
-                                                                       valueDecimals: 2,
-                                                                       valuePrefix: "$",
-                                                                       xDateFormat: '%y-%m-%d'
-                                                                   }
-                                                               });
+                                                               name: "Fund",
+                                                               data: response.data,
+                                                               tooltip: {
+                                                                   valueDecimals: 2,
+                                                                   valuePrefix: "$",
+                                                                   xDateFormat: '%y-%m-%d'
+                                                               }
+                                                           });
+                            chartData = response.data;
+                            data = response.data.map(function(row){ return {date: row[0], val: row[1]}; });
+                            $scope.tableConfig  = {
+                                params: new NgTableParams({count: 10}, { counts: [], data: data })
+                            };
                         });
                     }, function (response) {
                         if (response.status > 0)
@@ -45,7 +49,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
                                                  evt.loaded / evt.total));
                     });
                 }
-        }
-
+            }
+        //***end of file upload***
     });
 });
