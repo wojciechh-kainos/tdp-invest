@@ -3,7 +3,9 @@ package resources;
 import DAO.TdpIUnitDAO;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.google.inject.Inject;
 import domain.TdpIUnit;
+import io.dropwizard.hibernate.UnitOfWork;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.ws.rs.*;
@@ -22,35 +24,15 @@ public class TdpInvestCompareResource {
 
     private TdpIUnitDAO tdpIUnitDAO;
 
-    //funkcja wysyłająca dane do angulara :)
-    @GET
-    public List<StockPrice> fetch() {
-        List<StockPrice> collection = new ArrayList<>();
-        collection = generate(20, 4.0f, 0.02f);
-        return collection;
-    }
-
-    //generate - funkcja generująca dane date + price
-    public List<StockPrice> generate(int n, float maxX, float minX){
-
-        List<StockPrice> collection = new ArrayList<>();
-        Random rand = new Random();
-        Float price;
-        String date;
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        for(int i=0; i<n; i++){
-            price = rand.nextFloat() * (maxX - minX) + minX;
-            Date d = new Date();
-            date = dateFormat.format(d);
-            collection.add(new StockPrice(date, price));
-        }
-
-        return collection;
+    @Inject
+    public TdpInvestCompareResource(TdpIUnitDAO tdpIUnitDAO) {
+        this.tdpIUnitDAO = tdpIUnitDAO;
     }
 
     @POST
+    @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<TdpIUnit> fetchRange(String json) throws ParseException {
+    public List<StockPrice> fetchRange(String json) throws ParseException {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFrom = sdf.parse(jsonObject.get("dateFrom").getAsString());
@@ -61,8 +43,16 @@ public class TdpInvestCompareResource {
         System.out.println(dateFrom.toString());
         System.out.println(dateTo.toString());
 
-        List<TdpIUnit> collection = new ArrayList<>();
-        collection = new TdpInvestUnitResource(tdpIUnitDAO).fetchAll();
+        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        List<StockPrice> collection = new ArrayList<>();
+
+        List<TdpIUnit> units = new ArrayList<>();
+        units = tdpIUnitDAO.getDate(dateFrom, dateTo);
+
+        for(TdpIUnit unit : units){
+            collection.add(new StockPrice(dateFormat.format(unit.getDate()), unit.getValue()));
+        }
+
 
         return collection;
     }

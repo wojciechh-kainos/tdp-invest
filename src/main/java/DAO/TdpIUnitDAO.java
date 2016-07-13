@@ -6,6 +6,7 @@ import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
@@ -29,5 +30,9 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	public List<TdpIUnit> getDate(Long id) {
 		return list(namedQuery("TdpIUnit.getDate").setParameter("id", id));
+	}
+
+	public List<TdpIUnit> getDate(Date dateFrom, Date dateTo) {
+		return list(namedQuery("TdpIUnit.getDataByDate").setParameter("dateFrom", dateFrom ).setParameter("dateTo", dateTo));
 	}
 }

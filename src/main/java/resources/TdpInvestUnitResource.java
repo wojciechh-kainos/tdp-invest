@@ -36,6 +36,6 @@ public class TdpInvestUnitResource {
 	@Path("/{id}")
 	@UnitOfWork
 	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
-		return tdpIUnitDAO.getDate(id);
+		return tdpIUnitDAO.findAll();
 	}
 }
