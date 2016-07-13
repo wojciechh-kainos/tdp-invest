@@ -110,6 +110,5 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
         $scope.popup2 = {
             opened: false
         };
-
     });
 });
