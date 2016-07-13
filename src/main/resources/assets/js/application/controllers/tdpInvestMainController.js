@@ -1,8 +1,7 @@
 define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpTableService'], function(angular, tdpInvestModule) {
-    var chartData = []
+    var chartData = [];
 
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpTableService) {
-git 
         //***chart***
         $scope.chartConfig = chartConfig;
 
