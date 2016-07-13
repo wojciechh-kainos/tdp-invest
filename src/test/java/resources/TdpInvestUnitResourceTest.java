@@ -42,19 +42,19 @@ public class TdpInvestUnitResourceTest{
 
 	@Test
 	public void testFetchAll() {
-		when(mockDAO.getData()).thenReturn(stubDB);
+		when(mockDAO.findAll()).thenReturn(stubDB);
 
 		List<TdpIUnit> results = resource.fetchAll();
 
 		assertEquals(stubDB.size(), results.size());
-		verify(mockDAO, times(1)).getData();
+		verify(mockDAO, times(1)).findAll();
 	}
 
 	@Test
 	public void testFetch() {
 		when(mockDAO.findById(1L)).thenReturn(stubDB.get(0));
 
-		assertEquals(stubDB.get(0).getValue(), resource.fetch(1L).getValue());
+		assertEquals(stubDB.get(0).getValue(), resource.fetchOne(1L).getValue());
 		verify(mockDAO, times(1)).findById(anyLong());
 	}
 }

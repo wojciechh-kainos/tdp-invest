@@ -4,6 +4,7 @@ package DAO;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -29,5 +30,11 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	public List<TdpIUnit> getData() {
 		return list(namedQuery("TdpIUnit.onlyData"));
+	}
+
+	public List<TdpIUnit> getFundUnits(Long id) {
+		Query query = namedQuery("TdpIUnit.getUnits");
+		query.setLong("fund", id);
+		return list(query);
 	}
 }

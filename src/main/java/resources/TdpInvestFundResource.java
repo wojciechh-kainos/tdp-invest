@@ -4,6 +4,7 @@ package resources;
 import DAO.TdpIFundDAO;
 import com.google.inject.Inject;
 import domain.TdpIFund;
+import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -11,6 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 
@@ -30,6 +32,19 @@ public class TdpInvestFundResource {
     @UnitOfWork
     public List<TdpIFund> fetchAll() {
         return tdpIFundDAO.findAll();
+    }
+
+    @GET
+    @Path("/insert")
+    @UnitOfWork
+    public TdpIFund insert() {
+        TdpIFund fund = new TdpIFund();
+        fund.setName("Test");
+        fund.setShortcut("TST");
+
+        tdpIFundDAO.create(fund);
+
+        return fund;
     }
 
     @GET

@@ -11,7 +11,9 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u"),
 		@NamedQuery(name = "TdpIUnit.onlyData",
-				query = "select u.date, u.value from TdpIUnit u")
+				query = "select u.date, u.value from TdpIUnit u"),
+		@NamedQuery(name = "TdpIUnit.getUnits",
+				query = "select u.date, u.value from TdpIUnit u where u.fund = :fund")
 })
 
 public class TdpIUnit {
@@ -19,15 +21,45 @@ public class TdpIUnit {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
 	@ManyToOne
-	@JoinColumn(name="found_id")
-	private TdpIFund found_id;
+	@JoinColumn(name="fund_id")
+	private TdpIFund fund;
+
+	public TdpIFund getFund() {
+		return fund;
+	}
+
+	public void setFund(TdpIFund fund) { this.fund = fund; }
 
 	@NotNull
 	private Date date;
 
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
 	@NotNull
 	private Double value;
+
+	public Double getValue() {
+		return value;
+	}
+
+	public void setValue(Double value) {
+		this.value = value;
+	}
 
 
 	public TdpIUnit() {
@@ -39,27 +71,11 @@ public class TdpIUnit {
 		this.value = value;
 	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
+	public TdpIUnit(Long id, Date date, Double value, TdpIFund fund) {
 		this.id = id;
-	}
-
-	public Date getDate() {
-		return date;
-	}
-
-	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public Double getValue() {
-		return value;
-	}
-
-	public void setValue(Double value) {
 		this.value = value;
+		this.fund = fund;
 	}
+
 }

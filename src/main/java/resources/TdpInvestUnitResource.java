@@ -29,13 +29,28 @@ public class TdpInvestUnitResource {
 	@GET
 	@UnitOfWork
 	public List<TdpIUnit> fetchAll() {
+		return tdpIUnitDAO.findAll();
+	}
+
+	@GET
+	@Path("/all")
+	@UnitOfWork
+	public List<TdpIUnit> getData() {
 		return tdpIUnitDAO.getData();
 	}
 
 	@GET
 	@Path("/{id}")
 	@UnitOfWork
-	public TdpIUnit fetch(@PathParam("id") Long id) {
+	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
+		return tdpIUnitDAO.getFundUnits(id);
+	}
+
+
+	@UnitOfWork
+	public TdpIUnit fetchOne(@PathParam("id") Long id) {
 		return tdpIUnitDAO.findById(id);
 	}
+
+
 }
