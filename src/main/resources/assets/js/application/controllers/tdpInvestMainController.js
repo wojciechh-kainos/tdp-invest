@@ -1,14 +1,18 @@
 define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular, tdpInvestModule) {
+    var chartData = [];
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout) {
 
 
         //***chart***
         $scope.chartConfig = chartConfig;
-        //$scope.inputData = inputData;
 
+        //***table***
+        var data = chartData.map(function(row){ return {date: row[0], val: row[1]}; });
+        $scope.tableConfig  = {
+            params: new NgTableParams({count: data.length}, { counts: [], data: data })
+        };
 
-
-//        $scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
+        //$scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
 
         //***file upload***
         $scope.uploadFiles = function(file, errFiles) {
@@ -22,22 +26,20 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
 
                     file.upload.then(function (response) {
                         $timeout(function () {
-                            file.result = response.data;
-                            $scope.result = response.data;
                             $scope.chartConfig.series.push({
-                                                                   name: "Fund",
-                                                                   data: response.data,
-                                                                   tooltip: {
-                                                                       valueDecimals: 2,
-                                                                       valuePrefix: "$",
-                                                                       xDateFormat: '%y-%m-%d'
-                                                                   }
-                                                               });
-                            var data = inputData.map(function(row){ return {date: row[0], val: row[1]}; });
-
-                                    $scope.tableConfig  = {
-                                        params: new NgTableParams({count: 25}, { counts: [25, 50, 100], data: data })
-                                    };
+                                                               name: "Fund",
+                                                               data: response.data,
+                                                               tooltip: {
+                                                                   valueDecimals: 2,
+                                                                   valuePrefix: "$",
+                                                                   xDateFormat: '%y-%m-%d'
+                                                               }
+                                                           });
+                            chartData = response.data;
+                            data = response.data.map(function(row){ return {date: row[0], val: row[1]}; });
+                            $scope.tableConfig  = {
+                                params: new NgTableParams({count: data.length}, { counts: [], data: data })
+                            };
                         });
                     }, function (response) {
                         if (response.status > 0)
