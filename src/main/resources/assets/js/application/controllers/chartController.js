@@ -29,7 +29,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
                     keys = Object.getOwnPropertyNames(dataForChart[0]);
                     var numberOfKeys = keys.length;
-
+//sdasd
 
                     num = dataForChart.length;
                     var customDataHome = [];
