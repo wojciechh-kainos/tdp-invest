@@ -40,7 +40,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         function handleSuccess(res) {
             res.success = true;
-            return res.data;
+            return res;
         }
 
         function handleError(error) {
