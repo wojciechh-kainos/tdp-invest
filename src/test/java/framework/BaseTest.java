@@ -4,6 +4,7 @@ import com.google.inject.Guice;
 import com.google.inject.Injector;
 import configuration.DataResourceModule;
 import configuration.TestModule;
+
 import org.junit.BeforeClass;
 
 public class BaseTest {
