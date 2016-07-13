@@ -13,7 +13,7 @@
         <div ng-init="investments = getInvestments()">
             <li ng-repeat="inv in investments">
                 <a ng-click="delInvestment(inv.id)">
-                    {{inv.name}}: {{inv.val}}%
+                    ${{inv.amount.toFixed(2)}}, {{(inv.annualRate * 100).toFixed(2)}}%
                 </a>
             </li>
         </div>
