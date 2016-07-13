@@ -2,6 +2,7 @@ define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
+    , 'application/controllers/tdpInvestNavbarController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
