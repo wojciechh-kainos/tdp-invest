@@ -9,7 +9,7 @@
                 <tr>
                     <th>
                         <a ng-click="sortTable('date');">Date</a>
-                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sort == 'date', 'glyphicon glyphicon-arrow-down' : !reverse && sort == 'date', '' : sort != 'date'}"></span>
+                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sortType == 'date', 'glyphicon glyphicon-arrow-down' : !reverse && sortType == 'date', '' : sortType != 'date'}"></span>
                         <!--
                         omówienie ng-class:
                         dodaje 'klase' : jezeli spelniony warunek
@@ -21,12 +21,12 @@
 
                     <th>
                         <a ng-click="sortTable('price');">Price</a>
-                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sort == 'price', 'glyphicon glyphicon-arrow-down' : !reverse && sort == 'price', '' : sort != 'price'}"></span>
+                        <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sortType == 'price', 'glyphicon glyphicon-arrow-down' : !reverse && sortType == 'price', '' : sortType != 'price'}"></span>
                     </th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in filteredCollection | orderBy:sort:reverse">
+                <tr ng-repeat="item in filteredStockData | orderBy:sortType:reverse">
                     <td>{{item.date}}</td>
                     <td>{{item.price}}</td>
                 </tr>
@@ -36,7 +36,7 @@
     </div>
     <div class="col-md-6 col-md-offset-3 center"><uib-pagination
             ng-model="currentPage"
-            total-items="collection.length"
+            total-items="stockData.length"
             max-size="maxSize"
             boundary-links="true">
     </uib-pagination></div>
