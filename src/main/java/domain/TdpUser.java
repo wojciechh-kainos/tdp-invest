@@ -1,15 +1,29 @@
-package model;
+package domain;
 
+import org.hibernate.annotations.NaturalId;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
-public class User implements Principal {
+@Entity
+@Table(name = "TdpUser")
+public class TdpUser implements Principal {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", unique = true, nullable = false)
     private long id;
+
+    @NaturalId
+    @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
     private String mail;
+
+    @NotNull
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-
-    public User() {}
+    public TdpUser() {}
 
     public long getId() {
         return id;
