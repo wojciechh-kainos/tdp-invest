@@ -76,7 +76,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     name: 'Stock',
                     step: 'left'
                 }]
-            });
+                });
         };
 
 
