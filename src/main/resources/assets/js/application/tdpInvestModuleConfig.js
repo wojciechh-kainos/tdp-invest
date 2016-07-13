@@ -3,6 +3,7 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestCalendarController'
+    , 'application/controllers/tdpInvestDateController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
@@ -67,6 +68,16 @@ define(['angular'
                     }
                 }
             })
+            .state("date",{
+                url:"/date",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-date.html",
+                        controller: "tdpInvestDateController"
+                    }
+                }
+            })
+
     });
 
     return tdpInvestModule;
