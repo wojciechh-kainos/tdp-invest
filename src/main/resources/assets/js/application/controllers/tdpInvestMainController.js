@@ -1,5 +1,6 @@
 define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular, tdpInvestModule) {
     var chartData = [];
+
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout) {
 
 
@@ -9,7 +10,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
         //***table***
         var data = chartData.map(function(row){ return {date: row[0], val: row[1]}; });
         $scope.tableConfig  = {
-            params: new NgTableParams({count: data.length}, { counts: [], data: data })
+            params: new NgTableParams({count: 10}, { counts: [], data: data })
         };
 
         //$scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
@@ -38,7 +39,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table'], function(angular,
                             chartData = response.data;
                             data = response.data.map(function(row){ return {date: row[0], val: row[1]}; });
                             $scope.tableConfig  = {
-                                params: new NgTableParams({count: data.length}, { counts: [], data: data })
+                                params: new NgTableParams({count: 10}, { counts: [], data: data })
                             };
                         });
                     }, function (response) {
