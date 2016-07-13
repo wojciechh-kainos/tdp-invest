@@ -4,7 +4,7 @@ server:
   applicationConnectors:
     - type: http
       port: 9007
-    adminConnectors:
+  adminConnectors:
     - type: http
       port: 9507
 
