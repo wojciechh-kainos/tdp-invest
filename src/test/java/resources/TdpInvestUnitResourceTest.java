@@ -9,6 +9,7 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,10 +30,10 @@ public class TdpInvestUnitResourceTest{
 	@BeforeClass
 	public static void setUpStub() {
 		stubDB = new ArrayList<>();
-		stubDB.add(new TdpIUnit(1L, new Date(), 222.2));
-		stubDB.add(new TdpIUnit(2L, new Date(), 232.2));
-		stubDB.add(new TdpIUnit(3L, new Date(), 252.2));
-		stubDB.add(new TdpIUnit(4L, new Date(), 272.2));
+		stubDB.add(new TdpIUnit(1L, LocalDate.now(), 222.2));
+		stubDB.add(new TdpIUnit(2L, LocalDate.now(), 232.2));
+		stubDB.add(new TdpIUnit(3L, LocalDate.now(), 252.2));
+		stubDB.add(new TdpIUnit(4L, LocalDate.now(), 272.2));
 	}
 
 	@Before

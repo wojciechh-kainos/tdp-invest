@@ -1,7 +1,6 @@
 package services;
 
-import model.InvestScore;
-import org.junit.Assert;
+import domain.TdpIUnit;
 import org.junit.Before;
 import org.junit.Test;
 import java.io.FileNotFoundException;
@@ -19,19 +18,21 @@ public class ParseCsvWithInvalidDateValueTest {
 
     private CsvToModelParser csvToModelParser;
     private String path = "/testAssets/investScoresInvalidDateTest.csv";
-    private InvestScore expectedInvestScore;
+    private TdpIUnit expectedInvestScore;
 
     @Before
     public void setUp() throws FileNotFoundException {
-        expectedInvestScore = new InvestScore(LocalDate.of(1998,1,5),100);
+        expectedInvestScore = new TdpIUnit();
+        expectedInvestScore.setDate(LocalDate.of(1998,1,5));
+        expectedInvestScore.setValue(100.00);
         csvToModelParser = new CsvToModelParser(path);
     }
 
     @Test
-    public void parseCsvFileWithInvalidDateToInvestScoreModelTest() throws IOException {
-        List<InvestScore> investScoreList = csvToModelParser.parse();
+    public void parseCsvFileWithInvalidDateToTdpIUnitTest() throws IOException {
+        List<TdpIUnit> tdpIUnitList = csvToModelParser.parse();
         assertEquals("List should ignore invalid line",
-                investScoreList.size(), 1);
-        assertTrue("List should contain correct investScore", investScoreList.contains(expectedInvestScore));
+                tdpIUnitList.size(), 1);
+        assertTrue("List should contain correct TdpIUnit", tdpIUnitList.contains(expectedInvestScore));
     }
 }
