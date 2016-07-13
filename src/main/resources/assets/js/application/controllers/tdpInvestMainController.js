@@ -51,7 +51,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                $scope.dataForView = recordList;
 
                for (i = 0; i < recordList.length; i++) {
-                   dateList.push(recordList[i].date.month);
+                   dateList.push(getDateString(recordList[i].date));
                    valuesList.push(recordList[i].value)
                }
 
@@ -60,10 +60,9 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         function createChart(dateList, valuesList){
             Highcharts.chart('container', {
-
                 xAxis: {
                     title: {
-                        text: 'Month'
+                        text: 'Date'
                     },
                     categories: dateList
                 },
@@ -73,9 +72,18 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                      }
                 },
                 series: [{
-                    data: valuesList
+                    data: valuesList,
+                    name: 'Stock',
+                    step: 'left'
                 }]
-                });
+            });
+        };
+
+
+        function getDateString(date) {
+            var newDate = new Date(date.year + "-" + date.monthValue + "-" + date.dayOfMonth);
+
+            return newDate.toISOString().slice(0,10).replace(/-/g,".");
         };
 
     });
