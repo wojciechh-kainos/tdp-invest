@@ -3,12 +3,12 @@
     <tr>
         <td>Date</td>
         <td>Income</td>
-        <td ng-if="columns.length == 3">Income from fund</td>
+        <td ng-if="columns.length == 4">Income from fund</td>
     </tr>
     <tr ng-repeat="row in myData">
-        <td>{{row[columns[0]]}}</td>
-        <td><center>{{row[columns[1]]}}</center></td>
-        <td ng-if="columns.length == 3"><center>{{row[columns[2]]}}</center></td>
+        <td>{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
+        <td><center>{{row[columns[valIndex]]}}</center></td>
+        <!--<td ng-if="columns.length == 4"><center>{{row[columns[3]]}}</center></td>-->
     </tr>
 </table>
 

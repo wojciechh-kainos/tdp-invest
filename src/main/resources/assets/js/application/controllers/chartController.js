@@ -28,18 +28,19 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                      var dataForChart = [];
                      dataForChart = $scope.$parent.receivedData;
                     var keys = [];
-
                     if (dataForChart.length != 0)keys = Object.getOwnPropertyNames(dataForChart[0]);
                     var numberOfKeys = keys.length;
                     num = dataForChart.length;
+                    var dateIndex = keys.indexOf("date");
+                    var valIndex = keys.indexOf("value");
                     var customDataHome = [];
                     var customDataCompare = [];
                     for (var i = 0 ; i < num ; i++) {
-                        var now = new Date(dataForChart[i][keys[0]]);
+                        var now = new Date(dataForChart[i][keys[dateIndex]]);
                         var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-                        customDataHome.push([now_utc , dataForChart[i][keys[1]]]);
+                        customDataHome.push([now_utc , dataForChart[i][keys[valIndex]]]);
                      if(numberOfKeys == 3 && keys[2] != "$$hashKey")  {
-                        customDataCompare.push([now_utc , dataForChart[i][keys[2]]]);
+                        customDataCompare.push([now_utc , dataForChart[i][keys[valIndex]]]);
                       }
                     }
                    if(numberOfKeys == 3 && keys[2] != "$$hashKey") {

@@ -6,8 +6,9 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
               $scope.myData = $scope.$parent.receivedData;
               var Data = $scope.$parent.receivedData;
               var keys = [];
-
               if(Data.length != 0)keys = Object.getOwnPropertyNames(Data[0]);
+              $scope.dateIndex = keys.indexOf("date");
+              $scope.valIndex = keys.indexOf("value");
               $scope.columns = keys;
 
             })

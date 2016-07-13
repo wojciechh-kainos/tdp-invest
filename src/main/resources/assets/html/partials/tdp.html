@@ -9,13 +9,13 @@
     </div>
 </md-toolbar>
 <div flex layout="row">
-    <md-sidenav md-is-locked-open="true">
+    <div flex="10">
         <div ui-view="DateSegment"></div>
         <div ui-view="userData"></div>
         <div ui-view="submitButton"></div>
-    </md-sidenav>
+    </div>
     <div flex layout="row">
-        <div flex ui-view="chart"></div>
-        <div flex="30" ui-view="table"></div>
+        <div flex="80" ui-view="chart"></div>
+        <div flex ui-view="table"></div>
     </div>
 </div>

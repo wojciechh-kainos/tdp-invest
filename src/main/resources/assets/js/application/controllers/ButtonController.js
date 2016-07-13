@@ -11,7 +11,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
                 });
             } else {
                 DataService.getRowsForCompare(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate,
-                                                $scope.$parent.input, $scope.$parent.percentage).then(function(response) {
+                          $scope.$parent.input, $scope.$parent.percentage).then(function(response) {
                      $scope.$parent.receivedData = response.data;
                       }, function(error) {
                               alert("Error! ButtonController")

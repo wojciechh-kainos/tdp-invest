@@ -11,7 +11,7 @@ define(['angular'
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
             .state("root", {
-                url: "/tdp",
+                url: "",
                 templateUrl: 'html/partials/tdp.html',
                 controller: 'IndexController',
             })

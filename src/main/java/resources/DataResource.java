@@ -1,7 +1,11 @@
 package resources;
 
+import DAO.TdpIUnitDAO;
 import api.CalculatedRow;
 import api.Row;
+import domain.TdpIUnit;
+import io.dropwizard.hibernate.UnitOfWork;
+import org.hibernate.SessionFactory;
 import service.*;
 
 import javax.inject.Inject;
@@ -23,11 +27,16 @@ public class DataResource {
 
     private RowRepository repo;
     private DateTransformer tra = new DateTransformer();
+    private TdpIUnitDAO tdpDAO;
 
     @Inject
-    DataResource(RowRepository repo) {
+    DataResource(RowRepository repo, TdpIUnitDAO tdpDAO) {
         this.repo = repo;
+        this.tdpDAO = tdpDAO;
     }
+
+
+
 
     @GET
     @Path("/get/data")
@@ -37,8 +46,9 @@ public class DataResource {
     }
 
     @GET
+    @UnitOfWork
     @Path("/get/compare")
-    public List<CalculatedRow> fetchCompare(@PathParam("startDate") String startDate,
+    public List<TdpIUnit> fetchCompare(@PathParam("startDate") String startDate,
                                             @PathParam("endDate") String endDate,
                                             @PathParam("input") int input,
                                             @PathParam("percentage") int percentage) {
@@ -50,7 +60,11 @@ public class DataResource {
         calcs.add(row2);
         calcs.add(row3);
 
-        return calcs;
+
+        List <TdpIUnit> list = tdpDAO.findAll();
+
+
+        return list;
     }
 
 }
