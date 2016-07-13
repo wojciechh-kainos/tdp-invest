@@ -2,10 +2,12 @@ package resources;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -44,10 +46,16 @@ public class TdpInvestCompareResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void fetchRange(String json) {
+    public void fetchRange(String json) throws ParseException {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date dateFrom = sdf.parse(jsonObject.get("dateFrom").getAsString());
+        Date dateTo = sdf.parse(jsonObject.get("dateTo").getAsString());
+
         System.out.println(jsonObject.get("dateFrom").getAsString());
         System.out.println(jsonObject.get("dateTo").getAsString());
+        System.out.println(dateFrom.toString());
+        System.out.println(dateTo.toString());
 
 
     }
