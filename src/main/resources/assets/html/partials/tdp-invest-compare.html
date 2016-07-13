@@ -1,0 +1,93 @@
+<div class="container">
+    <div class="col-md-6">
+        <form class="form-horizontal" ng-submit="submit()" >
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Porównaj</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="start_date">Data początkowa:</label>
+                    <div class="col-md-7">
+
+                        <p class="input-group">
+                            <input id="start_date" name="start_date" ng-model="start_date" type="string" class="form-control" placeholder="dd/mm/rrrr" uib-datepicker-popup="{{format}}" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <span class="help-block">Data w formacie dd/mm/rrrr</span>
+                    </div>
+                </div>
+
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="end_date">Data końcowa:</label>
+                    <div class="col-md-7">
+
+                        <p class="input-group">
+                            <input id="end_date" name="end_date" ng-model="end_date" type="string" class="form-control" placeholder="dd/mm/rrrr" uib-datepicker-popup="{{format}}" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                        </p>
+                        <span class="help-block">Data w formacie dd/mm/rrrr</span>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="value_percentage">Oprocentowanie lokaty:</label>
+                    <div class="col-md-7">
+                        <input id="value_percentage" name="value_percentage" ng-model="value_percentage" type="number" value="0.07" placeholder="0.07" step="0.01" max="0.99" min="0.01" class="form-control input-md" required="">
+                        <span class="help-block">Wartość wyrażona w procentach</span>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="value_capitalization">Kapitalizacja odsetek:</label>
+                    <div class="col-md-7">
+                        <input id="value_capitalization" name="value_capitalization" ng-model="value_capitalization" type="number" value="30" placeholder="30" step="1" max="365" min="1" class="form-control input-md" required="">
+                        <span class="help-block">Ilość dni</span>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="value_investment">Kwota inwestycji</label>
+                    <div class="col-md-7">
+                        <input id="value_investment" name="value_investment" ng-model="value_investment" type="number" value="1000" placeholder="1000" class="form-control input-md" required="">
+                        <span class="help-block">Ilość pieniędzy inwestowana</span>
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="button1id"></label>
+                    <div class="col-md-7">
+                        <button id="button1id" name="button1id" type="submit" class="btn btn-success">Policz</button>
+                        <button id="button2id" name="button2id" type="reset" class="btn btn-danger">Reset</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+
+    <div class="col-md-6">
+        <legend>Porównanie</legend>
+
+
+        {{start_date}}
+        {{end_date}}
+        {{value_percentage}}
+        {{value_capitalization}}
+        {{value_investment}}
+
+        <highchart id="chart1" config="chartConfig" class="span3"></highchart>
+    </div>
+</div>

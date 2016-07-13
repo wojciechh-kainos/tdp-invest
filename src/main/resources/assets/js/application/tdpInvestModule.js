@@ -1,6 +1,5 @@
-define(['angular', 'uiRouter'], function(angular) {
-    return angular.module("tdpInvestModule", ['ui.router', 'ngCookies'])
-
+define(['angular', 'uiRouter', 'highcharts-ng', 'ui-bootstrap', 'ngCookies'], function(angular) {
+    angular.module("tdpInvestModule", ['ui.router', 'highcharts-ng', 'ui.bootstrap', '$cookieStore'])
     .run(['$rootScope', '$location', '$cookieStore', '$http',
         function ($rootScope, $location, $cookieStore, $http) {
             // keep user logged in after page refresh
