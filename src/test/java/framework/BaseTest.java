@@ -2,7 +2,6 @@ package framework;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import configuration.TestModule;
 import org.junit.BeforeClass;
 
 public class BaseTest {
