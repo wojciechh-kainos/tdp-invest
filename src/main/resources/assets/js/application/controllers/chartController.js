@@ -25,23 +25,44 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
      $scope.$watch('receivedData', function() {
                     var dataForChart = $scope.$parent.receivedData;
+                    var keys = [];
+
+                    keys = Object.getOwnPropertyNames(dataForChart[0]);
+                    var numberOfKeys = keys.length;
+
+
                     num = dataForChart.length;
-                    var customData = [];
+                    var customDataHome = [];
+                    var customDataCompare = [];
                     for (var i = 0 ; i < num ; i++) {
-                    var now = new Date(dataForChart[i].date);
-                    var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-                    console.log(now_utc);
-                        customData.push([now_utc , dataForChart[i].value]);
+                        var now = new Date(dataForChart[i][keys[0]]);
+                        var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+                        customDataHome.push([now_utc , dataForChart[i][keys[1]]]);
+                     if(numberOfKeys == 3)  {
+                        customDataCompare.push([now_utc , dataForChart[i][keys[2]]]);
+                      }
                     }
-                          $scope.chartConfig.series = [{
-                              data: customData}]
+                   if(numberOfKeys == 3) {
+                        $scope.chartConfig.series = [{
+                            name: "Home",
+                            data: customDataHome},
+                            {
+                            name: "compare",
+                            data: customDataCompare
+                            }]
+                   }
+                   else {
+                        $scope.chartConfig.series = [{
+                              name: "Home",
+                              data: customDataHome}]
+                   }
 
                 })
 
     $scope.chartConfig = {
         xAxis: {
                 type: 'datetime',
-                dateTimeLabelFormats: { // don't display the dummy year
+                dateTimeLabelFormats: {
                     month: '%e. %b',
                     year: '%b'
                 },

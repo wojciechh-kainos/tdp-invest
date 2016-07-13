@@ -2,7 +2,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
     tdpInvestModule.controller("DataController", function($scope, $state) {
 
         $scope.$watch('receivedData', function() {
-                console.log("hello");
+              //  console.log("hello");
               $scope.myVal = $scope.$parent.receivedData;
             })
 
