@@ -1,39 +1,44 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams, tdpDataService) {
+
         var investData = [];
+        var start = false;
+        var end = false;
+
+        function dateFilter(record){
+                if(start == false || end == false){
+                    return true;
+                }
+
+                var date = new Date(record.date.year + "-" + record.date.monthValue + "-" + record.date.dayOfMonth);
+                if(date > start && date < end)
+                       return true;
+                return false;
+        }
+
+        function prepareChart(recordList){
+               var dateList = []
+               var valuesList = []
+
+               recordList = recordList.filter(dateFilter);
+               $scope.tableData = recordList;
+
+               for (i = 0; i < recordList.length; i++) {
+                   dateList.push(recordList[i].date.month);
+                   valuesList.push(recordList[i].value)
+               }
+
+               createChart(dateList, valuesList);
+        }
+
         tdpDataService.getInvestData().then(function(response){
-            investData = response.data;
-            var dateList = []
-            var valuesList = []
-            $scope.tableData = investData;
-
-            for (i = 0; i < response.data.length; i++) {
-                dateList.push(response.data[i].date.month);
-                valuesList.push(response.data[i].value)
-            }
-
-            createChart(dateList, valuesList);
+            prepareChart(response.data)
         });
 
         $scope.submitRange = function(){
-            if(typeof $scope.start !== undefined && typeof $scope.end !== undefined){
-                var dateList = []
-                var valuesList = []
-                $scope.tableData = [];
-
-                var start = new Date($scope.start);
-                var end = new Date ($scope.end);
-                for (i = 0; i < investData.length; i++) {
-                    var date = new Date(investData[i].date.year + "-" + investData[i].date.monthValue + "-" + investData[i].date.dayOfMonth);
-                    if( date > start && date < end){
-                        $scope.tableData.push(investData[i]);
-                        dateList.push(investData[i].date.month);
-                        valuesList.push(investData[i].value)
-                    }
-                }
-
-                createChart(dateList, valuesList);
-            }
+              start = new Date($scope.start);
+              end = new Date ($scope.end);
+              prepareChart($scope.tableData)
         }
 
         function createChart(dateList, valuesList){
