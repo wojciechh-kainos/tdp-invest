@@ -23,6 +23,7 @@
     "requirejs": "^2.2.0",
     "highcharts-ng": "^0.0.11",
     "highcharts": "^4.2.5",
-    "restangular": "^1.5.2"
+    "restangular": "^1.5.2",
+    "ng-table": "^1.0.0"
   }
 }

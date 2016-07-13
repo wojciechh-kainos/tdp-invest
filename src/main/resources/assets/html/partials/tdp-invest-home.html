@@ -3,3 +3,9 @@
 <label>Value of investment</label><input ng-model="investmentValue"  />
 <button ng-click="updateChart()">Show me!</button>
 <highchart config="chartConfig"></highchart>
+
+<table ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-striped" >
+    <tr ng-repeat="row in $data">
+        <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+    </tr>
+</table>

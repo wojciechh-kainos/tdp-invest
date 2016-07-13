@@ -8,15 +8,18 @@ require.config({
         'highcharts': 'lib/highcharts/highcharts',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
         'lodash': 'lib/lodash/dist/lodash.min',
-        'restangular': 'lib/restangular/dist/restangular.min'
+        'restangular': 'lib/restangular/dist/restangular.min',
+        'ngTable': 'lib/ng-table/dist/ng-table.min',
+        'highchart-theme': 'lib/highcharts/themes/dark-unica'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
         'uiRouter': ['angular'],
-        'highcharts-ng': ['angular', 'highcharts'],
-        'restangular': ['angular', 'lodash']
+        'highcharts-ng': ['angular', 'highcharts', 'highchart-theme'],
+        'restangular': ['angular', 'lodash'],
+        'ngTable': ['angular']
     },
     deps: ['application/bootstrap']
 });
