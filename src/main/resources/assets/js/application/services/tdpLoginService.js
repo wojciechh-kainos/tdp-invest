@@ -2,8 +2,7 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
     tdpInvestModule.service('tdpLoginService', ['$cookieStore', '$http', '$rootScope', '$timeout', function($cookieStore, $http, $rootScope, $timeout) {
         var service = {};
 
-        service.Login = function (username, password, callback) {
-
+        service.Login = function(username, password, callback) {
             $timeout(function(){
                 $http.post('/api/login', { mail: username, password: password })
                     .then(function (response) {
@@ -16,12 +15,12 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
             }, 1000);
         };
 
-        service.SetCredentials = function (username, password) {
-            var authdata = Base64.encode(username + ':' + password);
+        service.SetCredentials = function(email, password) {
+            var authdata = Base64.encode(email + ':' + password);
 
             $rootScope.globals = {
                 currentUser: {
-                    username: username,
+                    username: email,
                     authdata: authdata
                 }
             };
@@ -30,14 +29,24 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
             $cookieStore.put('globals', $rootScope.globals);
         };
 
-        service.ClearCredentials = function () {
+        service.ClearCredentials = function() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
             $http.defaults.headers.common.Authorization = 'Basic ';
         };
 
+        service.WatchAuthorizationStatus = function(loginCallback, logoutCallback) {
+            $rootScope.$watch('globals.currentUser', function(newVal) {
+                if (newVal) { // user logged in
+                    loginCallback();
+                } else { // user logged out
+                    logoutCallback();
+                }
+            }, true);
+        };
+
         return service;
-    }])
+    }]);
 
     // Base64 encoding service used by AuthenticationService
     var Base64 = {
