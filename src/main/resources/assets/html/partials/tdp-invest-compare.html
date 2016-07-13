@@ -12,12 +12,12 @@
                     <div class="col-md-7">
 
                         <p class="input-group">
-                            <input id="start_date" name="start_date" ng-model="start_date" type="string" class="form-control" placeholder="dd/mm/rrrr" uib-datepicker-popup="{{format}}" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <input id="start_date" name="start_date" ng-model="start_date" type="string" class="form-control" placeholder="rrrr-mm-dd" uib-datepicker-popup="{{format}}" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
-                        <span class="help-block">Data w formacie dd/mm/rrrr</span>
+                        <span class="help-block">Data w formacie rrrr-mm-dd</span>
                     </div>
                 </div>
 
@@ -28,12 +28,12 @@
                     <div class="col-md-7">
 
                         <p class="input-group">
-                            <input id="end_date" name="end_date" ng-model="end_date" type="string" class="form-control" placeholder="dd/mm/rrrr" uib-datepicker-popup="{{format}}" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                            <input id="end_date" name="end_date" ng-model="end_date" type="string" class="form-control" placeholder="rrrr-mm-dd" uib-datepicker-popup="{{format}}" ng-model="dt2" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
-                        <span class="help-block">Data w formacie dd/mm/rrrr</span>
+                        <span class="help-block">Data w formacie rrrr-mm-dd</span>
                     </div>
                 </div>
 
@@ -60,7 +60,7 @@
                     <label class="col-md-4 control-label" for="value_investment">Kwota inwestycji</label>
                     <div class="col-md-7">
                         <input id="value_investment" name="value_investment" ng-model="value_investment" type="number" value="1000" placeholder="1000" class="form-control input-md" required="">
-                        <span class="help-block">Ilość pieniędzy inwestowana</span>
+                        <span class="help-block">Zainwestowana ilość pieniędzy</span>
                     </div>
                 </div>
 
