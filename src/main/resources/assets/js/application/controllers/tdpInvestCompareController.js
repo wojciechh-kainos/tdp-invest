@@ -65,16 +65,21 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             };
         }
 
+        $scope.renderInfo = function(response) {
+            $scope.stockData = response.data;
+                        $scope.prices = [];
+                        $scope.dates = [];
+                        for (i = 0; i < $scope.stockData.length; i++) {
+                            $scope.prices.push(parseFloat($scope.stockData[i].price));
+                            $scope.dates.push($scope.stockData[i].date);
+                        }
+                        initializeTable();
+                        initializeChart();
+        }
+
+
         tdpCompareService.getData().then(function(response) {
-                $scope.stockData = response.data;
-                $scope.prices = [];
-                $scope.dates = [];
-                for (i = 0; i < $scope.stockData.length; i++) {
-                    $scope.prices.push(parseFloat($scope.stockData[i].price));
-                    $scope.dates.push($scope.stockData[i].date);
-                }
-                initializeTable();
-                initializeChart();
+                $scope.renderInfo(response);
         });
     });
 });
