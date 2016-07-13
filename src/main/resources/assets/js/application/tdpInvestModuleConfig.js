@@ -2,6 +2,7 @@ define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
+    , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainViewController'
@@ -61,7 +62,8 @@ define(['angular'
                         }
                     }
                 }
-            }).state("login", {
+            }
+        }).state("login", {
                   url: "/login",
                   views: {
                       "@": {

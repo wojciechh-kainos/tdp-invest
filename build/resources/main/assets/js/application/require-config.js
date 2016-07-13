@@ -1,11 +1,15 @@
 'use strict';
 
+//noinspection JSFileReferences
 require.config({
     baseUrl: 'js/',
     paths: {
-        'angular': 'lib/angular/angular.min',
-        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
-        'ngCookies': 'lib/angular-cookies/angular-cookies.min',
+        'angular': 'lib/angular/angular',
+        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
+        'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
+        'highstocks': 'lib/highcharts/highstock',
+        'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls'
     },
     shim: {
         'angular': {
@@ -14,9 +18,10 @@ require.config({
         'uiRouter' : ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
-            deps: ['angular'],
+            deps: ['angular']
         },
+        'highcharts-ng' : ['angular', 'highstocks'],
+        'ui-bootstrap' : ['angular']
     },
     deps: ['application/bootstrap']
 });
-
