@@ -3,7 +3,8 @@ package domain;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
+import java.util.Objects;
 
 @Entity
 @Table(name = "unit")
@@ -16,7 +17,7 @@ public class TdpIUnit {
 	private Long id;
 
 	@NotNull
-	private Date date;
+	private LocalDate date;
 
 	@NotNull
 	private Double value;
@@ -25,8 +26,13 @@ public class TdpIUnit {
 	public TdpIUnit() {
 	}
 
-	public TdpIUnit(Long id, Date date, Double value) {
+	public TdpIUnit(Long id, LocalDate date, Double value) {
 		this.id = id;
+		this.date = date;
+		this.value = value;
+	}
+
+	public TdpIUnit(LocalDate date, double value) {
 		this.date = date;
 		this.value = value;
 	}
@@ -39,11 +45,11 @@ public class TdpIUnit {
 		this.id = id;
 	}
 
-	public Date getDate() {
+	public LocalDate getDate() {
 		return date;
 	}
 
-	public void setDate(Date date) {
+	public void setDate(LocalDate date) {
 		this.date = date;
 	}
 
@@ -53,5 +59,14 @@ public class TdpIUnit {
 
 	public void setValue(Double value) {
 		this.value = value;
+	}
+
+	@Override
+	public boolean equals(Object tdpIUnitToCompare) {
+		TdpIUnit tdpIUnit = (TdpIUnit)tdpIUnitToCompare;
+		if(this.date.isEqual(tdpIUnit.date) &&
+				Objects.equals(this.value, tdpIUnit.value))
+			return true;
+		return false;
 	}
 }

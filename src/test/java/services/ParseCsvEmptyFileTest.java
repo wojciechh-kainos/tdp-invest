@@ -1,6 +1,6 @@
 package services;
 
-import model.InvestScore;
+import domain.TdpIUnit;
 import org.junit.Test;
 
 import java.io.IOException;
@@ -18,16 +18,16 @@ public class ParseCsvEmptyFileTest {
     private String pathToEmptyWithHeaderFile = "/testAssets/investScoresEmptyWithHeaderTest.csv";
 
     @Test
-    public void parseEmptyCsvFileToInvestScoreModelTest() throws IOException {
+    public void parseEmptyCsvFileToTdpIUnitTest() throws IOException {
         csvToModelParser = new CsvToModelParser(pathToEmptyFile);
-        List<InvestScore> investScoreList = csvToModelParser.parse();
-        assertTrue("List should not contain any scores", investScoreList.isEmpty());
+        List<TdpIUnit> tdpIUnitList = csvToModelParser.parse();
+        assertTrue("List should not contain any records", tdpIUnitList.isEmpty());
     }
 
     @Test
-    public void parseEmptyWithHeadersCsvFileToInvestScoreModelTest() throws IOException {
+    public void parseEmptyWithHeadersCsvFileToTdpIUnitTest() throws IOException {
         csvToModelParser = new CsvToModelParser(pathToEmptyWithHeaderFile);
-        List<InvestScore> investScoreList = csvToModelParser.parse();
-        assertTrue("List should not contain any scores", investScoreList.isEmpty());
+        List<TdpIUnit> investScoreList = csvToModelParser.parse();
+        assertTrue("List should not contain any records", investScoreList.isEmpty());
     }
 }

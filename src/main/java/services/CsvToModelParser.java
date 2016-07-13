@@ -1,6 +1,5 @@
 package services;
-
-import model.InvestScore;
+import domain.TdpIUnit;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVRecord;
 import org.apache.log4j.Logger;
@@ -35,19 +34,19 @@ public class CsvToModelParser {
         }
     }
 
-    public List<InvestScore> parse() throws IOException {
-        List<InvestScore> investScores = new ArrayList<>();
+    public List<TdpIUnit> parse() throws IOException {
+        List<TdpIUnit> tdpIUnitList = new ArrayList<>();
 
         Iterable<CSVRecord> records = CSVFormat.RFC4180.withHeader(dateHeader, valueHeader).parse(reader);
         for (CSVRecord record : records) {
             if(record.getRecordNumber() != HEADER){
                 LocalDate date = prepareDate(record.get(dateHeader));
-                if(date != null)
-                    investScores.add(new InvestScore(date,
-                            Float.parseFloat(record.get(valueHeader))));
+                if(date != null){
+                    tdpIUnitList.add(new TdpIUnit(date, Double.parseDouble(record.get(valueHeader))));
+                }
             }
         }
-        return investScores;
+        return tdpIUnitList;
     }
 
     private LocalDate prepareDate(String date) {
