@@ -2,10 +2,10 @@ package resources;
 
 import helpers.TimeSeries;
 import model.Fund;
+import org.joda.time.DateTime;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
 import java.util.List;
 
 @Path("/investment")
@@ -17,11 +17,13 @@ public class TdpInvestInvestmentResource {
 
     @GET
     @Path("/timeseries")
-    public List<Fund> fetchInvestmentTimeSeries(@QueryParam("startDate")Date startDate,
-                                                @QueryParam("endDate")Date endDate,
+    public List<Fund> fetchInvestmentTimeSeries(@QueryParam("startDate")long startDate,
+                                                @QueryParam("endDate")long endDate,
                                                 @QueryParam("amount")double amount,
                                                 @QueryParam("annualRate")double annualRate){
-        TimeSeries ts = new TimeSeries(startDate, endDate, amount, annualRate);
+
+
+        TimeSeries ts = new TimeSeries(new DateTime(startDate), new DateTime(endDate), amount, annualRate);
 
         return ts.getTimeSeries();
     }

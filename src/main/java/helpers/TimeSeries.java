@@ -1,9 +1,9 @@
 package helpers;
 
 import model.Fund;
+import org.joda.time.DateTime;
+
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
@@ -12,7 +12,7 @@ import java.util.stream.Stream;
 public class TimeSeries {
     List<Fund> timeSeries;
 
-    public TimeSeries(Date startDate, Date endDate, double amount, double annualRate){
+    public TimeSeries(DateTime startDate, DateTime endDate, double amount, double annualRate){
         this.timeSeries = createTimeSeries(startDate, endDate, amount, annualRate);
     }
 
@@ -20,28 +20,20 @@ public class TimeSeries {
         return this.timeSeries;
     }
 
-    private List<Fund> createTimeSeries(Date startDate, Date endDate, double amount, double annualRate){
+    private List<Fund> createTimeSeries(DateTime startDate, DateTime endDate, double amount, double annualRate){
         return Stream
-                .iterate(startDate, date -> addDays(date, 1))
-                .limit(datesDiffInDays(startDate, endDate) + 1)
+                .iterate(startDate, date -> date.plusDays(1))
+                .limit(datesDiffInDays(startDate, endDate) + 2)
                 .skip(1)
                 .map(row -> new Fund(row, futureValue(datesDiffInDays(startDate, row), amount, annualRate)))
                 .collect(Collectors.toCollection(ArrayList::new));
     }
 
-    private Date addDays(Date date, int days) {
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(date);
-        cal.add(Calendar.DATE, days);
-
-        return cal.getTime();
-    }
-
     private double futureValue(long days, double amount, double annualRate){
-        return amount * Math.pow(1 + annualRate / 365.25, days);
+        return amount * Math.pow(1 + annualRate / 365.25, days + 1);
     }
 
-    private long datesDiffInDays(Date startDate, Date endDate){
-        return TimeUnit.DAYS.convert(endDate.getTime() - startDate.getTime(), TimeUnit.MILLISECONDS);
+    private long datesDiffInDays(DateTime startDate, DateTime endDate){
+        return TimeUnit.DAYS.convert(endDate.getMillis() - startDate.getMillis(), TimeUnit.MILLISECONDS);
     }
 }
