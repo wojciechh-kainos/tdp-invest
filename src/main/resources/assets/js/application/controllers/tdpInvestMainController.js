@@ -1,59 +1,70 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams, tdpDataService) {
-        var investData = [];
+        var dataFromServer = [];
+
         tdpDataService.getInvestData().then(function(response){
-            investData = response.data;
-            var dateList = []
-            var valuesList = []
-            $scope.tableData = investData;
+            var dataFromServer = response.data;
+            $scope.dataForView = dataFromServer;
 
-            for (i = 0; i < response.data.length; i++) {
-                dateList.push(response.data[i].date.month);
-                valuesList.push(response.data[i].value)
-            }
+            createChart($scope.dataForView);
 
-            createChart(dateList, valuesList);
-        });
+            $scope.currentPage = 1;
+            $scope.numPerPage = 10;
+            $scope.maxSize = 5;
+            $scope.filteredDataForView = [];
+            $scope.dataChanged = false;
 
-        $scope.submitRange = function(){
-            if(typeof $scope.start !== undefined && typeof $scope.end !== undefined){
-                var dateList = []
-                var valuesList = []
-                $scope.tableData = [];
+            $scope.$watch("[currentPage + numPerPage, dataChanged]", function() {
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+                var end = begin + $scope.numPerPage;
+
+                $scope.filteredDataForView = $scope.dataForView.slice(begin, end);
+                $scope.dataChanged = false;
+            });
+
+            $scope.submitRange = function(){
+                $scope.dataForView = [];
 
                 var start = new Date($scope.start);
                 var end = new Date ($scope.end);
-                for (i = 0; i < investData.length; i++) {
-                    var date = new Date(investData[i].date.year + "-" + investData[i].date.monthValue + "-" + investData[i].date.dayOfMonth);
+                for (i = 0; i < dataFromServer.length; i++) {
+                    var date = new Date(dataFromServer[i].date.year + "-" + dataFromServer[i].date.monthValue + "-" + dataFromServer[i].date.dayOfMonth);
                     if( date > start && date < end){
-                        $scope.tableData.push(investData[i]);
-                        dateList.push(investData[i].date.month);
-                        valuesList.push(investData[i].value)
+                        $scope.dataForView.push(dataFromServer[i]);
                     }
                 }
-
-                createChart(dateList, valuesList);
+                $scope.dataChanged = true;
+                $scope.currentPage = 1;
+                createChart($scope.dataForView);
             }
-        }
 
-        function createChart(dateList, valuesList){
+        });
+
+        function createChart(data){
+            var dateList = []
+            var valuesList = []
+
+            for (i = 0; i < data.length; i++) {
+                dateList.push(data[i].date.month);
+                valuesList.push(data[i].value)
+            }
+
             Highcharts.chart('container', {
                 xAxis: {
                     title: {
                         text: 'Month'
                     },
                     categories: dateList
-                    },
-                    yAxis: {
-                         title: {
-                                text: 'Value'
-                         }
-                    },
-
-                    series: [{
-                        data: valuesList
-                    }]
-                });
+                },
+                yAxis: {
+                     title: {
+                            text: 'Value'
+                     }
+                },
+                series: [{
+                    data: valuesList
+                }]
+            });
         };
 
     });

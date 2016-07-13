@@ -1,17 +1,21 @@
 
-<div>
-    <form name="dateRangeForm">
-        <div class="form-group">
-            <input class="form-control" type="date" ng-model="start" placeholder="yyyy-MM-dd">
-            <input class="form-control" type="date" ng-model="end" placeholder="yyyy-MM-dd">
+    <form class="form-horizontal" name="dateRangeForm" >
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <label for="start">Begin date:</label>
+                <input class="form-control" type="date" id="start" ng-model="start" placeholder="yyyy-MM-dd">
+
+                <label for="end">End date:</label>
+                <input class="form-control" type="date" id="end" ng-model="end" placeholder="yyyy-MM-dd">
+            </div>
         </div>
 
-        <div class="form-group">
-            <button class="btn btn-default" type="submit" ng-click="submitRange()">Submit</button>
+        <div class="row">
+            <div class="form-group col-xs-3">
+                <button class="btn btn-default" type="submit" ng-click="submitRange()">Submit</button>
+            </div>
         </div>
     </form>
-</div>
-
 <div class="row">
     <div>
     PersonId: <input type="text" ng-model="id">
@@ -23,11 +27,16 @@
 <div class="row">
     <div id="container">Placeholder for chart</div>
 </div>
+
 <div class="row">
-    <p>
-        Search:
-        <input ng-model= "query">
-    </p>
+    <form class="form-horizontal">
+        <div class="form-group">
+            <label for="query" >Search: </label>
+            <div class="input-group">
+                <input class="form-control" id="query" ng-model= "query">
+            </div>
+        </div>
+    </form>
 
     <table class="table investScoreTable">
         <tr>
@@ -36,11 +45,18 @@
             <td><a href="#" ng-click="sortType = 'year'; sortReverse = !sortReverse">Year</a></td>
             <td><a href="#" ng-click="sortType = 'value'; sortReverse = !sortReverse">Value</a></td>
         </tr>
-        <tr ng-repeat="score in tableData | orderBy:sortType:sortReverse | filter: query ">
+        <tr ng-repeat="score in filteredDataForView | orderBy:sortType:sortReverse | filter: query ">
             <td>{{score.date.dayOfMonth}}</td>
             <td>{{score.date.month}}</td>
             <td>{{score.date.year}}</td>
             <td>{{score.value}}</td>
         </tr>
     </table>
+
+    <uib-pagination
+            ng-model="currentPage"
+            total-items="dataForView.length"
+            max-size="maxSize"
+            boundary-links="true">
+    </uib-pagination>
 </div>
