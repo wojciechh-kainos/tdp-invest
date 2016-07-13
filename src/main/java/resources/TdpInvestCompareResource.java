@@ -1,7 +1,9 @@
 package resources;
 
+import DAO.TdpIUnitDAO;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import domain.TdpIUnit;
 import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.ws.rs.*;
@@ -17,6 +19,8 @@ import java.util.*;
 @Path("/compare")
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestCompareResource {
+
+    private TdpIUnitDAO tdpIUnitDAO;
 
     //funkcja wysyłająca dane do angulara :)
     @GET
@@ -46,7 +50,7 @@ public class TdpInvestCompareResource {
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
-    public void fetchRange(String json) throws ParseException {
+    public List<TdpIUnit> fetchRange(String json) throws ParseException {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFrom = sdf.parse(jsonObject.get("dateFrom").getAsString());
@@ -57,7 +61,10 @@ public class TdpInvestCompareResource {
         System.out.println(dateFrom.toString());
         System.out.println(dateTo.toString());
 
+        List<TdpIUnit> collection = new ArrayList<>();
+        collection = new TdpInvestUnitResource(tdpIUnitDAO).fetchAll();
 
+        return collection;
     }
 
 
