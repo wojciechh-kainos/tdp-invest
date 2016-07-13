@@ -2,6 +2,7 @@ package framework;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import configuration.DataResourceModule;
 import configuration.TestModule;
 import org.junit.BeforeClass;
 
@@ -15,6 +16,6 @@ public class BaseTest {
 
     @BeforeClass
     public static void createInjector() {
-        injector = Guice.createInjector(new TestModule());
+        injector = Guice.createInjector(new DataResourceModule());
     }
 }

@@ -54,7 +54,8 @@ dependencies {
     compile (
         'io.dropwizard:dropwizard-core:' + dropwizardVersion,
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
-        'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2'
+        'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2',
+        'io.dropwizard:dropwizard-testing:' + dropwizardVersion
     )
 
     /* Google Guice - Dependency Injection */

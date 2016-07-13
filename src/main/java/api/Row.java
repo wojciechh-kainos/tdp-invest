@@ -16,6 +16,8 @@ public class Row {
         value = myValue;
     }
 
+    public Row(){}
+
     public Date getDate() {
         return date;
     }

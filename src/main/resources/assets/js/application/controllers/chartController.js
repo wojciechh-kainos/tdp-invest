@@ -28,10 +28,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                     num = dataForChart.length;
                     var customData = [];
                     for (var i = 0 ; i < num ; i++) {
-                    var now = new Date($scope.$parent.receivedData[i].date);
+                    var now = new Date(dataForChart[i].date);
                     var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
                     console.log(now_utc);
-                        customData.push([now_utc , $scope.$parent.receivedData[i].value]);
+                        customData.push([now_utc , dataForChart[i].value]);
                     }
                           $scope.chartConfig.series = [{
                               data: customData}]
