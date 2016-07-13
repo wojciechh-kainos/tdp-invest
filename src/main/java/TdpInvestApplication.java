@@ -34,7 +34,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         bootstrap.addBundle(hibernateBundle);
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
-                .addModule(new TdpInvestModule())
                 .addModule(new DataResourceModule())
                 .addModule(module)
                 .setConfigClass(TdpInvestApplicationConfiguration.class)
@@ -44,9 +43,9 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
-        environment.jersey().register(guiceBundle.getInjector().getInstance(DataResource.class));
         module.setSessionFactory(hibernateBundle.getSessionFactory());
 
+        environment.jersey().register(guiceBundle.getInjector().getInstance(DataResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
     }
