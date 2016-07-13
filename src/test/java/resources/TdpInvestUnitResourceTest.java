@@ -42,12 +42,12 @@ public class TdpInvestUnitResourceTest{
 
 	@Test
 	public void testFetchAll() {
-		when(mockDAO.findAll()).thenReturn(stubDB);
+		when(mockDAO.getData()).thenReturn(stubDB);
 
 		List<TdpIUnit> results = resource.fetchAll();
 
 		assertEquals(stubDB.size(), results.size());
-		verify(mockDAO, times(1)).findAll();
+		verify(mockDAO, times(1)).getData();
 	}
 
 	@Test

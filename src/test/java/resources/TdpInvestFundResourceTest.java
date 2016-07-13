@@ -1,6 +1,6 @@
 package resources;
 
-import DAO.TdpIUnitDAO;
+import DAO.TdpIFundDAO;
 import domain.TdpIFund;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
 public class TdpInvestFundResourceTest {
 
 	@Mock
-	TdpIUnitDAO mockDAO;
+	TdpIFundDAO mockDAO;
 
 	TdpInvestFundResource resource;
 
