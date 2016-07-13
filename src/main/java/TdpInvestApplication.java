@@ -6,6 +6,7 @@ import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.TdpInvestPersonResource;
@@ -23,13 +24,20 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         }
     };
 
+    private final MigrationsBundle<TdpInvestApplicationConfiguration> migrationsBundle = new MigrationsBundle<TdpInvestApplicationConfiguration>() {
+        @Override
+        public DataSourceFactory getDataSourceFactory(TdpInvestApplicationConfiguration configuration) {
+            return configuration.getDataSourceFactory();
+        }
+    };
+
     private TdpInvestModule module = new TdpInvestModule();
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
         bootstrap.addBundle(hibernateBundle);
-
+        bootstrap.addBundle(migrationsBundle);
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)
