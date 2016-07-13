@@ -99,9 +99,7 @@ derby.log
 ######################
 
 .factorypath
-build/
-node_modules/
+
 src/main/main.iml
 src/main/test.iml
-.DS_Store
-src/main/resources/assets/js/lib/
+src/main/resources/app_config.yml
