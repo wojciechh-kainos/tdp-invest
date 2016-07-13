@@ -26,4 +26,8 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
+
+	public List<TdpIUnit> getDate(Long id) {
+		return list(namedQuery("TdpIUnit.getDate").setParameter("id", id));
+	}
 }
