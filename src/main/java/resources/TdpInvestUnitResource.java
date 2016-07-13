@@ -29,7 +29,7 @@ public class TdpInvestUnitResource {
 	@GET
 	@UnitOfWork
 	public List<TdpIUnit> fetchAll() {
-		return tdpIUnitDAO.findAll();
+		return tdpIUnitDAO.getData();
 	}
 
 	@GET

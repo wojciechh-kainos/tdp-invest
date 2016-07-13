@@ -9,11 +9,19 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u")})
+				query = "select u from TdpIUnit u"),
+		@NamedQuery(name = "TdpIUnit.onlyData",
+				query = "select u.date, u.value from TdpIUnit u")
+})
+
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+
+	@ManyToOne
+	@JoinColumn(name="found_id")
+	private TdpIFund found_id;
 
 	@NotNull
 	private Date date;

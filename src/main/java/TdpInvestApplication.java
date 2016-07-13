@@ -2,12 +2,14 @@ import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
+import domain.TdpIFund;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import resources.TdpInvestFundResource;
 import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
 
@@ -16,7 +18,10 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     private GuiceBundle<TdpInvestApplicationConfiguration> guiceBundle;
 
-    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(TdpIUnit.class) {
+    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(
+            TdpIUnit.class,
+            TdpIFund.class
+        ) {
         @Override
         public DataSourceFactory getDataSourceFactory(TdpInvestApplicationConfiguration configuration) {
             return configuration.getDataSourceFactory();
@@ -44,6 +49,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
+
+        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestFundResource.class));
     }
 
     public static void main(final String[] args) throws Exception {
