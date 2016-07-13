@@ -22,9 +22,12 @@ footer {
 
 .content {
     overflow: auto;
-    height: 300px;
+    max-height: 75vh;
 }
 
 tr {
     width: 100%;
 }
+ td, th{
+     width: 50%;
+ }

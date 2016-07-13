@@ -1,5 +1,5 @@
 <div class="container">
-    <div class="col-md-6">
+    <div ng-class="{'col-md-6':$state.includes('compare.calculated')}">
         <form class="form-horizontal" ng-submit="submit()" >
             <fieldset>
 
@@ -78,16 +78,6 @@
 
     </div>
 
-    <div class="col-md-6">
-        <legend>Porównanie</legend>
+    <div ui-view="compare-chart"></div>
 
-
-        {{start_date}}
-        {{end_date}}
-        {{value_percentage}}
-        {{value_capitalization}}
-        {{value_investment}}
-
-        <highchart id="chart1" config="chartConfig" class="span3"></highchart>
-    </div>
 </div>

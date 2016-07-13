@@ -58,8 +58,18 @@ define(['angular'
                         }
                     }
                 }
-            }});
+            }}).state("compare.calculated", {
+            views: {
+                "compare-chart": {
+                    templateUrl: "html/partials/tdp-invest-compare-chart.html"
+                }
+            }
+        });
     });
+
+    tdpInvestModule.run(['$rootScope', '$state', function ($rootScope, $state) {
+        $rootScope.$state = $state;
+    }]);
 
     return tdpInvestModule;
 });

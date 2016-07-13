@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'application/services/tdpInvestCompareService', 'ui-bootstrap'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', 'compareData', function($scope, $stateParams, stockData, compareData) {
+    tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', 'compareData', '$state', function($scope, $stateParams, stockData, compareData, $state) {
         $scope.data = stockData.getData();
 
         $scope.dateOptions = {
@@ -88,30 +88,31 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
 
         $scope.submit = function() {
-            var compareDataConfig = {
-                start_date: formatData($scope.start_date),
-                end_date: formatData($scope.end_date),
-                value_investment: $scope.value_investment,
-                value_capitalization: $scope.value_capitalization,
-                value_percentage: $scope.value_percentage
-            }
-
-            compareData.setConfig(compareDataConfig);
-            compareData.refresh();
-
-            var calculated = JSON.parse(JSON.stringify( $scope.data )); // copy array
-
-            calculated[0][1] = $scope.value_investment;
-
-            calculated.forEach(function(element, index, array) {
-                if(index == 0) return;
-                calculated[index][1] = calculated[index - 1][1] + 0.01;
-            });
-
-            $scope.chartConfig.series.push({
-                id: 2,
-                data: calculated
-            });
+            // var compareDataConfig = {
+            //     start_date: formatData($scope.start_date),
+            //     end_date: formatData($scope.end_date),
+            //     value_investment: $scope.value_investment,
+            //     value_capitalization: $scope.value_capitalization,
+            //     value_percentage: $scope.value_percentage
+            // }
+            //
+            // compareData.setConfig(compareDataConfig);
+            // compareData.refresh();
+            //
+            // var calculated = JSON.parse(JSON.stringify( $scope.data )); // copy array
+            //
+            // calculated[0][1] = $scope.value_investment;
+            //
+            // calculated.forEach(function(element, index, array) {
+            //     if(index == 0) return;
+            //     calculated[index][1] = calculated[index - 1][1] + 0.01;
+            // });
+            //
+            // $scope.chartConfig.series.push({
+            //     id: 2,
+            //     data: calculated
+            // });
+            $state.go('.calculated');
         };
         
     }]);
