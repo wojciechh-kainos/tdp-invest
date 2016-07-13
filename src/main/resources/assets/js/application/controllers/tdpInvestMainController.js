@@ -86,5 +86,30 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
             return newDate.toISOString().slice(0,10).replace(/-/g,".");
         };
 
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2150, 01, 01),
+            minDate: new Date(1950, 01, 01)
+        };
+
+        $scope.open1 = function() {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.open2 = function() {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.format = 'dd.MM.yyyy';
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+
+         $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
+
     });
 });

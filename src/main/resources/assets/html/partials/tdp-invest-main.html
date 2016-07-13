@@ -2,11 +2,22 @@
     <form class="form-horizontal" name="dateRangeForm" >
         <div class="row">
             <div class="form-group col-xs-3">
-                <label for="start">Begin date:</label>
-                <input class="form-control" type="date" id="start" ng-model="startDate" placeholder="yyyy-MM-dd">
+                <label for="start">Begin date:</label><p class="input-group">
+                <p class="input-group">
+                    <input id="start" type="text" placeholder="{{format}}" class="form-control" uib-datepicker-popup="{{format}}" ng-model="startDate" is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open1()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+
 
                 <label for="end">End date:</label>
-                <input class="form-control" type="date" id="end" ng-model="endDate" placeholder="yyyy-MM-dd">
+                <p class="input-group">
+                    <input id="end" type="text" placeholder="{{format}}" class="form-control" uib-datepicker-popup="{{format}}" ng-model="endDate" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
+                    <span class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
             </div>
         </div>
 
@@ -16,12 +27,6 @@
             </div>
         </div>
     </form>
-<div class="row">
-    <div>
-    PersonId: <input type="text" ng-model="id">
-    <a href="javascript:void(0);" ui-sref="tdp.person({personId: id})">Go!</a>
-    </div>
-</div>
 
 
 <div class="row">
