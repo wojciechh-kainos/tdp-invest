@@ -19,11 +19,22 @@
 
             <p class="input-group">
                 <input id="end_date" name="end_date" ng-model="end_date" type="string" class="form-control" placeholder="dd/mm/rrrr" uib-datepicker-popup="{{format}}" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" alt-input-formats="altInputFormats" />
-                            <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
-                            </span>
+                <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()"><i class="glyphicon glyphicon-calendar"></i></button>
+                </span>
             </p>
             <span class="help-block">Data w formacie dd/mm/rrrr</span>
         </div>
+    </div>
+
+    <div class="form-group">
+        <label class="col-md-4 control-label">Interest Rate</label>
+        <div class="col-md-7">
+            <input name="interest_rate" type="text" class=" form-control" placeholder="0.02" ng-model="interest_rate"/>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button class="btn btn-primary" ng-click="getStockData(start_date, end_date);">Show stock prices</button>
     </div>
 </div>
