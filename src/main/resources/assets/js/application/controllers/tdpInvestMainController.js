@@ -75,7 +75,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                 series: [{
                     data: valuesList
                 }]
-                });
+            });
         };
 
     });
