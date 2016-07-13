@@ -6,6 +6,9 @@ import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
+import dao.TdpUserDAO;
+import io.dropwizard.hibernate.UnitOfWork;
+import org.hibernate.HibernateException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
@@ -19,11 +22,13 @@ import javax.ws.rs.core.Response;
 @Consumes(MediaType.APPLICATION_JSON)
 public class TdpInvestAuthResource {
 
+    private final TdpUserDAO tdpUserDAO;
     private final TdpInvestAuthenticator authenticator;
 
     @Inject
-    public TdpInvestAuthResource(TdpInvestAuthenticator authenticator) {
+    public TdpInvestAuthResource(TdpInvestAuthenticator authenticator, TdpUserDAO tdpUserDAO) {
         this.authenticator = authenticator;
+        this.tdpUserDAO = tdpUserDAO;
     }
 
     @GET
@@ -33,6 +38,7 @@ public class TdpInvestAuthResource {
     }
 
     @POST
+    @UnitOfWork
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response login(TdpUser tdpUser) throws AuthenticationException {
@@ -43,6 +49,21 @@ public class TdpInvestAuthResource {
         } else {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
+    }
+
+    @POST
+    @UnitOfWork
+    @Path("/register")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public Response register(TdpUser tdpUser){
+//        try {
+            tdpUserDAO.create(tdpUser);
+            return Response.status(Response.Status.CREATED).build();
+//        }
+//        catch(HibernateException e) {
+//            System.out.println(e.getMessage());
+//            return Response.status(Response.Status.CONFLICT).build();
+//        }
     }
 
 }

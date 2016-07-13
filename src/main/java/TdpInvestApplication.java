@@ -21,7 +21,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     private GuiceBundle<TdpInvestApplicationConfiguration> guiceBundle;
 
-    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(TdpIUnit.class) {
+    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(TdpIUnit.class, TdpUser.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(TdpInvestApplicationConfiguration configuration) {
             return configuration.getDataSourceFactory();

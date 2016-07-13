@@ -26,7 +26,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         }
 
         function Create(user) {
-            return $http.post('/api/users', user).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('/api/register/',  { mail: user.username, password: user.password }).then(handleSuccess, handleError('Error creating user'));
         }
 
         function Update(user) {
