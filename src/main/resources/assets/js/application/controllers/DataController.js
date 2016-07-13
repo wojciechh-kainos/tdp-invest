@@ -3,7 +3,13 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
 
         $scope.$watch('receivedData', function() {
               //  console.log("hello");
-              $scope.myVal = $scope.$parent.receivedData;
+              $scope.myData = $scope.$parent.receivedData;
+              var Data = $scope.$parent.receivedData;
+              var keys = [];
+
+              if(Data.length != 0)keys = Object.getOwnPropertyNames(Data[0]);
+              $scope.columns = keys;
+
             })
 
     })

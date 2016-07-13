@@ -1,8 +1,14 @@
 <link href="style.css" rel="stylesheet" />
 <table border="1">
-    <tr ng-repeat="row in data">
-        <td ng-repeat="column in cols">{{row[column]}}</td>
+    <tr>
+        <td>Date</td>
+        <td>Income</td>
+        <td ng-if="columns.length == 3">Income from fund</td>
+    </tr>
+    <tr ng-repeat="row in myData">
+        <td>{{row[columns[0]]}}</td>
+        <td><center>{{row[columns[1]]}}</center></td>
+        <td ng-if="columns.length == 3"><center>{{row[columns[2]]}}</center></td>
     </tr>
 </table>
 
-<p>{{myVal}}</p>

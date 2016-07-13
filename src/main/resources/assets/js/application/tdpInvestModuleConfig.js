@@ -14,7 +14,7 @@ define(['angular'
                 url: "/tdp",
                 templateUrl: 'html/partials/tdp.html',
                 controller: 'IndexController',
-            }) //asdasd
+            })
                 .state("root.data", {
                     url: "/home",
                     views: {

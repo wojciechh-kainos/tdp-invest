@@ -24,13 +24,13 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
     }
 
      $scope.$watch('receivedData', function() {
-                    var dataForChart = $scope.$parent.receivedData;
+
+                     var dataForChart = [];
+                     dataForChart = $scope.$parent.receivedData;
                     var keys = [];
 
-                    keys = Object.getOwnPropertyNames(dataForChart[0]);
+                    if (dataForChart.length != 0)keys = Object.getOwnPropertyNames(dataForChart[0]);
                     var numberOfKeys = keys.length;
-//sdasd
-
                     num = dataForChart.length;
                     var customDataHome = [];
                     var customDataCompare = [];
@@ -38,11 +38,11 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                         var now = new Date(dataForChart[i][keys[0]]);
                         var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
                         customDataHome.push([now_utc , dataForChart[i][keys[1]]]);
-                     if(numberOfKeys == 3)  {
+                     if(numberOfKeys == 3 && keys[2] != "$$hashKey")  {
                         customDataCompare.push([now_utc , dataForChart[i][keys[2]]]);
                       }
                     }
-                   if(numberOfKeys == 3) {
+                   if(numberOfKeys == 3 && keys[2] != "$$hashKey") {
                         $scope.chartConfig.series = [{
                             name: "Home",
                             data: customDataHome},
@@ -77,4 +77,5 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
     };
     });
+
 });
