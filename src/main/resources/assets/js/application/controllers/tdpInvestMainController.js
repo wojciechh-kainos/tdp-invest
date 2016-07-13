@@ -2,16 +2,43 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
     tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams, tdpDataService) {
 
         var investData = [];
-        var start = false;
-        var end = false;
+        var startDate = false;
+        var endDate = false;
+
+        $scope.currentPage = 1;
+        $scope.numPerPage = 10;
+        $scope.maxSize = 5;
+        $scope.filteredDataForView = [];
+        $scope.dataChanged = false;
+
+        tdpDataService.getInvestData().then(function(response){
+            prepareChart(response.data)
+
+            $scope.$watch("[currentPage + numPerPage, dataChanged]", function() {
+                var begin = (($scope.currentPage - 1) * $scope.numPerPage);
+                var end = begin + $scope.numPerPage;
+
+                $scope.filteredDataForView = $scope.dataForView.slice(begin, end);
+                $scope.dataChanged = false;
+            });
+
+        });
+
+        $scope.submitRange = function(){
+              startDate = new Date($scope.startDate);
+              endDate = new Date ($scope.endDate);
+              prepareChart($scope.dataForView)
+                $scope.dataChanged = true;
+                $scope.currentPage = 1;
+        }
 
         function dateFilter(record){
-                if(start == false || end == false){
+                if(startDate == false || endDate == false){
                     return true;
                 }
 
                 var date = new Date(record.date.year + "-" + record.date.monthValue + "-" + record.date.dayOfMonth);
-                if(date > start && date < end)
+                if(date > startDate && date < endDate)
                        return true;
                 return false;
         }
@@ -21,7 +48,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                var valuesList = []
 
                recordList = recordList.filter(dateFilter);
-               $scope.tableData = recordList;
+               $scope.dataForView = recordList;
 
                for (i = 0; i < recordList.length; i++) {
                    dateList.push(recordList[i].date.month);
@@ -29,16 +56,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                }
 
                createChart(dateList, valuesList);
-        }
-
-        tdpDataService.getInvestData().then(function(response){
-            prepareChart(response.data)
-        });
-
-        $scope.submitRange = function(){
-              start = new Date($scope.start);
-              end = new Date ($scope.end);
-              prepareChart($scope.tableData)
         }
 
         function createChart(dateList, valuesList){
