@@ -30,6 +30,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
         bootstrap.addBundle(hibernateBundle);
 
+
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)
                 .setConfigClass(TdpInvestApplicationConfiguration.class)
