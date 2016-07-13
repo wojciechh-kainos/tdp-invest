@@ -1,12 +1,13 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestRegisterController", function($location, $scope, tdpUserService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpAuthService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestRegisterController", function($location, $scope, tdpAuthService) {
 
         $scope.register = function() {
             $scope.dataLoading = true;
-            tdpUserService.Create($scope.user)
+            tdpAuthService.Register($scope.user.username, $scope.user.password)
                 .then(function(response) {
                     if(response.success) {
-                        $location.path('/login');
+                        tdpAuthService.SetCredentials($scope.user.username, $scope.user.password);
+                        $location.path('/tdp');
                     } else {
                         $scope.dataLoading = false;
                         $scope.error = "Registration failed.";

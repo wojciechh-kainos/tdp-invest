@@ -1,19 +1,16 @@
 define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular, tdpInvestModule) {
-    tdpInvestModule.service('tdpLoginService', ['$cookieStore', '$http', '$rootScope', '$timeout', function($cookieStore, $http, $rootScope, $timeout) {
+    tdpInvestModule.service('tdpAuthService', ['$cookieStore', '$http', '$rootScope', '$timeout', function($cookieStore, $http, $rootScope) {
         var service = {};
 
-        service.Login = function(username, password, callback) {
-            $timeout(function(){
-                $http.post('/api/login', { mail: username, password: password })
-                    .then(function (response) {
-                        response.success = true;
-                        callback(response);
-                    }, function(response) {
-                        response.message = "Email or password incorrect.";
-                        callback(response);
-                    });
-            }, 1000);
+        service.Login = function(username, password) {
+            return $http.post('/api/login', { mail: username, password: password }).then(handleSuccess, handleError('Bad credentials'));
+
         };
+
+        service.Register = function(username, password) {
+            return $http.post('/api/register/',  { mail: username, password: password }).then(handleSuccess, handleError('Error creating user'));
+        };
+
 
         service.SetCredentials = function(email, password) {
             var authdata = Base64.encode(email + ':' + password);
@@ -44,6 +41,21 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
                 }
             }, true);
         };
+
+
+
+        // private functions
+
+        function handleSuccess(res) {
+            res.success = true;
+            return res;
+        }
+
+        function handleError(error) {
+            return function () {
+                return { success: false, message: error };
+            };
+        }
 
         return service;
     }]);

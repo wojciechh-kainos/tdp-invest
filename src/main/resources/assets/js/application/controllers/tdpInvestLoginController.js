@@ -1,13 +1,14 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpLoginService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestLoginController", function($scope, $rootScope, $location, $stateParams, tdpLoginService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpAuthService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestLoginController", function($scope, $rootScope, $location, $stateParams, tdpAuthService) {
 
-        tdpLoginService.ClearCredentials();
+        tdpAuthService.ClearCredentials();
 
         $scope.login = function () {
             $scope.dataLoading = true;
-            tdpLoginService.Login($scope.username, $scope.password, function(response) {
+            tdpAuthService.Login($scope.username, $scope.password)
+                .then( function(response){
                 if(response.success) {
-                    tdpLoginService.SetCredentials($scope.username, $scope.password);
+                    tdpAuthService.SetCredentials($scope.username, $scope.password);
                     $location.path('/tdp');
                 } else {
                     $scope.error = response.message;
