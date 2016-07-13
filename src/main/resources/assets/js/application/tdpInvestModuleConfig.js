@@ -4,6 +4,7 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestHomeController'
+    , 'application/controllers/tdpInvestUploadController'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider, RestangularProvider) {
         $stateProvider
@@ -36,6 +37,14 @@ define(['angular'
                 "@": {
                   templateUrl: "html/partials/tdp-invest-home.html",
                   controller: "tdpInvestHomeController"
+                }
+              }
+            }).state("tdp.upload", {
+              url: "/upload",
+              views: {
+                "@": {
+                  templateUrl: "html/partials/tdp-invest-upload.html",
+                  controller: "tdpInvestUploadController"
                 }
               }
             });

@@ -10,7 +10,10 @@ require.config({
         'lodash': 'lib/lodash/dist/lodash.min',
         'restangular': 'lib/restangular/dist/restangular.min',
         'ngTable': 'lib/ng-table/dist/ng-table.min',
-        'highchart-theme': 'lib/highcharts/themes/dark-unica'
+        'highchart-theme': 'lib/highcharts/themes/dark-unica',
+        'ng-file-upload': 'lib/ng-file-upload/ng-file-upload.min',
+        //for non HTML5 browsers
+        'ng-file-upload-shim': 'lib/ng-file-upload/ng-file-upload-shim.min'
     },
     shim: {
         'angular': {
@@ -19,7 +22,8 @@ require.config({
         'uiRouter': ['angular'],
         'highcharts-ng': ['angular', 'highcharts', 'highchart-theme'],
         'restangular': ['angular', 'lodash'],
-        'ngTable': ['angular']
+        'ngTable': ['angular'],
+        'ng-file-upload':['angular', 'ng-file-upload-shim']
     },
     deps: ['application/bootstrap']
 });
