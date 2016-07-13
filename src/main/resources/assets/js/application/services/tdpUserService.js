@@ -1,7 +1,6 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
     tdpInvestModule.service("tdpUserService", function($http) {
-
-
+        
         var service = {};
 
         service.GetAll = GetAll;
@@ -40,6 +39,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         // private functions
 
         function handleSuccess(res) {
+            response.success = true;
             return res.data;
         }
 
@@ -48,7 +48,5 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 return { success: false, message: error };
             };
         }
-
-
     })
 });

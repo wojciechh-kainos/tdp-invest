@@ -47,7 +47,7 @@ public class TdpInvestAuthResource {
         if (authenticator.authenticate(credentials).isPresent()) {
             return Response.status(Response.Status.ACCEPTED).build();
         } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
+            return Response.status(Response.Status.UNAUTHORIZED).build();
         }
     }
 
@@ -56,14 +56,13 @@ public class TdpInvestAuthResource {
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
     public Response register(TdpUser tdpUser){
-//        try {
+        try {
             tdpUserDAO.create(tdpUser);
             return Response.status(Response.Status.CREATED).build();
-//        }
-//        catch(HibernateException e) {
-//            System.out.println(e.getMessage());
-//            return Response.status(Response.Status.CONFLICT).build();
-//        }
+        }
+        catch(HibernateException e) {
+            return Response.status(Response.Status.CONFLICT).build();
+        }
     }
 
 }
