@@ -23,7 +23,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             $scope.popup2.opened = true;
         };
 
-        $scope.format = 'dd/MM/yyyy';
+        $scope.format = 'yyyy-MM-dd';
         $scope.altInputFormats = ['M!/d!/yyyy'];
 
         $scope.popup1 = {
