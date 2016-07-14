@@ -18,15 +18,16 @@ require.config({
   paths: {
       'angular': 'lib/angular/angular',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
-      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router'
+      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
+      'ngCookies': 'lib/angular-cookies/angular-cookies'
   },
   shim: {
       'angular': {
           exports: 'angular'
       },
-
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
+      'ngCookies': ['angular'],
   },
   // dynamically load all test files
   deps: allTestFiles,
