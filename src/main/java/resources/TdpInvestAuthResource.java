@@ -8,6 +8,7 @@ import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
 import dao.TdpUserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 
 import javax.ws.rs.Consumes;
@@ -52,15 +53,15 @@ public class TdpInvestAuthResource {
     }
 
     @POST
-    @UnitOfWork
+    @UnitOfWork(flushMode = FlushMode.MANUAL)
     @Path("/register")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response register(TdpUser tdpUser){
+    public Response register(TdpUser tdpUser) {
         try {
             tdpUserDAO.create(tdpUser);
             return Response.status(Response.Status.CREATED).build();
         }
-        catch(HibernateException e) {
+        catch (HibernateException e) {
             return Response.status(Response.Status.CONFLICT).build();
         }
     }

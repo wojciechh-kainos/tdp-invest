@@ -1,9 +1,6 @@
 package domain;
 
-import org.hibernate.annotations.NaturalId;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
 import java.security.Principal;
 
 @Entity
@@ -15,11 +12,9 @@ public class TdpUser implements Principal {
     @Column(name = "ID", unique = true, nullable = false)
     private long id;
 
-    @NaturalId
     @Column(name = "EMAIL", unique = true, nullable = false, length = 100)
     private String mail;
 
-    @NotNull
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 

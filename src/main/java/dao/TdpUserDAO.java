@@ -1,6 +1,5 @@
 package dao;
 
-
 import com.google.inject.Inject;
 import domain.TdpUser;
 import io.dropwizard.hibernate.AbstractDAO;
