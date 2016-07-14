@@ -41,6 +41,9 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 series: [{
                     showInLegend: false,
                     data: $scope.prices
+                }, {
+                    showInLegend: false,
+                    data: $scope.investPrices
                 }],
                 title: {
                     text: 'Stock prices'
@@ -76,6 +79,19 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             initializeTable();
             initializeChart();
         }
+
+        $scope.createInvestChart = function(data) {
+           $scope.investData = data;
+           $scope.investPrices = [];
+           $scope.dates = [];
+           for (i = 0; i < $scope.stockData.length; i++) {
+               $scope.investPrices.push(parseFloat($scope.investData[i].price));
+               $scope.dates.push($scope.investData[i].date);
+           }
+
+           initializeTable();
+           initializeChart();
+       }
 
         $scope.start_date = new Date(2015, 7, 20);
         $scope.end_date = new Date();

@@ -28,13 +28,20 @@
     </div>
 
     <div class="form-group col-md-12">
-        <label class="col-md-4 control-label">Interest Rate</label>
+        <label class="col-md-4 control-label">Input</label>
         <div class="col-md-5">
-            <input name="interest_rate" type="text" class=" form-control" placeholder="0.02" ng-model="interest_rate"/>
+            <input name="input_value" type="text" class=" form-control" placeholder="300" ng-model="input_value"/>
         </div>
     </div>
 
     <div class="form-group col-md-12">
-        <button class="btn btn-primary col-md-10" ng-click="getStockData(start_date, end_date);">Show stock prices</button>
+        <label class="col-md-4 control-label">Interest Rate</label>
+        <div class="col-md-5">
+            <input name="interest_rate" type="text" class="form-control" placeholder="0.02" ng-model="interest_rate"/>
+        </div>
+    </div>
+
+    <div class="form-group col-md-12">
+        <button class="btn btn-primary col-md-10" ng-click="getStockData(start_date, end_date); createInvestChart(showInvest(start_date, end_date, input_value, interest_rate));">Show stock prices</button>
     </div>
 </div>
