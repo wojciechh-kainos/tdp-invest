@@ -1,7 +1,7 @@
-define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpTableService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
     var chartData = [];
 
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpTableService) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpInvestmentService) {
         //***chart***
         $scope.chartConfig = chartConfig;
 
@@ -11,7 +11,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
             params: new NgTableParams({count: 10}, { counts: [], data: data })
         };
 
-        //$scope.timeseries = tdpTableService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
+        //$scope.timeseries = tdpInvestmentService.getInvestmentTimeSeries("2016-01-01", "2016-06-01", 1000.0, 0.04);
 
         //***file upload***
         $scope.uploadFiles = function(file, errFiles) {

@@ -5,5 +5,9 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return $http.get("/api/investment/timeseries?startDate=" + startDate + "&endDate=" + endDate + "&amount=" + amount + "&annualRate=" + annualRate);
         };
 
+        this.getInvestmentSpecifications = function() {
+            return $http.get("/api/investment/list");
+        };
+
     })
 });
