@@ -1,28 +1,18 @@
 define(['angular'
     , 'application/tdpInvestModule'
-    , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestCompareController'
-    , 'application/controllers/tdpInvestCalendarController'
     , 'application/controllers/tdpInvestDateController'
+    , 'application/directives/tdpInvestCalendarDirective'
+    , 'application/directives/tdpInvestTableDirective'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
-            .state("tdp", {
-                url: "/tdp",
+            .state("main", {
+                url: "/",
                 views: {
                     "@": {
-                        templateUrl: "html/partials/tdp-invest-main.html"
-                    },
-                    "navbar": {
-                        templateUrl: "html/partials/tdp-invest-navbar.html"
-                    }
-                }
-            }).state("tdp.person", {
-                url: "/person/{personId}",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-person.html",
-                        controller: "tdpInvestPersonController"
+                        templateUrl: "html/partials/tdp-invest-main.html",
+                        controller: "tdpInvestCompareController"
                     },
                     "navbar": {
                         templateUrl: "html/partials/tdp-invest-navbar.html"
@@ -38,12 +28,7 @@ define(['angular'
                     },
                      "navbar": {
                          templateUrl: "html/partials/tdp-invest-navbar.html"
-                     },
-                     "calendar@compare":{
-                        templateUrl: "html/partials/tdp-invest-calendar.html",
-                        controller : "tdpInvestCalendarController"
                      }
-
                 }
             })
             .state("login",{

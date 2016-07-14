@@ -1,0 +1,37 @@
+<div class="col-md-12">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>
+                <a ng-click="sortTable('date');">Date</a>
+                <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sortType == 'date', 'glyphicon glyphicon-arrow-down' : !reverse && sortType == 'date', '' : sortType != 'date'}"></span>
+                <!--
+                omówienie ng-class:
+                dodaje 'klase' : jezeli spelniony warunek
+                Tutaj:
+                obsługa strzałki pokazującej zwrot sortowania - jeżeli reverse == true to w górę i odwrotnie,
+                jeżeli sortujemy inną wartość strzałka znika
+                -->
+            </th>
+
+            <th>
+                <a ng-click="sortTable('price');">Price</a>
+                <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sortType == 'price', 'glyphicon glyphicon-arrow-down' : !reverse && sortType == 'price', '' : sortType != 'price'}"></span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in filteredStockData | orderBy:sortType:reverse">
+            <td>{{item.date}}</td>
+            <td>{{item.price}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+<div class="col-md-6 col-md-offset-3 center"><uib-pagination
+        ng-model="currentPage"
+        total-items="stockData.length"
+        max-size="maxSize"
+        boundary-links="true">
+</uib-pagination></div>
