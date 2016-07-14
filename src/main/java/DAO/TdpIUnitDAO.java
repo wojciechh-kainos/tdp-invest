@@ -6,6 +6,7 @@ import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
@@ -26,4 +27,8 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
+
+	public List<TdpIUnit> findDatesBetween(Date start, Date end) { return list(namedQuery("TdpIUnit.findDatesBetween")
+			.setDate("start", start)
+			.setDate("end", end));}
 }

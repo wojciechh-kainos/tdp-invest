@@ -9,7 +9,11 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u")})
+				query = "select u from TdpIUnit u"),
+		@NamedQuery(name = "TdpIUnit.findDatesBetween",
+					query = "select u from TdpIUnit u where u.date between ':start' and ':end'")
+
+})
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

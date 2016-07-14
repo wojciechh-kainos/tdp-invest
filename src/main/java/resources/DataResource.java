@@ -5,10 +5,14 @@ import api.CalculatedRow;
 import api.Row;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import service.*;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -28,13 +32,11 @@ public class DataResource {
     private RowRepository repo;
     private DateTransformer tra = new DateTransformer();
     private TdpIUnitDAO tdpDAO;
-
     @Inject
     DataResource(RowRepository repo, TdpIUnitDAO tdpDAO) {
         this.repo = repo;
         this.tdpDAO = tdpDAO;
     }
-
 
 
 
@@ -60,11 +62,10 @@ public class DataResource {
         calcs.add(row2);
         calcs.add(row3);
 
+        List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDateFromHtml(startDate), tra.getDateFromHtml(endDate));
+            return list;
 
-        List <TdpIUnit> list = tdpDAO.findAll();
 
-
-        return list;
     }
 
 }
