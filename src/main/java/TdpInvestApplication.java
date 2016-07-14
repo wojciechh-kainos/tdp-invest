@@ -50,11 +50,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         module.setSessionFactory(hibernateBundle.getSessionFactory());
-
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
-
-
     }
 
     public static void main(final String[] args) throws Exception {

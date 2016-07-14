@@ -92,6 +92,10 @@ atlassian-ide-plugin.xml
 # Testing environment specific
 derby.log
 
+# Local pid.lock file
+
+.pid.lock
+
 
 ######################
 # Liberty tools
