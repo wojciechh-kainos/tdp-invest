@@ -38,7 +38,7 @@ define(['angular'
                     },
                     resolve: {
                         dataUrl: function() {
-                            return "/api/rows/get/data"
+                            return "/api/rows/get"
                         }
                     }
                 })
@@ -68,7 +68,7 @@ define(['angular'
                     },
                     resolve: {
                         dataUrl: function() {
-                            return "api/rows/get/compare"
+                            return "api/rows/get"
                         }
                     }
                 });

@@ -1,6 +1,5 @@
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
-import configuration.DataResourceModule;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
 import domain.TdpIUnit;
@@ -44,7 +43,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         bootstrap.addBundle(migrationsBundle);
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
-                .addModule(new DataResourceModule())
                 .addModule(module)
                 .setConfigClass(TdpInvestApplicationConfiguration.class)
                 .build();
