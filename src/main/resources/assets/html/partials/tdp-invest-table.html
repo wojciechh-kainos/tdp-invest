@@ -5,13 +5,6 @@
             <th>
                 <a ng-click="sortTable('date');">Date</a>
                 <span class="" ng-class="{'glyphicon glyphicon-arrow-up' : reverse && sortType == 'date', 'glyphicon glyphicon-arrow-down' : !reverse && sortType == 'date', '' : sortType != 'date'}"></span>
-                <!--
-                omówienie ng-class:
-                dodaje 'klase' : jezeli spelniony warunek
-                Tutaj:
-                obsługa strzałki pokazującej zwrot sortowania - jeżeli reverse == true to w górę i odwrotnie,
-                jeżeli sortujemy inną wartość strzałka znika
-                -->
             </th>
 
             <th>
@@ -34,4 +27,5 @@
         total-items="stockData.length"
         max-size="maxSize"
         boundary-links="true">
-</uib-pagination></div>
+</uib-pagination>
+</div>
