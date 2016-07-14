@@ -3,14 +3,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         tdpDataService.getInvestData().then(function(response){
             $scope.investData = response.data;
-
-            dateList = []
-            valuesList = []
-            for (i = 0; i < response.data.length; i++) {
-                dateList.push(response.data[i].date.month);
-                valuesList.push(response.data[i].value)
-            }
-            prepareChart('container', dateList, valuesList);
         });
 
         $scope.submit = function(){
@@ -52,7 +44,18 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                 }
 
                 $scope.gain = gain;
-                prepareChart('investmentChart', dateList, valuesList);
+                var stockValuesList = []
+
+                var stockGain = $scope.amount;
+                var unitNumber = $scope.amount / $scope.investData[0].value;
+
+                for(i = 1; i < days; i++){
+                    stockValuesList.push(stockGain);
+                    stockGain = unitNumber * $scope.investData[i].value;
+                }
+
+                prepareChart('investmentChart', dateList, valuesList, stockValuesList);
+
             }
         }
 
@@ -61,7 +64,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
         };
 
 
-        function prepareChart(type, date, values){
+        function prepareChart(type, date, investValues, stockValues ){
                 Highcharts.chart(type, {
                         title: {
                             text: 'Investment chart'
@@ -81,7 +84,12 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                         },
 
                         series: [{
-                            data: values,
+                            data: investValues,
+                            name: 'Investment',
+                            step: 'left'
+                        },
+                        {
+                            data: stockValues,
                             name: 'Stock',
                             step: 'left'
                         }]
