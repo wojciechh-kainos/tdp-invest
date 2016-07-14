@@ -4,15 +4,22 @@ server:
   applicationConnectors:
     - type: http
       port: 8888
+    - type: https
+      port: 8443
+      keyStorePassword: changeit
+      keyStorePath: certificate/keystore.jks
+    # trustStorePath: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/security/cacerts
+      validateCerts: false #true
+      certAlias: selfsigned
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
 
   # the username
-  user: danielr
+  user: mateuszs
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/danielr
+  url: jdbc:postgresql://localhost/mateuszs
 
   # any properties specific to your JDBC driver:
   properties:

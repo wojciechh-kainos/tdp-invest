@@ -9,7 +9,7 @@ define(['angular'
     , 'application/services/tdpInvestStockDataService'
 
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function ($stateProvider) {
+    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -80,7 +80,7 @@ define(['angular'
                       }
                   }
               });
-        // $urlRouterProvider.otherwise("/login");
+        $urlRouterProvider.otherwise("/login");
     });
 
     return tdpInvestModule;
