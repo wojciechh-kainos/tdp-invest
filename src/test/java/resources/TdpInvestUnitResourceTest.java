@@ -76,8 +76,10 @@ public class TdpInvestUnitResourceTest{
 		String startDateString = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
 		String endDateString = new SimpleDateFormat("yyyy-MM-dd").format(endDate);
 
-		assertEquals(Response.Status.OK, resource.select(startDateString, endDateString).getStatusInfo());
-		assertEquals(Response.Status.BAD_REQUEST, resource.select(endDateString, startDateString).getStatusInfo());
+		assertEquals(Response.Status.OK, resource.select(1L, startDateString, endDateString).getStatusInfo());
+		assertEquals(Response.Status.BAD_REQUEST, resource.select(1L, endDateString, startDateString).getStatusInfo());
+		assertEquals(Response.Status.BAD_REQUEST, resource.select(1L, "xx12", "2000-01-01").getStatusInfo());
+		assertEquals(Response.Status.BAD_REQUEST, resource.select(null, null, null).getStatusInfo());
 
 		assertEquals(stubDB.size(), results.size());
 		verify(mockDAO, times(1)).findAll();

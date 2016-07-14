@@ -6,14 +6,12 @@ import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -44,14 +42,29 @@ public class TdpInvestUnitResource {
 	}
 
 	@GET
-	@Path("/start/{dateStart}/end/{dateEnd}")
+	@Path("/select/{fund}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@UnitOfWork
 	//public List<TdpIUnit> select(
 	public Response select(
-			@PathParam("dateStart") String stringDateStart,
-			@PathParam("dateEnd") String stringDateEnd
+			@PathParam("fund") Long id,
+			@QueryParam("dateStart") String stringDateStart,
+			@QueryParam("dateEnd") String stringDateEnd
 	) {
+		List<String> errors = new ArrayList<String>();;
+
+		if (id == null)
+			errors.add("No fund ID!");
+
+		if(stringDateStart == null)
+			errors.add("No start data string!");
+
+		if(stringDateEnd == null)
+			errors.add("No end data string!");
+
+		if(errors.size() > 0)
+			return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
+
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 		try {
 			Date dateStart = sdf.parse(stringDateStart);
