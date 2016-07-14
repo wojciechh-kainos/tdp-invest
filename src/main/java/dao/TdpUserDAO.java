@@ -1,5 +1,6 @@
 package dao;
 
+import auth.TdpInvestPasswordStore;
 import com.google.inject.Inject;
 import domain.TdpUser;
 import io.dropwizard.hibernate.AbstractDAO;
@@ -25,6 +26,14 @@ public class TdpUserDAO extends AbstractDAO<TdpUser> {
         return uniqueResult(criteria);
     }
 
-    public long create(TdpUser user) { return persist(user).getId(); }
+    public long create(TdpUser user) {
+        try {
+            user.setPassword(TdpInvestPasswordStore.createHash(user.getPassword()));
+            return persist(user).getId();
+        } catch (TdpInvestPasswordStore.CannotPerformOperationException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
 
 }

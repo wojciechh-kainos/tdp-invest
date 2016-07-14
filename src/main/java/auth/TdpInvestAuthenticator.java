@@ -21,9 +21,14 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
     public Optional<TdpUser> authenticate(BasicCredentials credentials) throws AuthenticationException {
         TdpUser user = userDao.getUserByEmail(credentials.getUsername());
 
-        if (user != null && user.getPassword().equals(credentials.getPassword())) {
-            return Optional.of(user);
+        try {
+            if (user != null && TdpInvestPasswordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
+                return Optional.of(user);
+            }
+        } catch (TdpInvestPasswordStore.CannotPerformOperationException | TdpInvestPasswordStore.InvalidHashException e) {
+            e.printStackTrace();
         }
+
         return Optional.absent();
     }
 }

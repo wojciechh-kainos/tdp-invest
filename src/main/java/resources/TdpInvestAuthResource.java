@@ -60,8 +60,7 @@ public class TdpInvestAuthResource {
         try {
             tdpUserDAO.create(tdpUser);
             return Response.status(Response.Status.CREATED).build();
-        }
-        catch (HibernateException e) {
+        } catch (HibernateException e) { // user already exists in a database
             return Response.status(Response.Status.CONFLICT).build();
         }
     }
