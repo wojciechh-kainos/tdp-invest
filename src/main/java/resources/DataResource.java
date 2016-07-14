@@ -58,8 +58,8 @@ public class DataResource {
         calcs.add(row1);
         calcs.add(row2);
         calcs.add(row3);
-
-        List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDate(startDate) , tra.getDate(endDate));
+        
+        List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDateFromHtml(startDate) , tra.getDateFromHtml(endDate));
             return list;
 
 
