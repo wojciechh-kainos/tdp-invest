@@ -12,9 +12,12 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
 
     private final TdpUserDAO userDao;
 
+    private final TdpInvestPasswordStore passwordStore;
+
     @Inject
-    public TdpInvestAuthenticator(final TdpUserDAO userDao) {
+    public TdpInvestAuthenticator(TdpUserDAO userDao, TdpInvestPasswordStore passwordStore) {
         this.userDao = userDao;
+        this.passwordStore = passwordStore;
     }
 
     @Override
@@ -22,7 +25,7 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
         TdpUser user = userDao.getUserByEmail(credentials.getUsername());
 
         try {
-            if (user != null && TdpInvestPasswordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
+            if (user != null && passwordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
                 return Optional.of(user);
             }
         } catch (TdpInvestPasswordStore.CannotPerformOperationException | TdpInvestPasswordStore.InvalidHashException e) {

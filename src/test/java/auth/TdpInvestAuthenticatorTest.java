@@ -6,7 +6,6 @@ import domain.TdpUser;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.basic.BasicCredentials;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -21,23 +20,25 @@ public class TdpInvestAuthenticatorTest {
     @Mock
     TdpUserDAO mockDAO;
 
+    @Mock
+    TdpInvestPasswordStore mockPasswordStore;
+
     TdpInvestAuthenticator authenticator;
 
     private static TdpUser stubDbUser;
 
-    @BeforeClass
-    public static void setUpStub() throws TdpInvestPasswordStore.CannotPerformOperationException {
-        stubDbUser = new TdpUser("a@a", TdpInvestPasswordStore.createHash("pass"));
+    @Before
+    public void setUp() throws TdpInvestPasswordStore.CannotPerformOperationException {
+        stubDbUser = new TdpUser("a@a", "pass");
+        authenticator = new TdpInvestAuthenticator(mockDAO, mockPasswordStore);
     }
 
-    @Before
-    public void setUp() { authenticator = new TdpInvestAuthenticator(mockDAO); }
-
     @Test
-    public void testAuthenticationWithValidCredentials() throws AuthenticationException {
+    public void testAuthenticationWithValidCredentials() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
         when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
+        when(mockPasswordStore.verifyPassword(anyString(), anyString())).thenReturn(true);
 
-        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", "pass"));
+        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", ""));
 
         assertEquals(result.isPresent(), true);
         assertEquals(result.get(), stubDbUser);
@@ -45,10 +46,11 @@ public class TdpInvestAuthenticatorTest {
     }
 
     @Test
-    public void testAuthenticationWithInvalidCredentials() throws AuthenticationException {
+    public void testAuthenticationWithInvalidCredentials() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
         when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
+        when(mockPasswordStore.verifyPassword(anyString(), anyString())).thenReturn(false);
 
-        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", "wrong"));
+        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", ""));
 
         assertEquals(result.isPresent(), false);
         verify(mockDAO, times(1)).getUserByEmail(any());

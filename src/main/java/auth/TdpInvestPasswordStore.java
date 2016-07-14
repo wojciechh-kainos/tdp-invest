@@ -78,12 +78,12 @@ public class TdpInvestPasswordStore {
     private static final int SALT_INDEX = 3;
     private static final int PBKDF2_INDEX = 4;
 
-    public static String createHash(String password)
+    public String createHash(String password)
             throws CannotPerformOperationException {
         return createHash(password.toCharArray());
     }
 
-    public static String createHash(char[] password)
+    public String createHash(char[] password)
             throws CannotPerformOperationException {
         // Generate a random salt
         SecureRandom random = new SecureRandom();
@@ -105,12 +105,12 @@ public class TdpInvestPasswordStore {
         return parts;
     }
 
-    public static boolean verifyPassword(String password, String correctHash)
+    public boolean verifyPassword(String password, String correctHash)
             throws CannotPerformOperationException, InvalidHashException {
         return verifyPassword(password.toCharArray(), correctHash);
     }
 
-    public static boolean verifyPassword(char[] password, String correctHash)
+    public boolean verifyPassword(char[] password, String correctHash)
             throws CannotPerformOperationException, InvalidHashException {
         // Decode the hash into its parameters
         String[] params = correctHash.split(":");
