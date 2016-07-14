@@ -88,14 +88,6 @@ public class TdpInvestUnitResource {
 		}
 	}
 
-	@GET
-	@Path("/{id}")
-	@UnitOfWork
-	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
-		return tdpIUnitDAO.getFundUnits(id);
-	}
-
-
 	@UnitOfWork
 	public TdpIUnit fetchOne(@PathParam("id") Long id) {
 		return tdpIUnitDAO.findById(id);
