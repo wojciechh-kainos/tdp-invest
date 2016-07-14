@@ -49,7 +49,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpUser>()
                 .setAuthenticator(guiceBundle.getInjector().getInstance(TdpInvestAuthenticator.class))
                 .buildAuthFilter()));
-				
+
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestAuthResource.class));
