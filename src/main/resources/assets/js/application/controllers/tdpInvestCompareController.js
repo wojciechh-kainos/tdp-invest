@@ -77,10 +77,12 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             initializeChart();
         }
 
+        $scope.start_date = new Date(2015, 7, 20);
+        $scope.end_date = new Date();
 
-        tdpCompareService.getData().then(function(response) {
+        tdpCompareService.getDataRange($scope.start_date, $scope.end_date)
+            .then(function(response) {
                 $scope.renderInfo(response);
-                console.log(response.data.price);
-        });
+            });
     });
 });
