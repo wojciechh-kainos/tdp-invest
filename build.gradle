@@ -8,17 +8,21 @@ apply plugin: 'application'
 apply plugin: 'maven'
 apply plugin: 'gradle-one-jar'
 apply plugin: 'com.wiredforcode.spawn'
+apply plugin: 'eu.appsatori.fatjar'
+
 
 mainClassName = 'TdpInvestApplication'
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
     }
     dependencies {
         classpath 'com.github.rholder:gradle-one-jar:1.0.4'
         classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
     }
 }
 
@@ -87,6 +91,16 @@ task oneJar(type: OneJar) {
     mainClass = mainClassName
 }
 
+task myFatJar(type: Jar) {
+    baseName = project.name + '-all'
+    from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+    with jar
+    manifest {
+        attributes 'Implementation-Title': 'tdp-invest', 'Implementation-Version': version
+        attributes 'Main-Class': mainClassName
+    }
+}
+
 task startServer(type: SpawnProcessTask) {
     command "gradle run"
     ready "Server: Started"
@@ -94,10 +108,13 @@ task startServer(type: SpawnProcessTask) {
 
 task stopServer(type: KillProcessTask)
 
+task migrateRun(dependsOn: myFatJar, type: Exec) {
+    commandLine  'java', '-jar', myFatJar.archivePath, 'db', 'migrate', './src/main/resources/app_config.yml'
+}
 run {
     args 'server', './src/main/resources/app_config.yml'
 }
 
 artifacts {
-    oneJar
+
 }

@@ -6,6 +6,7 @@ import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -51,8 +52,9 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         module.setSessionFactory(hibernateBundle.getSessionFactory());
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
-
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
+
+
     }
 
     public static void main(final String[] args) throws Exception {
