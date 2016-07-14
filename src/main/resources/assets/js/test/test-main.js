@@ -22,7 +22,8 @@ require.config({
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
       'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
       'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
-      'highstocks': 'lib/highcharts/highstock'
+      'highstocks': 'lib/highcharts/highstock',
+      'ngResource': 'lib/angular-resource/angular-resource'
   },
   shim: {
       'angular': {
@@ -31,6 +32,7 @@ require.config({
 
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
+      'ngResource' : ['angular'],
       'highcharts-ng' : ['angular', 'highstocks'],
       'ui-bootstrap' : ['angular']
 
