@@ -13,7 +13,9 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.onlyData",
 				query = "select u.date, u.value from TdpIUnit u"),
 		@NamedQuery(name = "TdpIUnit.getUnits",
-				query = "select u.date, u.value from TdpIUnit u where u.fund = :fund")
+				query = "select u.date, u.value from TdpIUnit u where u.fund = :fund"),
+		@NamedQuery(name = "TdpIUnit.selectDate",
+				query = "select u.date, u.value from TdpIUnit u where u.date >= :date_start and u.date <= :date_end")
 })
 
 public class TdpIUnit {
@@ -37,7 +39,9 @@ public class TdpIUnit {
 		return fund;
 	}
 
-	public void setFund(TdpIFund fund) { this.fund = fund; }
+	public void setFund(TdpIFund fund) {
+		this.fund = fund;
+	}
 
 	@NotNull
 	private Date date;

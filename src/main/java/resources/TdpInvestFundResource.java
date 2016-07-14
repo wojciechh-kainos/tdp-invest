@@ -4,7 +4,6 @@ package resources;
 import DAO.TdpIFundDAO;
 import com.google.inject.Inject;
 import domain.TdpIFund;
-import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -12,7 +11,6 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import java.util.Date;
 import java.util.List;
 
 

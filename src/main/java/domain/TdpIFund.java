@@ -24,7 +24,7 @@ public class TdpIFund {
         this.fund_id = fund_id;
     }
 
-
+    @Column (name = "name")
     @NotNull
     private String name;
 
@@ -36,6 +36,7 @@ public class TdpIFund {
         this.name = name;
     }
 
+    @Column (name = "shortcut")
     @NotNull
     private String shortcut;
 
@@ -47,14 +48,18 @@ public class TdpIFund {
         this.shortcut = shortcut;
     }
 
+    @Column (name = "code")
     @OneToMany(mappedBy="fund")
     @ElementCollection(targetClass=TdpIUnit.class)
     private List<TdpIUnit> units;
 
-    public List<TdpIUnit> getUnits() { return units; }
-    public void setUnits(List<TdpIUnit> units) { this.units = units; }
+    public List<TdpIUnit> getUnits() {
+        return units;
+    }
 
-
+    public void setUnits(List<TdpIUnit> units) {
+        this.units = units;
+    }
 
     public TdpIFund() {
     }

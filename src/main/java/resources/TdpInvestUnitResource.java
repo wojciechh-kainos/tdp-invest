@@ -11,6 +11,10 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 
@@ -37,6 +41,32 @@ public class TdpInvestUnitResource {
 	@UnitOfWork
 	public List<TdpIUnit> getData() {
 		return tdpIUnitDAO.getData();
+	}
+
+	@GET
+	@Path("/start/{dateStart}/end/{dateEnd}")
+	@Produces(MediaType.APPLICATION_JSON)
+	@UnitOfWork
+	//public List<TdpIUnit> select(
+	public Response select(
+			@PathParam("dateStart") String stringDateStart,
+			@PathParam("dateEnd") String stringDateEnd
+	) {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			Date dateStart = sdf.parse(stringDateStart);
+			Date dateEnd = sdf.parse(stringDateEnd);
+
+			if (dateStart.getTime() >= dateEnd.getTime()) {
+				return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
+			}
+
+			List<TdpIUnit> content = tdpIUnitDAO.selectData(dateStart, dateEnd);
+
+			return Response.ok(content).build();
+		} catch (ParseException e) {
+			return Response.status(Response.Status.BAD_REQUEST).entity("Invalid data format, allowed yyyy-MM-dd").build();
+		}
 	}
 
 	@GET

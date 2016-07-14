@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import javax.ws.rs.core.Response;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,10 +31,11 @@ public class TdpInvestUnitResourceTest{
 	@BeforeClass
 	public static void setUpStub() {
 		stubDB = new ArrayList<>();
-		stubDB.add(new TdpIUnit(1L, new Date(), 222.2));
-		stubDB.add(new TdpIUnit(2L, new Date(), 232.2));
-		stubDB.add(new TdpIUnit(3L, new Date(), 252.2));
-		stubDB.add(new TdpIUnit(4L, new Date(), 272.2));
+		stubDB.add(new TdpIUnit(1L, new Date(981068400000L), 95.6));
+		stubDB.add(new TdpIUnit(2L, new Date(981327600000L), 94.31));
+		stubDB.add(new TdpIUnit(3L, new Date(981414000000L), 94.34));
+		stubDB.add(new TdpIUnit(4L, new Date(981500400000L), 92.9));
+		stubDB.add(new TdpIUnit(5L, new Date(981586800000L), 93.06));
 	}
 
 	@Before
@@ -56,5 +59,28 @@ public class TdpInvestUnitResourceTest{
 
 		assertEquals(stubDB.get(0).getValue(), resource.fetchOne(1L).getValue());
 		verify(mockDAO, times(1)).findById(anyLong());
+	}
+
+	@Test
+	public void testSelectDates() {
+		when(mockDAO.findAll()).thenReturn(stubDB);
+
+		List<TdpIUnit> results = resource.fetchAll();
+
+		Date startDate = stubDB.get(0).getDate();
+		Date endDate = stubDB.get(4).getDate();
+
+		assertEquals(startDate, results.get(0).getDate());
+		assertEquals(endDate, results.get(4).getDate());
+
+		String startDateString = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
+		String endDateString = new SimpleDateFormat("yyyy-MM-dd").format(endDate);
+
+		assertEquals(Response.Status.OK, resource.select(startDateString, endDateString).getStatusInfo());
+		assertEquals(Response.Status.BAD_REQUEST, resource.select(endDateString, startDateString).getStatusInfo());
+
+		assertEquals(stubDB.size(), results.size());
+		verify(mockDAO, times(1)).findAll();
+
 	}
 }

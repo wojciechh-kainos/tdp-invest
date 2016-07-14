@@ -7,6 +7,7 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
+import java.util.Date;
 import java.util.List;
 
 public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
@@ -30,6 +31,13 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	public List<TdpIUnit> getData() {
 		return list(namedQuery("TdpIUnit.onlyData"));
+	}
+
+	public List<TdpIUnit> selectData(Date dateStart, Date dateEnd) {
+		Query query = namedQuery("TdpIUnit.selectDate");
+		query.setDate("date_start", dateStart);
+		query.setDate("date_end", dateEnd);
+		return list(query);
 	}
 
 	public List<TdpIUnit> getFundUnits(Long id) {
