@@ -3,27 +3,30 @@ version '1.0-SNAPSHOT'
 
 import com.wiredforcode.gradle.spawn.*
 
+
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven'
-apply plugin: 'gradle-one-jar'
 apply plugin: 'com.wiredforcode.spawn'
+apply plugin: 'eu.appsatori.fatjar'
 
 mainClassName = 'TdpInvestApplication'
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
     }
     dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
-        classpath 'com.wiredforcode:gradle-spawn-plugin:0.7.0'
+        classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
     }
 }
 
 project.ext {
     dropwizardVersion = '0.9.3'
+    configPath = './src/main/resources/app_config.yml'
 }
 
 repositories {
@@ -57,6 +60,7 @@ dependencies {
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
         'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
         'io.dropwizard:dropwizard-db:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
         'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2',
         'org.glassfish.jersey.media:jersey-media-multipart:2.21'
     )
@@ -82,10 +86,6 @@ dependencies {
     testCompile 'org.slf4j:jcl-over-slf4j:1.7.2'
 }
 
-task oneJar(type: OneJar) {
-    mainClass = mainClassName
-}
-
 task startServer(type: SpawnProcessTask) {
     command "gradle run"
     ready "Server: Started"
@@ -93,10 +93,25 @@ task startServer(type: SpawnProcessTask) {
 
 task stopServer(type: KillProcessTask)
 
-run {
-    args 'server', './src/main/resources/app_config.yml'
+
+// Configure the fatJar task
+fatJar {
+    classifier 'fat'
+
+    // We need to add the main class to the manifest, otherwise the JAR won't start.
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    // We have to exclude signature files from the fat JAR, otherwise we'll get invalid signature file digest errors.
+    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
 }
 
-artifacts {
-    oneJar
+task migrate(type: JavaExec, dependsOn: fatJar) {
+    main = "-jar"
+    args = ["./build/libs/" + rootProject.name + "-" + version + "-fat.jar", "db", "migrate", configPath]
+}
+
+run {
+    args 'server', configPath
 }
