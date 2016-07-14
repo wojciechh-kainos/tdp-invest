@@ -43,13 +43,11 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         module.setSessionFactory(hibernateBundle.getSessionFactory());
-
-        environment.jersey().register(new TdpInvestCompareResource());
         //dodajemy taką linię przy każdym endpoincie :)
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
-
+        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestCompareResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
     }
 

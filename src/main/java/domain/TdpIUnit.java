@@ -9,7 +9,13 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u")})
+				query = "select u from TdpIUnit u"),
+		@NamedQuery(name = "TdpIUnit.getDate",
+		query = "select u.date from TdpIUnit u where u.id = :id"),
+		@NamedQuery(name = "TdpIUnit.getDataByDate",
+				query = "select u from TdpIUnit u where u.date >= :dateFrom and u.date <= :dateTo")
+})
+
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

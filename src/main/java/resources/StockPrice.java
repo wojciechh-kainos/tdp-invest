@@ -8,9 +8,9 @@ import java.util.Date;
  */
 public class StockPrice {
     public String date;
-    public Float price;
+    public Double price;
 
-    StockPrice(String d, Float p){
+    StockPrice(String d, Double p){
         date = d;
         price = p;
     }

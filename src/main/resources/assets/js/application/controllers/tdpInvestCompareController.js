@@ -1,8 +1,8 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpCompareService) {
 
-        $scope.start_date = new Date();
-        $scope.end_date = new Date(2016, 7, 20);
+        $scope.start_date = new Date(2015, 7, 20);
+                $scope.end_date = new Date();
 
         $scope.today = function() {
             $scope.dt = new Date();
@@ -167,23 +167,27 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             $scope.dates = [];
             for (i = 0; i < $scope.stockData.length; i++) {
                 $scope.prices.push(parseFloat($scope.stockData[i].price));
-                $scope.dates.push($scope.stockData[i].date);
+                $scope.dates.push($scope.stockData[i].date)
+
 
             }
-            initializeChart();
             initializeTable();
-        };
+            initializeChart();
+        }
 
-        tdpCompareService.getData().then(function(response) {
-            renderInfo(response);
-        });
+
+
+        tdpCompareService.getDataRange($scope.start_date, $scope.end_date)
+            .then(function(response) {
+                renderInfo(response);
+            });
 
         $scope.getStockData = function(date1, date2) {
-                    tdpCompareService.getDataRange(date1, date2)
-                            .then(function(response) {
-                                renderInfo(response);
-                            });
+            tdpCompareService.getDataRange(date1, date2)
+                .then(function(response) {
+                    renderInfo(response);
+                });
 
-                }
+        }
     });
 });
