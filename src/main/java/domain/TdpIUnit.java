@@ -15,7 +15,7 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.getUnits",
 				query = "select u.date, u.value from TdpIUnit u where u.fund = :fund"),
 		@NamedQuery(name = "TdpIUnit.selectDate",
-				query = "select u.date, u.value from TdpIUnit u where u.date >= :date_start and u.date <= :date_end")
+				query = "select u.date, u.value from TdpIUnit u where u.date >= :date_start and u.date <= :date_end and u.fund = :fund_id")
 })
 
 public class TdpIUnit {

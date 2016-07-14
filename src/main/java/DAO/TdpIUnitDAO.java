@@ -33,8 +33,9 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 		return list(namedQuery("TdpIUnit.onlyData"));
 	}
 
-	public List<TdpIUnit> selectData(Date dateStart, Date dateEnd) {
+	public List<TdpIUnit> selectData(Long id, Date dateStart, Date dateEnd) {
 		Query query = namedQuery("TdpIUnit.selectDate");
+		query.setLong("fund_id", id);
 		query.setDate("date_start", dateStart);
 		query.setDate("date_end", dateEnd);
 		return list(query);

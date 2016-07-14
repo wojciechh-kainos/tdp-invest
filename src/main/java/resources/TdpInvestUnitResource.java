@@ -41,20 +41,26 @@ public class TdpInvestUnitResource {
 		return tdpIUnitDAO.getData();
 	}
 
+
 	@GET
 	@Path("/select/{fund}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@UnitOfWork
-	//public List<TdpIUnit> select(
 	public Response select(
 			@PathParam("fund") Long id,
 			@QueryParam("dateStart") String stringDateStart,
 			@QueryParam("dateEnd") String stringDateEnd
 	) {
-		List<String> errors = new ArrayList<String>();;
+		List<String> errors = new ArrayList<String>();
 
 		if (id == null)
 			errors.add("No fund ID!");
+		else {
+			if(stringDateStart == null && stringDateEnd == null) {
+				List<TdpIUnit> content = tdpIUnitDAO.getFundUnits(id);
+				return Response.ok(content).build();
+			}
+		}
 
 		if(stringDateStart == null)
 			errors.add("No start data string!");
@@ -74,7 +80,7 @@ public class TdpInvestUnitResource {
 				return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
 			}
 
-			List<TdpIUnit> content = tdpIUnitDAO.selectData(dateStart, dateEnd);
+			List<TdpIUnit> content = tdpIUnitDAO.selectData(id, dateStart, dateEnd);
 
 			return Response.ok(content).build();
 		} catch (ParseException e) {
