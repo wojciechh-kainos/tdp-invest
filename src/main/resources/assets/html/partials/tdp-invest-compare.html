@@ -1,21 +1,28 @@
-<h4>compare view</h4>
+<div class="compare-view">
+    <div id="compare-form" class="well col-lg-4 col-lg-offset-4">
+        <form>
+            <div class="form-group">
+                <label for="inputName">Name</label>
+                <input type="text" class="form-control" id="inputName" ng-model="name" placeholder="Name">
+            </div>
+            <div class="form-group">
+                <label for="inputValue">Email</label>
+                <input type="number" class="form-control" id="inputValue" ng-model="val" placeholder="Value">
+            </div>
+            <button ng-click="addInvestment(name, val)" id="add-btn" type="submit" class="btn btn-primary">Add</button>
+        </form>
+    </div>
 
-<div>
-    <input ng-model="name" />
-    <input ng-model="val" />
-    <button ng-click="addInvestment(name, val)">Add</button>
-    <br />
-</div>
-
-<div>
-    <h3>Investments</h3>
-    <ul>
-        <div ng-init="investments = getInvestments()">
-            <li ng-repeat="inv in investments">
-                <a ng-click="delInvestment(inv.id)">
-                    ${{inv.amount.toFixed(2)}}, {{(inv.annualRate * 100).toFixed(2)}}%
-                </a>
-            </li>
-        </div>
-    </ul>
+    <div id="investments" class="well col-lg-4 col-lg-offset-4">
+        <h3>Investments</h3>
+        <ul class="list-group">
+            <div ng-init="investments = getInvestments()">
+                <li class="list-group-item" ng-repeat="inv in investments">
+                    <a ng-click="delInvestment(inv.id)">
+                        ${{inv.amount.toFixed(2)}}, {{(inv.annualRate * 100).toFixed(2)}}%
+                    </a>
+                </li>
+            </div>
+        </ul>
+    </div>
 </div>
