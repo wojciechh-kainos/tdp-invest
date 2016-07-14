@@ -1,6 +1,7 @@
 package resources;
 
 import DAO.TdpIFundDAO;
+import DAO.TdpIUnitDAO;
 import domain.TdpIFund;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -21,6 +22,9 @@ public class TdpInvestFundResourceTest {
 	@Mock
 	TdpIFundDAO mockDAO;
 
+	@Mock
+	TdpIUnitDAO mockDAO2;
+
 	TdpInvestFundResource resource;
 
 	private static List<TdpIFund> stubDB;
@@ -36,7 +40,7 @@ public class TdpInvestFundResourceTest {
 
 	@Before
 	public void setUp() {
-		resource = new TdpInvestFundResource(mockDAO);
+		resource = new TdpInvestFundResource(mockDAO, mockDAO2);
 	}
 
 	@Test

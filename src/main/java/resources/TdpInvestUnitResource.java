@@ -51,7 +51,7 @@ public class TdpInvestUnitResource {
 			@QueryParam("dateStart") String stringDateStart,
 			@QueryParam("dateEnd") String stringDateEnd
 	) {
-		List<String> errors = new ArrayList<String>();
+		List<String> errors = new ArrayList<String>();;
 
 		if (id == null)
 			errors.add("No fund ID!");
@@ -87,6 +87,14 @@ public class TdpInvestUnitResource {
 			return Response.status(Response.Status.BAD_REQUEST).entity("Invalid data format, allowed yyyy-MM-dd").build();
 		}
 	}
+
+	@GET
+	@Path("/{id}")
+	@UnitOfWork
+	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
+		return tdpIUnitDAO.getFundUnits(id);
+	}
+
 
 	@UnitOfWork
 	public TdpIUnit fetchOne(@PathParam("id") Long id) {

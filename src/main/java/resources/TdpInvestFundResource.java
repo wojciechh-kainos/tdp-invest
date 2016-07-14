@@ -2,8 +2,10 @@ package resources;
 
 
 import DAO.TdpIFundDAO;
+import DAO.TdpIUnitDAO;
 import com.google.inject.Inject;
 import domain.TdpIFund;
+import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -11,6 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+import java.util.Date;
 import java.util.List;
 
 
@@ -20,10 +23,13 @@ import java.util.List;
 public class TdpInvestFundResource {
 
     private TdpIFundDAO tdpIFundDAO;
+    private TdpIUnitDAO tdpIUnitDAO;
 
     @Inject
-    public TdpInvestFundResource(TdpIFundDAO tdpIFundDAO) {
+    public TdpInvestFundResource(TdpIFundDAO tdpIFundDAO, TdpIUnitDAO tdpIUnitDAO) {
+
         this.tdpIFundDAO = tdpIFundDAO;
+        this.tdpIUnitDAO = tdpIUnitDAO;
     }
 
     @GET
@@ -40,7 +46,13 @@ public class TdpInvestFundResource {
         fund.setName("Test");
         fund.setShortcut("TST");
 
+        TdpIUnit unit = new TdpIUnit();
+        unit.setFund(fund);
+        unit.setDate(new Date(981068400000L));
+        unit.setValue(12.32);
+
         tdpIFundDAO.create(fund);
+        tdpIUnitDAO.create(unit);
 
         return fund;
     }
@@ -51,4 +63,6 @@ public class TdpInvestFundResource {
     public TdpIFund fetch(@PathParam("id") Long id) {
         return tdpIFundDAO.findById(id);
     }
+
+
 }
