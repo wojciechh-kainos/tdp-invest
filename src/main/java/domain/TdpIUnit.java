@@ -11,7 +11,7 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u"),
 		@NamedQuery(name = "TdpIUnit.findDatesBetween",
-					query = "select u from TdpIUnit u where u.date between ':start' and ':end'")
+					query = "select u from TdpIUnit u where u.date between :iks and :end")
 
 })
 public class TdpIUnit {

@@ -13,10 +13,7 @@ import service.*;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -42,18 +39,18 @@ public class DataResource {
 
     @GET
     @Path("/get/data")
-    public List<Row> fetchData(@PathParam("startDate") String startDate,
-                               @PathParam("endDate") String endDate) {
+    public List<Row> fetchData(@QueryParam("startDate") String startDate,
+                               @QueryParam("endDate") String endDate) {
         return repo.getAllRows();
     }
 
     @GET
     @UnitOfWork
     @Path("/get/compare")
-    public List<TdpIUnit> fetchCompare(@PathParam("startDate") String startDate,
-                                            @PathParam("endDate") String endDate,
-                                            @PathParam("input") int input,
-                                            @PathParam("percentage") int percentage) {
+    public List<TdpIUnit> fetchCompare(@QueryParam("startDate") String startDate,
+                                            @QueryParam("endDate") String endDate,
+                                            @QueryParam("input") int input,
+                                            @QueryParam("percentage") long percentage) {
         CalculatedRow row1 = new CalculatedRow(tra.getDate("12/02/2013"), new BigDecimal(377), new BigDecimal(123));
         CalculatedRow row2 = new CalculatedRow(tra.getDate("13/02/2013"), new BigDecimal(377), new BigDecimal(123));
         CalculatedRow row3 = new CalculatedRow(tra.getDate("14/02/2013"), new BigDecimal(377), new BigDecimal(123));
@@ -62,7 +59,7 @@ public class DataResource {
         calcs.add(row2);
         calcs.add(row3);
 
-        List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDateFromHtml(startDate), tra.getDateFromHtml(endDate));
+        List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDate(startDate) , tra.getDate(endDate));
             return list;
 
 

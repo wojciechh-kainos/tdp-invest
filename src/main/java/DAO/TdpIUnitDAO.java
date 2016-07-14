@@ -28,7 +28,9 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
 
-	public List<TdpIUnit> findDatesBetween(Date start, Date end) { return list(namedQuery("TdpIUnit.findDatesBetween")
-			.setDate("start", start)
-			.setDate("end", end));}
+	public List<TdpIUnit> findDatesBetween(Date start,Date end) { return list(namedQuery("TdpIUnit.findDatesBetween")
+				.setParameter("iks", start)
+				.setParameter("end", end)) ;}
+
+	private String lol = "lol";
 }
