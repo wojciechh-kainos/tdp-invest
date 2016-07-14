@@ -82,7 +82,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         function getDateString(date) {
             var newDate = new Date(date.year + "-" + date.monthValue + "-" + date.dayOfMonth);
-
             return newDate.toISOString().slice(0,10).replace(/-/g,".");
         };
 
