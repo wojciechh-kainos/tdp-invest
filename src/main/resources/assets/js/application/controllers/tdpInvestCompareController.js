@@ -1,9 +1,6 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpDataService) {
 
-        var startDate = false;
-        var endDate = false;
-
         tdpDataService.getInvestData().then(function(response){
             $scope.investData = response.data;
 
@@ -23,8 +20,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                 var valuesList = [];
                 var dateList = [];
 
-                var startDate = new Date($scope.start);
-                var endDate = new Date($scope.end);
+                var startDate = new Date($scope.startDate);
+                var endDate = new Date($scope.endDate);
                 var countedDate = startDate;
 
                 var gain = $scope.amount;
@@ -91,15 +88,37 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     });
         }
 
-
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
         function dateDiffInDays(a, b) {
               var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
               var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-
               return Math.floor((utc2 - utc1) / _MS_PER_DAY);
         }
 
+        $scope.dateOptions = {
+            formatYear: 'yy',
+            maxDate: new Date(2150, 01, 01),
+            minDate: new Date(1950, 01, 01)
+        };
+
+        $scope.open1 = function() {
+            $scope.popup1.opened = true;
+        };
+
+        $scope.open2 = function() {
+            $scope.popup2.opened = true;
+        };
+
+        $scope.format = 'dd.MM.yyyy';
+        $scope.altInputFormats = ['M!/d!/yyyy'];
+
+         $scope.popup1 = {
+            opened: false
+        };
+
+        $scope.popup2 = {
+            opened: false
+        };
     });
 });
