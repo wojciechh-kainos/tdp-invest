@@ -8,7 +8,13 @@ define(['angular','application/tdpInvestModule', 'ngCookies'], function(angular,
         };
 
         service.Register = function(username, password) {
-            return $http.post('/api/register/',  { mail: username, password: password }).then(handleSuccess, handleError('Error creating user'));
+            return $http.post('/api/register/',  { mail: username, password: password }).then(handleSuccess, function (response) {
+                if(response.status == 409){
+                    return { success: false, message: "Email address already in use." };
+                }
+                return { success: false, message: "Registration failed." };
+
+            });
         };
 
 

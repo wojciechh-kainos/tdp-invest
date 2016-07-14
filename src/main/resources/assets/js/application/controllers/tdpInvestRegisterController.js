@@ -8,9 +8,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpAuthS
                     if(response.success) {
                         tdpAuthService.SetCredentials($scope.user.username, $scope.user.password);
                         $location.path('/tdp');
-                    } else {
+                     }
+
+                    else {
                         $scope.dataLoading = false;
-                        $scope.error = "Registration failed.";
+                        $scope.error = response.message;
                     }
                 });
         }
