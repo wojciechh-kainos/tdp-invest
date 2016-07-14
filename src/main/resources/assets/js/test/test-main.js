@@ -19,7 +19,9 @@ require.config({
       'angular': 'lib/angular/angular',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
-      'ngCookies': 'lib/angular-cookies/angular-cookies'
+      'ngCookies': 'lib/angular-cookies/angular-cookies',
+      'requireJS': 'lib/requirejs/require',
+      'karma-requireJS': 'lib/karma-require'
   },
   shim: {
       'angular': {
@@ -27,7 +29,7 @@ require.config({
       },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
-      'ngCookies': ['angular'],
+      'ngCookies': ['angular']
   },
   // dynamically load all test files
   deps: allTestFiles,
