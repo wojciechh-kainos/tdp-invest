@@ -7,15 +7,16 @@ server:
   adminConnectors:
     - type: http
       port: 9500
+
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
 
   # the username
-  user: remigiuszk
+  user: radoslawl
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/remigiuszk
+  url: jdbc:postgresql://localhost/radoslawl
 
   # any properties specific to your JDBC driver:
   properties:

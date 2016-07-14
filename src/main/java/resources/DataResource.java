@@ -35,8 +35,6 @@ public class DataResource {
         this.tdpDAO = tdpDAO;
     }
 
-
-
     @GET
     @Path("/get/data")
     public List<Row> fetchData(@QueryParam("startDate") String startDate,
