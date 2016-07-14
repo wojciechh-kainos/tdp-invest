@@ -20,6 +20,11 @@ public class TdpUser implements Principal {
 
     public TdpUser() {}
 
+    public TdpUser(String mail, String password) {
+        this.mail = mail;
+        this.password = password;
+    }
+
     public long getId() {
         return id;
     }
