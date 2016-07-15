@@ -18,5 +18,15 @@
         </createTable>
     </changeSet>
 
+
+    <changeSet id="1" author="mateusz">
+        <loadData tableName="unit" file="assets/staticdata/data1.csv"/>
+        <loadData tableName="unit" file="assets/staticdata/data2.csv"/>
+        <loadData tableName="unit" file="assets/staticdata/data3.csv"/>
+        <loadData tableName="unit" file="assets/staticdata/data4.csv"/>
+        <loadData tableName="unit" file="assets/staticdata/data5.csv"/>
+        <loadData tableName="unit" file="assets/staticdata/data6.csv"/>
+    </changeSet>
+
 </databaseChangeLog>
 
