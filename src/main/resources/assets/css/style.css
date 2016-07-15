@@ -12,3 +12,15 @@ p.error{
     color:red;
     font-size:10;
 }
+
+.btn-disabled{
+    background-color:red;
+    border-color:red;
+    disabled;
+}
+.btn-disabled : hover{
+    background-color:red;
+    border-color:red;
+    disabled;
+    opacity:0.9;
+}
