@@ -49,12 +49,4 @@ public class TdpInvestUnitResourceTest{
 		assertEquals(stubDB.size(), results.size());
 		verify(mockDAO, times(1)).findAll();
 	}
-
-	@Test
-	public void testFetch() {
-		when(mockDAO.findById(1L)).thenReturn(stubDB.get(0));
-
-		assertEquals(stubDB.get(0).getValue(), resource.fetch(1L).getValue());
-		verify(mockDAO, times(1)).findById(anyLong());
-	}
 }
