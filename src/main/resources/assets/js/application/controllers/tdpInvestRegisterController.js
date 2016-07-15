@@ -1,11 +1,11 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpAuthService'], function (angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestRegisterController", function ($location, $scope, tdpAuthService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestAuthService'], function (angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestRegisterController", function ($location, $scope, tdpInvestAuthService) {
 
         $scope.register = function () {
-            $scope.registerPromise = tdpAuthService.Register($scope.user.username, $scope.user.password)
+            $scope.registerPromise = tdpInvestAuthService.register($scope.user.username, $scope.user.password)
                 .then(function (response) {
                     if (response.success) {
-                        tdpAuthService.SetCredentials($scope.user.username, $scope.user.password);
+                        tdpInvestAuthService.setCredentials($scope.user.username, $scope.user.password);
                         $location.path('/tdp');
                     }
                     else {

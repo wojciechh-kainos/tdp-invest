@@ -9,7 +9,6 @@ define(['angular'
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
-                // authenticate: true,
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"

@@ -1,7 +1,7 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpAuthService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestNavbarController", function($scope, $rootScope, tdpAuthService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestAuthService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestNavbarController", function($scope, $rootScope, tdpInvestAuthService) {
 
-        tdpAuthService.WatchAuthorizationStatus(function() {
+        tdpInvestAuthService.watchAuthorizationStatus(function() {
             $scope.isUserLoggedIn = true;
         }, function() {
             $scope.isUserLoggedIn = false;
