@@ -1,6 +1,5 @@
 package DAO;
 
-
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
@@ -26,4 +25,5 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
+
 }

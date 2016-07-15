@@ -2,6 +2,7 @@ import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
+import domain.TdpIInvestment;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
@@ -22,7 +23,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     private GuiceBundle<TdpInvestApplicationConfiguration> guiceBundle;
 
-    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(TdpIUnit.class) {
+    private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle =
+            new HibernateBundle<TdpInvestApplicationConfiguration>(TdpIUnit.class, TdpIInvestment.class) {
         @Override
         public DataSourceFactory getDataSourceFactory(TdpInvestApplicationConfiguration configuration) {
             return configuration.getDataSourceFactory();
@@ -55,10 +57,12 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         module.setSessionFactory(hibernateBundle.getSessionFactory());
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
+        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestInvestmentResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
+        //TODO: implement in this class before uncommenting line below
+        //environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestConvertResource.class));
 
         //TODO: guiceInjectors
-        environment.jersey().register(new TdpInvestInvestmentResource());
         environment.jersey().register(MultiPartFeature.class);
         environment.jersey().register(new TdpInvestConvertResource());
     }

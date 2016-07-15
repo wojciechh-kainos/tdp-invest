@@ -8,8 +8,8 @@ import java.util.Date;
 @Entity
 @Table(name = "unit")
 @NamedQueries({
-		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u")})
+		@NamedQuery(name = "TdpIUnit.findAll", query = "select u from TdpIUnit u")
+})
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
