@@ -6,6 +6,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
         $scope.receivedData = [];
         $scope.input = 100;
         $scope.percentage = 2;
+        $scope.dataFund = [];
+        $scope.dataInvest = [];
 
     });
 });

@@ -4,7 +4,6 @@ import DAO.TdpIUnitDAO;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 import service.*;
-
 import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
@@ -14,14 +13,13 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class DataResource {
 
-    private DateTransformer tra = new DateTransformer();
+    private DateTransformer tra;
     private TdpIUnitDAO tdpDAO;
     @Inject
-    DataResource( TdpIUnitDAO tdpDAO) {
+    DataResource( TdpIUnitDAO tdpDAO, DateTransformer tra) {
         this.tdpDAO = tdpDAO;
+        this.tra = tra;
     }
-
-
 
     @GET
     @UnitOfWork
@@ -31,6 +29,4 @@ public class DataResource {
         List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDateFromHtml(startDate) , tra.getDateFromHtml(endDate));
         return list;
     }
-
-
 }

@@ -3,6 +3,7 @@ package framework;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import configuration.TdpInvestModule;
 import org.junit.BeforeClass;
 
 public class BaseTest {
@@ -15,6 +16,6 @@ public class BaseTest {
 
     @BeforeClass
     public static void createInjector() {
-      //  injector = Guice.createInjector(new DataResourceModule());
+        injector = Guice.createInjector(new TdpInvestModule());
     }
 }

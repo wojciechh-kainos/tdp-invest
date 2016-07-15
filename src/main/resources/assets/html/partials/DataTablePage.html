@@ -1,14 +1,25 @@
 <link href="style.css" rel="stylesheet" />
-<table border="1">
+<table ng-if="state == 'root.home'" border="1">
     <tr>
         <td>Date</td>
-        <td>Income</td>
-        <td ng-if="columns.length == 4">Income from fund</td>
+        <td>Value</td>
     </tr>
     <tr ng-repeat="row in myData">
         <td>{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
         <td><center>{{row[columns[valIndex]]}}</center></td>
-        <!--<td ng-if="columns.length == 4"><center>{{row[columns[3]]}}</center></td>-->
+    </tr>
+</table>
+
+<table ng-if="state == 'root.compare'" border="1">
+    <tr>
+        <td>Date</td>
+        <td>Income from Fund</td>
+        <td>Income from Investment</td>
+    </tr>
+    <tr ng-repeat="row in myData">
+        <td>{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
+        <td><center>{{row[columns[fundIndex]]}}</center></td>
+        <td><center>{{row[columns[investIndex]]}}</center></td>
     </tr>
 </table>
 

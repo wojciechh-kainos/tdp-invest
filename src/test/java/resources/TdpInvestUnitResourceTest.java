@@ -29,10 +29,10 @@ public class TdpInvestUnitResourceTest{
 	@BeforeClass
 	public static void setUpStub() {
 		stubDB = new ArrayList<>();
-		stubDB.add(new TdpIUnit(1L, new Date(), 222.2));
-		stubDB.add(new TdpIUnit(2L, new Date(), 232.2));
-		stubDB.add(new TdpIUnit(3L, new Date(), 252.2));
-		stubDB.add(new TdpIUnit(4L, new Date(), 272.2));
+		stubDB.add(new TdpIUnit(1L, new Date(), 222.2, incomeFromFund, incomeFromInvestment));
+		stubDB.add(new TdpIUnit(2L, new Date(), 232.2, incomeFromFund, incomeFromInvestment));
+		stubDB.add(new TdpIUnit(3L, new Date(), 252.2, incomeFromFund, incomeFromInvestment));
+		stubDB.add(new TdpIUnit(4L, new Date(), 272.2, incomeFromFund, incomeFromInvestment));
 	}
 
 	@Before

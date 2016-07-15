@@ -15,7 +15,7 @@ define(['angular'
                 templateUrl: 'html/partials/tdp.html',
                 controller: 'IndexController',
             })
-                .state("root.data", {
+                .state("root.home", {
                     url: "/home",
                     views: {
                          "chart@root": {
