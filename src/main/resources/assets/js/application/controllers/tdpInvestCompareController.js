@@ -3,12 +3,16 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         $scope.start_date = new Date(2015, 7, 20);
         $scope.end_date = new Date();
+
         $scope.investData = [];
+        $scope.input_value_state = true;
+        $scope.interest_rate_state = true;
+        $scope.show_button = true;
 
         $scope.showInvest = function(date1, date2, input_value, interest_rate) {
 
             input_value = parseFloat(input_value);
-            interest_rate = parseFloat(interest_rate);
+            interest_rate = parseFloat(interest_rate)/100;
 
             console.log(interest_rate);
 
@@ -54,7 +58,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
         $scope.setInvestData = function(data) {
             console.log(data);
             $scope.investData = data;
-
         }
 
 
@@ -62,12 +65,42 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             tdpCompareService.getDataRange(date1, date2)
                 .then(function(response) {
                     $scope.stockData = response.data;
-                    console.log("dupa");
-
                 });
-
         }
 
         $scope.getStockData($scope.start_date, $scope.end_date);
+
+        $scope.$watch('interest_rate', function(){
+            if($scope.interest_rate > 100 || $scope.interest_rate < 0 || $scope.interest_rate == undefined || $scope.interest_rate == '' || !isNumber($scope.interest_rate)){
+                $scope.interest_rate_error = "Please put right value of rate: 0 <= rate <= 100";
+                $scope.interest_rate_state = false;
+            }else{
+                $scope.interest_rate_error = "";
+                $scope.interest_rate_state = true;
+            }
+            $scope.show_button = !($scope.interest_rate_state && $scope.input_value_state);
+            console.log($scope.interest_rate_state + " && " + $scope.input_value_state + " = " + ($scope.interest_rate_state && $scope.input_value_state) + "\n");
+        });
+
+        $scope.$watch('input_value', function(){
+            if($scope.input_value == undefined || $scope.input_value == '' || !isNumber($scope.input_value)){
+                $scope.input_value_error = "Please fill the field";
+                $scope.input_value_state = false;
+            }else{
+                $scope.input_value_error = "";
+                $scope.input_value_state = true;
+            }
+            $scope.show_button = !($scope.interest_rate_state && $scope.input_value_state);
+            console.log($scope.interest_rate_state + " && " + $scope.input_value_state + " = " + ($scope.interest_rate_state && $scope.input_value_state) + "\n");
+
+        });
+
+
     });
 });
+
+function isNumber(n){
+    if(!isNaN(n))
+       return true;
+    return false;
+}

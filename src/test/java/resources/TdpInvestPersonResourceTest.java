@@ -22,10 +22,4 @@ public class TdpInvestPersonResourceTest extends BaseTest {
     public void testShouldInject() {
         assertTrue(resource.getJob() instanceof SecondImplementation);
     }
-
-    @Test
-    public void collectionLengthShouldBe() {
-        TdpInvestCompareResource tester = new TdpInvestCompareResource();
-        assertEquals("Collection length should be 20", 20,  tester.fetch().size());
-    }
 }
