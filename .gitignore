@@ -16,6 +16,7 @@ hs_err_pid*
 tdp-invest.iml
 .gradle
 .idea
+src/main/resources/app_config.yml
 
 
 # bower dependencies
