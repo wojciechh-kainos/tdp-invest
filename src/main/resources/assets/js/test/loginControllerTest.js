@@ -3,23 +3,25 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
     describe('tdpInvestLoginController', function () {
         beforeEach(angular.mock.module('tdpInvestModule'));
 
+        var authService;
         var deferred;
         var $scope;
         var $q;
 
         beforeEach(inject(function ($controller, _$rootScope_, tdpAuthService, _$q_) {
             $q = _$q_;
-            $scope = _$rootScope_.$new();
             deferred = $q.defer();
+            $scope = _$rootScope_.$new();
+            authService = tdpAuthService;
 
-            spyOn(tdpAuthService, 'Login').and.returnValue(deferred.promise);
-            spyOn(tdpAuthService, 'ClearCredentials').and.returnValue('');
-            spyOn(tdpAuthService, 'SetCredentials').and.returnValue('');
+            spyOn(authService, 'Login').and.returnValue(deferred.promise);
+            spyOn(authService, 'ClearCredentials').and.returnValue('');
+            spyOn(authService, 'SetCredentials').and.returnValue('');
 
-            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: tdpAuthService});
+            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService});
         }));
 
-        describe('When login', function () {
+        describe('When logging in', function () {
 
             it('with valid credentials should succeed', inject(function () {
                 deferred.resolve({success: true});
@@ -27,7 +29,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect($scope.dataLoading).toEqual(true);
+                expect(authService.SetCredentials).toHaveBeenCalled();
             }));
 
             it('with invalid credentials should fail', inject(function () {
@@ -37,6 +39,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.$apply();
 
                 expect($scope.error).toEqual("error");
+                expect(authService.SetCredentials).not.toHaveBeenCalled();
             }));
 
         });
