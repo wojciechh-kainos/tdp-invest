@@ -22,7 +22,10 @@
             <div class="navbar-header">
                 <a class="navbar-brand" href="#/">TDP Invest</a>
             </div>
-
+            <ul class="nav navbar-nav">
+                <li><a href="#/"><i class="fa fa-home"></i> Home</a></li>
+                <li><a href="#/compare"><i class="fa fa-home"></i> Compare</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
                 <li ng-show="isUserLoggedIn"><a href="#/tdp"><i class="fa fa-home"></i> Home</a></li>
                 <li ng-show="isUserLoggedIn"><a href="#/login"><i class="fa fa-shield"></i> Logout</a></li>
@@ -33,6 +36,7 @@
 
     </nav>
 </header>
+
 <div class="container" ui-view></div>
 </body>
 </html>
