@@ -5,20 +5,23 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
 
         var authService;
         var deferred;
+        var location;
         var $scope;
         var $q;
 
-        beforeEach(inject(function ($controller, _$rootScope_, tdpAuthService, _$q_) {
+        beforeEach(inject(function ($controller, _$rootScope_, $location, tdpAuthService, _$q_) {
             $q = _$q_;
             deferred = $q.defer();
             $scope = _$rootScope_.$new();
             authService = tdpAuthService;
+            location = $location;
 
+            spyOn(location, 'path');
             spyOn(authService, 'Login').and.returnValue(deferred.promise);
             spyOn(authService, 'ClearCredentials').and.returnValue('');
             spyOn(authService, 'SetCredentials').and.returnValue('');
 
-            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService});
+            $controller('tdpInvestLoginController', {$scope: $scope, $location: location, tdpAuthService: authService});
         }));
 
         describe('When logging in', function () {
@@ -29,6 +32,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
+                expect(location.path).toHaveBeenCalledWith('/tdp');
                 expect(authService.SetCredentials).toHaveBeenCalled();
             }));
 
