@@ -1,12 +1,11 @@
 package resources;
 
-import DAO.TdpIUnitDAO;
+import dao.TdpIUnitDAO;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
-import sun.java2d.pipe.SpanShapeRenderer;
 
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;

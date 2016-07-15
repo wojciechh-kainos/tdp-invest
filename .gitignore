@@ -16,6 +16,7 @@ hs_err_pid*
 tdp-invest.iml
 .gradle
 .idea
+src/main/resources/app_config.yml
 
 build/
 node_modules/
@@ -97,6 +98,10 @@ atlassian-ide-plugin.xml
 
 # Testing environment specific
 derby.log
+
+# Local pid.lock file
+
+.pid.lock
 
 
 ######################

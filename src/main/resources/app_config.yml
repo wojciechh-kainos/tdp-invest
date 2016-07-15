@@ -5,17 +5,22 @@ server:
     - type: http
       port: 9001
   adminConnectors:
-    - type: http
+    - type: https
       port: 9501
+      keyStorePassword: changeit
+      keyStorePath: certificate/keystore.jks
+    # trustStorePath: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/security/cacerts
+      validateCerts: false #true
+      certAlias: selfsigned
 database:
   # the name of your JDBC driver
   driverClass: org.postgresql.Driver
 
   # the username
-  user: jakubr
+  user: mateuszc
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/jakubr
+  url: jdbc:postgresql://localhost/mateuszc
 
   # any properties specific to your JDBC driver:
   properties:

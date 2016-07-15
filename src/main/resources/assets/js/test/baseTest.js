@@ -72,4 +72,3 @@ define(['angular', 'angularMocks',  'application/controllers/tdpInvestDateContro
 
 
 });
-
