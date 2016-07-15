@@ -1,5 +1,5 @@
 define(['angular','application/tdpInvestModule', 'application/services/tdpInvestBase64Service', 'ngCookies'], function(angular, tdpInvestModule) {
-    tdpInvestModule.service('tdpInvestAuthService', ['$cookieStore', '$http', '$rootScope', '$timeout', 'tdpInvestBase64Service', function($cookieStore, $http, $rootScope, $timeout, tdpInvestBase64Service) {
+    tdpInvestModule.service('tdpInvestAuthService', ['$cookieStore', '$http', '$rootScope', 'tdpInvestBase64Service', function($cookieStore, $http, $rootScope, tdpInvestBase64Service) {
         var service = {};
 
         service.login = function(username, password) {
