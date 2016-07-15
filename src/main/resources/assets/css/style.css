@@ -6,3 +6,9 @@
 .center{
     margin:"0 auto";
 }
+
+/* p attributes */
+p.error{
+    color:red;
+    font-size:10;
+}
