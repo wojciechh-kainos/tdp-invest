@@ -59,7 +59,7 @@ $scope.prices = [];
 
             $scope.$watch('investData', function() {
                 console.log("investdata: " + $scope.investData);
-                if($scope.investData.length > 0) {
+                if($scope.investData !== undefined && $scope.investData.length > 0) {
                 $scope.investPrices = [];
                 for (i = 0; i < $scope.stockData.length; i++) {
                     $scope.investPrices.push(parseFloat($scope.investData[i].price));
