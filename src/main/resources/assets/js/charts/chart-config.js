@@ -1,5 +1,8 @@
 var chartConfig = {
     options: {
+        lang:{
+            noData: "No data uploaded"
+        },
         chart: {
             zoomType: 'x'
         },
@@ -10,14 +13,7 @@ var chartConfig = {
             enabled: true
         }
     },
-    series: [{
-        name: "Fund",
-        tooltip: {
-            valueDecimals: 2,
-            valuePrefix: "$",
-            xDateFormat: '%y-%m-%d'
-        }
-    }],
+    series: [],
     title: {
         text: 'Time series'
     },
