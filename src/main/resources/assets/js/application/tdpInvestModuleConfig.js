@@ -1,8 +1,11 @@
 define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
-], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+    , 'application/controllers/tdpInvestLoginController'
+    , 'application/controllers/tdpInvestRegisterController'
+    , 'application/controllers/tdpInvestNavbarController'
+], function (angular, tdpInvestModule) {
+    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -19,16 +22,25 @@ define(['angular'
                         controller: "tdpInvestPersonController"
                     }
                 }
-            }).state("tdp.page", {
-                url: "/page",
+            }).state("login", {
+                url: "/login",
                 views: {
                     "@": {
-                        templateUrl: "html/partials/tdp-invest-page.html"
+                        templateUrl: "html/partials/tdp-invest-login.html",
+                        controller: "tdpInvestLoginController"
                     }
                 }
-        });
+            }).state("register", {
+                url: "/register",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-register.html",
+                        controller: "tdpInvestRegisterController"
+                    }
+                }
+            });
+        $urlRouterProvider.otherwise("/login");
     });
 
     return tdpInvestModule;
 });
-

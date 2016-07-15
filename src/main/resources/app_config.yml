@@ -2,8 +2,43 @@ server:
   rootPath: /api/*
   applicationContextPath: /
   applicationConnectors:
-  - type: http
-    port: 9004
-  adminConnectors:
-  - type: http
-    port: 9504
+    - type: http
+      port: 9004
+    - type: https
+      port: 8443
+      keyStorePassword: changeit
+      keyStorePath: certificate/keystore.jks
+    # trustStorePath: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/security/cacerts
+      validateCerts: false #true
+      certAlias: selfsigned
+database:
+  # the name of your JDBC driver
+  driverClass: org.postgresql.Driver
+
+  # the username
+  user: radoslawl
+
+  # the JDBC URL
+  url: jdbc:postgresql://localhost/radoslawl
+
+  # any properties specific to your JDBC driver:
+  properties:
+    charSet: UTF-8
+    hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate.hbm2ddl.auto: create
+    hibernate.show_sql: true
+
+  # the maximum amount of time to wait on an empty pool before throwing an exception
+  maxWaitForConnection: 1s
+
+  # the SQL query to run when validating a connection's liveness
+  validationQuery: "/* MyApplication Health Check */ SELECT 1"
+
+  # the minimum number of connections to keep open
+  minSize: 8
+
+  # the maximum number of connections to keep open
+  maxSize: 32
+
+  # whether or not idle connections should be validated
+  checkConnectionWhileIdle: false

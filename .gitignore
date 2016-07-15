@@ -16,8 +16,90 @@ hs_err_pid*
 tdp-invest.iml
 .gradle
 .idea
+src/main/resources/app_config.yml
 
 
-node_modules/
+# bower dependencies
+src/main/resources/assets/js/lib
+
+
+# Directories #
 build/
-src/main/resources/assets/js/lib/
+bin/
+target/
+libs/
+tmp/
+node_modules/
+jaxws/jaxws-client/src/main/
+
+# OS Files #
+.DS_Store
+
+*.class
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.db
+rebel.xml
+
+######################
+# Windows
+######################
+
+# Windows image file caches
+Thumbs.db
+
+# Folder config file
+Desktop.ini
+
+######################
+# OSX
+######################
+
+.DS_Store
+.svn
+
+# Thumbnails
+._*
+
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+######################
+# IDEA
+######################
+*.iml
+*.ipr
+*.iws
+.idea/
+atlassian-ide-plugin.xml
+
+
+# External tool builders
+.externalToolBuilders/
+
+# Locally stored "Eclipse launch configurations"
+*.launch
+
+# CDT-specific
+.cproject
+
+# PDT-specific
+.buildpath
+
+# Testing environment specific
+derby.log
+
+# Local pid.lock file
+
+.pid.lock
+
+
+######################
+# Liberty tools
+######################
+
+.factorypath
