@@ -4,6 +4,7 @@ define(['angular'
     , 'application/controllers/tdpInvestDateController'
     , 'application/directives/tdpInvestCalendarDirective'
     , 'application/directives/tdpInvestTableDirective'
+    , 'application/directives/tdpInvestChartDirective'
 ], function(angular, tdpInvestModule) {
     tdpInvestModule.config(function($stateProvider) {
         $stateProvider
