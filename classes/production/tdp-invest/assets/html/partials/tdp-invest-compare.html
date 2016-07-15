@@ -1,4 +1,4 @@
-<tdp-chart ng-if="stockData" stock-data="stockData" invest-data="investData"></tdp-chart>
+<tdp-chart ng-if="prices && dates" prices="prices" dates="dates"></tdp-chart>
 
 <tdp-table ng-if="stockData" stock-data="stockData" class="col-md-6"></tdp-table>
 
@@ -18,5 +18,5 @@
         </div>
     </div>
 
-    <tdp-calendar get-stock-data="getStockData" set-invest-data="setInvestData"></tdp-calendar>
+    <tdp-calendar get-stock-data="getStockData"></tdp-calendar>
 </div>

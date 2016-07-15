@@ -1,8 +1,8 @@
 define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.directive('tdpChart', function() {
-        var controller = ['$scope', function($scope) {
+var controller = ['$scope', function($scope) {
 
-            $scope.chartConfig = {
+$scope.chartConfig = {
                 options: {
                     chart: {
                         type: 'line'
@@ -16,8 +16,10 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/s
                 },
                 series: [{
                     showInLegend: false,
+                    data: $scope.prices
                 }, {
                     showInLegend: false,
+                    data: $scope.investPrices
                 }],
                 title: {
                     text: 'Stock prices'
@@ -27,6 +29,7 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/s
                     title: {
                         text: 'Date'
                     },
+                    categories: $scope.dates
                 },
 
                 yAxis: {
@@ -39,46 +42,14 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/s
                     height: 400
                 }
             };
-
-
-
-
-
-            $scope.$watch('stockData', function() {
-$scope.prices = [];
-            $scope.dates = [];
-                for (i = 0; i < $scope.stockData.length; i++) {
-                    $scope.prices.push(parseFloat($scope.stockData[i].price));
-                    $scope.dates.push($scope.stockData[i].date);
-                }
-                $scope.chartConfig.series[0].data = $scope.prices;
-                $scope.chartConfig.xAxis.categories = $scope.dates;
-
-
-            });
-
-            $scope.$watch('investData', function() {
-                console.log("investdata: " + $scope.investData);
-                if($scope.investData.length > 0) {
-                $scope.investPrices = [];
-                for (i = 0; i < $scope.stockData.length; i++) {
-                    $scope.investPrices.push(parseFloat($scope.investData[i].price));
-                    $scope.dates.push($scope.investData[i].date);
-                }
-                $scope.chartConfig.series[1].data = $scope.investPrices;
-    }
-
-            });
-
-
-        }];
+            }];
         return {
             template: '<highchart id="chart1" config="chartConfig" class="center col-md-12"></highchart>',
             controller: controller,
-            scope: {
-                stockData: "=",
-                investData: "="
-            }
+                        scope: {
+                        prices: "=",
+                        dates: "="
+                        }
         };
     });
 });

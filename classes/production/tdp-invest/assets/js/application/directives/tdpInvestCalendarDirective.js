@@ -101,8 +101,10 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/s
 
         return {
             templateUrl: 'html/partials/tdp-invest-calendar.html',
-            controller: controller
-//
+            controller: controller,
+                                    scope: {
+                                    getStockData: "="
+                                    }
         };
     });
 });

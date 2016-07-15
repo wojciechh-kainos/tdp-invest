@@ -3,7 +3,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         $scope.start_date = new Date(2015, 7, 20);
         $scope.end_date = new Date();
-        $scope.investData = [];
 
         $scope.showInvest = function(date1, date2, input_value, interest_rate) {
 
@@ -51,10 +50,14 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             return year + "-" + month + "-" + day;
         }
 
-        $scope.setInvestData = function(data) {
-            console.log(data);
+        $scope.createInvestChart = function(data) {
             $scope.investData = data;
-
+            $scope.investPrices = [];
+            $scope.dates = [];
+            for (i = 0; i < $scope.stockData.length; i++) {
+                $scope.investPrices.push(parseFloat($scope.investData[i].price));
+                $scope.dates.push($scope.investData[i].date);
+            }
         }
 
 
@@ -63,7 +66,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 .then(function(response) {
                     $scope.stockData = response.data;
                     console.log("dupa");
-
                 });
 
         }
