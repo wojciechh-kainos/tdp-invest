@@ -12,7 +12,6 @@ Object.keys(window.__karma__.files).forEach(function (file) {
   }
 });
 
-//noinspection JSFileReferences
 require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: '/base',
@@ -23,19 +22,21 @@ require.config({
       'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
       'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
       'highstocks': 'lib/highcharts/highstock',
-      'ngResource': 'lib/angular-resource/angular-resource'
+      'ngResource': 'lib/angular-resource/angular-resource',
+      'ngCookies': 'lib/angular-cookies/angular-cookies',
+      'requireJS': 'lib/requirejs/require',
+      'karma-requireJS': 'lib/karma-require'
   },
   shim: {
       'angular': {
           exports: 'angular'
       },
-
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
       'ngResource' : ['angular'],
       'highcharts-ng' : ['angular', 'highstocks'],
-      'ui-bootstrap' : ['angular']
-
+      'ui-bootstrap' : ['angular'],
+      'ngCookies': ['angular']
   },
   // dynamically load all test files
   deps: allTestFiles,

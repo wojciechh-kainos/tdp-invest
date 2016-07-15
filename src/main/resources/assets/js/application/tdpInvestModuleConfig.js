@@ -1,12 +1,14 @@
 define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
+    , 'application/controllers/tdpInvestLoginController'
+    , 'application/controllers/tdpInvestRegisterController'
+    , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainViewController'
     , 'application/services/tdpInvestStockDataService'
-
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function ($stateProvider) {
+    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -44,11 +46,26 @@ define(['angular'
                     templateUrl: "html/partials/tdp-invest-another.html"
                 }
             }
+        }).state("login", {
+            url: "/login",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-login.html",
+                    controller: "tdpInvestLoginController"
+                }
+            }
+        }).state("register", {
+            url: "/register",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-register.html",
+                    controller: "tdpInvestRegisterController"
+                }
+            }
         }).state("compare", {
             url: "/compare",
             views: {
                 "@": {
-
                     templateUrl: "html/partials/tdp-invest-compare.html",
                     controller: "tdpInvestCompareController",
                     resolve: {
@@ -58,13 +75,16 @@ define(['angular'
                         }
                     }
                 }
-            }}).state("compare.calculated", {
+            }
+        }).state("compare.calculated", {
             views: {
                 "compare-chart": {
                     templateUrl: "html/partials/tdp-invest-compare-chart.html"
                 }
             }
         });
+
+        $urlRouterProvider.otherwise("/login");
     });
 
     tdpInvestModule.run(['$rootScope', '$state', function ($rootScope, $state) {

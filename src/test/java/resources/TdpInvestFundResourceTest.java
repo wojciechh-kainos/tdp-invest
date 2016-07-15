@@ -1,7 +1,7 @@
 package resources;
 
-import DAO.TdpIFundDAO;
-import DAO.TdpIUnitDAO;
+import dao.TdpIFundDAO;
+import dao.TdpIUnitDAO;
 import domain.TdpIFund;
 import org.junit.Before;
 import org.junit.BeforeClass;

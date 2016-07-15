@@ -7,6 +7,13 @@ server:
   adminConnectors:
     - type: http
       port: 9507
+    - type: https
+      port: 8443
+      keyStorePassword: changeit
+      keyStorePath: certificate/keystore.jks
+    # trustStorePath: /Library/Java/JavaVirtualMachines/jdk1.8.0_92.jdk/Contents/Home/jre/lib/security/cacerts
+      validateCerts: false #true
+      certAlias: selfsigned
 
 database:
   # the name of your JDBC driver
@@ -22,7 +29,7 @@ database:
   properties:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate.hbm2ddl.auto: create
+    hibernate.hbm2ddl.auto: update
     hibernate.show_sql: true
 
   # the maximum amount of time to wait on an empty pool before throwing an exception

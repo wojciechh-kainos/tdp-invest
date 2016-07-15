@@ -1,8 +1,8 @@
 package resources;
 
 
-import DAO.TdpIFundDAO;
-import DAO.TdpIUnitDAO;
+import dao.TdpIFundDAO;
+import dao.TdpIUnitDAO;
 import com.google.inject.Inject;
 import domain.TdpIFund;
 import domain.TdpIUnit;
