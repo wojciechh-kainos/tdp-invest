@@ -18,8 +18,11 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="1" author="marcint">
+        <loadData tableName="fund" file="assets/staticdata/fund1.csv"/>
+    </changeSet>
 
-    <changeSet id="1" author="mateusz">
+    <changeSet id="2" author="mateusz">
         <loadData tableName="unit" file="assets/staticdata/data1.csv"/>
         <loadData tableName="unit" file="assets/staticdata/data2.csv"/>
         <loadData tableName="unit" file="assets/staticdata/data3.csv"/>
