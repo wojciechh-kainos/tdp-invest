@@ -2,7 +2,7 @@ html, body{
     height: 100%;
 }
 
-h1{
+h1, h3{
     text-align: center;
 }
 
@@ -14,3 +14,20 @@ footer{
     text-align: center;
 }
 
+.wrapper{
+    margin: 10px;
+    overflow:auto;
+}
+
+.table-wrapper{
+    height: 488px;
+}
+
+#compare-form{
+    overflow:auto;
+}
+
+#add-btn{
+    float: right;
+    width: 100px;
+}

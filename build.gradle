@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 import com.wiredforcode.gradle.spawn.*
 
-
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven'
