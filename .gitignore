@@ -25,6 +25,7 @@ src/main/resources/assets/js/lib
 # Directories #
 build/
 bin/
+out/
 target/
 libs/
 tmp/

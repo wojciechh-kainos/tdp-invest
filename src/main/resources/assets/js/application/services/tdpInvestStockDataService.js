@@ -5,7 +5,7 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             return data;
         };
         
-        this.promise = $http.get('staticdata/stock.json').then(
+        this.promise = $http.get('/staticdata/stock.json').then(
             function (response) {
                 data = response.data;
                 return data;
