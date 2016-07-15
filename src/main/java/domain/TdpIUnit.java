@@ -9,7 +9,9 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u")})
+				query = "select u from TdpIUnit u"),
+		@NamedQuery(name = "TdpIUnit.findAllWithinRange", query =
+						"select u from TdpIUnit u between :minDate and :maxDate")})
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

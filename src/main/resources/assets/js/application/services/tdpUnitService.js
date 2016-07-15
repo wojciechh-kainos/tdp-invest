@@ -6,8 +6,13 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return restService.getList();
         };
 
+        var getAllWithinRange = function(minDate, maxDate) {
+          return restService.customGET("range", {minDate: minDate, maxDate: maxDate}).getList();
+        };
+
         return {
-            getAll: getAll
+            getAll: getAll,
+            getAllWithinRange: getAllWithinRange
         };
     });
 });

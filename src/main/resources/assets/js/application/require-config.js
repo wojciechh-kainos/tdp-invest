@@ -11,9 +11,8 @@ require.config({
         'restangular': 'lib/restangular/dist/restangular.min',
         'ngTable': 'lib/ng-table/dist/ng-table.min',
         'highchart-theme': 'lib/highcharts/themes/dark-unica',
-        'ng-file-upload': 'lib/ng-file-upload/ng-file-upload.min',
-        //for non HTML5 browsers
-        'ng-file-upload-shim': 'lib/ng-file-upload/ng-file-upload-shim.min'
+        'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
+        'angular-animate': 'lib/angular-animate/angular-animate.min'
     },
     shim: {
         'angular': {
@@ -21,9 +20,11 @@ require.config({
         },
         'uiRouter': ['angular'],
         'highcharts-ng': ['angular', 'highcharts', 'highchart-theme'],
+        'highchart-theme': ['highcharts'],
         'restangular': ['angular', 'lodash'],
         'ngTable': ['angular'],
-        'ng-file-upload':['angular', 'ng-file-upload-shim']
+        'ui.bootstrap': ['angular', 'angular-animate'],
+        'angular-animate': ['angular']
     },
     deps: ['application/bootstrap']
 });

@@ -3,6 +3,37 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
   tdpInvestModule.controller("tdpInvestHomeController", function($scope, ChartConfigFactory, tdpUnitService, NgTableParams) {
       $scope.investmentValue = 5000;
       $scope.chartConfig = {};
+      var maxDate = Date();
+      var minDate = Date();
+
+      ////////////////////////////////datepicker:
+
+      $scope.dt = new Date();
+      $scope.dt2 = new Date();
+
+      $scope.dateOptions = {
+       formatYear: 'yy',
+       maxDate: maxDate,
+       minDate: minDate,
+       startingDay: 1,
+       showWeeks: false
+      };
+
+      $scope.open1 = function() {
+        $scope.popup1.opened = true;
+      };
+
+      $scope.popup1 = {
+        opened: false
+      };
+
+      $scope.open2 = function() {
+        $scope.popup2.opened = true;
+      };
+
+      $scope.popup2 = {
+        opened: false
+      };
 
 
       $scope.updateChart = function() {
@@ -16,13 +47,20 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
           var unitAmount = value / plainData[0].value;
 
           for (var i = 0; i < plainData.length; i++) {
-            fundSeries.push(value + (value -  unitAmount * plainData[i].value));
-            categories.push(plainData[i].date);
-            unit.push({value: value + (value -  unitAmount * plainData[i].value), date: plainData[i].date});
+            var countedValue = (unitAmount * plainData[i].value).toFixed(2);
+            var dateToFormat = new Date(plainData[i].date);
+            var formattedDate = dateToFormat.getDate() + '/' + (dateToFormat.getMonth() + 1) + '/' +  dateToFormat.getFullYear();
+
+            fundSeries.push(parseFloat(countedValue));
+            categories.push(formattedDate);
+            unit.push({value: parseFloat(countedValue), date: formattedDate});
           }
+          $scope.dateOptions.minDate = new Date(plainData[0].date);
+          console.log(minDate);
+          console.log(typeof minDate);
+          $scope.dateOptions.maxDate = new Date(plainData[plainData.length - 1].date);
 
-
-          $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries}];
+          $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries, turboThreshold: 0}];
           $scope.chartConfig.xAxis.categories = categories;
 
 
@@ -36,5 +74,37 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
 
       $scope.chartConfig = ChartConfigFactory('Profit', 'from fund investment of ' + $scope.investmentValue + ' PLN', [], []);
       $scope.updateChart();
+
+      $scope.$watch(function () {
+        return $scope.dt;
+      },function(value){
+        var minDate = {
+          type: 'minDate',
+          value: value
+        };
+        changeData(minDate);
+        console.log(value);
+      });
+
+      $scope.$watch(function () {
+        return $scope.dt2;
+      },function(value){
+        var maxDate = {
+          type: 'maxDate',
+          value: value
+        };
+        changeData(maxDate);
+        console.log(value);
+      });
+
+      var changeData = function(dateObj) {
+
+        if(dateObj.type === 'minDate') {
+
+        } else {
+
+        }
+
+      }
   });
 });

@@ -5,6 +5,7 @@ import configuration.TdpInvestModule;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -29,6 +30,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
         bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(new MultiPartBundle());
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)

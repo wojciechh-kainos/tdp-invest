@@ -9,25 +9,27 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
       var bankSeries = [];
       var fundSeries = [];
       var categories = [];
-      var percentPerMonth = parseInt($scope.investmentPercent) / 12;
-      var value = parseInt($scope.investmentValue);
+      var percentPerDay = parseInt($scope.investmentPercent) / 365;
+      var investmentValue = parseInt($scope.investmentValue);
 
       tdpUnitService.getAll().then(function (data) {
         var plainData = data.plain();
-        var unitAmount = value / plainData[0].value;
+        var unitAmount = investmentValue / plainData[0].value;
 
         for (i = 0; i < plainData.length; i++) {
+          var dateToFormat = new Date(plainData[i].date);
+          var formattedDate = dateToFormat.getDate() + '/' + (dateToFormat.getMonth() + 1) + '/' +  dateToFormat.getFullYear();
+
           fundSeries.push(unitAmount * plainData[i].value);
-          categories.push(plainData[i].date);
-        }
-//        console.log(fundSeries);
-        for(i = 0; i < categories.length; i++) {
-          var x = value.toFixed(2);
-          bankSeries.push(parseFloat(x));
-          value += value * percentPerMonth/100;
+          categories.push(formattedDate);
         }
 
-        $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries}, {name: 'bank investment', data: bankSeries}];
+        for(i = 0; i < categories.length; i++) {
+          var value = (investmentValue + (investmentValue * i * percentPerDay/100)).toFixed(2);
+          bankSeries.push(parseFloat(value));
+
+        }
+        $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries, turboThreshold: 0}, {name: 'bank investment', data: bankSeries, turboThreshold: 0}];
         $scope.chartConfig.xAxis.categories = categories;
       });
     };

@@ -11,14 +11,17 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	@Inject
 	public TdpIUnitDAO(SessionFactory sessionFactory) {
+
 		super(sessionFactory);
 	}
 
 	public TdpIUnit findById(Long id) {
+
 		return get(id);
 	}
 
 	public long create(TdpIUnit unit) {
+
 		return persist(unit).getId();
 	}
 
@@ -26,5 +29,12 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
 
-    public void add(TdpIUnit unit) {currentSession().save(unit);}
+    public void add(TdpIUnit unit) {
+		currentSession().save(unit);
+	}
+
+	public List<TdpIUnit> findAllWithinRange() {
+		return list(namedQuery("TdpIUnit.findAllWithinRange").setParameter("minDate", "").setParameter("maxDate", ""));
+
+	}
 }
