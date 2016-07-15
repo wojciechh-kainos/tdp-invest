@@ -3,7 +3,7 @@ server:
   applicationContextPath: /
   applicationConnectors:
     - type: http
-      port: 8888
+      port: 9000
     - type: https
       port: 8443
       keyStorePassword: changeit
@@ -16,10 +16,10 @@ database:
   driverClass: org.postgresql.Driver
 
   # the username
-  user: mateuszs
+  user: radoslawl
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/mateuszs
+  url: jdbc:postgresql://localhost/radoslawl
 
   # any properties specific to your JDBC driver:
   properties:
