@@ -1,11 +1,13 @@
 package DAO;
 
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
+
 
 public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 

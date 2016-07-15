@@ -6,11 +6,11 @@ import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name = "unit")
+@Table(name = "units")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u")})
-public class TdpIUnit {
+public class TdpIUnit{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;

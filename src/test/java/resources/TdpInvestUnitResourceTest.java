@@ -8,6 +8,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import services.TdpInvestLoadDataService;
+import services.TdpInvestReadCSVFileService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,6 +24,8 @@ public class TdpInvestUnitResourceTest{
 	@Mock
 	TdpIUnitDAO mockDAO;
 
+	@Mock
+	TdpInvestLoadDataService mockloadDataService;
 	TdpInvestUnitResource resource;
 
 	private static List<TdpIUnit> stubDB;
@@ -37,7 +41,7 @@ public class TdpInvestUnitResourceTest{
 
 	@Before
 	public void setUp() {
-		resource = new TdpInvestUnitResource(mockDAO);
+		resource = new TdpInvestUnitResource(mockDAO, mockloadDataService);
 	}
 
 	@Test

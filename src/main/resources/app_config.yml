@@ -12,16 +12,16 @@ database:
   driverClass: org.postgresql.Driver
 
   # the username
-  user: malgorzatar
+  user: dawidkw
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/malgorzatar
+  url: jdbc:postgresql://localhost/dawidkw
 
   # any properties specific to your JDBC driver:
   properties:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate.hbm2ddl.auto: create
+    hibernate.hbm2ddl.auto: update
     hibernate.show_sql: true
     hibernate.jdbc.batch_size: 20
 
