@@ -73,6 +73,14 @@ define(['angular'
                         controller: "tdpInvestRegisterController"
                     }
                 }
+            }).state("upload", {
+                url: "/upload",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-upload.html"
+                    }
+                }
+
             });
         $urlRouterProvider.otherwise("/login");
     });

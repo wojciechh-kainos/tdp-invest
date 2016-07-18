@@ -5,12 +5,15 @@ import dao.TdpIUnitDAO;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
+import org.glassfish.jersey.media.multipart.FormDataParam;
+import services.CSVReader;
+import services.DataLoader;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
+import java.io.InputStream;
 import java.util.List;
 
 
@@ -20,10 +23,14 @@ import java.util.List;
 public class TdpInvestUnitResource {
 
 	private TdpIUnitDAO tdpIUnitDAO;
+	private CSVReader csvReader;
+	private DataLoader dataLoader;
 
 	@Inject
-	public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO) {
+	public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO, CSVReader csvReader, DataLoader dataLoader) {
 		this.tdpIUnitDAO = tdpIUnitDAO;
+		this.csvReader = csvReader;
+		this.dataLoader = dataLoader;
 	}
 
 	@GET
@@ -37,5 +44,20 @@ public class TdpInvestUnitResource {
 	@UnitOfWork
 	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
 		return tdpIUnitDAO.findAll();
+	}
+
+	@POST
+	@Path("/upload")
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	@UnitOfWork
+	public Response uploadFile(
+			@FormDataParam("file") InputStream fileInputStream,
+			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+		dataLoader.loadData(fileInputStream);
+
+
+
+		return Response.status(200).entity("file uploaded").build();
+
 	}
 }

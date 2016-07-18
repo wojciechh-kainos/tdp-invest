@@ -61,10 +61,11 @@ dependencies {
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
         'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
         'io.dropwizard:dropwizard-db:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-forms:' + dropwizardVersion,
         'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2',
-            'com.google.code.gson:gson:2.7',
-        'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
-        'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2'
+        'com.google.code.gson:gson:2.7',
+        'io.dropwizard:dropwizard-migrations:' + dropwizardVersion
+
     )
 
     compile 'org.postgresql:postgresql:9.4.1208.jre7'

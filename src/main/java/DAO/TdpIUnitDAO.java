@@ -3,7 +3,9 @@ package dao;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +19,14 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	public TdpIUnit findById(Long id) {
 		return get(id);
+	}
+
+	public void bulkAdd (List<TdpIUnit> tdpUnitList) {
+
+		for (TdpIUnit unit : tdpUnitList) {
+			persist(unit);
+		}
+
 	}
 
 	public long create(TdpIUnit unit) {
