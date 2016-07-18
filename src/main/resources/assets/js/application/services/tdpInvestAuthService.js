@@ -37,7 +37,7 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
         service.clearCredentials = function() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            $http.defaults.headers.common.Authorization = ' '; // 'Basic '
         };
 
         service.watchAuthorizationStatus = function(loginCallback, logoutCallback) {
