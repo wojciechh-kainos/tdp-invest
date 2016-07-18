@@ -19,6 +19,7 @@ import domain.TdpUser;
 import resources.TdpInvestAuthResource;
 import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
+import service.DateTransformer;
 
 
 public class TdpInvestApplication extends Application<TdpInvestApplicationConfiguration> {
@@ -67,6 +68,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     }
 
     public static void main(final String[] args) throws Exception {
+        DateTransformer tra = new DateTransformer();
+        tra.transformFile();
         new TdpInvestApplication().run(args);
     }
 
