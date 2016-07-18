@@ -11,8 +11,7 @@ require.config({
         'data': 'charts/input-data',
         'chart-config': 'charts/chart-config',
         'ngFileUpload' : 'lib/ng-file-upload/ng-file-upload',
-        'ng-table': 'lib/ng-table/dist/ng-table',
-        'highcharts-no-data': 'lib/highcharts-no-data-to-display/no-data-to-display'
+        'ng-table': 'lib/ng-table/dist/ng-table'
     },
     shim: {
         'angular': {
@@ -31,9 +30,6 @@ require.config({
         'ng-table': {
             exports: 'NgTableParams',
             deps: ['angular']
-        },
-        'highcharts-no-data': {
-            deps: ['highcharts-ng']
         }
     },
     deps: ['application/bootstrap']

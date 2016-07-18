@@ -1,16 +1,16 @@
 <div class="well wrapper">
-    <div class="chart col-lg-8">
-        <highchart config="chartConfig"></highchart>
-    </div>
+    <!--<div class="chart col-lg-8">-->
+        <!--<highchart config="chartConfig"></highchart>-->
+    <!--</div>-->
 
-    <div class="table-wrapper col-lg-4">
-        <table class="table table-condensed table-bordered table-striped" ng-table="tableConfig.params" show-filter="true">
-            <tr ng-repeat="row in $data">
-                <td title="'Date'" filter="{ date: 'text' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>
-                <td title="'Value'" filter="{ val: 'text' }" sortable="'val'">{{ row.val }}</td>
-            </tr>
-        </table>
-    </div>
+    <!--<div class="table-wrapper col-lg-4">-->
+        <!--<table class="table table-condensed table-bordered table-striped" ng-table="tableConfig.params" show-filter="true">-->
+            <!--<tr ng-repeat="row in $data">-->
+                <!--<td title="'Date'" filter="{ date: 'text' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>-->
+                <!--<td title="'Value'" filter="{ val: 'text' }" sortable="'val'">{{ row.val }}</td>-->
+            <!--</tr>-->
+        <!--</table>-->
+    <!--</div>-->
 
     <div class="{{hidden}} select-btn col-lg-12">
         <button class="btn btn-danger" type="file" ngf-select="uploadFiles($file, $invalidFiles)">

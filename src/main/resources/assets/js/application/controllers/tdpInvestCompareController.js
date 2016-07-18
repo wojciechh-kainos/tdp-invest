@@ -1,13 +1,21 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule){
     tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestmentService){
-        var investments = tdpInvestmentService.getInvestmentSpecifications();
+        var investments = tdpInvestmentService.getInvestments();
 
         var compareInvestment = function(dateStart, dateEnd, amount, annualRate){
             return tdpInvestmentService.getInvestmentTimeSeries(dateStart, dateEnd, amount, annualRate);
         };
 
-        $scope.getInvestments = function(){
-            return investments;
+        $scope.postInvestment = function(){
+            return tdpInvestmentService.postInvestment();
+        };
+
+        $scope.deleteInvestment = function(){
+            return tdpInvestmentService.deleteInvestment(13);
+        }
+
+        $scope.fetch = function(){
+            return tdpInvestmentService.getInvestments();
         };
 
         $scope.addInvestment = function(amount, annualRate){

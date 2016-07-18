@@ -3,13 +3,15 @@ package DAO;
 import com.google.inject.Inject;
 import domain.TdpIInvestment;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Criterion;
+import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class TdpIInvestmentDAO extends AbstractDAO<TdpIInvestment> {
     @Inject
@@ -17,17 +19,30 @@ public class TdpIInvestmentDAO extends AbstractDAO<TdpIInvestment> {
 
     public TdpIInvestment findById(Long id) { return get(id); }
 
-    //TODO: am I supposed to perform more get requests than use select * from invest where id in(...)?
-    public List<TdpIInvestment> fetchByIds(List<Long> ids) {
-        return ids.stream().map(id -> get(id)).collect(Collectors.toCollection(ArrayList::new));
-    }
-
     public long create(TdpIInvestment investment) { return persist(investment).getId(); }
+
+    public void remove(Long id){
+//        Criteria criteria = currentSession().createCriteria(TdpIInvestment.class);
+//        addRestrictionIfNotNull(criteria, Restrictions.eq("id", id), id);
+//        TdpIInvestment investment = (TdpIInvestment) criteria.uniqueResult();
+
+        TdpIInvestment investment = findById(id);
+        currentSession().delete(investment);
+    }
 
     public List<TdpIInvestment> findAll() { return list(namedQuery("TdpIInvestment.findAll")); }
 
-    public List<TdpIInvestment> findBetween(Date startDate, Date endDate) {
-        return list(namedQuery("TdpIInvestment.findBetween").setDate("startDate", startDate));//.setDate("endDate", endDate));
+    public List<TdpIInvestment> findBetween(DateTime startDate, DateTime endDate){
+        Criteria criteria = currentSession().createCriteria(TdpIInvestment.class);
+        addRestrictionIfNotNull(criteria, Restrictions.ge("startDate", startDate), startDate);
+        addRestrictionIfNotNull(criteria, Restrictions.le("endDate", endDate), endDate);
+
+        return criteria.list();
     }
 
+    private void addRestrictionIfNotNull(Criteria criteria, Criterion expression, Object value){
+        if (value != null){
+            criteria.add(expression);
+        }
+    }
 }

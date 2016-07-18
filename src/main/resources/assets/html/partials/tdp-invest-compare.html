@@ -13,14 +13,16 @@
         </form>
     </div>
 
+    <div id="add-investment">
+        <button ng-click="deleteInvestment()" type="submit" class="btn btn-primary">POST to db</button>
+    </div>
+
     <div id="investments" class="well col-lg-4 col-lg-offset-4">
         <h3>Investments</h3>
         <ul class="list-group">
-            <div ng-init="investments = getInvestments()">
-                <li class="list-group-item" ng-repeat="inv in investments">
-                    <a ng-click="delInvestment(inv.id)">
-                        ${{inv.amount.toFixed(2)}}, {{(inv.annualRate * 100).toFixed(2)}}%
-                    </a>
+            <div ng-init="x = fetch()">
+                <li class="list-group-item" ng-repeat="inv in arr">
+                    {{inv.amount}}, {{inv.annualRate}}
                 </li>
             </div>
         </ul>
