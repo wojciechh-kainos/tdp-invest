@@ -5,18 +5,18 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
 
         var authService;
         var deferred;
-        var location;
+        var $state;
         var $scope;
         var $q;
 
-        beforeEach(inject(function ($controller, _$rootScope_, $location, tdpInvestAuthService, _$q_) {
+        beforeEach(inject(function ($controller, _$rootScope_, $location, tdpInvestAuthService, _$q_, _$state_) {
             $q = _$q_;
             deferred = $q.defer();
             $scope = _$rootScope_.$new();
             authService = tdpInvestAuthService;
-            location = $location;
+            $state = _$state_;
 
-            spyOn(location, 'path');
+            spyOn($state, 'go');
             spyOn(authService, 'login').and.returnValue(deferred.promise);
             spyOn(authService, 'clearCredentials').and.returnValue('');
             spyOn(authService, 'setCredentials').and.returnValue('');
@@ -32,7 +32,8 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect(location.path).toHaveBeenCalledWith('/tdp');
+                expect($state.go).toHaveBeenCalledWith('tdp');
+                expect(authService.setCredentials).toHaveBeenCalled();
             }));
 
             it('with invalid credentials should fail', inject(function () {
@@ -41,7 +42,8 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect($scope.error).toEqual("error");
+                expect($state.go).not.toHaveBeenCalledWith('tdp');
+                expect(authService.setCredentials).not.toHaveBeenCalled();
             }));
 
         });
