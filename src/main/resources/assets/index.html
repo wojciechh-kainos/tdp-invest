@@ -24,10 +24,8 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ui-sref-active="active"><a ui-sref="tdp">Chart</a></li>
                     <li ui-sref-active="active"><a ui-sref="compare">Compare</a></li>
-                    <li ui-sref-active="active"><a ui-sref="login"><i class="fa fa-shield"></i> {{isLoggedIn()? "Logout"
-                        : "Login"}}</a></li>
-                    <li ng-show="!isLoggedIn()" ui-sref-active="active"><a ui-sref="register"><i
-                            class="fa fa-shield"></i> Register</a></li>
+                    <li ui-sref-active="active"><a ui-sref="login">{{isLoggedIn()? "Logout" : "Login"}}</a></li>
+                    <li ng-show="!isLoggedIn()" ui-sref-active="active"><a ui-sref="register">Register</a></li>
                 </ul>
             </div>
 
