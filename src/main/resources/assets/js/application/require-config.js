@@ -1,5 +1,6 @@
 'use strict';
 
+//noinspection JSFileReferences
 require.config({
     baseUrl: 'js/',
     paths: {
@@ -11,7 +12,9 @@ require.config({
         'data': 'charts/input-data',
         'chart-config': 'charts/chart-config',
         'ngFileUpload' : 'lib/ng-file-upload/ng-file-upload',
-        'ng-table': 'lib/ng-table/dist/ng-table'
+        'ng-table': 'lib/ng-table/dist/ng-table',
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
+        'highstocks': 'lib/highcharts/highstock'
     },
     shim: {
         'angular': {
@@ -30,8 +33,11 @@ require.config({
         'ng-table': {
             exports: 'NgTableParams',
             deps: ['angular']
+        },
+        'ngCookies': {
+            exports: 'ngCookies',
+            deps: ['angular']
         }
     },
     deps: ['application/bootstrap']
 });
-

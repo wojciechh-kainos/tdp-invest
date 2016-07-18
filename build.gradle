@@ -56,6 +56,7 @@ sourceSets {
 dependencies {
     compile (
         'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
         'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
         'io.dropwizard:dropwizard-db:' + dropwizardVersion,

@@ -25,5 +25,4 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}
-
 }

@@ -21,6 +21,8 @@
     "angular-ui-router": "angular-ui-router#~0.3.1",
     "angular-mocks": "^1.5.7",
     "requirejs": "^2.2.0",
+    "bootstrap": "^3.3.6",
+    "angular-cookies": "^1.5.7",
     "ng-table": "0.8.3",
     "requirejs-plugins": "^1.0.3",
     "ng-file-upload-shim": "^12.0.4"
