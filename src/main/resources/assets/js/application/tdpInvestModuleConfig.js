@@ -6,31 +6,17 @@ define(['angular'
     , 'application/controllers/tdpInvestMainViewController'
     , 'application/services/tdpInvestStockDataService'
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
+    tdpInvestModule.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-main.html",
-                        controller: "tdpInvestMainViewController",
-                        resolve: {
-                            stockDataService: "stockData",
-                            stockDataPromise: function (stockDataService) {
-                                return stockDataService.promise;
-                            }
-                        }
+                resolve: {
+                    stockDataService: "stockData",
+                    stockDataPromise: function (stockDataService) {
+                        return stockDataService.promise;
                     }
                 }
-            }).state("tdp.person", {
-            url: "/person/{personId}",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-person.html",
-                    controller: "tdpInvestPersonController"
-                }
-            }
-        }).state("login", {
+            }).state("login", {
             url: "/login",
             views: {
                 "@": {
@@ -46,7 +32,7 @@ define(['angular'
                     controller: "tdpInvestRegisterController"
                 }
             }
-        }).state("compare", {
+        }).state("tdp.compare", {
             url: "/compare",
             views: {
                 "@": {
@@ -60,16 +46,24 @@ define(['angular'
                     }
                 }
             }
-        }).state("compare.calculated", {
+        }).state("tdp.compare.calculated", {
             views: {
                 "compare-chart": {
                     templateUrl: "html/partials/tdp-invest-compare-chart.html"
                 }
             }
+        }).state("tdp.chart", {
+            url: "/home",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-main.html",
+                    controller: "tdpInvestMainViewController"
+                }
+            }
         });
 
         $urlRouterProvider.otherwise("/login");
-    });
+    }]);
 
     tdpInvestModule.run(['$rootScope', '$state', 'tdpInvestAuthService', '$cookieStore', '$http',
         function ($rootScope, $state, tdpInvestAuthService, $cookieStore, $http) {
