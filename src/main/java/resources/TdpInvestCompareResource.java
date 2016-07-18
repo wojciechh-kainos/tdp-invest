@@ -5,6 +5,9 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
+import domain.TdpUser;
+import io.dropwizard.auth.Auth;
+import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
@@ -31,7 +34,7 @@ public class TdpInvestCompareResource {
     @POST
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<StockPrice> fetchRange(String json) throws ParseException {
+    public List<StockPrice> fetchRange(String json) throws ParseException, AuthenticationException {
         JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         Date dateFrom = sdf.parse(jsonObject.get("dateFrom").getAsString());

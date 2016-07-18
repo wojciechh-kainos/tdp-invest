@@ -42,7 +42,7 @@ public class TdpInvestAuthResource {
     @UnitOfWork
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(TdpUser tdpUser) throws AuthenticationException {
+    public Response login(@Auth TdpUser tdpUser) throws AuthenticationException {
         BasicCredentials credentials = new BasicCredentials(tdpUser.getMail(), tdpUser.getPassword());
 
         if (authenticator.authenticate(credentials).isPresent()) {

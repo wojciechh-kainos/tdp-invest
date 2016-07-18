@@ -1,9 +1,10 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpCompareService) {
 
-        $scope.start_date = new Date(2015, 7, 20);
+        $scope.start_date = new Date(2015, 7, 16);
         $scope.end_date = new Date();
 
+        $scope.stockData = [];
         $scope.investData = [];
         $scope.input_value_state = true;
         $scope.interest_rate_state = true;
@@ -18,7 +19,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
             var oneDay = 24 * 60 * 60 * 1000;
             var diffDays = Math.round(Math.abs((date1.getTime() - date2.getTime()) / (oneDay)));
-            console.log(diffDays);
             var rate = parseFloat((input_value * interest_rate / 365).toFixed(5));
             console.log(rate);
             var invest = [];
@@ -68,8 +68,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 });
         }
 
-        $scope.getStockData($scope.start_date, $scope.end_date);
-
         $scope.$watch('interest_rate', function(){
             if($scope.interest_rate > 100 || $scope.interest_rate < 0 || $scope.interest_rate == undefined || $scope.interest_rate == '' || !isNumber($scope.interest_rate)){
                 $scope.interest_rate_error = "Please put right value of rate: 0 <= rate <= 100";
@@ -94,6 +92,9 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             console.log($scope.interest_rate_state + " && " + $scope.input_value_state + " = " + ($scope.interest_rate_state && $scope.input_value_state) + "\n");
 
         });
+
+
+        $scope.getStockData($scope.start_date, $scope.end_date);
 
 
     });
