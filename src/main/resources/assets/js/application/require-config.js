@@ -16,10 +16,10 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-        'uiRouter' : ['angular'],
-        'ngResource' : ['angular'],
-        'highcharts-ng' : ['angular', 'highstocks'],
-        'ui-bootstrap' : ['angular'],
+        'uiRouter': ['angular'],
+        'ngResource': ['angular'],
+        'highcharts-ng': ['angular', 'highstocks'],
+        'ui-bootstrap': ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
             deps: ['angular']

@@ -17,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 
 
-
 @Path("/fund")
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestFundResource {

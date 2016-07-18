@@ -12,7 +12,9 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+
 import javax.ws.rs.core.Response;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -35,7 +37,9 @@ public class TdpInvestAuthResourceTest {
     }
 
     @Before
-    public void setUp() { resource = new TdpInvestAuthResource(mockAuthenticator, mockDAO); }
+    public void setUp() {
+        resource = new TdpInvestAuthResource(mockAuthenticator, mockDAO);
+    }
 
     @Test
     public void testLoginWithValidCredentials() throws AuthenticationException {
