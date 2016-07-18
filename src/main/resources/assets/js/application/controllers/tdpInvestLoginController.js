@@ -8,7 +8,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 .then(function (response) {
                     if (response.success) {
                         tdpInvestAuthService.setCredentials($scope.username, $scope.password);
-                        $location.path('/');
+                        $location.path('/compare');
                     } else {
                         $scope.error = response.message;
                     }
