@@ -7,9 +7,18 @@
     <link rel="stylesheet" href="js/lib/ng-table/dist/ng-table.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
 ">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-    <h1>Application header</h1>
+    <nav class="navbar navbar-default ">
+        <div class="container">
+            <a ui.sref="" class="navbar-brand">{{title}}</a>
+            <a ui-sref="tdp.home" class="navbar-text">Home</a>
+            <a ui-sref="tdp.upload" class="navbar-text">Upload</a>
+            <a ui-sref="tdp.compare" class="navbar-text">Compare</a>
+            <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+        </div>
+    </nav>
     <div ui-view></div>
     <footer>Application footer</footer>
 </body>

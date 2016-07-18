@@ -11,6 +11,9 @@ public class TdpIDateRange {
     this.maxDate = maxDate;
   }
 
+  public TdpIDateRange() {
+  }
+
   public Date getMinDate() {
     return minDate;
   }

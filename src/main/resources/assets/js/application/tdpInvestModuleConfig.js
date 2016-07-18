@@ -50,6 +50,14 @@ define(['angular'
             });
 
         RestangularProvider.setBaseUrl('/api');
+        RestangularProvider.addElementTransformer('unit', true, function(units) {
+                        // This will add a method called login that will do a POST to the path login
+                        // signature is (name, operation, path, params, headers, elementToPost)
+
+                        units.addRestangularMethod('getAllWithinRange', 'post', 'range');
+
+                        return units;
+                });
 
     });
 

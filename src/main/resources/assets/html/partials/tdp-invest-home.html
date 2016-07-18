@@ -1,55 +1,53 @@
-<style>
-  .full button span {
-    background-color: limegreen;
-    border-radius: 32px;
-    color: black;
-  }
-  .partially button span {
-    background-color: orange;
-    border-radius: 32px;
-    color: black;
-  }
-</style>
-
-<h2>Home</h2>
-
-<label>Value of investment:</label><input ng-model="investmentValue"  />
-<button ng-click="updateChart()">Show me!</button>
-
-<div id="datepicker-wrapper">
+<div class="container-fluid">
+<div class="col-md-offset-1">
+    <h2>Home</h2>
     <div class="row">
-        <label>Pick the start date:</label>
+        <div class="col-md-3">
+            <label>Value of investment:</label><br>
+            <input ng-model="investmentValue"  class="form-control"/>
+
+        </div>
+        <div class="col-md-3">
+            <label>Pick the start date:</label>
+                <p class="input-group">
+                    <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
+                           datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open1()">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+        </div>
+        <div class="col-md-3">
+            <label>Pick the finish date:</label>
+                <p class="input-group">
+                    <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
+                           datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open2()">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                </p>
+        </div>
         <div class="col-md-2">
-            <p class="input-group">
-                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
-                       datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open1()">
-                <i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-            </p>
+            <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg btn-block show-me-btn">Show me!</button>
         </div>
     </div>
 
     <div class="row">
-        <label>Pick the finish date:</label>
-        <div class="col-md-2">
-            <p class="input-group">
-                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
-                       datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
-          <span class="input-group-btn">
-            <button type="button" class="btn btn-default" ng-click="open2()">
-                <i class="glyphicon glyphicon-calendar"></i></button>
-          </span>
-            </p>
+        <div class="col-md-11">
+            <highchart config="chartConfig"></highchart>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-11">
+            <table  ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-hover" >
+                <tr ng-repeat="row in $data">
+                    <td ng-repeat="col in $columns">{{row[col.field]}}</td>
+                </tr>
+            </table>
         </div>
     </div>
 </div>
-
-<highchart config="chartConfig"></highchart>
-
-<table ng-table-dynamic="tableParams with cols" class="table table-condensed table-bordered table-striped" >
-    <tr ng-repeat="row in $data">
-        <td ng-repeat="col in $columns">{{row[col.field]}}</td>
-    </tr>
-</table>
+</div>

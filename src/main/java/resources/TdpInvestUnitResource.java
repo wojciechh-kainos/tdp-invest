@@ -23,6 +23,7 @@ import java.util.List;
 public class TdpInvestUnitResource {
   private TdpIUnitDAO tdpIUnitDAO;
   private TdpInvestLoadDataService dataLoader;
+  private TdpIDateRange tdpIDateRange;
 
   @Inject
   public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO, TdpInvestLoadDataService dataLoader) {
@@ -64,12 +65,16 @@ public class TdpInvestUnitResource {
 
   }
 
-  @GET
+  @POST
   @Path("/range")
   @Consumes(MediaType.APPLICATION_JSON)
   @UnitOfWork
-  public List<TdpIUnit> fetchAllWithinRange() {
-    return tdpIUnitDAO.findAllWithinRange();
+  public List<TdpIUnit> fetchAllWithinRange(TdpIDateRange tdpIDateRange) {
+    System.out.println("..............................................");
+    System.out.println(tdpIDateRange.getMaxDate());
+    System.out.println(tdpIDateRange.getMinDate());
+
+    return tdpIUnitDAO.findAllWithinRange(tdpIDateRange);
   }
 
 }

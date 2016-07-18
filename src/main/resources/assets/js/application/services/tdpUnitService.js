@@ -1,18 +1,30 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.service("tdpUnitService", function(Restangular) {
-        var restService = Restangular.service('unit');
+    tdpInvestModule.factory("tdpUnitService", function(Restangular) {
 
         var getAll = function() {
-            return restService.getList();
+            return Restangular.all('unit').getList();
         };
 
         var getAllWithinRange = function(minDate, maxDate) {
-          return restService.customGET("range", {minDate: minDate, maxDate: maxDate}).getList();
+          return Restangular.one('unit').post('range',JSON.stringify({minDate: minDate, maxDate: maxDate}));
+        };
+
+        var uploadFile = function() {
+          return Restangular
+                     .one('unit/loadData')
+                     .withHttpConfig({
+                         transformRequest: angular.identity,
+                         timeout: 0 // Avoid global setting's timeout on upload
+                     })
+                     .customPOST(formData, undefined, undefined, {
+                         'Content-Type': undefined
+                     });
         };
 
         return {
             getAll: getAll,
-            getAllWithinRange: getAllWithinRange
+            getAllWithinRange: getAllWithinRange,
+            uploadFile: uploadFile
         };
     });
 });

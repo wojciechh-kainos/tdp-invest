@@ -1,6 +1,7 @@
 package DAO;
 
 import com.google.inject.Inject;
+import domain.TdpIDateRange;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
@@ -33,8 +34,8 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 		currentSession().save(unit);
 	}
 
-	public List<TdpIUnit> findAllWithinRange() {
-		return list(namedQuery("TdpIUnit.findAllWithinRange").setParameter("minDate", "").setParameter("maxDate", ""));
+	public List<TdpIUnit> findAllWithinRange(TdpIDateRange tdpIDateRange) {
+		return list(namedQuery("TdpIUnit.findAllWithinRange").setParameter("minDate", tdpIDateRange.getMinDate()).setParameter("maxDate", tdpIDateRange.getMaxDate()));
 
 	}
 }

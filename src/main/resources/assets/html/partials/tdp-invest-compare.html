@@ -1,6 +1,46 @@
-<h2>Compare</h2>
+<div class="container-fluid">
+<div class="col-md-offset-1">
+    <h2>Compare</h2>
+    <div class="row">
+        <div class="col-md-4">
+            <label>Percent of investment</label><br><input ng-model="investmentPercent" class="form-control"/>
+        </div>
+        <div class="col-md-4">
+            <label>Value of investment</label><br><input ng-model="investmentValue" class="form-control"/>
+        </div>
+        <div class="col-md-4">
+            <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg btn-block show-me-btn">Show me!</button>
+        </div>
 
-<label>Percent of investment</label><input ng-model="investmentPercent"  />
-<label>Value of investment</label><input ng-model="investmentValue"  />
-<button ng-click="updateChart()">Show me!</button>
-<highchart config="chartConfig"></highchart>
+    </div>
+    <div class="row">
+        <div class="col-md-5">
+            <label>Pick the start date:</label>
+            <p class="input-group">
+                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
+                       datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open1()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+            </p>
+        </div>
+        <div class="col-md-5">
+            <label>Pick the finish date:</label>
+            <p class="input-group">
+                <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
+                       datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
+                  <span class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open2()">
+                        <i class="glyphicon glyphicon-calendar"></i></button>
+                  </span>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-11">
+            <highchart config="chartConfig"></highchart>
+        </div>
+    </div>
+</div>
+</div>

@@ -1,9 +1,14 @@
 <h2>Upload file</h2>
 
-<form action="/api/unit/loadData" method="post" enctype="multipart/form-data">
-
+<!--action="/api/unit/loadData" method="post" enctype="multipart/form-data">-->
+<form ng-submit="submit()">
     <p>Select a file : <input type="file" name="file" size="50" /></p>
 
-    <input type="submit" value="Upload It" />
+    <input type="submit" id="submit" value="Upload It" />
 
+</form>
+
+<form  method="post" ng-submit="submit(form.file)" enctype="multipart/form-data" name="form">
+    <input type="file" name="file"/>
+    <button type="submit" class="btn">Upload it </button>
 </form>
