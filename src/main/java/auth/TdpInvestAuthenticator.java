@@ -2,12 +2,15 @@ package auth;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
 import dao.TdpUserDAO;
+import io.dropwizard.hibernate.UnitOfWork;
 
+@Singleton
 public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, TdpUser> {
 
     private final TdpUserDAO userDao;
@@ -21,6 +24,7 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
     }
 
     @Override
+    @UnitOfWork
     public Optional<TdpUser> authenticate(BasicCredentials credentials) throws AuthenticationException {
         TdpUser user = userDao.getUserByEmail(credentials.getUsername());
 

@@ -3,12 +3,17 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
         var service = {};
 
         service.login = function(username, password) {
-            return $http.post('/api/login', { mail: username, password: password }).then(handleSuccess, handleError('Bad credentials'));
+            service.setCredentials(username, password);
+
+            return $http.get('/api/login').then(handleSuccess, function () {
+                service.clearCredentials();
+                return { success: false, message: "Wrong email or password." };
+            });
         };
 
         service.register = function(username, password) {
-            return $http.post('/api/register',  { mail: username, password: password }).then(handleSuccess, function (response) {
-                if(response.status == 409){
+            return $http.post('/api/register', { mail: username, password: password }).then(handleSuccess, function (response) {
+                if (response.status == 409){
                     return { success: false, message: "Email address already in use." };
                 }
                 return { success: false, message: "Registration failed." };
@@ -32,7 +37,7 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
         service.clearCredentials = function() {
             $rootScope.globals = {};
             $cookieStore.remove('globals');
-            $http.defaults.headers.common.Authorization = 'Basic ';
+            $http.defaults.headers.common.Authorization = '';
         };
 
         service.watchAuthorizationStatus = function(loginCallback, logoutCallback) {
@@ -45,17 +50,9 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
             }, true);
         };
 
-        // private functions
-
         function handleSuccess(res) {
             res.success = true;
             return res;
-        }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
         }
 
         return service;

@@ -1,7 +1,5 @@
 package resources;
 
-import auth.TdpInvestAuthenticator;
-import com.google.common.base.Optional;
 import dao.TdpUserDAO;
 import domain.TdpUser;
 import io.dropwizard.auth.AuthenticationException;
@@ -22,9 +20,6 @@ public class TdpInvestAuthResourceTest {
     @Mock
     TdpUserDAO mockDAO;
 
-    @Mock
-    TdpInvestAuthenticator mockAuthenticator;
-
     TdpInvestAuthResource resource;
 
     private static TdpUser stubUser;
@@ -35,26 +30,13 @@ public class TdpInvestAuthResourceTest {
     }
 
     @Before
-    public void setUp() { resource = new TdpInvestAuthResource(mockAuthenticator, mockDAO); }
+    public void setUp() { resource = new TdpInvestAuthResource(mockDAO); }
 
     @Test
     public void testLoginWithValidCredentials() throws AuthenticationException {
-        when(mockAuthenticator.authenticate(any())).thenReturn(Optional.of(stubUser));
-
         Response response = resource.login(stubUser);
 
         assertEquals(response.getStatus(), Response.Status.ACCEPTED.getStatusCode());
-        verify(mockAuthenticator, times(1)).authenticate(any());
-    }
-
-    @Test
-    public void testLoginWithInvalidCredentials() throws AuthenticationException {
-        when(mockAuthenticator.authenticate(any())).thenReturn(Optional.absent());
-
-        Response response = resource.login(stubUser);
-
-        assertEquals(response.getStatus(), Response.Status.UNAUTHORIZED.getStatusCode());
-        verify(mockAuthenticator, times(1)).authenticate(any());
     }
 
     @Test

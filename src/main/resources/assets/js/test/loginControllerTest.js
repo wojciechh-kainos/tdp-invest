@@ -33,7 +33,6 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.$apply();
 
                 expect(location.path).toHaveBeenCalledWith('/tdp');
-                expect(authService.setCredentials).toHaveBeenCalled();
             }));
 
             it('with invalid credentials should fail', inject(function () {
@@ -43,7 +42,6 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.$apply();
 
                 expect($scope.error).toEqual("error");
-                expect(authService.setCredentials).not.toHaveBeenCalled();
             }));
 
         });
