@@ -1,11 +1,12 @@
 package resources;
 
 
-import dao.TdpIFundDAO;
-import dao.TdpIUnitDAO;
+import auth.TdpInvestAuthenticator;
 import com.google.inject.Inject;
-import domain.TdpIFund;
-import domain.TdpIUnit;
+import dao.TdpFundDAO;
+import dao.TdpUnitDAO;
+import domain.TdpFund;
+import domain.TdpUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -22,37 +23,38 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestFundResource {
 
-    private TdpIFundDAO tdpIFundDAO;
-    private TdpIUnitDAO tdpIUnitDAO;
+    private TdpFundDAO tdpFundDAO;
+    private TdpUnitDAO tdpUnitDAO;
+    private TdpInvestAuthenticator authenticator;
 
     @Inject
-    public TdpInvestFundResource(TdpIFundDAO tdpIFundDAO, TdpIUnitDAO tdpIUnitDAO) {
-
-        this.tdpIFundDAO = tdpIFundDAO;
-        this.tdpIUnitDAO = tdpIUnitDAO;
+    public TdpInvestFundResource(TdpFundDAO tdpFundDAO, TdpUnitDAO tdpUnitDAO, TdpInvestAuthenticator authenticator) {
+        this.tdpFundDAO = tdpFundDAO;
+        this.tdpUnitDAO = tdpUnitDAO;
+        this.authenticator = authenticator;
     }
 
     @GET
     @UnitOfWork
-    public List<TdpIFund> fetchAll() {
-        return tdpIFundDAO.findAll();
+    public List<TdpFund> fetchAll() {
+        return tdpFundDAO.findAll();
     }
 
     @GET
     @Path("/insert")
     @UnitOfWork
-    public TdpIFund insert() {
-        TdpIFund fund = new TdpIFund();
+    public TdpFund insert() {
+        TdpFund fund = new TdpFund();
         fund.setName("Test");
         fund.setShortcut("TST");
 
-        TdpIUnit unit = new TdpIUnit();
+        TdpUnit unit = new TdpUnit();
         unit.setFund(fund);
         unit.setDate(new Date(981068400000L));
         unit.setValue(12.32);
 
-        tdpIFundDAO.create(fund);
-        tdpIUnitDAO.create(unit);
+        tdpFundDAO.create(fund);
+        tdpUnitDAO.create(unit);
 
         return fund;
     }
@@ -60,8 +62,8 @@ public class TdpInvestFundResource {
     @GET
     @Path("/{id}")
     @UnitOfWork
-    public TdpIFund fetch(@PathParam("id") Long id) {
-        return tdpIFundDAO.findById(id);
+    public TdpFund fetch(@PathParam("id") Long id) {
+        return tdpFundDAO.findById(id);
     }
 
 

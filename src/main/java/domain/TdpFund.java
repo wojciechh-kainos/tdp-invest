@@ -9,9 +9,9 @@ import java.util.List;
 @Table(name = "fund")
 @NamedQueries({
         @NamedQuery(name = "tdpIFund.findAll",
-                query = "select u from TdpIFund u")})
+                query = "select u from TdpFund u")})
 
-public class TdpIFund {
+public class TdpFund {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long fund_id;
@@ -50,21 +50,21 @@ public class TdpIFund {
 
     @Column (name = "code")
     @OneToMany(mappedBy="fund")
-    @ElementCollection(targetClass=TdpIUnit.class)
-    private List<TdpIUnit> units;
+    @ElementCollection(targetClass= TdpUnit.class)
+    private List<TdpUnit> units;
 
-    public List<TdpIUnit> getUnits() {
+    public List<TdpUnit> getUnits() {
         return units;
     }
 
-    public void setUnits(List<TdpIUnit> units) {
+    public void setUnits(List<TdpUnit> units) {
         this.units = units;
     }
 
-    public TdpIFund() {
+    public TdpFund() {
     }
 
-    public TdpIFund(Long fund_id, String name, String shortcut) {
+    public TdpFund(Long fund_id, String name, String shortcut) {
         this.fund_id = fund_id;
         this.name = name;
         this.shortcut = shortcut;

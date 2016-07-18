@@ -1,9 +1,9 @@
 package resources;
 
 
-import dao.TdpIUnitDAO;
+import dao.TdpUnitDAO;
 import com.google.inject.Inject;
-import domain.TdpIUnit;
+import domain.TdpUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.*;
@@ -21,24 +21,24 @@ import java.util.List;
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestUnitResource {
 
-	private TdpIUnitDAO tdpIUnitDAO;
+	private TdpUnitDAO tdpUnitDAO;
 
 	@Inject
-	public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO) {
-		this.tdpIUnitDAO = tdpIUnitDAO;
+	public TdpInvestUnitResource(TdpUnitDAO tdpUnitDAO) {
+		this.tdpUnitDAO = tdpUnitDAO;
 	}
 
 	@GET
 	@UnitOfWork
-	public List<TdpIUnit> fetchAll() {
-		return tdpIUnitDAO.findAll();
+	public List<TdpUnit> fetchAll() {
+		return tdpUnitDAO.findAll();
 	}
 
 	@GET
 	@Path("/all")
 	@UnitOfWork
-	public List<TdpIUnit> getData() {
-		return tdpIUnitDAO.getData();
+	public List<TdpUnit> getData() {
+		return tdpUnitDAO.getData();
 	}
 
 
@@ -51,13 +51,13 @@ public class TdpInvestUnitResource {
 			@QueryParam("dateStart") String stringDateStart,
 			@QueryParam("dateEnd") String stringDateEnd
 	) {
-		List<String> errors = new ArrayList<String>();;
+		List<String> errors = new ArrayList<>();
 
 		if (id == null)
 			errors.add("No fund ID!");
 		else {
 			if(stringDateStart == null && stringDateEnd == null) {
-				List<TdpIUnit> content = tdpIUnitDAO.getFundUnits(id);
+				List<TdpUnit> content = tdpUnitDAO.getFundUnits(id);
 				return Response.ok(content).build();
 			}
 		}
@@ -80,7 +80,7 @@ public class TdpInvestUnitResource {
 				return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
 			}
 
-			List<TdpIUnit> content = tdpIUnitDAO.selectData(id, dateStart, dateEnd);
+			List<TdpUnit> content = tdpUnitDAO.selectData(id, dateStart, dateEnd);
 
 			return Response.ok(content).build();
 		} catch (ParseException e) {
@@ -91,13 +91,13 @@ public class TdpInvestUnitResource {
 	@GET
 	@Path("/{id}")
 	@UnitOfWork
-	public List<TdpIUnit> fetch(@PathParam("id") Long id) {
-		return tdpIUnitDAO.getFundUnits(id);
+	public List<TdpUnit> fetch(@PathParam("id") Long id) {
+		return tdpUnitDAO.getFundUnits(id);
 	}
 
 
 	@UnitOfWork
-	public TdpIUnit fetchOne(Long id) {
-		return tdpIUnitDAO.findById(id);
+	public TdpUnit fetchOne(Long id) {
+		return tdpUnitDAO.findById(id);
 	}
 }

@@ -2,28 +2,28 @@ package dao;
 
 
 import com.google.inject.Inject;
-import domain.TdpIFund;
+import domain.TdpFund;
 import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
 
-public class TdpIFundDAO extends AbstractDAO<TdpIFund> {
+public class TdpFundDAO extends AbstractDAO<TdpFund> {
 
     @Inject
-    public TdpIFundDAO(SessionFactory sessionFactory) {
+    public TdpFundDAO(SessionFactory sessionFactory) {
         super(sessionFactory);
     }
 
-    public TdpIFund findById(Long id) {
+    public TdpFund findById(Long id) {
         return get(id);
     }
 
-    public long create(TdpIFund fund) {
+    public long create(TdpFund fund) {
         return persist(fund).getId();
     }
 
-    public List<TdpIFund> findAll() {
+    public List<TdpFund> findAll() {
         return list(namedQuery("tdpIFund.findAll"));
     }
 }

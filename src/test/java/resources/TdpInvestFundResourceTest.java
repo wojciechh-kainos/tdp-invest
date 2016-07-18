@@ -1,8 +1,10 @@
 package resources;
 
-import dao.TdpIFundDAO;
-import dao.TdpIUnitDAO;
-import domain.TdpIFund;
+import auth.TdpInvestAuthenticator;
+import dao.TdpFundDAO;
+import dao.TdpUnitDAO;
+import domain.TdpFund;
+import domain.TdpUser;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -20,44 +22,51 @@ import static org.mockito.Mockito.*;
 public class TdpInvestFundResourceTest {
 
 	@Mock
-	TdpIFundDAO mockDAO;
+	TdpFundDAO mockFundDAO;
 
 	@Mock
-	TdpIUnitDAO mockDAO2;
+	TdpUnitDAO mockUnitDAO;
+
+	@Mock
+	TdpInvestAuthenticator mockAuth;
 
 	TdpInvestFundResource resource;
 
-	private static List<TdpIFund> stubDB;
+	private static List<TdpFund> stubDB;
+
+	private static TdpUser stubUser;
 
 	@BeforeClass
 	public static void setUpStub() {
 		stubDB = new ArrayList<>();
-		stubDB.add(new TdpIFund(1L, "Test", "TST"));
-		stubDB.add(new TdpIFund(2L, "Test2", "TST2"));
-		stubDB.add(new TdpIFund(3L, "Test3", "TST3"));
-		stubDB.add(new TdpIFund(4L, "Test4", "TST4"));
+		stubDB.add(new TdpFund(1L, "Test", "TST"));
+		stubDB.add(new TdpFund(2L, "Test2", "TST2"));
+		stubDB.add(new TdpFund(3L, "Test3", "TST3"));
+		stubDB.add(new TdpFund(4L, "Test4", "TST4"));
+
+		stubUser = new TdpUser("a@test", "a");
 	}
 
 	@Before
 	public void setUp() {
-		resource = new TdpInvestFundResource(mockDAO, mockDAO2);
+		resource = new TdpInvestFundResource(mockFundDAO, mockUnitDAO, mockAuth);
 	}
 
 	@Test
 	public void testFetchAll() {
-		when(mockDAO.findAll()).thenReturn(stubDB);
+		when(mockFundDAO.findAll()).thenReturn(stubDB);
 
-		List<TdpIFund> results = resource.fetchAll();
+		List<TdpFund> results = resource.fetchAll(stubUser);
 
 		assertEquals(stubDB.size(), results.size());
-		verify(mockDAO, times(1)).findAll();
+		verify(mockFundDAO, times(1)).findAll();
 	}
 
 	@Test
 	public void testFetch() {
-		when(mockDAO.findById(1L)).thenReturn(stubDB.get(0));
+		when(mockFundDAO.findById(1L)).thenReturn(stubDB.get(0));
 
 		assertEquals(stubDB.get(0).getName(), resource.fetch(1L).getName());
-		verify(mockDAO, times(1)).findById(anyLong());
+		verify(mockFundDAO, times(1)).findById(anyLong());
 	}
 }

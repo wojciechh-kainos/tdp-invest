@@ -9,16 +9,16 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUnit.findAll",
-				query = "select u from TdpIUnit u"),
+				query = "select u from TdpUnit u"),
 		@NamedQuery(name = "TdpIUnit.onlyData",
-				query = "select u.date, u.value from TdpIUnit u"),
+				query = "select u.date, u.value from TdpUnit u"),
 		@NamedQuery(name = "TdpIUnit.getUnits",
-				query = "select u.date, u.value from TdpIUnit u where u.fund = :fund"),
+				query = "select u.date, u.value from TdpUnit u where u.fund = :fund"),
 		@NamedQuery(name = "TdpIUnit.selectDate",
-				query = "select u.date, u.value from TdpIUnit u where u.date >= :date_start and u.date <= :date_end and u.fund = :fund_id")
+				query = "select u.date, u.value from TdpUnit u where u.date >= :date_start and u.date <= :date_end and u.fund = :fund_id")
 })
 
-public class TdpIUnit {
+public class TdpUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
@@ -33,13 +33,13 @@ public class TdpIUnit {
 
 	@ManyToOne
 	@JoinColumn(name="fund_id")
-	private TdpIFund fund;
+	private TdpFund fund;
 
-	public TdpIFund getFund() {
+	public TdpFund getFund() {
 		return fund;
 	}
 
-	public void setFund(TdpIFund fund) {
+	public void setFund(TdpFund fund) {
 		this.fund = fund;
 	}
 
@@ -66,16 +66,16 @@ public class TdpIUnit {
 	}
 
 
-	public TdpIUnit() {
+	public TdpUnit() {
 	}
 
-	public TdpIUnit(Long id, Date date, Double value) {
+	public TdpUnit(Long id, Date date, Double value) {
 		this.id = id;
 		this.date = date;
 		this.value = value;
 	}
 
-	public TdpIUnit(Long id, Date date, Double value, TdpIFund fund) {
+	public TdpUnit(Long id, Date date, Double value, TdpFund fund) {
 		this.id = id;
 		this.date = date;
 		this.value = value;

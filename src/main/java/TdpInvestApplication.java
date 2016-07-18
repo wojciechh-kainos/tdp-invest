@@ -3,14 +3,13 @@ import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
-import domain.TdpIFund;
-import domain.TdpIUnit;
+import domain.TdpFund;
+import domain.TdpUnit;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -26,8 +25,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     private GuiceBundle<TdpInvestApplicationConfiguration> guiceBundle;
 
     private final HibernateBundle<TdpInvestApplicationConfiguration> hibernateBundle = new HibernateBundle<TdpInvestApplicationConfiguration>(
-            TdpIUnit.class,
-            TdpIFund.class,
+            TdpUnit.class,
+            TdpFund.class,
             TdpUser.class
         ) {
         @Override

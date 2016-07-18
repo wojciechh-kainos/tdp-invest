@@ -1,7 +1,7 @@
 package resources;
 
-import dao.TdpIUnitDAO;
-import domain.TdpIUnit;
+import dao.TdpUnitDAO;
+import domain.TdpUnit;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -22,20 +22,20 @@ import static org.mockito.Mockito.*;
 public class TdpInvestUnitResourceTest{
 
 	@Mock
-	TdpIUnitDAO mockDAO;
+	TdpUnitDAO mockDAO;
 
 	TdpInvestUnitResource resource;
 
-	private static List<TdpIUnit> stubDB;
+	private static List<TdpUnit> stubDB;
 
 	@BeforeClass
 	public static void setUpStub() {
 		stubDB = new ArrayList<>();
-		stubDB.add(new TdpIUnit(1L, new Date(981068400000L), 95.6));
-		stubDB.add(new TdpIUnit(2L, new Date(981327600000L), 94.31));
-		stubDB.add(new TdpIUnit(3L, new Date(981414000000L), 94.34));
-		stubDB.add(new TdpIUnit(4L, new Date(981500400000L), 92.9));
-		stubDB.add(new TdpIUnit(5L, new Date(981586800000L), 93.06));
+		stubDB.add(new TdpUnit(1L, new Date(981068400000L), 95.6));
+		stubDB.add(new TdpUnit(2L, new Date(981327600000L), 94.31));
+		stubDB.add(new TdpUnit(3L, new Date(981414000000L), 94.34));
+		stubDB.add(new TdpUnit(4L, new Date(981500400000L), 92.9));
+		stubDB.add(new TdpUnit(5L, new Date(981586800000L), 93.06));
 	}
 
 	@Before
@@ -47,7 +47,7 @@ public class TdpInvestUnitResourceTest{
 	public void testFetchAll() {
 		when(mockDAO.findAll()).thenReturn(stubDB);
 
-		List<TdpIUnit> results = resource.fetchAll();
+		List<TdpUnit> results = resource.fetchAll();
 
 		assertEquals(stubDB.size(), results.size());
 		verify(mockDAO, times(1)).findAll();
@@ -65,7 +65,7 @@ public class TdpInvestUnitResourceTest{
 	public void testSelectDates() {
 		when(mockDAO.findAll()).thenReturn(stubDB);
 
-		List<TdpIUnit> results = resource.fetchAll();
+		List<TdpUnit> results = resource.fetchAll();
 
 		Date startDate = stubDB.get(0).getDate();
 		Date endDate = stubDB.get(4).getDate();
