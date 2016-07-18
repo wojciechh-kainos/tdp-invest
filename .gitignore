@@ -16,6 +16,7 @@ hs_err_pid*
 tdp-invest.iml
 .gradle
 .idea
+src/main/resources/app_config.yml
 
 
 # bower dependencies
@@ -92,6 +93,10 @@ atlassian-ide-plugin.xml
 
 # Testing environment specific
 derby.log
+
+# Local pid.lock file
+
+.pid.lock
 
 
 ######################

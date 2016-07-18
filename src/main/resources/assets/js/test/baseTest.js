@@ -20,4 +20,3 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonContr
 
     });
 });
-
