@@ -9,13 +9,11 @@ import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import domain.TdpUser;
 import resources.TdpInvestAuthResource;
-import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
 
 
@@ -61,7 +59,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
                 .buildAuthFilter()));
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
-        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestAuthResource.class));
     }
 
