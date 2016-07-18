@@ -3,6 +3,7 @@ package resources;
 import dao.TdpFundDAO;
 import dao.TdpUnitDAO;
 import domain.TdpFund;
+import domain.TdpUser;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -29,6 +30,8 @@ public class TdpInvestFundResourceTest {
 
     private static List<TdpFund> stubDB;
 
+    private static TdpUser stubUser;
+
     @BeforeClass
     public static void setUpStub() {
         stubDB = new ArrayList<>();
@@ -36,6 +39,8 @@ public class TdpInvestFundResourceTest {
         stubDB.add(new TdpFund(2L, "Test2", "TST2"));
         stubDB.add(new TdpFund(3L, "Test3", "TST3"));
         stubDB.add(new TdpFund(4L, "Test4", "TST4"));
+
+        stubUser = new TdpUser("a@test", "a");
     }
 
     @Before
@@ -47,7 +52,7 @@ public class TdpInvestFundResourceTest {
     public void testFetchAll() {
         when(mockFundDAO.findAll()).thenReturn(stubDB);
 
-        List<TdpFund> results = resource.fetchAll();
+        List<TdpFund> results = resource.fetchAll(stubUser);
 
         assertEquals(stubDB.size(), results.size());
         verify(mockFundDAO, times(1)).findAll();
