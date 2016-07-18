@@ -3,7 +3,12 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
         var service = {};
 
         service.login = function(username, password) {
-            return $http.post('/api/login', { mail: username, password: password }).then(handleSuccess, handleError('Bad credentials'));
+            service.setCredentials(username, password);
+
+            return $http.get('/api/login').then(handleSuccess, function () {
+                service.clearCredentials();
+                return { success: false, message: "Invalid email or password." };
+            });
         };
 
         service.register = function(username, password) {
@@ -45,17 +50,9 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
             }, true);
         };
 
-        // private functions
-
         function handleSuccess(res) {
             res.success = true;
             return res;
-        }
-
-        function handleError(error) {
-            return function () {
-                return { success: false, message: error };
-            };
         }
 
         return service;

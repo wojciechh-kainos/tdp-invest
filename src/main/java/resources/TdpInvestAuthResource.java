@@ -38,18 +38,12 @@ public class TdpInvestAuthResource {
         return "SUCCESS";
     }
 
-    @POST
+    @GET
     @UnitOfWork
     @Path("/login")
     @Consumes(MediaType.APPLICATION_JSON)
-    public Response login(TdpUser tdpUser) throws AuthenticationException {
-        BasicCredentials credentials = new BasicCredentials(tdpUser.getMail(), tdpUser.getPassword());
-
-        if (authenticator.authenticate(credentials).isPresent()) {
+    public Response login(@Auth TdpUser tdpUser) throws AuthenticationException {
             return Response.status(Response.Status.ACCEPTED).build();
-        } else {
-            return Response.status(Response.Status.UNAUTHORIZED).build();
-        }
     }
 
     @POST
