@@ -7,15 +7,12 @@ import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import configuration.TdpInvestModule;
 import org.glassfish.jersey.media.multipart.MultiPartFeature;
 import resources.TdpInvestConvertResource;
 import resources.TdpInvestInvestmentResource;
-import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
 
 
@@ -58,7 +55,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         module.setSessionFactory(hibernateBundle.getSessionFactory());
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestInvestmentResource.class));
-        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
         //TODO: implement in this class before uncommenting line below
         //environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestConvertResource.class));
 
