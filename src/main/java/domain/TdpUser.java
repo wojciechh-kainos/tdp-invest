@@ -18,7 +18,8 @@ public class TdpUser implements Principal {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    public TdpUser() {}
+    public TdpUser() {
+    }
 
     public TdpUser(String mail, String password) {
         this.mail = mail;

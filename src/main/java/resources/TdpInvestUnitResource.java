@@ -16,88 +16,87 @@ import java.util.Date;
 import java.util.List;
 
 
-
 @Path("/unit")
 @Produces(MediaType.APPLICATION_JSON)
 public class TdpInvestUnitResource {
 
-	private TdpUnitDAO tdpUnitDAO;
+    private TdpUnitDAO tdpUnitDAO;
 
-	@Inject
-	public TdpInvestUnitResource(TdpUnitDAO tdpUnitDAO) {
-		this.tdpUnitDAO = tdpUnitDAO;
-	}
+    @Inject
+    public TdpInvestUnitResource(TdpUnitDAO tdpUnitDAO) {
+        this.tdpUnitDAO = tdpUnitDAO;
+    }
 
-	@GET
-	@UnitOfWork
-	public List<TdpUnit> fetchAll() {
-		return tdpUnitDAO.findAll();
-	}
+    @GET
+    @UnitOfWork
+    public List<TdpUnit> fetchAll() {
+        return tdpUnitDAO.findAll();
+    }
 
-	@GET
-	@Path("/all")
-	@UnitOfWork
-	public List<TdpUnit> getData() {
-		return tdpUnitDAO.getData();
-	}
-
-
-	@GET
-	@Path("/select/{fund}")
-	@Produces(MediaType.APPLICATION_JSON)
-	@UnitOfWork
-	public Response select(
-			@PathParam("fund") Long id,
-			@QueryParam("dateStart") String stringDateStart,
-			@QueryParam("dateEnd") String stringDateEnd
-	) {
-		List<String> errors = new ArrayList<>();
-
-		if (id == null)
-			errors.add("No fund ID!");
-		else {
-			if(stringDateStart == null && stringDateEnd == null) {
-				List<TdpUnit> content = tdpUnitDAO.getFundUnits(id);
-				return Response.ok(content).build();
-			}
-		}
-
-		if(stringDateStart == null)
-			errors.add("No start data string!");
-
-		if(stringDateEnd == null)
-			errors.add("No end data string!");
-
-		if(errors.size() > 0)
-			return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
-
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		try {
-			Date dateStart = sdf.parse(stringDateStart);
-			Date dateEnd = sdf.parse(stringDateEnd);
-
-			if (dateStart.getTime() >= dateEnd.getTime()) {
-				return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
-			}
-
-			List<TdpUnit> content = tdpUnitDAO.selectData(id, dateStart, dateEnd);
-
-			return Response.ok(content).build();
-		} catch (ParseException e) {
-			return Response.status(Response.Status.BAD_REQUEST).entity("Invalid data format, allowed yyyy-MM-dd").build();
-		}
-	}
-
-	@GET
-	@Path("/{id}")
-	@UnitOfWork
-	public List<TdpUnit> fetch(@PathParam("id") Long id) {
-		return tdpUnitDAO.getFundUnits(id);
-	}
+    @GET
+    @Path("/all")
+    @UnitOfWork
+    public List<TdpUnit> getData() {
+        return tdpUnitDAO.getData();
+    }
 
 
-	@UnitOfWork
-	public TdpUnit fetchOne(Long id) {
-		return tdpUnitDAO.findById(id);
-	}
+    @GET
+    @Path("/select/{fund}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @UnitOfWork
+    public Response select(
+            @PathParam("fund") Long id,
+            @QueryParam("dateStart") String stringDateStart,
+            @QueryParam("dateEnd") String stringDateEnd
+    ) {
+        List<String> errors = new ArrayList<>();
+
+        if (id == null)
+            errors.add("No fund ID!");
+        else {
+            if (stringDateStart == null && stringDateEnd == null) {
+                List<TdpUnit> content = tdpUnitDAO.getFundUnits(id);
+                return Response.ok(content).build();
+            }
+        }
+
+        if (stringDateStart == null)
+            errors.add("No start data string!");
+
+        if (stringDateEnd == null)
+            errors.add("No end data string!");
+
+        if (errors.size() > 0)
+            return Response.status(Response.Status.BAD_REQUEST).entity(errors).build();
+
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date dateStart = sdf.parse(stringDateStart);
+            Date dateEnd = sdf.parse(stringDateEnd);
+
+            if (dateStart.getTime() >= dateEnd.getTime()) {
+                return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
+            }
+
+            List<TdpUnit> content = tdpUnitDAO.selectData(id, dateStart, dateEnd);
+
+            return Response.ok(content).build();
+        } catch (ParseException e) {
+            return Response.status(Response.Status.BAD_REQUEST).entity("Invalid data format, allowed yyyy-MM-dd").build();
+        }
+    }
+
+    @GET
+    @Path("/{id}")
+    @UnitOfWork
+    public List<TdpUnit> fetch(@PathParam("id") Long id) {
+        return tdpUnitDAO.getFundUnits(id);
+    }
+
+
+    @UnitOfWork
+    public TdpUnit fetchOne(Long id) {
+        return tdpUnitDAO.findById(id);
+    }
 }
