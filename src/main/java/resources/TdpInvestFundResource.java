@@ -6,6 +6,8 @@ import dao.TdpFundDAO;
 import dao.TdpUnitDAO;
 import domain.TdpFund;
 import domain.TdpUnit;
+import domain.TdpUser;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 
 import javax.ws.rs.GET;
@@ -32,7 +34,7 @@ public class TdpInvestFundResource {
 
     @GET
     @UnitOfWork
-    public List<TdpFund> fetchAll() {
+    public List<TdpFund> fetchAll(@Auth TdpUser tdpUser) {
         return tdpFundDAO.findAll();
     }
 
