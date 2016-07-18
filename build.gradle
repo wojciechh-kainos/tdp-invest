@@ -57,6 +57,7 @@ sourceSets {
 dependencies {
     compile (
         'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
         'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2',
         'io.dropwizard:dropwizard-testing:' + dropwizardVersion,

@@ -1,14 +1,17 @@
 define(['angular'
     , 'application/tdpInvestModule'
+    , 'application/controllers/tdpInvestPersonController'
+    , 'application/controllers/tdpInvestLoginController'
+    , 'application/controllers/tdpInvestRegisterController'
+    , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/chartController'
     , 'application/controllers/DataController'
     , 'application/controllers/DateController'
     , 'application/controllers/IndexController'
     , 'application/controllers/UserDataController'
     , 'application/controllers/ButtonController'
-
-], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+], function (angular, tdpInvestModule) {
+    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("root", {
                 url: "",
@@ -71,8 +74,25 @@ define(['angular'
                             return "api/rows/get"
                         }
                     }
-                });
-
+                }
+            }).state("login", {
+                url: "/login",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-login.html",
+                        controller: "tdpInvestLoginController"
+                    }
+                }
+            }).state("register", {
+                url: "/register",
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest-register.html",
+                        controller: "tdpInvestRegisterController"
+                    }
+                }
+            });
+        $urlRouterProvider.otherwise("/login");
     });
 
     return tdpInvestModule;

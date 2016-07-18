@@ -1,5 +1,6 @@
 'use strict';
 
+//noinspection JSFileReferences
 require.config({
     baseUrl: 'js/',
     paths: {
@@ -20,8 +21,10 @@ require.config({
         'ngAnimate' : ['angular'],
         'ngAria' : ['angular'],
         'ngMaterial' : ['angular', 'ngAria', 'ngAnimate'],
-
+        'ngCookies': {
+            exports: 'ngCookies',
+            deps: ['angular']
+        }
     },
     deps: ['application/bootstrap']
 });
-
