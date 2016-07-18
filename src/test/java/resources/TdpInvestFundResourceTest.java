@@ -4,6 +4,7 @@ import dao.TdpFundDAO;
 import dao.TdpUnitDAO;
 import domain.TdpFund;
 import domain.TdpUser;
+import io.dropwizard.auth.AuthenticationException;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -52,11 +53,35 @@ public class TdpInvestFundResourceTest {
     public void testFetchAll() {
         when(mockFundDAO.findAll()).thenReturn(stubDB);
 
-        List<TdpFund> results = resource.fetchAll(stubUser);
+        List<TdpFund> results = null;
+        try {
+            results = resource.fetchAll(stubUser);
 
-        assertEquals(stubDB.size(), results.size());
-        verify(mockFundDAO, times(1)).findAll();
+            assertEquals(stubDB.size(), results.size());
+            verify(mockFundDAO, times(1)).findAll();
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+        }
+
+
     }
+
+    @Test
+    public void testAuth() {
+        when(mockFundDAO.findAll()).thenReturn(stubDB);
+
+        TdpUser wrongUser = new TdpUser("", "");
+        try {
+            List<TdpFund> results = resource.fetchAll(wrongUser);
+
+            assertEquals(stubDB.size(), results.size());
+            verify(mockFundDAO, times(1)).findAll();
+        } catch (AuthenticationException e) {
+            e.printStackTrace();
+
+        }
+    }
+
 
     @Test
     public void testFetch() {
