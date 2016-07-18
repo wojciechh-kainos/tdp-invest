@@ -12,7 +12,7 @@
 <body>
 
 <div id="content">
-    <header ng-controller="tdpInvestNavbarController">
+    <header>
 
         <nav class="navbar navbar-inverse navbar-static-top ng-cloak">
             <div class="container">
@@ -24,14 +24,15 @@
                 <ul class="nav navbar-nav navbar-right">
                     <li ui-sref-active="active"><a ui-sref="tdp">Chart</a></li>
                     <li ui-sref-active="active"><a ui-sref="compare">Compare</a></li>
-                    <li ui-sref-active="active"><a ui-sref="login"><i class="fa fa-shield"></i> {{isUserLoggedIn? "Logout" : "Login"}}</a></li>
-                    <li ng-show="!isUserLoggedIn" ui-sref-active="active"><a ui-sref="register"><i class="fa fa-shield"></i> Register</a></li>
+                    <li ui-sref-active="active"><a ui-sref="login"><i class="fa fa-shield"></i> {{isLoggedIn()? "Logout"
+                        : "Login"}}</a></li>
+                    <li ng-show="!isLoggedIn()" ui-sref-active="active"><a ui-sref="register"><i
+                            class="fa fa-shield"></i> Register</a></li>
                 </ul>
             </div>
 
         </nav>
     </header>
-
     <div class="container" ui-view></div>
 
 </div>

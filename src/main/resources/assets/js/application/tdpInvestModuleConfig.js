@@ -3,7 +3,6 @@ define(['angular'
     , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
-    , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainViewController'
     , 'application/services/tdpInvestStockDataService'
@@ -87,9 +86,26 @@ define(['angular'
         $urlRouterProvider.otherwise("/login");
     });
 
-    tdpInvestModule.run(['$rootScope', '$state', function ($rootScope, $state) {
-        $rootScope.$state = $state;
-    }]);
+    tdpInvestModule.run(['$rootScope', '$state', 'tdpInvestAuthService', '$cookieStore', '$http',
+        function ($rootScope, $state, tdpInvestAuthService, $cookieStore, $http) {
+            var userLoggedIn = false;
+            $rootScope.$state = $state;
+
+            tdpInvestAuthService.watchAuthorizationStatus(function () {
+                userLoggedIn = true;
+            }, function () {
+                userLoggedIn = false;
+            });
+
+            $rootScope.isLoggedIn = function () {
+                return userLoggedIn;
+            };
+
+            $rootScope.globals = $cookieStore.get('globals') || {};
+            if ($rootScope.globals.currentUser) {
+                $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+            }
+        }]);
 
     return tdpInvestModule;
 });

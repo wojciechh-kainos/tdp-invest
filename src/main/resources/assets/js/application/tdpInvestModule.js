@@ -1,11 +1,3 @@
 define(['angular', 'uiRouter', 'ngCookies', 'highcharts-ng', 'ui-bootstrap', 'ngResource'], function (angular) {
     return angular.module("tdpInvestModule", ['ui.router', 'ngResource', 'highcharts-ng', 'ui.bootstrap', 'ngCookies'])
-        .run(['$rootScope', '$location', '$cookieStore', '$http',
-            function ($rootScope, $location, $cookieStore, $http) {
-                // keep user logged in after page refresh
-                $rootScope.globals = $cookieStore.get('globals') || {};
-                if ($rootScope.globals.currentUser) {
-                    $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
-                }
-            }]);
 });
