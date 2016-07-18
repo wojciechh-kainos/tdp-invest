@@ -74,8 +74,9 @@ define(['angular'
                             return "api/rows/get"
                         }
                     }
-                }
-            }).state("login", {
+                })
+
+            .state("login", {
                 url: "/login",
                 views: {
                     "@": {
@@ -83,7 +84,8 @@ define(['angular'
                         controller: "tdpInvestLoginController"
                     }
                 }
-            }).state("register", {
+            })
+            .state("register", {
                 url: "/register",
                 views: {
                     "@": {
@@ -92,8 +94,8 @@ define(['angular'
                     }
                 }
             });
-        $urlRouterProvider.otherwise("/login");
-    });
+        //$urlRouterProvider.otherwise("/login");
+    })
 
     return tdpInvestModule;
 });

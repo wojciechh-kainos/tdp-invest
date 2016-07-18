@@ -1,15 +1,6 @@
-<md-toolbar layout="row">
-    <div class="md-toolbar-tools">
-        <md-button aria-label="Home" ui-sref="root.home" ng-click="receivedData = []">
-            <a>Home</a>
-        </md-button>
-        <md-button aria-label="Chart" ui-sref="root.compare" ng-click="receivedData = []">
-            <a>Compare</a>
-        </md-button>
-    </div>
-</md-toolbar>
+
 <div flex layout="row">
-    <div flex="10">
+    <div flex="15">
         <div ui-view="DateSegment"></div>
         <div ui-view="userData"></div>
         <div ui-view="submitButton"></div>

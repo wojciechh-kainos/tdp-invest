@@ -11,6 +11,7 @@ require.config({
         'ngMaterial' : 'lib/angular-material/angular-material',
         'ngAnimate' : 'lib/angular-aria/angular-aria',
         'ngAria' : 'lib/angular-animate/angular-animate',
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
     },
     shim: {
         'angular': {

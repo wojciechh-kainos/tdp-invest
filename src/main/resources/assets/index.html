@@ -1,10 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<<<<<<< HEAD
 <meta http-equiv="pragma" content="no-cache" />
-=======
 
->>>>>>> origin/master
 <head>
     <meta charset="UTF-8">
     <title>TDP Invest</title>
@@ -12,10 +9,6 @@
     <script data-main="js/application/require-config.js" src="js/lib/requirejs/require.js"></script>
     <link href="js/lib/angular-material/angular-material.css" rel="stylesheet" />
 </head>
-<<<<<<< HEAD
-<body layout="column">
-<div ui-view></div>
-=======
 
 <body>
 
@@ -29,7 +22,8 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="isUserLoggedIn"><a href="#/tdp"><i class="fa fa-home"></i> Home</a></li>
+                <li ng-show="isUserLoggedIn"><a href="#/home" ><i class="fa fa-home"></i> Home</a></li>
+                <li ng-show="isUserLoggedIn"><a href="#/compare" ><i class="fa fa-home"></i> Compare</a></li>
                 <li ng-show="isUserLoggedIn"><a href="#/login"><i class="fa fa-shield"></i> Logout</a></li>
                 <li ng-show="!isUserLoggedIn"><a href="#/login"><i class="fa fa-shield"></i> Login</a></li>
                 <li ng-show="!isUserLoggedIn"><a href="#/register"><i class="fa fa-shield"></i> Register</a></li>
@@ -39,6 +33,6 @@
     </nav>
 </header>
 <div class="container" ui-view></div>
->>>>>>> origin/master
 </body>
 </html>
+
