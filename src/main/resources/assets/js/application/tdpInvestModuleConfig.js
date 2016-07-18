@@ -1,6 +1,5 @@
 define(['angular'
     , 'application/tdpInvestModule'
-    , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestCompareController'
@@ -29,20 +28,6 @@ define(['angular'
                 "@": {
                     templateUrl: "html/partials/tdp-invest-person.html",
                     controller: "tdpInvestPersonController"
-                }
-            }
-        }).state("tdp.empty", {
-            url: "/empty",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-empty.html"
-                }
-            }
-        }).state("another", {
-            url: "/another",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-another.html"
                 }
             }
         }).state("login", {
