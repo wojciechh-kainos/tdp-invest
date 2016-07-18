@@ -7,6 +7,7 @@ import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
 import dao.TdpUserDAO;
+import io.dropwizard.jersey.sessions.Session;
 
 public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, TdpUser> {
 
@@ -23,6 +24,7 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
     @Override
     public Optional<TdpUser> authenticate(BasicCredentials credentials) throws AuthenticationException {
         TdpUser user = userDao.getUserByEmail(credentials.getUsername());
+        System.out.println(credentials.getUsername() + " " + credentials.getPassword());
 
         try {
             if (user != null && passwordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
