@@ -39,7 +39,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
            for (var i = 0 ; i < num ; i++) {
                 var now = new Date(dataForChart[i][keys[dateIndex]]);
                 var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-                customDataHome.push([now_utc , dataForChart[i][keys[valIndex]]]);
+               if($state.current.name == "root.home") customDataHome.push([now_utc , dataForChart[i][keys[valIndex]]]);
+               else customDataHome.push([now_utc , $scope.$parent.dataInvest[i]]);
                  if(dataForCompare.length != 0)  {
                     customDataCompare.push([now_utc , dataForCompare[i]]);
                  }

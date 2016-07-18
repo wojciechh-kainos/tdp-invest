@@ -6,7 +6,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 }
 
         this.calculateFundIncome = function (input , dataInc){
-               var number = input/dataInc[0].value;
+               if (dataInc.length == 0) return result;
+               var number = Math.round( input/dataInc[0].value );
                var result = [];
                var length = dataInc.length;
                for (var i = 0 ; i < length ; i++){
@@ -18,18 +19,20 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         this.calculateInvestIncome = function(percentage, input, dataInc){
              var result = [];
-             var totalMoney = input;
+             var totalMoney = parseFloat(input);
              var length = dataInc.length;
              result.push(0);
+             var startDate = new Date(dataInc[0].date);
              for ( var i = 1 ; i < length ; i++){
-                  var startDate = new Date(dataInc[i-1].date);
-                  var year = startDate.getFullYear();
                   var endDate = new Date(dataInc[i].date);
-                  var year2 = endDate.getFullYear();
-                  var years = year2 - year;
+                  var year = startDate.getTime();
+                  var year2 = endDate.getTime();
+                  var yearsDif = new Date (year2 - year);
+                  var years = (yearsDif.getUTCFullYear() - 1970);
+                  console.log(years);
+                  if (years != 0) startDate = new Date (dataInc[i].date);
                   var dayIncome = 0.01 * percentage * totalMoney * years;
                   totalMoney += dayIncome;
-                  console.log(totalMoney);
                   result.push(Math.round( (totalMoney - input) * 100) / 100);
              }
              return result;
