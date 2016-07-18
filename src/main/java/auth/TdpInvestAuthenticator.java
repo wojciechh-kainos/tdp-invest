@@ -2,12 +2,14 @@ package auth;
 
 import com.google.common.base.Optional;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
 import dao.TdpUserDAO;
 
+@Singleton
 public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, TdpUser> {
 
     private final TdpUserDAO userDao;

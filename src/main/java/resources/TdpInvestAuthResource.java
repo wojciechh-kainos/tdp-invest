@@ -1,10 +1,8 @@
 package resources;
 
-import auth.TdpInvestAuthenticator;
 import com.google.inject.Inject;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
-import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
 import dao.TdpUserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
@@ -24,11 +22,9 @@ import javax.ws.rs.core.Response;
 public class TdpInvestAuthResource {
 
     private final TdpUserDAO tdpUserDAO;
-    private final TdpInvestAuthenticator authenticator;
 
     @Inject
-    public TdpInvestAuthResource(TdpInvestAuthenticator authenticator, TdpUserDAO tdpUserDAO) {
-        this.authenticator = authenticator;
+    public TdpInvestAuthResource(TdpUserDAO tdpUserDAO) {
         this.tdpUserDAO = tdpUserDAO;
     }
 
@@ -39,9 +35,7 @@ public class TdpInvestAuthResource {
     }
 
     @GET
-    @UnitOfWork
     @Path("/login")
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response login(@Auth TdpUser tdpUser) throws AuthenticationException {
             return Response.status(Response.Status.ACCEPTED).build();
     }
@@ -49,7 +43,6 @@ public class TdpInvestAuthResource {
     @POST
     @UnitOfWork(flushMode = FlushMode.MANUAL)
     @Path("/register")
-    @Consumes(MediaType.APPLICATION_JSON)
     public Response register(TdpUser tdpUser) {
         try {
             tdpUserDAO.create(tdpUser);

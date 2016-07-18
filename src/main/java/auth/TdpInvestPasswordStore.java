@@ -32,6 +32,7 @@
 
 package auth;
 
+import com.google.inject.Singleton;
 import java.security.SecureRandom;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.SecretKeyFactory;
@@ -39,6 +40,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import javax.xml.bind.DatatypeConverter;
 
+@Singleton
 public class TdpInvestPasswordStore {
 
     @SuppressWarnings("serial")

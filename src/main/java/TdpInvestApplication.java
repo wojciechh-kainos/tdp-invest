@@ -1,9 +1,11 @@
 import auth.TdpInvestAuthenticator;
+import auth.TdpInvestPasswordStore;
 import auth.TdpInvestUnauthorizedHandler;
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
+import dao.TdpUserDAO;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
@@ -11,6 +13,7 @@ import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
 import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
@@ -58,8 +61,13 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
         module.setSessionFactory(hibernateBundle.getSessionFactory());
 
+        TdpInvestAuthenticator authenticator = new UnitOfWorkAwareProxyFactory(hibernateBundle).create(TdpInvestAuthenticator.class,
+                new Class[]{TdpUserDAO.class, TdpInvestPasswordStore.class},
+                new Object[]{guiceBundle.getInjector().getInstance(TdpUserDAO.class),
+                        guiceBundle.getInjector().getInstance(TdpInvestPasswordStore.class)});
+
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpUser>()
-                .setAuthenticator(guiceBundle.getInjector().getInstance(TdpInvestAuthenticator.class))
+                .setAuthenticator(authenticator)
                 .setUnauthorizedHandler(guiceBundle.getInjector().getInstance(TdpInvestUnauthorizedHandler.class))
                 .buildAuthFilter()));
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(TdpUser.class));
