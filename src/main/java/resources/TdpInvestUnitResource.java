@@ -1,7 +1,7 @@
 package resources;
 
 
-import dao.TdpIUnitDAO;
+import DAO.TdpIUnitDAO;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.UnitOfWork;

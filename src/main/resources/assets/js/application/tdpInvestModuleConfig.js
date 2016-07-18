@@ -1,16 +1,13 @@
 define(['angular'
     , 'application/tdpInvestModule'
-    , 'application/controllers/tdpInvestPersonController'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestNavbarController'
-], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
     , 'application/controllers/tdpInvestInvestmentController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider) {
+    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
