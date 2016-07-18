@@ -6,7 +6,7 @@ import io.dropwizard.auth.Auth;
 import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
-import dao.TdpUserDAO;
+import DAO.TdpUserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;

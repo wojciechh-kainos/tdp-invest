@@ -16,17 +16,24 @@ public class TdpIInvestment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotNull
     private DateTime startDate;
+
+    @NotNull
     private DateTime endDate;
+
+    @NotNull
     private double amount;
+
+    @NotNull
     private double annualRate;
     //</editor-fold>
 
     //<editor-fold desc="constructors">
     public TdpIInvestment(){}
 
-    public TdpIInvestment(Long id, DateTime startDate, DateTime endDate, double amount, double annualRate){
-        this.id = id;
+    public TdpIInvestment(DateTime startDate, DateTime endDate, double amount, double annualRate){
         this.startDate = startDate;
         this.endDate = endDate;
         this.amount = amount;
@@ -40,7 +47,7 @@ public class TdpIInvestment {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

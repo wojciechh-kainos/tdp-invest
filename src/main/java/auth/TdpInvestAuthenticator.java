@@ -6,7 +6,7 @@ import io.dropwizard.auth.AuthenticationException;
 import io.dropwizard.auth.Authenticator;
 import io.dropwizard.auth.basic.BasicCredentials;
 import domain.TdpUser;
-import dao.TdpUserDAO;
+import DAO.TdpUserDAO;
 
 public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, TdpUser> {
 

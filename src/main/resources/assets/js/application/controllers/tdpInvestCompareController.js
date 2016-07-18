@@ -11,7 +11,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         };
 
         $scope.deleteInvestment = function(){
-            return tdpInvestmentService.deleteInvestment(13);
+            return tdpInvestmentService.deleteInvestment({"id": 13});
         }
 
         $scope.fetch = function(){

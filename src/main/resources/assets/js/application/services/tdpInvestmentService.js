@@ -18,8 +18,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         //     return $http.put("/api/investment/edit", investment);
         // };
 
-        this.deleteInvestment = function(investmentId){
-            return $http.delete("/api/investment/delete/" + investmentId, {});
+        this.deleteInvestment = function(investment){
+            return $http.delete("/api/investment/delete", investment);
         };
 
     })

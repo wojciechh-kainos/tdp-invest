@@ -21,12 +21,7 @@ public class TdpIInvestmentDAO extends AbstractDAO<TdpIInvestment> {
 
     public long create(TdpIInvestment investment) { return persist(investment).getId(); }
 
-    public void remove(Long id){
-//        Criteria criteria = currentSession().createCriteria(TdpIInvestment.class);
-//        addRestrictionIfNotNull(criteria, Restrictions.eq("id", id), id);
-//        TdpIInvestment investment = (TdpIInvestment) criteria.uniqueResult();
-
-        TdpIInvestment investment = findById(id);
+    public void remove(TdpIInvestment investment){
         currentSession().delete(investment);
     }
 

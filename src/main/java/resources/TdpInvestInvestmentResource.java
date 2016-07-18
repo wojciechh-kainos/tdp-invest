@@ -65,10 +65,11 @@ public class TdpInvestInvestmentResource {
     }
 
     @DELETE
-    @Path("/delete/{investmentId}")
+    @Path("/delete")
     @UnitOfWork
-    public void delete(@PathParam("investmentId")Long id){
-        tdpIInvestmentDAO.remove(id);
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void delete(TdpIInvestment investment){
+        tdpIInvestmentDAO.remove(investment);
     }
 
     @GET
