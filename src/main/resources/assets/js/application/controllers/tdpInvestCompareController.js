@@ -64,6 +64,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
         $scope.getStockData = function(date1, date2) {
             tdpCompareService.getDataRange(date1, date2)
                 .then(function(response) {
+                    $scope.stockData = [];
                     $scope.stockData = response.data;
                 });
         }

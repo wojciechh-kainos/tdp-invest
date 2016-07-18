@@ -9,6 +9,7 @@ import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
+import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
@@ -47,6 +48,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
+        bootstrap.addBundle(new MultiPartBundle());
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)
