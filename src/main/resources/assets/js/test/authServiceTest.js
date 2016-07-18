@@ -13,7 +13,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
 
         describe('When login', function () {
             it('with valid credentials should succeed', function () {
-                $httpBackend.expectPOST('/api/login', undefined).respond(200, '');
+                $httpBackend.expectGET('/api/login', undefined).respond(200, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {
@@ -24,7 +24,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             });
 
             it('with invalid credentials should fail', function () {
-                $httpBackend.expectPOST('/api/login', undefined).respond(400, '');
+                $httpBackend.expectGET('/api/login', undefined).respond(400, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {
