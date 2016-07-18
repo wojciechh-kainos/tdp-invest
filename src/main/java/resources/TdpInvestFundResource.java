@@ -1,7 +1,6 @@
 package resources;
 
 
-import auth.TdpInvestAuthenticator;
 import com.google.inject.Inject;
 import dao.TdpFundDAO;
 import dao.TdpUnitDAO;
@@ -25,13 +24,11 @@ public class TdpInvestFundResource {
 
     private TdpFundDAO tdpFundDAO;
     private TdpUnitDAO tdpUnitDAO;
-    private TdpInvestAuthenticator authenticator;
 
     @Inject
-    public TdpInvestFundResource(TdpFundDAO tdpFundDAO, TdpUnitDAO tdpUnitDAO, TdpInvestAuthenticator authenticator) {
+    public TdpInvestFundResource(TdpFundDAO tdpFundDAO, TdpUnitDAO tdpUnitDAO) {
         this.tdpFundDAO = tdpFundDAO;
         this.tdpUnitDAO = tdpUnitDAO;
-        this.authenticator = authenticator;
     }
 
     @GET

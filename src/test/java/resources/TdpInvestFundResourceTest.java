@@ -1,6 +1,5 @@
 package resources;
 
-import auth.TdpInvestAuthenticator;
 import dao.TdpFundDAO;
 import dao.TdpUnitDAO;
 import domain.TdpFund;
@@ -27,9 +26,6 @@ public class TdpInvestFundResourceTest {
 	@Mock
 	TdpUnitDAO mockUnitDAO;
 
-	@Mock
-	TdpInvestAuthenticator mockAuth;
-
 	TdpInvestFundResource resource;
 
 	private static List<TdpFund> stubDB;
@@ -49,14 +45,14 @@ public class TdpInvestFundResourceTest {
 
 	@Before
 	public void setUp() {
-		resource = new TdpInvestFundResource(mockFundDAO, mockUnitDAO, mockAuth);
+		resource = new TdpInvestFundResource(mockFundDAO, mockUnitDAO);
 	}
 
 	@Test
 	public void testFetchAll() {
 		when(mockFundDAO.findAll()).thenReturn(stubDB);
 
-		List<TdpFund> results = resource.fetchAll(stubUser);
+		List<TdpFund> results = resource.fetchAll();
 
 		assertEquals(stubDB.size(), results.size());
 		verify(mockFundDAO, times(1)).findAll();
