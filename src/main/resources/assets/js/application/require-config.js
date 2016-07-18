@@ -14,7 +14,8 @@ require.config({
         'ngFileUpload' : 'lib/ng-file-upload/ng-file-upload',
         'ng-table': 'lib/ng-table/dist/ng-table',
         'ngCookies': 'lib/angular-cookies/angular-cookies',
-        'highstocks': 'lib/highcharts/highstock'
+        'highstocks': 'lib/highcharts/highstock', 
+        'highcharts-no-data': 'lib/highcharts-no-data-to-display/no-data-to-display'
     },
     shim: {
         'angular': {
@@ -37,7 +38,9 @@ require.config({
         'ngCookies': {
             exports: 'ngCookies',
             deps: ['angular']
-        }
+        },
+         'highcharts-no-data': {     deps: ['highcharts-ng'] }
+
     },
     deps: ['application/bootstrap']
 });
