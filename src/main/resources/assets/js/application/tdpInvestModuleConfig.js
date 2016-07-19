@@ -75,7 +75,6 @@ define(['angular'
                         }
                     }
                 })
-
             .state("login", {
                 url: "/login",
                 views: {
@@ -94,8 +93,6 @@ define(['angular'
                     }
                 }
             });
-        //$urlRouterProvider.otherwise("/login");
     })
-
     return tdpInvestModule;
 });
