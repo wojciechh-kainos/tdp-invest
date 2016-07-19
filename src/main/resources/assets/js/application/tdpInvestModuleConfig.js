@@ -17,7 +17,7 @@ define(['angular'
                     }
                 },
                 templateUrl: 'html/partials/tdp-invest-main.html'
-            }).state("login", {
+        }).state("login", {
             url: "/login",
             templateUrl: "html/partials/tdp-invest-login.html",
             controller: "tdpInvestLoginController"
@@ -38,11 +38,27 @@ define(['angular'
         }).state("tdp.dashboard", {
             url: "/dashboard",
             templateUrl: "html/partials/tdp-invest-dashboard.html",
-            controller: "tdpInvestMainViewController"
+            controller: "tdpInvestMainViewController",
+            resolve: {
+                redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+            }
         });
 
         $urlRouterProvider.otherwise("/login");
     }]);
+
+    function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+        var defer = $q.defer();
+        if ($cookieStore.get('currentUser')) {
+            defer.resolve();
+        } else {
+            $timeout(function () {
+                $state.go("login");
+            });
+            defer.reject();
+        }
+        return defer.promise;
+    }
 
     tdpInvestModule.run(['$rootScope', '$state', 'tdpInvestAuthService', '$cookieStore', '$http',
         function ($rootScope, $state, tdpInvestAuthService, $cookieStore, $http) {
@@ -64,6 +80,8 @@ define(['angular'
                 $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
             }
         }]);
+
+    });
 
     return tdpInvestModule;
 });

@@ -2,6 +2,7 @@ package domain;
 
 import javax.persistence.*;
 import java.security.Principal;
+import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "TdpUser")
@@ -18,16 +19,32 @@ public class TdpUser implements Principal {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
-    public TdpUser() {
+    @Column(name = "TOKEN", length = 50)
+    private String token;
+
+    @Column(name = "TOKEN_EXPIRE")
+    private ZonedDateTime tokenExpire;
+
+    public TdpUser(){};
+
+    public TdpUser(String mail, String password) { this.mail = mail; this.password = password; }
+
+    public long getId() { return id; }
+
+    public String getToken() {
+        return token;
     }
 
-    public TdpUser(String mail, String password) {
-        this.mail = mail;
-        this.password = password;
+    public void setToken(String token) {
+        this.token = token;
     }
 
-    public long getId() {
-        return id;
+    public ZonedDateTime getTokenExpire() {
+        return tokenExpire;
+    }
+
+    public void setTokenExpire(ZonedDateTime tokenExpire) {
+        this.tokenExpire = tokenExpire;
     }
 
     public void setId(long id) {
