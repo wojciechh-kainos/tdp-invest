@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.3.xsd">
+
+    <changeSet id="1" author="radoslawlandowski">
+        <preConditions onFailMessage="The table your trying to create already exists!" onFail="CONTINUE">
+            <not>
+                <tableExists tableName="unit" schemaName="public"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="unit">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="timestamp"/>
+            <column name="value" type="double precision"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="2" author="radoslawlandowski" runOnChange="true">
+        <preConditions onFailMessage="The table your trying to create already exists!" onFail="CONTINUE">
+            <not>
+                <tableExists tableName="tdpuser" schemaName="public"></tableExists>
+            </not>
+        </preConditions>
+        <createTable tableName="tdpuser">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="varchar(100)">
+                <constraints unique="true" uniqueConstraintName="avoidDuplicateEmails" />
+            </column>
+            <column name="password" type="varchar(255)"/>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="3" author="radoslawlandowski">
+        <preConditions onFailMessage="The table your trying to load data to doesn't exist!" onFail="HALT">
+            <tableExists tableName="unit" schemaName="public"></tableExists>
+        </preConditions>
+        <loadData encoding="UTF-8"
+                  file="dataForChangelogs/newdata.csv"
+                  relativeToChangelogFile="true"
+                  tableName="unit">
+        </loadData>
+    </changeSet>
+
+</databaseChangeLog>
+

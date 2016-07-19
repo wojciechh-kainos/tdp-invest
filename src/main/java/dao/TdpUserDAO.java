@@ -1,4 +1,4 @@
-package dao;
+package DAO;
 
 import auth.TdpInvestPasswordStore;
 import com.google.inject.Inject;

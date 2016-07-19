@@ -25,11 +25,6 @@ public class TdpIUnit {
 	@NotNull
 	private Double value;
 
-	private Double incomeFromFund;
-
-	private Double incomeFromInvestment;
-
-
 	public TdpIUnit() {
 	}
 
@@ -37,8 +32,6 @@ public class TdpIUnit {
 		this.id = id;
 		this.date = date;
 		this.value = value;
-		this.incomeFromFund = incomeFromFund;
-		this.incomeFromInvestment = incomeFromInvestment;
 	}
 
 	public Long getId() {
@@ -65,19 +58,4 @@ public class TdpIUnit {
 		this.value = value;
 	}
 
-	public Double getIncomeFromInvestment() {
-		return incomeFromInvestment;
-	}
-
-	public void setIncomeFromInvestment(Double incomeFromInvestment) {
-		this.incomeFromInvestment = incomeFromInvestment;
-	}
-
-	public Double getIncomeFromFund() {
-		return incomeFromFund;
-	}
-
-	public void setIncomeFromFund(Double incomeFromFund) {
-		this.incomeFromFund = incomeFromFund;
-	}
 }
