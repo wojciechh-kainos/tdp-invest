@@ -12,7 +12,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                var length = dataInc.length;
                for (var i = 0 ; i < length ; i++){
                     var dayIncome = (number * dataInc[i].value) - (number * dataInc[0].value);
-                    result.push(dayIncome);
+                    result.push(Math.round(dayIncome * 100) / 100);
                }
                return result;
         }
@@ -29,7 +29,6 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                   var year2 = endDate.getTime();
                   var yearsDif = new Date (year2 - year);
                   var years = (yearsDif.getUTCFullYear() - 1970);
-                  console.log(years);
                   if (years != 0) startDate = new Date (dataInc[i].date);
                   var dayIncome = 0.01 * percentage * totalMoney * years;
                   totalMoney += dayIncome;

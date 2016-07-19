@@ -7,5 +7,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             $scope.isUserLoggedIn = false;
         })
 
+
     });
 });

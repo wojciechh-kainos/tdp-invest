@@ -2,6 +2,8 @@ package resources;
 
 import DAO.TdpIUnitDAO;
 import domain.TdpIUnit;
+import domain.TdpUser;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import service.*;
 import javax.inject.Inject;
@@ -25,7 +27,7 @@ public class DataResource {
     @UnitOfWork
     @Path("/get")
     public List<TdpIUnit> fetchData(@QueryParam("startDate") String startDate,
-                               @QueryParam("endDate") String endDate) {
+                                    @QueryParam("endDate") String endDate) {
         if(startDate == null) startDate = "7-2-2010";
         if(endDate== null) endDate = "7-2-2016";
 

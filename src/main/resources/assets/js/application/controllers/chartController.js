@@ -60,6 +60,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 data: customDataHome}]
               }
 
+
            })
 
     $scope.chartConfig = {

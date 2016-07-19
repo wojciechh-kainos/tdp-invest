@@ -1,25 +1,33 @@
 <link href="style.css" rel="stylesheet" />
-<table ng-if="state == 'root.home'" border="1">
+<table class="table table-fixed" ng-if="state == 'root.home'" >
+    <thead>
     <tr>
-        <td>Date</td>
-        <td>Value</td>
+        <th class="col-xs-6">Date</th>
+        <th class="col-xs-6">Value</th>
     </tr>
+    </thead>
+    <tbody>
     <tr ng-repeat="row in myData">
-        <td>{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
-        <td><center>{{row[columns[valIndex]]}}</center></td>
+        <td class="col-xs-6">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
+        <td class="col-xs-6">{{row[columns[valIndex]]}}</td>
     </tr>
+    </tbody>
 </table>
 
-<table ng-if="state == 'root.compare'" border="1">
-    <tr>
-        <td>Date</td>
-        <td>Income from Fund</td>
-        <td>Income from Investment</td>
-    </tr>
+<table class="table table-fixed" ng-if="state == 'root.compare'" border="1">
+    <thead>
+        <tr>
+            <th class="col-xs-5">Date</th>
+            <th class="col-xs-3">Income from Fund</th>
+            <th class="col-xs-4">Income from Investment</th>
+        </tr>
+    </thead>
+    <tbody>
     <tr ng-repeat="row in myData">
-        <td>{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
-        <td><center>{{row[columns[fundIndex]]}}</center></td>
-        <td><center>{{row[columns[investIndex]]}}</center></td>
+        <td class="col-xs-5">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
+        <td class="col-xs-3">{{row[columns[fundIndex]]}}</td>
+        <td class="col-xs-4">{{row[columns[investIndex]]}}</td>
     </tr>
+    </tbody>
 </table>
 
