@@ -7,18 +7,13 @@ import io.dropwizard.hibernate.AbstractDAO;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
-
-import java.security.SecureRandom;
 import java.time.ZonedDateTime;
+import java.util.UUID;
 
 
 public class TdpUserDAO extends AbstractDAO<TdpUser> {
 
     private final TdpInvestPasswordStore passwordStore;
-
-    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
-
-    static SecureRandom rnd = new SecureRandom();
 
     @Inject
     public TdpUserDAO(SessionFactory sessionFactory, TdpInvestPasswordStore passwordStore) {
@@ -52,17 +47,10 @@ public class TdpUserDAO extends AbstractDAO<TdpUser> {
         return persist(user).getToken();
     }
 
-    public String generateToken(TdpUser user) {
-        String token = randomString(50);
-        user.setToken(token);
+    public String generateToken(TdpUser user) throws TdpInvestPasswordStore.CannotPerformOperationException {
         user.setTokenExpire(ZonedDateTime.now().plusMinutes(10));
+        String token = UUID.randomUUID().toString() + user.getTokenExpire() + user.getMail();
+        user.setToken(passwordStore.createHash(token).substring(21));
         return persist(user).getToken();
-    }
-
-    private String randomString(int len) {
-        StringBuilder sb = new StringBuilder(len);
-        for (int i = 0; i < len; i++)
-            sb.append(AB.charAt(rnd.nextInt(AB.length())));
-        return sb.toString();
     }
 }
