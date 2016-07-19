@@ -23,11 +23,6 @@ public class LoginPage extends BasePage{
         this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
-    @Override
-    public void close() {
-        this.driver.close();
-    }
-
     public void login(String username, String password){
         driver.findElement(this.username).sendKeys(username);
         driver.findElement(this.password).sendKeys(password);

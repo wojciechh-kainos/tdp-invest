@@ -15,5 +15,7 @@ public abstract class BasePage {
 
         public abstract void open();
 
-        public abstract void close();
+        public void close() {
+                this.driver.close();
+        }
 }
