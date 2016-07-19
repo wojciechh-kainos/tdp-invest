@@ -70,9 +70,6 @@ public class TdpInvestUnitResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @UnitOfWork
   public List<TdpIUnit> fetchAllWithinRange(TdpIDateRange tdpIDateRange) {
-    System.out.println("..............................................");
-    System.out.println(tdpIDateRange.getMaxDate());
-    System.out.println(tdpIDateRange.getMinDate());
 
     return tdpIUnitDAO.findAllWithinRange(tdpIDateRange);
   }

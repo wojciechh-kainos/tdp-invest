@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="col-md-offset-1">
+<div class="wrapper center-block">
     <h2>Compare</h2>
     <div class="row">
         <div class="col-md-4">
@@ -8,13 +8,15 @@
         <div class="col-md-4">
             <label>Value of investment</label><br><input ng-model="investmentValue" class="form-control"/>
         </div>
-        <div class="col-md-4">
-            <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg btn-block show-me-btn">Show me!</button>
+        <div>
+            <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg col-md-4 show-me-btn">Show me!</button>
         </div>
 
     </div>
+    <div>
     <div class="row">
-        <div class="col-md-5">
+        <div class="col-md-3"></div>
+        <div class="col-md-3">
             <label>Pick the start date:</label>
             <p class="input-group">
                 <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
@@ -25,7 +27,7 @@
                   </span>
             </p>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-3">
             <label>Pick the finish date:</label>
             <p class="input-group">
                 <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
@@ -36,9 +38,11 @@
                   </span>
             </p>
         </div>
+        <div class="col-md-3"></div>
+    </div>
     </div>
     <div class="row">
-        <div class="col-md-11">
+        <div class="col-md-12">
             <highchart config="chartConfig"></highchart>
         </div>
     </div>

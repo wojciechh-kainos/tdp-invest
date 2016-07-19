@@ -21,6 +21,7 @@ public class TdpInvestLoadDataService {
   }
 
   public void loadFromLocalFile() {
+    tdpIUnitDAO.deleteAll();
     List<TdpIUnit> unitList = csvReader.readCSVFile(Optional.empty());
     for (int i = 0; i < unitList.size(); i++) {
       tdpIUnitDAO.add(unitList.get(i));
@@ -29,6 +30,7 @@ public class TdpInvestLoadDataService {
 
 
   public void loadFromUploadedFile(InputStream fileInputStream) {
+    tdpIUnitDAO.deleteAll();
     List<TdpIUnit> unitList = csvReader.readCSVFile(Optional.of(fileInputStream));
     System.out.println("UWAGAaaaaaaaaaaaaaa" +  unitList.get(1));
     for (int i = 0; i < unitList.size(); i++) {

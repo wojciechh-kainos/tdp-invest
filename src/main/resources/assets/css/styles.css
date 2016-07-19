@@ -2,3 +2,15 @@
   margin-top: 15px;
 }
 
+.wrapper {
+  width: 70%;
+  text-align: center;
+}
+
+.padding-20 {
+  padding: 20px;
+}
+
+.navbar {
+    margin-top: 20px;
+}

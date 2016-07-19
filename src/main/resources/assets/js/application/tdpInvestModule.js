@@ -1,4 +1,4 @@
-define(['angular', 'uiRouter', 'highcharts-ng', 'restangular', 'ngTable', 'ui.bootstrap'], function(angular) {
+define(['angular', 'uiRouter', 'highcharts-ng', 'restangular', 'ngTable', 'ui.bootstrap', 'flow'], function(angular) {
     return angular.module(
-      "tdpInvestModule", ['ui.router', 'highcharts-ng', 'restangular', 'ngTable', 'ui.bootstrap']);
+      "tdpInvestModule", ['ui.router', 'highcharts-ng', 'restangular', 'ngTable', 'ui.bootstrap', 'flow']);
 });

@@ -26,6 +26,11 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 		return persist(unit).getId();
 	}
 
+	public int deleteAll() {
+		int result = namedQuery("TdpIUnit.deleteAll").executeUpdate();
+		return  result;
+	}
+
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
 	}

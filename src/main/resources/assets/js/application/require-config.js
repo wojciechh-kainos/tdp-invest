@@ -12,7 +12,8 @@ require.config({
         'ngTable': 'lib/ng-table/dist/ng-table.min',
         'highchart-theme': 'lib/highcharts/themes/dark-unica',
         'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
-        'angular-animate': 'lib/angular-animate/angular-animate.min'
+        'angular-animate': 'lib/angular-animate/angular-animate.min',
+        'flow': 'lib/ng-flow/dist/ng-flow-standalone.min'
     },
     shim: {
         'angular': {
@@ -24,7 +25,8 @@ require.config({
         'restangular': ['angular', 'lodash'],
         'ngTable': ['angular'],
         'ui.bootstrap': ['angular', 'angular-animate'],
-        'angular-animate': ['angular']
+        'angular-animate': ['angular'],
+        'flow': ['angular']
     },
     deps: ['application/bootstrap']
 });

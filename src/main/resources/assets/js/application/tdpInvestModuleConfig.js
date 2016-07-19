@@ -6,7 +6,7 @@ define(['angular'
     , 'application/controllers/tdpInvestHomeController'
     , 'application/controllers/tdpInvestUploadController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, RestangularProvider) {
+    tdpInvestModule.config(function($stateProvider, RestangularProvider, flowFactoryProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -50,15 +50,14 @@ define(['angular'
             });
 
         RestangularProvider.setBaseUrl('/api');
-        RestangularProvider.addElementTransformer('unit', true, function(units) {
-                        // This will add a method called login that will do a POST to the path login
-                        // signature is (name, operation, path, params, headers, elementToPost)
 
-                        units.addRestangularMethod('getAllWithinRange', 'post', 'range');
-
-                        return units;
-                });
-
+        flowFactoryProvider.defaults = {
+          target: '/api/unit/loadData',
+          permanentErrors: [404, 500, 501],
+          maxChunkRetries: 1,
+          chunkRetryInterval: 5000,
+          simultaneousUploads: 4
+        };
     });
 
     return tdpInvestModule;

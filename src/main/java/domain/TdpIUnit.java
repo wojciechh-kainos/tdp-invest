@@ -11,7 +11,8 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u"),
 		@NamedQuery(name = "TdpIUnit.findAllWithinRange", query =
-						"select u from TdpIUnit u where u.date between :minDate and :maxDate")})
+						"select u from TdpIUnit u where u.date between :minDate and :maxDate"),
+		@NamedQuery(name = "TdpIUnit.deleteAll", query="delete from TdpIUnit")})
 public class TdpIUnit {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
