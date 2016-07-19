@@ -3,6 +3,8 @@ package e2e;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
 import static junit.framework.TestCase.assertTrue;
 
 public class AuthenticationTest {
@@ -26,13 +28,20 @@ public class AuthenticationTest {
     }
 
     @Test
-    public void testRegisterAndValidLogin(){
+    public void testRegisterAndValidLogin() throws InterruptedException {
         registerPage.open();
         registerPage.register(VALID_USERNAME, VALID_PASSWORD);
 
         loginPage.open();
         loginPage.login(VALID_USERNAME, VALID_PASSWORD);
         assertTrue("When login with correct credentials, user is redirected to tdp.",loginPage.isRedirected());
+
+        Thread.sleep(2000);
+        registerPage.open();
+        registerPage.register(VALID_USERNAME, VALID_PASSWORD);
+
+        Thread.sleep(2000);
+        assertTrue("When register with already used credentials, the error message should become visible",registerPage.isErrorVisible());
     }
 
     @Test

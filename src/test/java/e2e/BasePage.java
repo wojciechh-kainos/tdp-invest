@@ -1,6 +1,7 @@
 package e2e;
 
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
 public abstract class BasePage {
@@ -17,5 +18,9 @@ public abstract class BasePage {
 
         public void close() {
                 this.driver.close();
+        }
+
+        public boolean isErrorVisible(By element) {
+                return !driver.findElement(element).getCssValue("display").equals("none");
         }
 }

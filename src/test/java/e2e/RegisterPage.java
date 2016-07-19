@@ -11,6 +11,7 @@ public class RegisterPage extends BasePage {
     private By username = By.id("username");
     private By password = By.id("password");
     private By registerButton = By.id("registerButton");
+    private By errorAlert = By.id("errorAlert");
 
     public RegisterPage(WebDriver driver) {
         super(driver);
@@ -25,5 +26,9 @@ public class RegisterPage extends BasePage {
         driver.findElement(this.username).sendKeys(username);
         driver.findElement(this.password).sendKeys(password);
         driver.findElement(this.registerButton).click();
+    }
+
+    public Boolean isErrorVisible(){
+        return super.isErrorVisible(this.errorAlert);
     }
 }

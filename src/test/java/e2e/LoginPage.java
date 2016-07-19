@@ -2,7 +2,6 @@ package e2e;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import java.util.concurrent.TimeUnit;
 
 public class LoginPage extends BasePage{
 
@@ -20,6 +19,7 @@ public class LoginPage extends BasePage{
     public void open() {
         String url = BASE_PATH + PATH;
         this.driver.get(url);
+        
     }
 
     public void login(String username, String password){
@@ -28,8 +28,9 @@ public class LoginPage extends BasePage{
         driver.findElement(this.loginButton).click();
     }
 
+
     public Boolean isErrorVisible(){
-        return !driver.findElement(this.errorAlert).getCssValue("display").equals("none");
+        return super.isErrorVisible(this.errorAlert);
     }
 
     public boolean isRedirected() {
