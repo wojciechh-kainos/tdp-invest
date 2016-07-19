@@ -2,7 +2,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
     tdpInvestModule.controller("tdpInvestRegisterController", function ($scope, tdpInvestAuthService, $state) {
 
         $scope.register = function () {
-            $scope.registerPromise = tdpInvestAuthService.register($scope.user.username, $scope.user.password)
+            $scope.registerPromise = tdpInvestAuthService.register($scope.username, $scope.password)
                 .then(function (response) {
                     if (response.success) {
                         $state.go('login');
