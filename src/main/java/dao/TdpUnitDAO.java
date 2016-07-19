@@ -24,25 +24,17 @@ public class TdpUnitDAO extends AbstractDAO<TdpUnit> {
         return persist(unit).getId();
     }
 
-    public List<TdpUnit> findAll() {
-        return list(namedQuery("TdpUnit.findAll"));
-    }
-
-    public List<TdpUnit> getData() {
-        return list(namedQuery("TdpUnit.onlyData"));
-    }
-
-    public List<TdpUnit> selectData(Long id, Date dateStart, Date dateEnd) {
-        Query query = namedQuery("TdpUnit.selectDate");
+    public List<TdpUnit> selectData(Long id) {
+        Query query = namedQuery("TdpUnit.selectUnits");
         query.setLong("fund_id", id);
-        query.setDate("date_start", dateStart);
-        query.setDate("date_end", dateEnd);
         return list(query);
     }
 
-    public List<TdpUnit> getFundUnits(Long id) {
-        Query query = namedQuery("TdpUnit.getUnits");
-        query.setLong("fund", id);
+    public List<TdpUnit> selectData(Long id, Date dateStart, Date dateEnd) {
+        Query query = namedQuery("TdpUnit.selectUnitsDate");
+        query.setLong("fund_id", id);
+        query.setDate("date_start", dateStart);
+        query.setDate("date_end", dateEnd);
         return list(query);
     }
 }

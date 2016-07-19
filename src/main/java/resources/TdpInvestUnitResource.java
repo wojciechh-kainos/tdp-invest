@@ -28,18 +28,11 @@ public class TdpInvestUnitResource {
     }
 
     @GET
+    @Path("/{id}")
     @UnitOfWork
-    public List<TdpUnit> fetchAll() {
-        return tdpUnitDAO.findAll();
+    public TdpUnit fetchOne(@PathParam("id") Long id) {
+        return tdpUnitDAO.findById(id);
     }
-
-    @GET
-    @Path("/all")
-    @UnitOfWork
-    public List<TdpUnit> getData() {
-        return tdpUnitDAO.getData();
-    }
-
 
     @GET
     @Path("/select/{fund}")
@@ -56,7 +49,7 @@ public class TdpInvestUnitResource {
             errors.add("No fund ID!");
         else {
             if (stringDateStart == null && stringDateEnd == null) {
-                List<TdpUnit> content = tdpUnitDAO.getFundUnits(id);
+                List<TdpUnit> content = tdpUnitDAO.selectData(id);
                 return Response.ok(content).build();
             }
         }
@@ -87,16 +80,4 @@ public class TdpInvestUnitResource {
         }
     }
 
-    @GET
-    @Path("/{id}")
-    @UnitOfWork
-    public List<TdpUnit> fetch(@PathParam("id") Long id) {
-        return tdpUnitDAO.getFundUnits(id);
-    }
-
-
-    @UnitOfWork
-    public TdpUnit fetchOne(Long id) {
-        return tdpUnitDAO.findById(id);
-    }
 }

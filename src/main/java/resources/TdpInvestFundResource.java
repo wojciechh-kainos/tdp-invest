@@ -40,25 +40,6 @@ public class TdpInvestFundResource {
     }
 
     @GET
-    @Path("/insert")
-    @UnitOfWork
-    public TdpFund insert() {
-        TdpFund fund = new TdpFund();
-        fund.setName("Test");
-        fund.setShortcut("TST");
-
-        TdpUnit unit = new TdpUnit();
-        unit.setFund(fund);
-        unit.setDate(new Date(981068400000L));
-        unit.setValue(12.32);
-
-        tdpFundDAO.create(fund);
-        tdpUnitDAO.create(unit);
-
-        return fund;
-    }
-
-    @GET
     @Path("/{id}")
     @UnitOfWork
     public TdpFund fetch(@PathParam("id") Long id) {

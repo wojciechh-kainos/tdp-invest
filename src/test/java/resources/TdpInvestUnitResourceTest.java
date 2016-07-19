@@ -1,6 +1,7 @@
 package resources;
 
 import dao.TdpUnitDAO;
+import domain.TdpFund;
 import domain.TdpUnit;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -27,30 +28,24 @@ public class TdpInvestUnitResourceTest {
     TdpInvestUnitResource resource;
 
     private static List<TdpUnit> stubDB;
+    private static List<TdpFund> stubDBFund;
 
     @BeforeClass
     public static void setUpStub() {
+        stubDBFund = new ArrayList<>();
+        stubDBFund.add(new TdpFund(1L, "Test", "TST"));
+
         stubDB = new ArrayList<>();
-        stubDB.add(new TdpUnit(1L, new Date(981068400000L), 95.6));
-        stubDB.add(new TdpUnit(2L, new Date(981327600000L), 94.31));
-        stubDB.add(new TdpUnit(3L, new Date(981414000000L), 94.34));
-        stubDB.add(new TdpUnit(4L, new Date(981500400000L), 92.9));
-        stubDB.add(new TdpUnit(5L, new Date(981586800000L), 93.06));
+        stubDB.add(new TdpUnit(1L, new Date(981068400000L), 95.6, stubDBFund.get(0)));
+        stubDB.add(new TdpUnit(2L, new Date(981327600000L), 94.31, stubDBFund.get(0)));
+        stubDB.add(new TdpUnit(3L, new Date(981414000000L), 94.34, stubDBFund.get(0)));
+        stubDB.add(new TdpUnit(4L, new Date(981500400000L), 92.9, stubDBFund.get(0)));
+        stubDB.add(new TdpUnit(5L, new Date(981586800000L), 93.06, stubDBFund.get(0)));
     }
 
     @Before
     public void setUp() {
         resource = new TdpInvestUnitResource(mockDAO);
-    }
-
-    @Test
-    public void testFetchAll() {
-        when(mockDAO.findAll()).thenReturn(stubDB);
-
-        List<TdpUnit> results = resource.fetchAll();
-
-        assertEquals(stubDB.size(), results.size());
-        verify(mockDAO, times(1)).findAll();
     }
 
     @Test
@@ -63,15 +58,12 @@ public class TdpInvestUnitResourceTest {
 
     @Test
     public void testSelectDates() {
-        when(mockDAO.findAll()).thenReturn(stubDB);
+        when(mockDAO.selectData(1L)).thenReturn(stubDB);
 
-        List<TdpUnit> results = resource.fetchAll();
+        Response results = resource.select(1L, null, null);
 
         Date startDate = stubDB.get(0).getDate();
         Date endDate = stubDB.get(4).getDate();
-
-        assertEquals(startDate, results.get(0).getDate());
-        assertEquals(endDate, results.get(4).getDate());
 
         String startDateString = new SimpleDateFormat("yyyy-MM-dd").format(startDate);
         String endDateString = new SimpleDateFormat("yyyy-MM-dd").format(endDate);
@@ -82,8 +74,7 @@ public class TdpInvestUnitResourceTest {
         assertEquals(Response.Status.OK, resource.select(2L, null, null).getStatusInfo());
         assertEquals(Response.Status.BAD_REQUEST, resource.select(null, null, null).getStatusInfo());
 
-        assertEquals(stubDB.size(), results.size());
-        verify(mockDAO, times(1)).findAll();
+        verify(mockDAO, times(1)).selectData(1L);
 
     }
 }

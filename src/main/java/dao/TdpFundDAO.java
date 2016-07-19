@@ -24,6 +24,6 @@ public class TdpFundDAO extends AbstractDAO<TdpFund> {
     }
 
     public List<TdpFund> findAll() {
-        return list(namedQuery("tdpIFund.findAll"));
+        return list(namedQuery("tdpFund.findAll"));
     }
 }

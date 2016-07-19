@@ -8,14 +8,10 @@ import java.util.Date;
 @Entity
 @Table(name = "unit")
 @NamedQueries({
-        @NamedQuery(name = "TdpIUnit.findAll",
-                query = "select u from TdpUnit u"),
-        @NamedQuery(name = "TdpIUnit.onlyData",
-                query = "select u.date, u.value from TdpUnit u"),
-        @NamedQuery(name = "TdpIUnit.getUnits",
-                query = "select u.date, u.value from TdpUnit u where u.fund = :fund"),
-        @NamedQuery(name = "TdpIUnit.selectDate",
-                query = "select u.date, u.value from TdpUnit u where u.date >= :date_start and u.date <= :date_end and u.fund = :fund_id")
+        @NamedQuery(name = "TdpUnit.selectUnits",
+                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id ORDER BY u.date DESC"),
+        @NamedQuery(name = "TdpUnit.selectUnitsDate",
+                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id AND u.date BETWEEN :date_start AND :date_end ORDER BY u.date DESC")
 })
 
 public class TdpUnit {

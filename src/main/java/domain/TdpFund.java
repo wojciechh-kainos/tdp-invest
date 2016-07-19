@@ -8,8 +8,8 @@ import java.util.List;
 @Entity
 @Table(name = "fund")
 @NamedQueries({
-        @NamedQuery(name = "tdpIFund.findAll",
-                query = "select u from TdpFund u")})
+        @NamedQuery(name = "tdpFund.findAll",
+                query = "SELECT u FROM TdpFund AS u")})
 
 public class TdpFund {
     @Id
