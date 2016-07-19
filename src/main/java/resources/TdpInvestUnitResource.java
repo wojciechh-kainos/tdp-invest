@@ -35,7 +35,7 @@ public class TdpInvestUnitResource {
     }
 
     @GET
-    @Path("/select/{fund}")
+    @Path("/select/{fund}/")
     @Produces(MediaType.APPLICATION_JSON)
     @UnitOfWork
     public Response select(
@@ -68,7 +68,7 @@ public class TdpInvestUnitResource {
             Date dateStart = sdf.parse(stringDateStart);
             Date dateEnd = sdf.parse(stringDateEnd);
 
-            if (dateStart.getTime() >= dateEnd.getTime()) {
+            if (dateStart.getTime() > dateEnd.getTime()) {
                 return Response.status(Response.Status.BAD_REQUEST).entity("Start date cannot be higher than end date").build();
             }
 

@@ -9,9 +9,9 @@ import java.util.Date;
 @Table(name = "unit")
 @NamedQueries({
         @NamedQuery(name = "TdpUnit.selectUnits",
-                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id ORDER BY u.date DESC"),
+                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id ORDER BY u.date ASC"),
         @NamedQuery(name = "TdpUnit.selectUnitsDate",
-                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id AND u.date BETWEEN :date_start AND :date_end ORDER BY u.date DESC")
+                query = "SELECT u.date, u.value FROM TdpUnit AS u WHERE u.fund = :fund_id AND u.date BETWEEN :date_start AND :date_end ORDER BY u.date ASC")
 })
 
 public class TdpUnit {
