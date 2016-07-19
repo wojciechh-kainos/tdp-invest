@@ -2,7 +2,7 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/s
     tdpInvestModule.directive('tdpCalendar', function() {
         var controller = ['$scope', function($scope) {
 
-            $scope.start_date = new Date(2015, 7, 20);
+            $scope.start_date = new Date(2015, 7, 15);
             $scope.end_date = new Date();
 
             $scope.today = function() {
