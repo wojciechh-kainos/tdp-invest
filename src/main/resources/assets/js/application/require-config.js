@@ -10,7 +10,9 @@ require.config({
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstocks': 'lib/highcharts/highstock',
         'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
-        'ngResource': 'lib/angular-resource/angular-resource'
+        'ngResource': 'lib/angular-resource/angular-resource',
+        'angularMocks': 'lib/angular-mocks/angular-mocks' //for plugin
+
     },
     shim: {
         'angular': {
