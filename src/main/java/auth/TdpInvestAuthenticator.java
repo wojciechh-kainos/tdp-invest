@@ -34,10 +34,11 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
             if (user != null) {
                 if (credentials.getPassword().equals(user.getToken()) && ZonedDateTime.now().isBefore(user.getTokenExpire())) {
                     userDao.refreshToken(user);
+                    return Optional.of(user);
                 } else if (passwordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
                     userDao.generateToken(user);
+                    return Optional.of(user);
                 }
-                return Optional.of(user);
             }
         } catch (TdpInvestPasswordStore.CannotPerformOperationException | TdpInvestPasswordStore.InvalidHashException e) {
             e.printStackTrace();
