@@ -60,7 +60,6 @@ public class TdpInvestCompareResource {
             collection.add(new StockPrice(dateFormat.format(unit.getDate()), unit.getValue()));
         }
 
-
         return collection;
     }
 

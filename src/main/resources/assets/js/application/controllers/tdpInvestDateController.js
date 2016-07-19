@@ -2,7 +2,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
     tdpInvestModule.controller("tdpInvestDateController", function($scope, $stateParams, tdpCompareService) {
         $scope.test = "";
 
-        $scope.dates = [
+        $scope.datesIntervals = [
             {
                 p : '2016-01-01',
                 k : '2016-02-01'
@@ -23,30 +23,49 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
         ];
 
+        $scope.datesAndPrices = [];
+
         $scope.start_date = '2015-08-13';
         $scope.end_date = '2016-08-19';
 
         $scope.getStockDataMany = function(date1, date2){
-            requests = $scope.createDateRequests($scope.dates, date1, date2).requests;
-            console.log(requests);
+            var data = $scope.createDateRequests($scope.datesIntervals, date1, date2);
+            if(data.length == 0){
+                $scope.stockData = getStockDataFromDates($scope.datesAndPrices, $scope.start_date, $scope.end_date);
+                for(i = 0; i < $scope.stockData.length; i++){
+                    console.log($scope.stockData[i].date + " : " + $scope.stockData[i].price);
+                }
+                return 1;
+            }
+            requests = data.requests;
+            $scope.datesTmp = data.datesIntervals;
             tdpCompareService.getDataRangeMany(requests)
             .then(function(response) {
                 for(i = 0; i < response.data.length; i++){
-                    console.log(response.data[i].date + " : " + response.data[i].price + "\n");
+                    $scope.datesAndPrices.push({date : response.data[i].date, price : response.data[i].price});
                 }
+                $scope.datesAndPrices.sort(compareDatesAndPrices);
+                $scope.datesIntervals = $scope.datesTmp;
+                $scope.stockData = getStockDataFromDates($scope.datesAndPrices, $scope.start_date, $scope.end_date);
+                for(i = 0; i < $scope.stockData.length; i++){
+                    console.log($scope.stockData[i].date + " : " + $scope.stockData[i].price);
+                }
+
             });
         }
 
         $scope.createDateRequests = function (dates, start_date, end_date){
-
+            var request = [];
+            //do poprawki :)
+            if(dates === undefined){
+                return request;
+            }
             dates.sort(compareDates);
 
             console.log("Daty w tablicy: \n");
             for(var i = 0; i < dates.length; i++){
                 console.log(dates[i].p + " - " + dates[i].k + "\n");
             }
-
-            var request = [];
 
             var T0 = start_date;
             var TX = end_date;
@@ -57,16 +76,14 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
                 if(makeDate(T0) < makeDate(dates[i].p)){
                     if(i != 0 && makeDate(T0) <= makeDate(dates[i - 1].k)){
-                        if(makeDate(TX) < makeDate(dates[i - 1].k))
+                        if(makeDate(TX) <= makeDate(dates[i - 1].k))
                             break;
                         T0 = dates[i-1].k;
                         console.log("tutaj: " + T0 + "\n");
                     }
                     if(makeDate(TX) < makeDate(dates[i].p)){
                         request.push(makeRequest(T0, TX));
-
                         dates.push({p : T0, k : TX});
-
                         dates.sort(compareDates);
                         break;
                     }
@@ -130,6 +147,12 @@ function compareDates(date1, date2){
     return -1;
 }
 
+function compareDatesAndPrices(a, b){
+    if(makeDate(a.date) >= makeDate(b.date))
+        return 1;
+    return -1;
+}
+
 function mergeDates(dates){
     var tmp;
     var i = 0;
@@ -142,4 +165,13 @@ function mergeDates(dates){
         }
     }
     return dates;
+}
+
+function getStockDataFromDates(dates, start_date, end_date){
+    stock_data = [];
+    for(i = 0; i < dates.length; i++){
+        if(dates[i].date >= start_date && dates[i].date <= end_date)
+            stock_data.push({date : dates[i].date, price : dates[i].price});
+    }
+    return stock_data;
 }

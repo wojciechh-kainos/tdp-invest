@@ -66,6 +66,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 .then(function(response) {
                     $scope.stockData = [];
                     $scope.stockData = response.data;
+                    console.log(response.data);
                 });
         }
 
