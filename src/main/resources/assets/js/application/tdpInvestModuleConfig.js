@@ -15,51 +15,30 @@ define(['angular'
                     stockDataPromise: function (stockDataService) {
                         return stockDataService.promise;
                     }
-                }
+                },
+                templateUrl: 'html/partials/tdp-invest-main.html'
             }).state("login", {
             url: "/login",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-login.html",
-                    controller: "tdpInvestLoginController"
-                }
-            }
+            templateUrl: "html/partials/tdp-invest-login.html",
+            controller: "tdpInvestLoginController"
         }).state("register", {
             url: "/register",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-register.html",
-                    controller: "tdpInvestRegisterController"
-                }
-            }
+            templateUrl: "html/partials/tdp-invest-register.html",
+            controller: "tdpInvestRegisterController"
         }).state("tdp.compare", {
             url: "/compare",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-compare.html",
-                    controller: "tdpInvestCompareController",
-                    resolve: {
-                        stockDataService: "stockData",
-                        stockDataPromise: function (stockDataService) {
-                            return stockDataService.promise;
-                        }
-                    }
-                }
-            }
+            templateUrl: "html/partials/tdp-invest-compare.html",
+            controller: "tdpInvestCompareController"
         }).state("tdp.compare.calculated", {
             views: {
                 "compare-chart": {
                     templateUrl: "html/partials/tdp-invest-compare-chart.html"
                 }
             }
-        }).state("tdp.chart", {
-            url: "/home",
-            views: {
-                "@": {
-                    templateUrl: "html/partials/tdp-invest-main.html",
-                    controller: "tdpInvestMainViewController"
-                }
-            }
+        }).state("tdp.dashboard", {
+            url: "/dashboard",
+            templateUrl: "html/partials/tdp-invest-dashboard.html",
+            controller: "tdpInvestMainViewController"
         });
 
         $urlRouterProvider.otherwise("/login");

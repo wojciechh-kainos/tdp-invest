@@ -1,29 +1,18 @@
-<div class="container">
-    <div class="col-md-9">
-        <highchart id="chart1" config="chartConfig" class="span10"></highchart>
-    </div>
-    <div class="col-md-3">
-        <div>
-            <table class="table" style="margin-bottom: 0;">
-                <thead>
-                <tr>
-                    <th>Date</th>
-                    <th>Value</th>
-                </tr>
-                </thead>
-            </table>
+<header>
+    <nav class="navbar navbar-inverse navbar-static-top ng-cloak">
+        <div class="container">
 
-        </div>
-        <div class="content" id="mytable">
-            <table class="table">
-                <tbody>
-                <tr ng-repeat="row in mydata | filter: isInRange(min, max)">
-                    <td>{{row[0] | date: 'dd/MM/yyyy'}}</td>
-                    <td>{{row[1]}}</td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+            <div class="navbar-header">
+                <a class="navbar-brand" ui-sref="tdp.dashboard">TDP Invest</a>
+            </div>
 
-    </div>
-</div>
+            <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active="active"><a ui-sref="tdp.dashboard">Chart</a></li>
+                <li ui-sref-active="active"><a ui-sref="tdp.compare">Compare</a></li>
+                <li ui-sref-active="active"><a ui-sref="login">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+</header>
+<div class="container" ui-view></div>
+
