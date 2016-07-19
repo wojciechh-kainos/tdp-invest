@@ -1,7 +1,7 @@
 package resources;
 
 
-import DAO.TdpIUnitDAO;
+import dao.TdpIUnitDAO;
 import com.google.inject.Inject;
 import configuration.TdpConfig;
 import domain.TdpIUnit;
@@ -20,7 +20,6 @@ import java.util.List;
 public class TdpInvestUnitResource {
 
 	private TdpIUnitDAO tdpIUnitDAO;
-	private static Boolean isDateInitialized = false;
 
 	@Inject
 	public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO) {
@@ -30,15 +29,6 @@ public class TdpInvestUnitResource {
 	@GET
 	@UnitOfWork
 	public List<TdpIUnit> fetchAll() {
-		if(!isDateInitialized)
-			try {
-				initializeDateFromFile();
-				isDateInitialized = true;
-			} catch (IOException e) {
-				e.printStackTrace();
-				isDateInitialized = false;
-			}
-
 		return tdpIUnitDAO.findAll();
 	}
 
@@ -53,12 +43,6 @@ public class TdpInvestUnitResource {
 	@UnitOfWork
 	public Long createTdpUnit(TdpIUnit tdpUnit) {
 		return tdpIUnitDAO.create(tdpUnit);
-	}
-
-	private void initializeDateFromFile() throws IOException {
-		CsvToModelParser csvToModelParser = new CsvToModelParser(TdpConfig.pathToData);
-		List<TdpIUnit> list = csvToModelParser.parse();
-		list.forEach(record -> tdpIUnitDAO.create(record));
 	}
 
 }

@@ -6,12 +6,13 @@ import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
+import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
+import resources.TdpUploadFileResource;
 
 
 public class TdpInvestApplication extends Application<TdpInvestApplicationConfiguration> {
@@ -39,6 +40,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
+        bootstrap.addBundle(new MultiPartBundle());
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)
@@ -52,6 +54,7 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         module.setSessionFactory(hibernateBundle.getSessionFactory());
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
+        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpUploadFileResource.class));
     }
 
     public static void main(final String[] args) throws Exception {

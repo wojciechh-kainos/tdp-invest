@@ -26,9 +26,8 @@ public class CsvToModelParser {
 
     public CsvToModelParser(String path) throws FileNotFoundException {
         log = Logger.getLogger(getClass().getName());
-        URL url = getClass().getResource(path);
-        if (url != null) {
-            reader = new FileReader(url.getPath());
+        if (path != null) {
+            reader = new FileReader(path);
         }else{
             throw new FileNotFoundException("File not found: " + path);
         }

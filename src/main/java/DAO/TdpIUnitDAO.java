@@ -1,9 +1,10 @@
-package DAO;
+package dao;
 
 
 import com.google.inject.Inject;
 import domain.TdpIUnit;
 import io.dropwizard.hibernate.AbstractDAO;
+import org.hibernate.Query;
 import org.hibernate.SessionFactory;
 
 import java.util.List;
@@ -25,5 +26,9 @@ public class TdpIUnitDAO extends AbstractDAO<TdpIUnit> {
 
 	public List<TdpIUnit> findAll() {
 		return list(namedQuery("TdpIUnit.findAll"));
+	}
+
+	public void deleteAll(){
+		namedQuery("TdpIUnit.deleteAll").executeUpdate();
 	}
 }

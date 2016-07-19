@@ -4,5 +4,5 @@ package configuration;
  * Created by malgorzatas on 12/07/16.
  */
 public class TdpConfig {
-    public static final String pathToData = "/data.csv";
+    public static String pathToDownloadData = "/";
 }
