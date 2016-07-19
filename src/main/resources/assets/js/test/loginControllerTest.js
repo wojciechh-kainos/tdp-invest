@@ -26,23 +26,23 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
 
         describe('When logging in', function () {
 
-            it('with valid credentials should succeed', inject(function () {
+            it('with valid credentials should succeed', function () {
                 deferred.resolve({success: true});
 
                 $scope.login();
                 $scope.$apply();
 
                 expect($state.go).toHaveBeenCalledWith('tdp');
-            }));
+            });
 
-            it('with invalid credentials should fail', inject(function () {
+            it('with invalid credentials should fail', function () {
                 deferred.resolve({success: false, message: "error"});
 
                 $scope.login();
                 $scope.$apply();
 
                 expect($state.go).not.toHaveBeenCalled();
-            }));
+            });
 
         });
     });

@@ -24,23 +24,23 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestRegisterCon
 
         describe('When registering', function () {
 
-            it('with valid credentials should succeed', inject(function () {
+            it('with valid credentials should succeed', function () {
                 deferred.resolve({success: true});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($state.go).toHaveBeenCalledWith('login');
-            }));
+            });
 
-            it('when user already exists should fail', inject(function () {
+            it('when user already exists should fail', function () {
                 deferred.resolve({success: false, message: "error"});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($scope.error).toEqual("error");
-            }));
+            });
 
         });
     });
