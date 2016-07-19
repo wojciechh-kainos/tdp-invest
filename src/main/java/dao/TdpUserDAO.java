@@ -8,10 +8,17 @@ import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 
+import java.security.SecureRandom;
+import java.time.ZonedDateTime;
+
 
 public class TdpUserDAO extends AbstractDAO<TdpUser> {
 
     private final TdpInvestPasswordStore passwordStore;
+
+    static final String AB = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz";
+
+    static SecureRandom rnd = new SecureRandom();
 
     @Inject
     public TdpUserDAO(SessionFactory sessionFactory, TdpInvestPasswordStore passwordStore) {
@@ -39,4 +46,23 @@ public class TdpUserDAO extends AbstractDAO<TdpUser> {
         }
     }
 
+    public String refreshToken(TdpUser user) {
+        ZonedDateTime newTokenExpire = user.getTokenExpire().plusMinutes(10);
+        user.setTokenExpire(newTokenExpire);
+        return persist(user).getToken();
+    }
+
+    public String generateToken(TdpUser user) {
+        String token = randomString(50);
+        user.setToken(token);
+        user.setTokenExpire(ZonedDateTime.now().plusMinutes(10));
+        return persist(user).getToken();
+    }
+
+    private String randomString(int len) {
+        StringBuilder sb = new StringBuilder(len);
+        for (int i = 0; i < len; i++)
+            sb.append(AB.charAt(rnd.nextInt(AB.length())));
+        return sb.toString();
+    }
 }

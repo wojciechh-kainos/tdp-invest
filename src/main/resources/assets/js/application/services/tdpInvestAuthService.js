@@ -5,15 +5,22 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
         service.login = function(username, password) {
             service.setCredentials(username, password);
 
-            return $http.get('/api/login').then(handleSuccess, function () {
+            return $http.get('/api/login').then(function(res) {
+                service.setCredentials($rootScope.globals.currentUser.username, res.data);
+                res.success = true;
+                return res;
+            }, function () {
                 service.clearCredentials();
                 return { success: false, message: "Wrong email or password." };
             });
         };
 
         service.register = function(username, password) {
-            return $http.post('/api/register', { mail: username, password: password }).then(handleSuccess, function (response) {
-                if (response.status == 409){
+            return $http.post('/api/register', { mail: username, password: password }).then(function(res) {
+                res.success = true;
+                return res;
+            }, function (response) {
+                if (response.status == 409) {
                     return { success: false, message: "Email address already in use." };
                 }
                 return { success: false, message: "Registration failed." };
@@ -49,11 +56,6 @@ define(['angular','application/tdpInvestModule', 'application/services/tdpInvest
                 }
             }, true);
         };
-
-        function handleSuccess(res) {
-            res.success = true;
-            return res;
-        }
 
         return service;
     }]);

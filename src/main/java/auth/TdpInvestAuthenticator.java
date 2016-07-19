@@ -10,6 +10,8 @@ import domain.TdpUser;
 import dao.TdpUserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
 
+import java.time.ZonedDateTime;
+
 @Singleton
 public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, TdpUser> {
 
@@ -29,7 +31,12 @@ public class TdpInvestAuthenticator implements Authenticator<BasicCredentials, T
         TdpUser user = userDao.getUserByEmail(credentials.getUsername());
 
         try {
-            if (user != null && passwordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
+            if (user != null) {
+                if (credentials.getPassword().equals(user.getToken()) && ZonedDateTime.now().isBefore(user.getTokenExpire())) {
+                    userDao.refreshToken(user);
+                } else if (passwordStore.verifyPassword(credentials.getPassword(), user.getPassword())) {
+                    userDao.generateToken(user);
+                }
                 return Optional.of(user);
             }
         } catch (TdpInvestPasswordStore.CannotPerformOperationException | TdpInvestPasswordStore.InvalidHashException e) {
