@@ -30,7 +30,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 deferred.resolve({success: true});
 
                 $scope.login();
-                //$scope.$apply();
+                $scope.$apply();
 
                 expect($state.go).toHaveBeenCalledWith('tdp.dashboard');
             });

@@ -8,7 +8,6 @@ import configuration.TdpInvestModule;
 import domain.TdpFund;
 import domain.TdpUnit;
 import dao.TdpUserDAO;
-import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
