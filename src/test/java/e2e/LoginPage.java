@@ -20,7 +20,6 @@ public class LoginPage extends BasePage{
     public void open() {
         String url = BASE_PATH + PATH;
         this.driver.get(url);
-        this.driver.manage().timeouts().implicitlyWait(3, TimeUnit.SECONDS);
     }
 
     public void login(String username, String password){
@@ -33,5 +32,7 @@ public class LoginPage extends BasePage{
         return !driver.findElement(this.errorAlert).getCssValue("display").equals("none");
     }
 
-
+    public boolean isRedirected() {
+        return driver.getCurrentUrl().equals(BASE_PATH + PATH);
+    }
 }
