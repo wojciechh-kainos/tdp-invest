@@ -13,6 +13,9 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
             }).state("tdp.person", {
                 url: "/person/{personId}",
@@ -40,6 +43,20 @@ define(['angular'
                 }
             });
         $urlRouterProvider.otherwise("/login");
+
+        function _redirectIfNotAuthenticated($q, $state, $rootScope) {
+            var defer = $q.defer();
+            if($rootScope.globals.currentUser) {
+                defer.resolve(); 
+            } else {
+                $timeout(function () {
+                    $state.go("login");
+                });
+                defer.reject();
+            }
+            return defer.promise;
+        }
+        
     });
 
     return tdpInvestModule;
