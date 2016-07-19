@@ -16,10 +16,10 @@ public class ParseCsvFileTest {
 
     private CsvToModelParser csvToModelParser;
     private List<TdpIUnit> expectedInvestScores = new ArrayList<>();
-    private String path = "/testAssets/investScoresTest.csv";
 
     @Before
     public void setUp() throws FileNotFoundException {
+        String path = getClass().getResource("/testAssets/investScoresTest.csv").getPath();
         csvToModelParser = new CsvToModelParser(path);
         expectedInvestScores.add(new TdpIUnit(LocalDate.of(1998,1,5), (double)100));
         expectedInvestScores.add(new TdpIUnit(LocalDate.of(1990,2,6), (double)200.50));

@@ -18,5 +18,26 @@
         </createTable>
     </changeSet>
 
+    <changeSet id="1" author="sara">
+        <createTable tableName="unit">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="date" type="timestamp without time zone">
+                <constraints nullable="false"/>
+            </column>
+            <column name="value" type="double precision"/>
+        </createTable>
+
+        <createTable tableName="tdpuser">
+            <column name="id" type="bigint" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="email" type="character varying(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="password" type="character varying(255)"/>
+        </createTable>
+    </changeSet>
 </databaseChangeLog>
 

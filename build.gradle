@@ -3,7 +3,6 @@ version '1.0-SNAPSHOT'
 
 import com.wiredforcode.gradle.spawn.*
 
-
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven'
@@ -57,12 +56,12 @@ sourceSets {
 dependencies {
     compile (
         'io.dropwizard:dropwizard-core:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
         'io.dropwizard:dropwizard-assets:' + dropwizardVersion,
         'io.dropwizard:dropwizard-hibernate:' + dropwizardVersion,
         'io.dropwizard:dropwizard-db:' + dropwizardVersion,
         'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
         'io.dropwizard:dropwizard-forms:' + dropwizardVersion,
-
         'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2'
     )
 

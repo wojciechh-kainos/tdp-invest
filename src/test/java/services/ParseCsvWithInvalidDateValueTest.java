@@ -17,11 +17,11 @@ import static junit.framework.TestCase.assertTrue;
 public class ParseCsvWithInvalidDateValueTest {
 
     private CsvToModelParser csvToModelParser;
-    private String path = "/testAssets/investScoresInvalidDateTest.csv";
     private TdpIUnit expectedInvestScore;
 
     @Before
     public void setUp() throws FileNotFoundException {
+        String path = getClass().getResource("/testAssets/investScoresInvalidDateTest.csv").getPath();
         expectedInvestScore = new TdpIUnit();
         expectedInvestScore.setDate(LocalDate.of(1998,1,5));
         expectedInvestScore.setValue(100.00);
