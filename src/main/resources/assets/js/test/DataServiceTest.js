@@ -1,12 +1,12 @@
-define(['angular', 'angularMocks', 'application/services/DataService'], function(angular, $httpBackend) {
+define(['angular', 'angularMocks', 'application/services/tdpInvestDataService'], function(angular, $httpBackend) {
 
     describe('DataService', function() {
         beforeEach(angular.mock.module('tdpInvestModule'));
 
         var DataService;
 
-        beforeEach( inject( function(_DataService_){
-          DataService = _DataService_;
+        beforeEach( inject( function(_tdpInvestDataService_){
+          DataService = _tdpInvestDataService_;
         }));
 
         var $httpBackend;

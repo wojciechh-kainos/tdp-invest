@@ -1,4 +1,4 @@
-define( ['angular' , 'angularMocks' , 'application/controllers/DataController'], function(angular){
+define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestTableController'], function(angular){
 
     describe('DataController', function() {
 
@@ -23,7 +23,7 @@ define( ['angular' , 'angularMocks' , 'application/controllers/DataController'],
 
             beforeEach(function() {
 
-                controller = $controller('DataController', { $scope: $scope, $state: $state});
+                controller = $controller('tdpInvestTableController', { $scope: $scope });
             });
 
             it('checks if right state is chosen', function() {

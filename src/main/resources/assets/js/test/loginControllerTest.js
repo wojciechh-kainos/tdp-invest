@@ -33,7 +33,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.$apply();
 
 
-                expect($state.go).toHaveBeenCalledWith('root');
+                expect($state.go).toHaveBeenCalledWith('root.home');
             });
 
 
