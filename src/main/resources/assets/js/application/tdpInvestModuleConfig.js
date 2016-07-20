@@ -81,7 +81,5 @@ define(['angular'
             }
         }]);
 
-    });
-
     return tdpInvestModule;
 });
