@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestDateController", function($scope, $stateParams, tdpCompareService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestCompareService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestDateController", function($scope, $stateParams, tdpInvestCompareService) {
         $scope.test = "";
 
         $scope.datesIntervals = [];
@@ -17,7 +17,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
             }
             requests = data.requests;
             $scope.datesTmp = data.datesIntervals;
-            tdpCompareService.getDataRangeMany(requests)
+            tdpInvestCompareService.getDataRangeMany(requests)
             .then(function(response) {
                 for(i = 0; i < response.data.length; i++){
                     $scope.datesAndPrices.push({date : response.data[i].date, price : response.data[i].price});

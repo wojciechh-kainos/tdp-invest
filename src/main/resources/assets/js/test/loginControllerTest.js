@@ -32,7 +32,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect(location.path).toHaveBeenCalledWith('/tdp');
+                expect(location.path).toHaveBeenCalledWith('/compare');
                 expect(authService.setCredentials).toHaveBeenCalled();
             }));
 

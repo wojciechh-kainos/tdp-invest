@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpInvestCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.directive('tdpChart', function() {
         var controller = ['$scope', function($scope) {
 

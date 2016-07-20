@@ -21,11 +21,6 @@ public class DataLoader {
 
     public void loadData(InputStream fileInputStream) {
         List<TdpIUnit> tdpUnitList = csvReader.readCSV(fileInputStream);
-
         dao.bulkAdd(tdpUnitList);
-//        for (TdpIUnit unit : tdpUnitList) {
-//            dao.create(unit);
-//        }
-
     }
 }

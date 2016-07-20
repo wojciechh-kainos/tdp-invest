@@ -55,9 +55,6 @@ public class TdpInvestUnitResource {
 			@FormDataParam("file") FormDataContentDisposition fileDetail) {
 		dataLoader.loadData(fileInputStream);
 
-
-
 		return Response.status(200).entity("file uploaded").build();
-
 	}
 }

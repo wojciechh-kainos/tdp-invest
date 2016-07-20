@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompareService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.directive('tdpTable', function() {
             var controller = ['$scope', function($scope) {
 

@@ -16,7 +16,6 @@ require.config({
   // Karma serves files under /base, which is the basePath from your config file
   baseUrl: '/base',
   paths: {
-<<<<<<< HEAD
         'angular': 'lib/angular/angular.min',
         'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
@@ -24,15 +23,10 @@ require.config({
 //        'angular-bootstrap': 'http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.12.1.min',
         'ui-bootstrap' : 'lib/angular-bootstrap/ui-bootstrap-tpls',
         'angularMocks': 'lib/angular-mocks/angular-mocks',
-        'eonasdan-bootstrap-datetimepicker' : 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker'
-=======
-      'angular': 'lib/angular/angular',
-      'angularMocks': 'lib/angular-mocks/angular-mocks',
-      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
-      'ngCookies': 'lib/angular-cookies/angular-cookies',
-      'requireJS': 'lib/requirejs/require',
-      'karma-requireJS': 'lib/karma-require'
->>>>>>> master
+        'eonasdan-bootstrap-datetimepicker' : 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker',
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
+        'requireJS': 'lib/requirejs/require',
+        'karma-requireJS': 'lib/karma-require'
   },
   shim: {
       'angular': {
@@ -41,11 +35,8 @@ require.config({
       'angularMocks': ['angular'],
       'highcharts-ng': ['angular', 'highcharts'],
       'uiRouter' : ['angular'],
-<<<<<<< HEAD
-      'ui-bootstrap' : ['angular']
-=======
+      'ui-bootstrap' : ['angular'],
       'ngCookies': ['angular']
->>>>>>> master
   },
   // dynamically load all test files
   deps: allTestFiles,

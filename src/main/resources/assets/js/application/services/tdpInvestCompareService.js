@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule, tdpCompareService) {
-    tdpInvestModule.service("tdpCompareService", function($http) {
+define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule, tdpInvestCompareService) {
+    tdpInvestModule.service("tdpInvestCompareService", function($http) {
         this.getData = function() {
             return $http.get("/api/compare");
         };
@@ -14,8 +14,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 }
             }
             return $http.post("/api/compare/date", data, config);
-        }
+        };
     })
+
+
 });
 
 
