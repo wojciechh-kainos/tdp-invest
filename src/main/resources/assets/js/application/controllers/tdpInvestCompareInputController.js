@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("UserDataController", function($scope, $state, DataService, dataUrl) {
+define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestCompareInputController", function($scope, $state) {
 
         $scope.$watch('input', function() {
             $scope.$parent.input = $scope.input;

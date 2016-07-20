@@ -1,3 +1,4 @@
+import DAO.TdpUserDAO;
 import auth.TdpInvestAuthenticator;
 import auth.TdpInvestPasswordStore;
 import auth.TdpInvestUnauthorizedHandler;
@@ -5,44 +6,25 @@ import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
-import DAO.TdpUserDAO;
 import domain.TdpIUnit;
+import domain.TdpUser;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
-import io.dropwizard.db.ManagedDataSource;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
-import liquibase.Contexts;
-import liquibase.LabelExpression;
-import liquibase.Liquibase;
-import liquibase.database.Database;
-import liquibase.database.DatabaseConnection;
-import liquibase.database.DatabaseFactory;
-import liquibase.database.jvm.JdbcConnection;
-import liquibase.exception.DatabaseException;
-import liquibase.exception.LiquibaseException;
-import liquibase.resource.ClassLoaderResourceAccessor;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import resources.DataResource;
-import configuration.TdpInvestModule;
-import domain.TdpUser;
 import resources.TdpInvestAuthResource;
 import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
-import service.DateTransformer;
 import service.FileTransformer;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 
 
 public class TdpInvestApplication extends Application<TdpInvestApplicationConfiguration> {

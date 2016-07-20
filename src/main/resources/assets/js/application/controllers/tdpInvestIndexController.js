@@ -1,5 +1,7 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("IndexController", function($scope, $state) {
+define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestIndexController", function($scope, $state) {
+
+        console.log("Entered Index Controller!");
 
         $scope.startDate = new Date(2013/05/03);
         $scope.endDate= new Date(2013/05/03);

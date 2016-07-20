@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("DateController", function($scope, $state, $filter, DataService, dataUrl) {
+define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestDateController", function($scope, $state, $filter) {
 
         $scope.$watch('startDated', function() {
             var date = $filter('date')($scope.startDated, "yyyy-MM-dd")

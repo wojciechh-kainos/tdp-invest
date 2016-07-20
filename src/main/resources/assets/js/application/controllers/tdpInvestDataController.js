@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("DataController", function($scope, $state) {
+    tdpInvestModule.controller("tdpInvestDataController", function($scope, $state) {
 
         $scope.$watch('receivedData', function() {
               var data = $scope.$parent.receivedData;

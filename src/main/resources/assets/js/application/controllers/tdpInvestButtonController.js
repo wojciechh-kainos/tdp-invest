@@ -1,17 +1,19 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("ButtonController", function($scope, $state, DataService, dataUrl) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestDataService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestButtonController", function($scope, $state, tdpInvestDataService) {
+
+        var dataUrl = "/api/rows/get";
 
         $scope.submitRequest = function() {
-                DataService.getRows(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate)
+                tdpInvestDataService.getRows(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate)
                 .then(function(response) {
                     $scope.$parent.receivedData = response.data;
                      if($state.current.name == "root.compare"){
                         var input = $scope.$parent.input;
                         var receivedData = $scope.$parent.receivedData
-                        var result = DataService.calculateFundIncome(input,receivedData);
+                        var result = tdpInvestDataService.calculateFundIncome(input,receivedData);
                         $scope.$parent.dataFund = result;
                         var percentage = $scope.$parent.percentage;
-                        result = DataService.calculateInvestIncome(percentage,input,receivedData);
+                        result = tdpInvestDataService.calculateInvestIncome(percentage,input,receivedData);
                         $scope.$parent.dataInvest = result;
                      };
 

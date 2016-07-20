@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("chartController", function($scope, $state, $stateParams,$filter,DataService, dataUrl) {
+    tdpInvestModule.controller("tdpInvestChartController", function($scope, $state, $stateParams, $filter) {
 
      $scope.$watch('receivedData', function() {
            var dataForChart = [];

@@ -4,78 +4,51 @@ define(['angular'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestNavbarController'
-    , 'application/controllers/chartController'
-    , 'application/controllers/DataController'
-    , 'application/controllers/DateController'
-    , 'application/controllers/IndexController'
-    , 'application/controllers/UserDataController'
-    , 'application/controllers/ButtonController'
+    , 'application/controllers/tdpInvestChartController'
+    , 'application/controllers/tdpInvestDataController'
+    , 'application/controllers/tdpInvestDateController'
+    , 'application/controllers/tdpInvestIndexController'
+    , 'application/controllers/tdpInvestCompareInputController'
+    , 'application/controllers/tdpInvestButtonController'
 ], function (angular, tdpInvestModule) {
     tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("root", {
-                url: "",
-                templateUrl: 'html/partials/tdp.html',
-                controller: 'IndexController',
+                url: "/",
+                abstract: "true",
+                templateUrl: 'html/partials/tdp-invest.html',
+                controller: 'tdpInvestIndexController',
+                resolve: {
+                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                    }
             })
                 .state("root.home", {
-                    url: "/home",
+                    url: "^/home",
                     views: {
-                         "chart@root": {
-                             templateUrl: "html/partials/chart.html",
-                              controller: "chartController"
-                              },
-                         "DateSegment@root": {
-                             templateUrl: "html/partials/DateSegment.html",
-                              controller: "DateController"
-                              },
                          "table@root": {
-                             templateUrl: "html/partials/DataTablePage.html",
-                              controller: "DataController"
-                              },
-                         "submitButton@root": {
-                            templateUrl: "html/partials/button.html",
-                            controller: "ButtonController"
-                         }
-
+                             templateUrl: "html/partials/tdp-invest-table.html",
+                              controller: "tdpInvestDataController"
+                              }
                     },
                     resolve: {
-                        dataUrl: function() {
-                            return "/api/rows/get"
-                        },
-                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                       // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
 
                 })
                 .state("root.compare", {
-                    url: "/compare",
+                    url: "^/compare",
                     views: {
-                         "chart@root": {
-                             templateUrl: "html/partials/chart.html",
-                              controller: "chartController"
-                              },
-                          "DateSegment@root": {
-                             templateUrl: "html/partials/DateSegment.html",
-                              controller: "DateController"
-                              },
                          "table@root": {
-                             templateUrl: "html/partials/DataTablePage.html",
-                              controller: "DataController"
+                             templateUrl: "html/partials/tdp-invest-table.html",
+                              controller: "tdpInvestDataController"
                               },
                          "userData@root": {
-                             templateUrl: "html/partials/userData.html",
-                             controller: "UserDataController"
-                             },
-                         "submitButton@root": {
-                             templateUrl: "html/partials/button.html",
-                             controller: "ButtonController"
+                             templateUrl: "html/partials/tdp-invest-userData.html",
+                             controller: "tdpInvestCompareInputController"
                              }
                     },
                     resolve: {
-                        dataUrl: function() {
-                            return "api/rows/get"
-                        },
-                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                       // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
                 })
             .state("login", {
