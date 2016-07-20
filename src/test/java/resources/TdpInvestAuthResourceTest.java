@@ -1,7 +1,5 @@
 package resources;
 
-import auth.TdpInvestAuthenticator;
-import com.google.common.base.Optional;
 import dao.TdpUserDAO;
 import domain.TdpUser;
 import io.dropwizard.auth.AuthenticationException;
@@ -14,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import javax.ws.rs.core.Response;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -29,6 +28,7 @@ public class TdpInvestAuthResourceTest {
     @BeforeClass
     public static void setUpStub() {
         stubUser = new TdpUser("a@test", "a");
+        stubUser.setToken("OK");
     }
 
     @Before
@@ -36,9 +36,9 @@ public class TdpInvestAuthResourceTest {
 
     @Test
     public void testLoginWithValidCredentials() throws AuthenticationException {
-        Response response = resource.login(stubUser);
+        String response = resource.login(stubUser);
 
-        assertEquals(response.getStatus(), Response.Status.ACCEPTED.getStatusCode());
+        assertNotNull(response);
     }
 
     @Test

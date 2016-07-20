@@ -29,15 +29,9 @@ public class TdpInvestAuthResource {
     }
 
     @GET
-    @Path("/valid")
-    public String valid(@Auth TdpUser tdpUser) throws AuthenticationException {
-        return "SUCCESS";
-    }
-
-    @GET
     @Path("/login")
-    public Response login(@Auth TdpUser tdpUser) throws AuthenticationException {
-            return Response.status(Response.Status.ACCEPTED).build();
+    public String login(@Auth TdpUser tdpUser) throws AuthenticationException {
+        return tdpUser.getToken();
     }
 
     @POST
