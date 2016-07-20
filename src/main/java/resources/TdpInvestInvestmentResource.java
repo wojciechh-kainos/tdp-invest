@@ -14,6 +14,7 @@ import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Date;
 import java.util.List;
 
 @Path("/investment")
@@ -60,16 +61,15 @@ public class TdpInvestInvestmentResource {
     @Path("/edit")
     @UnitOfWork
     @Consumes(MediaType.APPLICATION_JSON)
-    public long edit(TdpIInvestment investment) {
-        throw new NotImplementedException("You have to implement that method first!");
+    public void edit(TdpIInvestment investment) {
+        tdpIInvestmentDAO.edit(investment);
     }
 
     @DELETE
-    @Path("/delete")
+    @Path("/delete/{investmentId}")
     @UnitOfWork
-    @Consumes(MediaType.APPLICATION_JSON)
-    public void delete(TdpIInvestment investment){
-        tdpIInvestmentDAO.remove(investment);
+    public void delete(@PathParam("investmentId")Long id){
+        tdpIInvestmentDAO.removeById(id);
     }
 
     @GET
@@ -84,5 +84,5 @@ public class TdpInvestInvestmentResource {
         return ts.getTimeSeries();
     }
 
-    private DateTime convertToDate(String s){ return s == null ? null : DateTime.parse(s); }
+    private Date convertToDate(String s){ return s == null ? null : DateTime.parse(s).toDate(); }
 }

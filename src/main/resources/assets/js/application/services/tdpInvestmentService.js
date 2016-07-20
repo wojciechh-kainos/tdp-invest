@@ -13,13 +13,12 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return $http.post("/api/investment/create", investment);
         };
         
-        // //TODO: there should be a backend for edit!
-        // this.editInvestment = function(investment){
-        //     return $http.put("/api/investment/edit", investment);
-        // };
+        this.editInvestment = function(investment){
+            return $http.put("/api/investment/edit", investment);
+        };
 
-        this.deleteInvestment = function(investment){
-            return $http.delete("/api/investment/delete", investment);
+        this.deleteInvestment = function(id){
+            return $http.delete("/api/investment/delete/" + id);
         };
 
     })

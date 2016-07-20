@@ -9,7 +9,12 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
 
         //***table***
         $scope.tableConfig  = {
-            params: new NgTableParams({count: 10}, { counts: [], data: data })
+            params: new NgTableParams({
+                count: 10
+            }, {
+                counts: [],
+                data: data
+            })
         };
 
         //***file upload***
@@ -50,7 +55,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
                                                  evt.loaded / evt.total));
                     });
                 }
-            }
+            };
         //***end of file upload***
     });
 });

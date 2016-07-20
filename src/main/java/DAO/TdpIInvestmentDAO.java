@@ -11,6 +11,7 @@ import org.hibernate.criterion.Restrictions;
 import org.joda.time.DateTime;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class TdpIInvestmentDAO extends AbstractDAO<TdpIInvestment> {
@@ -21,13 +22,17 @@ public class TdpIInvestmentDAO extends AbstractDAO<TdpIInvestment> {
 
     public long create(TdpIInvestment investment) { return persist(investment).getId(); }
 
-    public void remove(TdpIInvestment investment){
-        currentSession().delete(investment);
+    public void removeById(Long id){
+        currentSession().delete(findById(id));
+    }
+
+    public void edit(TdpIInvestment investment) {
+        currentSession().merge(investment);
     }
 
     public List<TdpIInvestment> findAll() { return list(namedQuery("TdpIInvestment.findAll")); }
 
-    public List<TdpIInvestment> findBetween(DateTime startDate, DateTime endDate){
+    public List<TdpIInvestment> findBetween(Date startDate, Date endDate){
         Criteria criteria = currentSession().createCriteria(TdpIInvestment.class);
         addRestrictionIfNotNull(criteria, Restrictions.ge("startDate", startDate), startDate);
         addRestrictionIfNotNull(criteria, Restrictions.le("endDate", endDate), endDate);

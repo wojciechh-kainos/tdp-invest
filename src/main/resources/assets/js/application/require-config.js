@@ -15,7 +15,8 @@ require.config({
         'ng-table': 'lib/ng-table/dist/ng-table',
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'highstocks': 'lib/highcharts/highstock', 
-        'highcharts-no-data': 'lib/highcharts-no-data-to-display/no-data-to-display'
+        'highcharts-no-data': 'lib/highcharts-no-data-to-display/no-data-to-display',
+        'xeditable': 'lib/angular-xeditable/dist/js/xeditable'
     },
     shim: {
         'angular': {
@@ -39,8 +40,8 @@ require.config({
             exports: 'ngCookies',
             deps: ['angular']
         },
-         'highcharts-no-data': {     deps: ['highcharts-ng'] }
-
+         'highcharts-no-data': {  deps: ['highcharts-ng'] },
+        'xeditable': ['angular']
     },
     deps: ['application/bootstrap']
 });

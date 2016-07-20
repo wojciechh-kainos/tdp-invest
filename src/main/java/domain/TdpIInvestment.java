@@ -3,8 +3,7 @@ package domain;
 import org.joda.time.DateTime;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.ws.rs.FormParam;
+import java.util.Date;
 
 @Entity
 @Table(name = "investment")
@@ -17,23 +16,24 @@ public class TdpIInvestment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    private DateTime startDate;
+    private Date startDate;
 
-    @NotNull
-    private DateTime endDate;
+    private Date endDate;
 
-    @NotNull
     private double amount;
 
-    @NotNull
     private double annualRate;
     //</editor-fold>
 
     //<editor-fold desc="constructors">
     public TdpIInvestment(){}
 
-    public TdpIInvestment(DateTime startDate, DateTime endDate, double amount, double annualRate){
+    public TdpIInvestment(Long id){
+        this.id = id;
+    }
+
+    public TdpIInvestment(Long id, Date startDate, Date endDate, double amount, double annualRate){
+        this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
         this.amount = amount;
@@ -43,7 +43,7 @@ public class TdpIInvestment {
     //</editor-fold>
 
     //<editor-fold desc="getter/setter">
-    public long getId() {
+    public Long getId() {
         return id;
     }
 
@@ -51,19 +51,19 @@ public class TdpIInvestment {
         this.id = id;
     }
 
-    public DateTime getStartDate() {
+    public Date getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(DateTime startDate) {
+    public void setStartDate(Date startDate) {
         this.startDate = startDate;
     }
 
-    public DateTime getEndDate() {
+    public Date getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(DateTime endDate) {
+    public void setEndDate(Date endDate) {
         this.endDate = endDate;
     }
 
@@ -84,12 +84,13 @@ public class TdpIInvestment {
     }
     //</editor-fold>
 
-    @Override
-    public String toString(){
-        return "id: " + this.id +
-                " | " + startDate.toString("yyyy-MM-dd") +
-                " | " + endDate.toString("yyyy-MM-dd") +
-                " | $" + String.format("%.2f", this.amount) +
-                " | " + String.format("%.2f", this.annualRate * 100) + "%";
-    }
+//    @Override
+//    public String toString(){
+//        return "id: " + this.id +
+//                " | " + startDate == null ? "null" : startDate.toString("yyyy-MM-dd") +
+//                " | " + endDate == null ? "null" : endDate.toString("yyyy-MM-dd") +
+//                " | $" + String.format("%.2f", this.amount) +
+//                " | " + String.format("%.2f", this.annualRate * 100) + "%";
+//    }
+
 }
