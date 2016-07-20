@@ -7,7 +7,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in myData">
+    <tr ng-repeat="row in receivedData">
         <td class="col-xs-6">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
         <td class="col-xs-6">{{row[columns[valIndex]]}}</td>
     </tr>
@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in myData">
+    <tr ng-repeat="row in receivedData">
         <td class="col-xs-5">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
         <td class="col-xs-3">{{row[columns[fundIndex]]}}</td>
         <td class="col-xs-4">{{row[columns[investIndex]]}}</td>

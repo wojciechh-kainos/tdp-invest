@@ -2,7 +2,7 @@ package resources;
 
 import auth.TdpInvestAuthenticator;
 import com.google.common.base.Optional;
-import dao.TdpUserDAO;
+import DAO.TdpUserDAO;
 import domain.TdpUser;
 import io.dropwizard.auth.AuthenticationException;
 import org.hibernate.HibernateException;

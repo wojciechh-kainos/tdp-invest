@@ -11,7 +11,7 @@ import java.util.Date;
 		@NamedQuery(name = "TdpIUnit.findAll",
 				query = "select u from TdpIUnit u"),
 		@NamedQuery(name = "TdpIUnit.findDatesBetween",
-					query = "select u from TdpIUnit u where u.date between :start and :end")
+					query = "select u from TdpIUnit u where u.date between :start and :end order by u.date asc")
 
 })
 public class TdpIUnit {
@@ -28,7 +28,7 @@ public class TdpIUnit {
 	public TdpIUnit() {
 	}
 
-	public TdpIUnit(Long id, Date date, Double value, Double incomeFromFund, Double incomeFromInvestment) {
+	public TdpIUnit(Long id, Date date, Double value) {
 		this.id = id;
 		this.date = date;
 		this.value = value;
