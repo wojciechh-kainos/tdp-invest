@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/controllers/tdpInvestPersonController'], function(angular) {
 
     describe('tdpInvestPersonController', function() {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('auth'));
 
         var $controller;
         beforeEach(inject(function(_$controller_){

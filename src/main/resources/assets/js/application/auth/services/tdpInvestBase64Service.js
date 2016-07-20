@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
+define(['angular', 'auth/tdpInvestAuthModule'], function(angular, tdpInvestModule) {
     tdpInvestModule.service("tdpInvestBase64Service", function() {
 
         // Base64 encoding service used by AuthenticationService

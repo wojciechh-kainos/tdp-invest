@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestAuthService'], function (angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestLoginController", function ($scope, $rootScope, $stateParams, tdpInvestAuthService, $state) {
+define(['angular', 'auth/tdpInvestAuthModule', 'auth/services/tdpInvestAuthService'], function (angular, tdpInvestAuthModule) {
+    tdpInvestAuthModule.controller("tdpInvestLoginController", function ($scope, tdpInvestAuthService, $window) {
 
         tdpInvestAuthService.clearCredentials();
 
@@ -7,7 +7,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             $scope.loginPromise = tdpInvestAuthService.login($scope.username, $scope.password)
                 .then(function (response) {
                     if (response.success) {
-                        $state.go('tdp');
+                            $window.location.href = "/";
                     } else {
                         $scope.error = response.message;
                     }

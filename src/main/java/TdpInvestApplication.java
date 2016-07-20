@@ -8,6 +8,7 @@ import configuration.TdpInvestModule;
 import dao.TdpUserDAO;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
+import io.dropwizard.assets.AssetsBundle;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
@@ -46,7 +47,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
-        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
+        bootstrap.addBundle(new AssetsBundle("/assets", "/", "index.html", "TdpInvest"));
+        bootstrap.addBundle(new AssetsBundle("/assets/js/application/auth", "/auth/", "index.html", "Auth"));
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
 

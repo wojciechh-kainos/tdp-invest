@@ -1,7 +1,7 @@
 define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestAuthService', function () {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('auth'));
 
         var $httpBackend;
         var $service;
@@ -11,9 +11,9 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             $httpBackend = _$httpBackend_;
         }));
 
-        describe('When login', function () {
+        describe('When auth', function () {
             it('with valid credentials should succeed', function () {
-                $httpBackend.expectGET('/api/login', undefined).respond(200, '');
+                $httpBackend.expectGET('/api/auth', undefined).respond(200, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {
@@ -24,7 +24,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             });
 
             it('with invalid credentials should fail', function () {
-                $httpBackend.expectGET('/api/login', undefined).respond(400, '');
+                $httpBackend.expectGET('/api/auth', undefined).respond(400, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {

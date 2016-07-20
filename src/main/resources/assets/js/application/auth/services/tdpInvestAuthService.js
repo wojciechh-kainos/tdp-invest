@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestModule) {
-    tdpInvestModule.service('tdpInvestAuthService', ['$cookieStore', '$http', '$rootScope', 'tdpInvestBase64Service', function ($cookieStore, $http, $rootScope, tdpInvestBase64Service) {
+define(['angular', 'auth/tdpInvestAuthModule', 'auth/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestAuthModule) {
+    tdpInvestAuthModule.service('tdpInvestAuthService', ['$cookieStore', '$http', 'tdpInvestBase64Service', function ($cookieStore, $http, tdpInvestBase64Service) {
         var service = {};
 
         service.login = function (username, password) {
@@ -42,16 +42,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         service.clearCredentials = function () {
             $cookieStore.remove('currentUser');
             $http.defaults.headers.common.Authorization = '';
-        };
-
-        service.watchAuthorizationStatus = function (loginCallback, logoutCallback) {
-            $rootScope.$watch(function () { return $cookieStore.get('currentUser'); }, function (newVal) {
-                if (newVal) { // user logged in
-                    loginCallback();
-                } else { // user logged out
-                    logoutCallback();
-                }
-            }, true);
         };
 
         return service;
