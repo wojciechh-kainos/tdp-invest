@@ -3,6 +3,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         $scope.$watch('receivedData', function() {
               var data = $scope.$parent.receivedData;
+              $scope.currentStateName = $state.current.name;
 
               for(var i = 0 ; i < data.length ; i++) {
                     data[i].incomeFromFund = $scope.$parent.dataFund[i];
@@ -17,14 +18,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
               $scope.dateIndex = keys.indexOf("date");
               $scope.columns = keys;
 
-              if($state.current.name == "root.home") {
-                $scope.state = "root.home";
-                $scope.valIndex = keys.indexOf("value");
-              } else {
-                 $scope.state = "root.compare";
-                 $scope.fundIndex = keys.indexOf("incomeFromFund");
-                 $scope.investIndex = keys.indexOf("incomeFromInvestment");
-              }
+              $scope.valIndex = keys.indexOf("value");
+              $scope.fundIndex = keys.indexOf("incomeFromFund");
+              $scope.investIndex = keys.indexOf("incomeFromInvestment");
+
             })
     })
 });

@@ -20,10 +20,9 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestDataService'],
                 var res;
                 DataService.getRows(url).then(function(response) {
                     res = response.data;
+                    expect(res).toEqual({date:1468229562169, fundVal:377, depositVal:123});
                 });
                 $httpBackend.flush();
-                expect(res).toEqual({date:1468229562169, fundVal:377, depositVal:123});
-
             }));
         });
 
