@@ -4,21 +4,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return $http.get("/api/compare");
         };
 
-        this.getDataRange = function(dateFrom, dateTo) {
-            var data = {
-                        dateFrom: dateFrom,
-                        dateTo: dateTo
-                    };
-
-                    var config = {
-                        headers : {
-                            'Content-Type': 'application/json;charset=utf-8;'
-                        }
-                    }
-            return $http.post("/api/compare", data, config);
-        };
-
-        this.getDataRangeMany = function(requests){
+        this.getDataRange = function(requests){
             var data = {
                 requests : requests
             };

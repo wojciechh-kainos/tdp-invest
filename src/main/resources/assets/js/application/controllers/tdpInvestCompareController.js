@@ -58,29 +58,20 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
         }
 
         $scope.setInvestData = function(data) {
-            console.log(data);
             $scope.investData = data;
         }
-//
-//        $scope.getStockData = function(date1, date2) {
-//            tdpCompareService.getDataRange(date1, date2)
-//                .then(function(response) {
-//                    $scope.stockData = [];
-//                    $scope.stockData = response.data;
-//                    console.log(response.data);
-//                });
-//        }
 
         $scope.getStockData = function(date1, date2){
             var data = createDateRequests($scope.datesIntervals, date1, date2);
-            if(data.length == 0){
+            if(data.requests[0] === undefined){
                 $scope.stockData = getStockDataFromDates($scope.datesAndPrices, $scope.start_date, $scope.end_date);
                 return 1;
             }
             requests = data.requests;
             $scope.datesTmp = data.dates;
-            tdpCompareService.getDataRangeMany(requests)
+            tdpCompareService.getDataRange(requests)
             .then(function(response) {
+                console.log(response);
                 for(i = 0; i < response.data.length; i++){
                     $scope.datesAndPrices.push({date : response.data[i].date, price : response.data[i].price});
                 }
@@ -99,7 +90,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 $scope.interest_rate_state = true;
             }
             $scope.show_button = !($scope.interest_rate_state && $scope.input_value_state);
-            console.log($scope.interest_rate_state + " && " + $scope.input_value_state + " = " + ($scope.interest_rate_state && $scope.input_value_state) + "\n");
         });
 
         $scope.$watch('input_value', function(){
@@ -111,7 +101,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 $scope.input_value_state = true;
             }
             $scope.show_button = !($scope.interest_rate_state && $scope.input_value_state);
-            console.log($scope.interest_rate_state + " && " + $scope.input_value_state + " = " + ($scope.interest_rate_state && $scope.input_value_state) + "\n");
 
         });
 
@@ -121,6 +110,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
 
     });
+
     function isNumber(n){
         if(!isNaN(n))
            return true;
@@ -165,7 +155,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
 
     function getStockDataFromDates(dates, start_date, end_date){
         stock_data = [];
-        console.log(dates.length);
         for(i = 0; i < dates.length; i++){
             if(makeDate(dates[i].date) >= makeDate(start_date) && makeDate(dates[i].date) <= makeDate(end_date))
                 stock_data.push({date : dates[i].date, price : dates[i].price});
@@ -185,11 +174,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
         var TX = end_date;
         var tmp;
 
-        console.log(end_date);
-
         if(dates.length == 0){
             request.push(makeRequest(T0, TX));
             dates.push({p : T0, k : TX});
+            data = {dates : dates, requests : request};
+            return data;
         }
         for(var i = 0; i < dates.length; i++){
             if(makeDate(T0) < makeDate(dates[i].p)){
@@ -223,14 +212,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpCompa
                 }
             }
         }
-        for(var i = 0; i < dates.length; i++)
-            console.log(dates[i].p + " - " + dates[i].k + "\n")
 
         dates = mergeDates(dates);
-        for(var i = 0; i < dates.length; i++)
-            console.log(dates[i].p + " - " + dates[i].k + "\n")
-
-
 
         data = {dates : dates, requests : request};
 
