@@ -1,15 +1,16 @@
-package e2e;
+package e2e.pages;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 
-public class LoginPage extends BasePage {
+public class RegisterPage extends BasePage {
 
-    public LoginPage() {
+    public RegisterPage() throws Exception {
         super();
-        path = "login";
-        uniqueId = "loginPageUnique";
+        path = "register";
     }
+
+
 
     public WebElement getUsernameField() {
         return driver.findElement(By.id("username"));
@@ -19,8 +20,8 @@ public class LoginPage extends BasePage {
         return driver.findElement(By.id("password"));
     }
 
-    public WebElement getLoginButton() {
-        return driver.findElement(By.id("loginButton"));
+    public WebElement getRegisterButton() {
+        return driver.findElement(By.id("registerButton"));
     }
 
     public WebElement getErrorAlert() {

@@ -1,5 +1,6 @@
-package e2e;
+package e2e.pages;
 
+import e2e.WebDriverProvider;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -14,7 +15,7 @@ public abstract class BasePage {
     protected WebDriver driver;
     protected String uniqueId;
 
-    public BasePage() {
+    public BasePage() throws Exception {
         this.driver = WebDriverProvider.getDriver();
     }
 

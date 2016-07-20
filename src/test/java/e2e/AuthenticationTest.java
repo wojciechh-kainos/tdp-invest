@@ -1,5 +1,8 @@
 package e2e;
 
+import e2e.pages.LoginPage;
+import e2e.pages.MainPage;
+import e2e.pages.RegisterPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
@@ -14,7 +17,7 @@ public class AuthenticationTest {
 
 
     @Before
-    public void setUp() {
+    public void setUp() throws Exception {
         registerPage = new RegisterPage();
         loginPage = new LoginPage();
         mainPage = new MainPage();
