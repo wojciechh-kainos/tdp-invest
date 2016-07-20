@@ -5,7 +5,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 return result;
                 }
 
-        this.calculateFundIncome = function (input , dataInc){
+        this.calculateFundIncome = function (input , dataInc) {
                if (dataInc.length == 0) return result;
                var number = Math.round( input/dataInc[0].value );
                var result = [];
@@ -17,7 +17,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                return result;
         }
 
-        this.calculateInvestIncome = function(percentage, input, dataInc){
+        this.calculateInvestIncome = function(percentage, input, dataInc) {
              var result = [];
              var totalMoney = parseFloat(input);
              var length = dataInc.length;

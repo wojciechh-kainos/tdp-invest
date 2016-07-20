@@ -9,39 +9,26 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestDateCont
 
         beforeEach (inject (function (_$controller_, _$rootScope_) {
             $controller = _$controller_;
-
-            _$rootScope_.input = 100;
-            _$rootScope_.percentage = 5;
-
             $scope = _$rootScope_.$new();
         }));
 
         describe('Check if controller', function(){
             beforeEach(function() {
                 $controller('tdpInvestDateController', { $scope: $scope });
+                $scope.startDated = new Date("11/11/2011");
+                $scope.endDated = new Date("04/04/2004");
             });
 
-            it('has variables properly initialized from parent', function() {
-                expect($scope.input).toEqual(100);
-                expect($scope.percentage).toEqual(5);
+            it('has variables properly initialized', function() {
+                expect($scope.startDated).toEqual(new Date("11/11/2011"));
+                expect($scope.endDated).toEqual(new Date("04/04/2004"));
             });
 
-            it('has variables the same as parent', function() {
-                expect($scope.input).toEqual($scope.$parent.input);
-                expect($scope.percentage).toEqual($scope.$parent.percentage);
+            it('formats and sets date properly after $digest() invocation', function() {
+                $scope.$digest();
+                expect($scope.$parent.startDate).toEqual("2011-11-11");
+                expect($scope.$parent.endDate).toEqual("2004-04-04");
             });
-
-//            it('runs function after $apply() invotaion and changes input', function() {
-//                $scope.input = 200;
-//                $scope.$apply();
-//                expect($scope.input).toEqual($scope.$parent.input);
-//            });
-//
-//            it('runs function after $apply() invocation and changes percentage', function() {
-//                $scope.percentage = 10;
-//                $scope.$apply();
-//                expect($scope.percentage).toEqual($scope.$parent.percentage);
-//            });
         });
     });
 });

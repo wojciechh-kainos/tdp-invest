@@ -4,20 +4,15 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestDataService'],
         beforeEach(angular.mock.module('tdpInvestModule'));
 
         var DataService;
-
-        beforeEach( inject( function(_tdpInvestDataService_){
-          DataService = _tdpInvestDataService_;
-        }));
-
         var $httpBackend;
 
-        beforeEach(inject(function($injector) {
+        beforeEach(inject(function($injector, _tdpInvestDataService_) {
              $httpBackend = $injector.get('$httpBackend');
+             DataService = _tdpInvestDataService_;
            }));
 
         describe('Testing service', function() {
             it('returns proper value', inject(function($http) {
-                var $scope = {};
 
                 var url = '/api/rows/get/data';
                 $httpBackend.when('GET', url).respond(200, {date:1468229562169, fundVal:377, depositVal:123});

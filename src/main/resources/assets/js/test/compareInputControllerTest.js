@@ -9,10 +9,8 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestCompareI
 
         beforeEach (inject (function (_$controller_, _$rootScope_) {
             $controller = _$controller_;
-
             _$rootScope_.input = 100;
             _$rootScope_.percentage = 5;
-
             $scope = _$rootScope_.$new();
         }));
 
