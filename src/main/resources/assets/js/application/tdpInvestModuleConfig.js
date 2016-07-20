@@ -5,7 +5,7 @@ define(['angular'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/tdpInvestChartController'
-    , 'application/controllers/tdpInvestDataController'
+    , 'application/controllers/tdpInvestTableController'
     , 'application/controllers/tdpInvestDateController'
     , 'application/controllers/tdpInvestIndexController'
     , 'application/controllers/tdpInvestCompareInputController'
@@ -27,11 +27,10 @@ define(['angular'
                     views: {
                          "table@root": {
                              templateUrl: "html/partials/tdp-invest-table.html",
-                              controller: "tdpInvestDataController"
+                              controller: "tdpInvestTableController"
                               }
                     },
                     resolve: {
-                       // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
 
                 })
@@ -40,7 +39,7 @@ define(['angular'
                     views: {
                          "table@root": {
                              templateUrl: "html/partials/tdp-invest-table.html",
-                              controller: "tdpInvestDataController"
+                              controller: "tdpInvestTableController"
                               },
                          "userData@root": {
                              templateUrl: "html/partials/tdp-invest-userData.html",
@@ -48,7 +47,6 @@ define(['angular'
                              }
                     },
                     resolve: {
-                       // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
                 })
             .state("login", {
