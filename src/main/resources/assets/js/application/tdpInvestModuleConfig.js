@@ -7,7 +7,7 @@ define(['angular'
     , 'application/controllers/tdpInvestNavbarController'
     , 'application/controllers/tdpInvestUploadController'
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
                 url: "/tdp",
@@ -16,6 +16,9 @@ define(['angular'
                         templateUrl: "html/partials/tdp-invest-main.html",
                         controller: "tdpInvestMainController"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
             }).state("compare", {
                 url: "/compare",
@@ -41,16 +44,30 @@ define(['angular'
                         controller: "tdpInvestLoginController"
                     }
                 }
-            }).state("register", {
-                url: "/register",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-register.html",
-                        controller: "tdpInvestRegisterController"
-                    }
+        }).state("register", {
+            url: "/register",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-register.html",
+                    controller: "tdpInvestRegisterController"
                 }
-            });
+            }
+        });
         $urlRouterProvider.otherwise("/login");
+
+        function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+            var defer = $q.defer();
+            if ($cookieStore.get('currentUser')) {
+                defer.resolve();
+            } else {
+                $timeout(function () {
+                    $state.go("login");
+                });
+                defer.reject();
+            }
+            return defer.promise;
+        }
+
     });
 
     return tdpInvestModule;

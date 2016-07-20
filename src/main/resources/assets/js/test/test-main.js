@@ -18,13 +18,13 @@ require.config({
   paths: {
       'angular': 'lib/angular/angular',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
-      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
-      'highcharts': 'lib/highcharts/highcharts',
-      'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
-      'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
+      'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
       'ngCookies': 'lib/angular-cookies/angular-cookies',
       'requireJS': 'lib/requirejs/require',
-      'karma-requireJS': 'lib/karma-require'
+      'karma-requireJS': 'lib/karma-require',
+      'highcharts': 'lib/highcharts/highcharts',
+      'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
+      'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls'
   },
   shim: {
       'angular': {
@@ -32,9 +32,9 @@ require.config({
       },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
+      'ngCookies': ['angular']
       'highcharts-ng': ['angular' , 'highcharts'],
       'ui-bootstrap': ['angular'],
-      'ngCookies': ['angular']
   },
   // dynamically load all test files
   deps: allTestFiles,

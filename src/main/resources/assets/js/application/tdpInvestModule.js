@@ -1,11 +1,12 @@
-define(['angular', 'uiRouter', 'ngCookies', 'highcharts-ng', 'ui-bootstrap'], function(angular) {
-    return angular.module("tdpInvestModule", ['ui.router', 'ngCookies', 'highcharts-ng', 'ui.bootstrap'])
-    .run(['$rootScope', '$location', '$cookieStore', '$http',
-        function ($rootScope, $location, $cookieStore, $http) {
+define(['angular', 'uiRouter', 'ngCookies'], function(angular) {
+    return angular.module("tdpInvestModule", ['ui.router', 'ngCookies'])
+    .run(['$cookieStore', '$http',
+        function ($cookieStore, $http) {
             // keep user logged in after page refresh
-            $rootScope.globals = $cookieStore.get('globals') || {};
-            if ($rootScope.globals.currentUser) {
-                $http.defaults.headers.common['Authorization'] = 'Basic ' + $rootScope.globals.currentUser.authdata; // jshint ignore:line
+            var user = $cookieStore.get('currentUser') || {};
+
+            if (user) {
+                $http.defaults.headers.common['Authorization'] = 'Basic ' + user.authdata; // jshint ignore:line
             }
         }]);
 });
