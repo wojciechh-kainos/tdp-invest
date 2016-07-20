@@ -11,6 +11,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
+import java.time.ZonedDateTime;
+
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
@@ -34,7 +36,7 @@ public class TdpInvestAuthenticatorTest {
     }
 
     @Test
-    public void testAuthenticationWithValidCredentials() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
+    public void testAuthenticationWithValidLogin() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
         when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
         when(mockPasswordStore.verifyPassword(anyString(), anyString())).thenReturn(true);
 
@@ -46,7 +48,31 @@ public class TdpInvestAuthenticatorTest {
     }
 
     @Test
-    public void testAuthenticationWithInvalidCredentials() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
+    public void testAuthenticationWithValidToken() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
+        stubDbUser.setToken("token");
+        stubDbUser.setTokenExpire(ZonedDateTime.now().plusMinutes(10));
+
+        when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
+
+        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", "token"));
+
+        assertEquals(result.isPresent(), true);
+        verify(mockDAO, times(1)).getUserByEmail(any());
+    }
+
+    @Test
+    public void testAuthenticationWithWrongEmail() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
+        when(mockDAO.getUserByEmail(any())).thenReturn(null);
+
+        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", ""));
+
+        assertEquals(result.isPresent(), false);
+        verify(mockDAO, times(1)).getUserByEmail(any());
+        verify(mockPasswordStore, times(0)).verifyPassword(anyString(),anyString());
+    }
+
+    @Test
+    public void testAuthenticationWithWrongTokenAndPassword() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
         when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
         when(mockPasswordStore.verifyPassword(anyString(), anyString())).thenReturn(false);
 
@@ -54,6 +80,19 @@ public class TdpInvestAuthenticatorTest {
 
         assertEquals(result.isPresent(), false);
         verify(mockDAO, times(1)).getUserByEmail(any());
+        verify(mockPasswordStore, times(1)).verifyPassword(anyString(),anyString());
     }
 
+    @Test
+    public void testAuthenticationWithExpiredToken() throws AuthenticationException, TdpInvestPasswordStore.InvalidHashException, TdpInvestPasswordStore.CannotPerformOperationException {
+        stubDbUser.setToken("token");
+        stubDbUser.setTokenExpire(ZonedDateTime.now().minusMinutes(10));
+
+        when(mockDAO.getUserByEmail(any())).thenReturn(stubDbUser);
+
+        Optional<TdpUser> result = authenticator.authenticate(new BasicCredentials("", "token"));
+
+        assertEquals(result.isPresent(), false);
+        verify(mockDAO, times(1)).getUserByEmail(any());
+    }
 }
