@@ -15,7 +15,7 @@
                             <input id="start_date" name="start_date" ng-model="form.startDate" class="form-control"
                                    placeholder={{format}} uib-datepicker-popup={{format}}
                                    datepicker-options="dateOptions"
-                                   is-open="showDp1" ng-required="true"/>
+                                   is-open="showDp1" min="{{dateFirst | date:'yyyy-MM-dd' }}" max="{{dateLast | date:'yyyy-MM-dd' }}" required="true"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="showDp1 = !showDp1"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
@@ -35,7 +35,7 @@
                             <input id="end_date" name="end_date" ng-model="form.endDate" class="form-control"
                                    placeholder={{format}} uib-datepicker-popup={{format}}
                                    datepicker-options="dateOptions"
-                                   is-open="showDp2" ng-required="true"/>
+                                   is-open="showDp2" min="{{dateFirst | date:'yyyy-MM-dd' }}" max="{{dateLast | date:'yyyy-MM-dd' }}" ng-required="true"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="showDp2 = !showDp2"><i
                                         class="glyphicon glyphicon-calendar"></i></button>

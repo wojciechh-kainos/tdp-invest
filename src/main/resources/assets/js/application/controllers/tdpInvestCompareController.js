@@ -1,11 +1,14 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directive/tdpInvestShowErrors'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', '$state', function ($scope, $stateParams, stockData, $state) {
-
+        $scope.dateFirst = stockData.getFirst();
+        $scope.dateLast = stockData.getLast();
 
         $scope.dateOptions = {
             dateDisabled: disabled,
             formatYear: 'yy',
-            startingDay: 1
+            startingDay: 1,
+            minDate: $scope.dateFirst,
+            maxDate: $scope.dateLast
         };
 
         // Disable weekend selection

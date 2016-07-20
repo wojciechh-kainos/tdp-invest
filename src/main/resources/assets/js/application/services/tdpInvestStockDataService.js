@@ -7,6 +7,14 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             return data;
         };
 
+        this.getFirst = function () {
+            return new Date(data[0][0]);
+        };
+
+        this.getLast = function () {
+            return new Date(data[data.length-1][0]);
+        };
+
         this.promise = $http.get('/api/unit/select/1').then(
             function (response) {
                 data = response.data;
