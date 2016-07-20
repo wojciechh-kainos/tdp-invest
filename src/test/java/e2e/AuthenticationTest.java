@@ -3,26 +3,18 @@ package e2e;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 
 public class AuthenticationTest {
-
-    public static final String VALID_USERNAME = "test2";
-    public static final String VALID_PASSWORD = "test2";
-
-    public static final String INVALID_USERNAME = "test1";
-    public static final String INVALID_PASSWORD = "test1";
 
     private static LoginPage loginPage;
     private static RegisterPage registerPage;
 
 
-
-
     @Before
-    public void setUp(){
+    public void setUp() {
         registerPage = new RegisterPage();
         loginPage = new LoginPage();
     }
@@ -30,29 +22,39 @@ public class AuthenticationTest {
     @Test
     public void testRegisterAndValidLogin() throws InterruptedException {
         registerPage.open();
-        registerPage.register(VALID_USERNAME, VALID_PASSWORD);
+        registerPage.getUsernameField().sendKeys("test");
+        registerPage.getPasswordField().sendKeys("test");
+        registerPage.getRegisterButton().click();
+
 
         loginPage.open();
-        loginPage.login(VALID_USERNAME, VALID_PASSWORD);
-        assertTrue("When user logs in with correct credentials, user is redirected to tdp.",loginPage.isRedirected());
+        loginPage.getUsernameField().sendKeys("test");
+        loginPage.getPasswordField().sendKeys("test");
+        loginPage.getLoginButton().click();
 
         Thread.sleep(2000);
+        assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getUrl()));
+
         registerPage.open();
-        registerPage.register(VALID_USERNAME, VALID_PASSWORD);
+        registerPage.getUsernameField().sendKeys("test");
+        registerPage.getPasswordField().sendKeys("test");
+        registerPage.getRegisterButton().click();
 
         Thread.sleep(2000);
-        assertTrue("When user registers with already used credentials, the error message should become visible",registerPage.isErrorVisible());
+        assertFalse("When user registers with already used credentials, the error message should become visible", registerPage.getErrorAlert().getCssValue("display").equals("none"));
     }
 
     @Test
-    public void testInvalidLogin(){
+    public void testInvalidLogin() {
         loginPage.open();
-        loginPage.login(INVALID_USERNAME, INVALID_PASSWORD);
-        assertTrue("When user logs in with bad credentials, the error message should become visible",loginPage.isErrorVisible());
+        loginPage.getUsernameField().sendKeys("test2");
+        loginPage.getPasswordField().sendKeys("test2");
+        loginPage.getLoginButton().click();
+        assertFalse("When user logs in with bad credentials, the error message should become visible", loginPage.getErrorAlert().getCssValue("display").equals("none"));
     }
 
     @AfterClass
-    public static void tearDown(){
+    public static void tearDown() {
         loginPage.close();
     }
 }

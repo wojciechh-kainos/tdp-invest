@@ -1,32 +1,32 @@
 package e2e;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
-public class LoginPage extends BasePage{
+public class LoginPage extends BasePage {
 
-    private String PATH = "login";
-    private By username = By.id("username");
-    private By password = By.id("password");
-    private By loginButton = By.id("loginButton");
-    private By errorAlert = By.id("errorAlert");
-
-    public void open() {
-        super.open(PATH);
+    public LoginPage() {
+        super();
+        path = "login";
     }
 
-    public void login(String username, String password){
-        insertText(this.username, username); // consider further encapsulation
-        insertText(this.password, password);
-        clickElement(this.loginButton);
+    public WebElement getUsernameField() {
+        return driver.findElement(By.id("username"));
     }
 
-
-    public Boolean isErrorVisible(){
-        return super.isErrorVisible(this.errorAlert);
+    public WebElement getPasswordField() {
+        return driver.findElement(By.id("password"));
     }
 
-    public Boolean isRedirected() {
-        return super.isRedirected(PATH);
+    public WebElement getLoginButton() {
+        return driver.findElement(By.id("loginButton"));
+    }
+
+    public WebElement getErrorAlert() {
+        return driver.findElement(By.id("errorAlert"));
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }
