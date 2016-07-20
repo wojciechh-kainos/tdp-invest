@@ -9,10 +9,9 @@ require.config({
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstocks': 'lib/highcharts/highstock',
+        'highcharts': 'lib/highcharts/highcharts',
         'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
-        'ngResource': 'lib/angular-resource/angular-resource',
-        'angularMocks': 'lib/angular-mocks/angular-mocks' //for plugin
-
+        'ngResource': 'lib/angular-resource/angular-resource'
     },
     shim: {
         'angular': {
@@ -20,7 +19,7 @@ require.config({
         },
         'uiRouter': ['angular'],
         'ngResource': ['angular'],
-        'highcharts-ng': ['angular', 'highstocks'],
+        'highcharts-ng': ['angular', 'highstocks', 'highcharts'],
         'ui-bootstrap': ['angular'],
         'ngCookies': {
             exports: 'ngCookies',

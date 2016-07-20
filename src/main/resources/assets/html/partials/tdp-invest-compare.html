@@ -4,85 +4,83 @@
             <fieldset>
 
                 <!-- Form Name -->
-                <legend>Porównaj</legend>
+                <legend>Compare</legend>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="start_date">Data początkowa:</label>
+                    <label class="col-md-4 control-label" for="start_date">Start date:</label>
                     <div class="col-md-7">
 
                         <p class="input-group">
-                            <input id="start_date" name="start_date" ng-model="start_date" type="string"
-                                   class="form-control" placeholder="rrrr-mm-dd" uib-datepicker-popup="{{format}}"
-                                   is-open="popup1.opened" datepicker-options="dateOptions" ng-required="true"
-                                   close-text="Close" alt-input-formats="altInputFormats"/>
+                            <input id="start_date" ng-model="form.startDate" class="form-control"
+                                   placeholder={{format}} uib-datepicker-popup={{format}}
+                                   datepicker-options="dateOptions"
+                                   is-open="showDp1" ng-required="true"/>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open1()"><i
+                                <button type="button" class="btn btn-default" ng-click="showDp1 = !showDp1"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
-                        <span class="help-block">Data w formacie rrrr-mm-dd</span>
+                        <span class="help-block">Investment start date</span>
                     </div>
                 </div>
 
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="end_date">Data końcowa:</label>
+                    <label class="col-md-4 control-label" for="end_date">End date:</label>
                     <div class="col-md-7">
 
                         <p class="input-group">
-                            <input id="end_date" name="end_date" ng-model="end_date" type="string" class="form-control"
-                                   placeholder="rrrr-mm-dd" uib-datepicker-popup="{{format}}" ng-model="dt2"
-                                   is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true"
-                                   close-text="Close" alt-input-formats="altInputFormats"/>
+                            <input id="end_date" ng-model="form.endDate" class="form-control"
+                                   placeholder={{format}} uib-datepicker-popup={{format}}
+                                   datepicker-options="dateOptions"
+                                   is-open="showDp2" ng-required="true"/>
                             <span class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="open2()"><i
+                                <button type="button" class="btn btn-default" ng-click="showDp2 = !showDp2"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
-                        <span class="help-block">Data w formacie rrrr-mm-dd</span>
+                        <span class="help-block">Investment end date</span>
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="value_percentage">Oprocentowanie lokaty:</label>
+                    <label class="col-md-4 control-label" for="value_percentage">Interest rate:</label>
                     <div class="col-md-7">
-                        <input id="value_percentage" name="value_percentage" ng-model="value_percentage" type="number"
-                               value="0.07" placeholder="0.07" step="0.01" max="0.99" min="0.01"
+                        <input id="value_percentage" ng-model="form.interestRate" type="number" step="0.01"
+                               max="100"
+                               min="0.01" class="form-control input-md">
+                        <span class="help-block">Value in percent</span>
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="value_capitalization">Capitalization interval:</label>
+                    <div class="col-md-7">
+                        <input id="value_capitalization" name="value_capitalization"
+                               ng-model="form.captInterval"
+                               type="number" step="1" max="365" min="1"
                                class="form-control input-md" required="">
-                        <span class="help-block">Wartość wyrażona w procentach</span>
+                        <span class="help-block">Value in days</span>
                     </div>
                 </div>
 
-                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="value_capitalization">Kapitalizacja odsetek:</label>
+                    <label class="col-md-4 control-label" for="value_investment">Amount:</label>
                     <div class="col-md-7">
-                        <input id="value_capitalization" name="value_capitalization" ng-model="value_capitalization"
-                               type="number" value="30" placeholder="30" step="1" max="365" min="1"
-                               class="form-control input-md" required="">
-                        <span class="help-block">Ilość dni</span>
+                        <input id="value_investment" ng-model="form.amount" type="number"
+                               class="form-control input-md">
+                        <span class="help-block">Invested amount</span>
                     </div>
                 </div>
 
-                <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="value_investment">Kwota inwestycji</label>
-                    <div class="col-md-7">
-                        <input id="value_investment" name="value_investment" ng-model="value_investment" type="number"
-                               value="1000" placeholder="1000" class="form-control input-md" required="">
-                        <span class="help-block">Zainwestowana ilość pieniędzy</span>
-                    </div>
-                </div>
-
-                <!-- Button (Double) -->
-                <div class="form-group">
-                    <label class="col-md-4 control-label" for="button1id"></label>
-                    <div class="col-md-7">
-                        <button id="button1id" name="button1id" type="submit" class="btn btn-success">Policz</button>
-                        <button id="button2id" name="button2id" type="reset" class="btn btn-danger">Reset</button>
+                    <div class="col-md-7 col-md-offset-4">
+                        <button id="button1id" type="submit" class="btn btn-success">Calculate</button>
+                        <button id="button2id" ng-click="fill()" class="btn btn-danger">Reset</button>
                     </div>
                 </div>
 

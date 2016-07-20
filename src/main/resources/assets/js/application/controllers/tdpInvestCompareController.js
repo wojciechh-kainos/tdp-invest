@@ -1,6 +1,6 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', '$state', function ($scope, $stateParams, stockData, $state) {
-        $scope.data = stockData.getData();
+
 
         $scope.dateOptions = {
             dateDisabled: disabled,
@@ -14,70 +14,77 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 mode = data.mode;
             return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
         }
-
-        $scope.open1 = function () {
-            $scope.popup1.opened = true;
-        };
-
-        $scope.open2 = function () {
-            $scope.popup2.opened = true;
-        };
-
+        
         $scope.format = 'yyyy-MM-dd';
-        $scope.altInputFormats = ['M!/d!/yyyy'];
-
-        $scope.popup1 = {
-            opened: false
-        };
-
-        $scope.popup2 = {
-            opened: false
-        };
-
-        function getDayClass(data) {
-            var date = data.date,
-                mode = data.mode;
-            if (mode === 'day') {
-                var dayToCheck = new Date(date).setHours(0, 0, 0, 0);
-
-                for (var i = 0; i < $scope.events.length; i++) {
-                    var currentDay = new Date($scope.events[i].date).setHours(0, 0, 0, 0);
-
-                    if (dayToCheck === currentDay) {
-                        return $scope.events[i].status;
-                    }
-                }
-            }
-
-            return '';
-        }
 
         $scope.chartConfig = {
             options: {
                 chart: {
-                    zoomType: 'x'
+                    type: 'column'
                 },
-                rangeSelector: {
-                    enabled: true
-                },
-                navigator: {
-                    enabled: true
-                },
+
                 tooltip: {
-                    pointFormat: "Value: {point.y:.2f} "
+                    pointFormat: 'Income: {point.y:.2f}'
+                },
+                title: {
+                    text: ''
                 }
             },
-            series: [],
-            useHighStocks: true
+            xAxis: {
+                categories: ['Deposit', 'Fund']
+            },
+            series: [
+                {
+                    id: 1,
+                    data: [],
+                    color: '#E8CE1C',
+                    showInLegend: false
+                }
+            ]
+
         };
 
-        $scope.chartConfig.series.push({
-            id: 1,
-            data: $scope.data
-        });
+
+
+        function getValueAtDate(date){
+            var val = stockData.getData().find(function (unit) {
+                return unit[0] >= date.getTime();
+            });
+            return val[1];
+        }
+
+
+
+        $scope.fill = function () {
+            $scope.form = {
+                startDate: new Date(2001, 2, 9),
+                endDate: new Date(2012, 5, 5),
+                amount: 10000,
+                interestRate: 5.5,
+                captInterval: 30
+            }
+        };
+
+        function calculateStockInvestIncome() {
+            var form = $scope.form;
+            var startVal = getValueAtDate(form.startDate);
+            var endVal = getValueAtDate(form.endDate);
+            return form.amount * (endVal - startVal) / startVal;
+        }
+
+        function calculateDepositInvestIncome() {
+            var form = $scope.form;
+            var daysPassed = (form.endDate.getTime() - form.startDate.getTime()) / 86400000;
+            var capitalizations = Math.floor(daysPassed / form.captInterval);
+            var intrestRatePerCaptInterval = form.interestRate * form.captInterval / 365;
+            return form.amount * (Math.pow((1 + intrestRatePerCaptInterval/100), capitalizations) - 1);
+        }
 
 
         $scope.submit = function () {
+            $scope.chartConfig.series[0].data = [calculateDepositInvestIncome(), calculateStockInvestIncome()];
+
+
             $state.go('.calculated');
         };
 
