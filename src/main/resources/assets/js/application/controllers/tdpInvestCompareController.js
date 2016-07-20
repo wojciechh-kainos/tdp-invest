@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap'], function (angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directive/tdpInvestShowErrors',], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', '$state', function ($scope, $stateParams, stockData, $state) {
 
 
@@ -82,10 +82,13 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
 
         $scope.submit = function () {
+            $scope.$broadcast('show-errors-check-validity');
+
+            if ($scope.compareForm.$invalid) { return; }
+
             $scope.chartConfig.series[0].data = [calculateDepositInvestIncome(), calculateStockInvestIncome()];
 
-
-            $state.go('.calculated');
+            $state.go('tdp.compare.calculated');
         };
 
     }]);
