@@ -20,16 +20,13 @@ define(['angular', 'angularMocks', 'application/services/DataService'], function
                 var $scope = {};
 
                 var url = '/api/rows/get/data';
-
                 $httpBackend.when('GET', url).respond(200, {date:1468229562169, fundVal:377, depositVal:123});
 
                 var res;
                 DataService.getRows(url).then(function(response) {
                     res = response.data;
                 });
-
                 $httpBackend.flush();
-
                 expect(res).toEqual({date:1468229562169, fundVal:377, depositVal:123});
 
             }));

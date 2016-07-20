@@ -29,7 +29,7 @@ public class DataResource {
     public List<TdpIUnit> fetchData(@QueryParam("startDate") String startDate,
                                     @QueryParam("endDate") String endDate) {
         if(startDate == null) startDate = "7-2-2010";
-        if(endDate== null) endDate = "7-2-2016";
+        if(endDate == null) endDate = "7-2-2016";
 
         List <TdpIUnit> list = tdpDAO.findDatesBetween(tra.getDateFromHtml(startDate) , tra.getDateFromHtml(endDate));
         return list;

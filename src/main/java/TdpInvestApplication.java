@@ -79,16 +79,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void run(TdpInvestApplicationConfiguration configuration, Environment environment) {
-        try {
-            ManagedDataSource mds = migrationsBundle.getDataSourceFactory(configuration).build(environment.metrics(), "database");
-            Connection c = mds.getConnection();
-            Database db = DatabaseFactory.getInstance().findCorrectDatabaseImplementation(new JdbcConnection(c));
-            Liquibase liq = new liquibase.Liquibase("migrations.xml", new ClassLoaderResourceAccessor(), db);
-            liq.update(new Contexts(), new LabelExpression());
-        } catch (LiquibaseException | SQLException e) {
-            logger.error("COULD NOT PERFORM MIGRATION", e);
-        }
-
         module.setSessionFactory(hibernateBundle.getSessionFactory());
         environment.jersey().register(guiceBundle.getInjector().getInstance(DataResource.class));
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpUser>()

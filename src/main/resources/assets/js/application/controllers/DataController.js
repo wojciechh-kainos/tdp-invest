@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/DataService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("DataController", function($scope, $state) {
 
         $scope.$watch('receivedData', function() {
@@ -8,7 +8,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/DataServ
               for(var i = 0 ; i < Data.length ; i++){
                     Data[i].incomeFromFund = $scope.$parent.dataFund[i];
                     Data[i].incomeFromInvestment = $scope.$parent.dataInvest[i];
-                    }
+              }
 
               var keys = [];
               if(Data.length != 0)keys = Object.getOwnPropertyNames(Data[0]);

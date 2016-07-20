@@ -19,16 +19,16 @@ database:
   driverClass: org.postgresql.Driver
 
   # the username
-  user: remigiuszk
+  user: radoslawl
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/remigiuszk
+  url: jdbc:postgresql://localhost/mydb
 
   # any properties specific to your JDBC driver:
   properties:
     charSet: UTF-8
     hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate.hbm2ddl.auto: update
+    hibernate.hbm2ddl.auto: validate
     hibernate.show_sql: true
 
   # the maximum amount of time to wait on an empty pool before throwing an exception
