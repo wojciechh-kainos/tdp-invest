@@ -21,8 +21,6 @@ public class TdpIUserDAO extends AbstractDAO<TdpIUser> {
 		return persist(user).getId();
 	}
 
-	public void add(TdpIUser user) {currentSession().save(user);}
-
 	public TdpIUser findByUsername(String username) {
 		return uniqueResult(namedQuery("TdpIUser.findByUsername").setParameter("username", username));
 	}

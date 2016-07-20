@@ -11,6 +11,7 @@ require.config({
         'restangular': 'lib/restangular/dist/restangular.min',
         'ngTable': 'lib/ng-table/dist/ng-table.min',
         'highchart-theme': 'lib/highcharts/themes/dark-unica',
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
         'ng-file-upload': 'lib/ng-file-upload/ng-file-upload.min',
         //for non HTML5 browsers
         'ng-file-upload-shim': 'lib/ng-file-upload/ng-file-upload-shim.min'
@@ -20,10 +21,12 @@ require.config({
             exports: 'angular'
         },
         'uiRouter': ['angular'],
-        'highcharts-ng': ['angular', 'highcharts', 'highchart-theme'],
+        'highcharts-ng': ['angular', 'highcharts'],
         'restangular': ['angular', 'lodash'],
         'ngTable': ['angular'],
-        'ng-file-upload':['angular', 'ng-file-upload-shim']
+        'ngCookies': ['angular'],
+        'ng-file-upload':['angular', 'ng-file-upload-shim'],
+        'highchart-theme': ['highchart-theme']
     },
     deps: ['application/bootstrap']
 });

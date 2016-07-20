@@ -21,7 +21,7 @@ public class TdpInvestLoadDataService {
   public void saveFromLocalFile() {
     List<TdpIUnit> unitList = csvReader.readCSVFile("/Users/malgorzatar/projects/tdp-invest/src/main/resources/data.csv");
     for ( int i = 0; i < unitList.size(); i++ ) {
-      tdpIUnitDAO.add(unitList.get(i));
+      tdpIUnitDAO.create(unitList.get(i));
       }
     }
   }

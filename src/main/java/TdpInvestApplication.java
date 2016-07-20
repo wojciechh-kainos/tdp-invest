@@ -1,6 +1,7 @@
 import DAO.TdpIUserDAO;
-import auth.TdpISimpleAuthenticator;
-import auth.TdpISimpleAuthorizer;
+import auth.TdpIAuthenticator;
+import auth.TdpIAuthorizer;
+import auth.TdpIUnauthorizedHandler;
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
@@ -10,6 +11,7 @@ import domain.TdpIUser;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
 import io.dropwizard.auth.AuthValueFactoryProvider;
+import io.dropwizard.auth.DefaultUnauthorizedHandler;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
@@ -56,12 +58,13 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestAuthResource.class));
 
 
-		TdpISimpleAuthenticator authenticator = new UnitOfWorkAwareProxyFactory(hibernateBundle).create(TdpISimpleAuthenticator.class,
+		TdpIAuthenticator authenticator = new UnitOfWorkAwareProxyFactory(hibernateBundle).create(TdpIAuthenticator.class,
 				TdpIUserDAO.class, guiceBundle.getInjector().getInstance(TdpIUserDAO.class));
 
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpIUser>()
                 .setAuthenticator(authenticator)
-				.setAuthorizer(guiceBundle.getInjector().getInstance(TdpISimpleAuthorizer.class))
+				.setAuthorizer(guiceBundle.getInjector().getInstance(TdpIAuthorizer.class))
+                .setUnauthorizedHandler(new TdpIUnauthorizedHandler())
                 .buildAuthFilter()));
 
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(TdpIUser.class));
