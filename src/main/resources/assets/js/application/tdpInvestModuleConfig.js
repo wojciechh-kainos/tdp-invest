@@ -11,7 +11,7 @@ define(['angular'
     , 'application/controllers/UserDataController'
     , 'application/controllers/ButtonController'
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("root", {
                 url: "",
@@ -42,8 +42,10 @@ define(['angular'
                     resolve: {
                         dataUrl: function() {
                             return "/api/rows/get"
-                        }
+                        },
+                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
+
                 })
                 .state("root.compare", {
                     url: "/compare",
@@ -72,7 +74,8 @@ define(['angular'
                     resolve: {
                         dataUrl: function() {
                             return "api/rows/get"
-                        }
+                        },
+                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                     }
                 })
             .state("login", {
@@ -93,6 +96,22 @@ define(['angular'
                     }
                 }
             });
+        $urlRouterProvider.otherwise("/login");
+
+        function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+            var defer = $q.defer();
+            if ($cookieStore.get('currentUser')) {
+                defer.resolve();
+            } else {
+                $timeout(function () {
+                    $state.go("login");
+                });
+                defer.reject();
+            }
+            return defer.promise;
+        }
+
     })
+
     return tdpInvestModule;
 });

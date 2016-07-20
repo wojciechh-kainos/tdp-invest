@@ -4,14 +4,14 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         $scope.$watch('receivedData', function() {
               var data = $scope.$parent.receivedData;
 
-              for(var i = 0 ; i < Data.length ; i++) {
+              for(var i = 0 ; i < data.length ; i++) {
                     data[i].incomeFromFund = $scope.$parent.dataFund[i];
                     data[i].incomeFromInvestment = $scope.$parent.dataInvest[i];
               }
 
               var keys = [];
               if(data.length != 0) {
-                keys = Object.getOwnPropertyNames(Data[0]);
+                keys = Object.getOwnPropertyNames(data[0]);
               }
 
               $scope.dateIndex = keys.indexOf("date");
