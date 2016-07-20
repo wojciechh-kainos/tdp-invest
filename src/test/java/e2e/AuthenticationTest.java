@@ -3,7 +3,6 @@ package e2e;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
-import org.openqa.selenium.By;
 
 import static org.junit.Assert.assertFalse;
 
@@ -11,12 +10,14 @@ public class AuthenticationTest {
 
     private static LoginPage loginPage;
     private static RegisterPage registerPage;
+    private static MainPage mainPage;
 
 
     @Before
     public void setUp() {
         registerPage = new RegisterPage();
         loginPage = new LoginPage();
+        mainPage = new MainPage();
     }
 
     @Test
@@ -31,7 +32,7 @@ public class AuthenticationTest {
         loginPage.getPasswordField().sendKeys("test");
         loginPage.getLoginButton().click();
 
-        loginPage.waitForElementToLoad(By.id("uniqueId"));
+        loginPage.waitForElementToLoad(mainPage.getUniqueByElement());
         assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getUrl()));
 
         registerPage.open();

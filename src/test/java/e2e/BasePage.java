@@ -12,7 +12,7 @@ public abstract class BasePage {
     protected final String BASE_PATH = "http://localhost:9000/#/";
     protected String path;
     protected WebDriver driver;
-
+    protected String uniqueId;
 
     public BasePage() {
         this.driver = WebDriverProvider.getDriver();
@@ -35,11 +35,11 @@ public abstract class BasePage {
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(by));
     }
 
-    public void waitForElementToShow(By by){
-        (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOfElementLocated(by));
-    }
-
     public void waitForElementToShow(WebElement by){
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(by));
+    }
+
+    public By getUniqueByElement(){
+        return By.id(uniqueId);
     }
 }

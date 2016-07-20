@@ -8,6 +8,7 @@ public class LoginPage extends BasePage {
     public LoginPage() {
         super();
         path = "login";
+        uniqueId = "loginPageUnique";
     }
 
     public WebElement getUsernameField() {
