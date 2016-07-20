@@ -15,7 +15,7 @@ node {
     sh 'bower install --allow-root'
 
     stage 'test'
-    sh 'gradle test'
+    sh 'gradle testWithoutSelenium'
 
     stage 'karma test'
     sh './node_modules/karma/bin/karma start karma.conf.js'
