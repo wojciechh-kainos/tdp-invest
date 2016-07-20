@@ -13,11 +13,6 @@ public class RegisterPage extends BasePage {
     private By registerButton = By.id("registerButton");
     private By errorAlert = By.id("errorAlert");
 
-    public RegisterPage(WebDriver driver) {
-        super(driver);
-    }
-
-    @Override
     public void open() {
         this.driver.get(BASE_PATH + PATH);
     }

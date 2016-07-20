@@ -23,8 +23,8 @@ public class AuthenticationTest {
 
     @Before
     public void setUp(){
-        registerPage = new RegisterPage(WebDriverProvider.getDriver());
-        loginPage = new LoginPage(WebDriverProvider.getDriver());
+        registerPage = new RegisterPage();
+        loginPage = new LoginPage();
     }
 
     @Test
@@ -34,21 +34,21 @@ public class AuthenticationTest {
 
         loginPage.open();
         loginPage.login(VALID_USERNAME, VALID_PASSWORD);
-        assertTrue("When login with correct credentials, user is redirected to tdp.",loginPage.isRedirected());
+        assertTrue("When user logs in with correct credentials, user is redirected to tdp.",loginPage.isRedirected());
 
         Thread.sleep(2000);
         registerPage.open();
         registerPage.register(VALID_USERNAME, VALID_PASSWORD);
 
         Thread.sleep(2000);
-        assertTrue("When register with already used credentials, the error message should become visible",registerPage.isErrorVisible());
+        assertTrue("When user registers with already used credentials, the error message should become visible",registerPage.isErrorVisible());
     }
 
     @Test
     public void testInvalidLogin(){
         loginPage.open();
         loginPage.login(INVALID_USERNAME, INVALID_PASSWORD);
-        assertTrue("When login with bad credentials, the error message should become visible",loginPage.isErrorVisible());
+        assertTrue("When user logs in with bad credentials, the error message should become visible",loginPage.isErrorVisible());
     }
 
     @AfterClass

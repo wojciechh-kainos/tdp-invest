@@ -11,21 +11,14 @@ public class LoginPage extends BasePage{
     private By loginButton = By.id("loginButton");
     private By errorAlert = By.id("errorAlert");
 
-    public LoginPage(WebDriver driver) {
-        super(driver);
-    }
-
-    @Override
     public void open() {
-        String url = BASE_PATH + PATH;
-        this.driver.get(url);
-        
+        super.open(PATH);
     }
 
     public void login(String username, String password){
-        driver.findElement(this.username).sendKeys(username);
-        driver.findElement(this.password).sendKeys(password);
-        driver.findElement(this.loginButton).click();
+        insertText(this.username, username); // consider further encapsulation
+        insertText(this.password, password);
+        clickElement(this.loginButton);
     }
 
 
@@ -33,7 +26,7 @@ public class LoginPage extends BasePage{
         return super.isErrorVisible(this.errorAlert);
     }
 
-    public boolean isRedirected() {
-        return driver.getCurrentUrl().equals(BASE_PATH + PATH);
+    public Boolean isRedirected() {
+        return super.isRedirected(PATH);
     }
 }
