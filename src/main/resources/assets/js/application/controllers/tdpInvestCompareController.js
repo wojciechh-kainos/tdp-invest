@@ -43,6 +43,9 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
         $scope.saveRow = function(row, dbId){
             var investment = mergeObjects(dbId, row);
+            tdpInvestmentService.editInvestment(investment).then(function(success){
+                $scope.tableConfig.reload();
+            })
         };
 
         $scope.addRow = function(){
