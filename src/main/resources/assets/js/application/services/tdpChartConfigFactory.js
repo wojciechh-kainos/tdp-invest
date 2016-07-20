@@ -2,16 +2,14 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
     tdpInvestModule.factory('ChartConfigFactory', function() {
         var config =  function(title, subtitle, series, categories) {
             return {
-
               options: {
                   chart: {
-                      type: 'spline'
+                      zoomType: 'x'
                   },
                   tooltip: {
                       valueSuffix: ' PLN'
                   },
               },
-
               title: {
                   text: title
               },
@@ -25,8 +23,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                   title: {
                       text: 'Value [PLN]'
                   },
-                  minorGridLineWidth: 0,
-                  gridLineWidth: 0,
+                  minorGridLineWidth: 1,
+                  gridLineWidth: 1,
                   alternateGridColor: null
               },
               tooltip: {

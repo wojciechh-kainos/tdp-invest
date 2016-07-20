@@ -6,11 +6,10 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         })();
 
         $scope.login = function() {
-            tdpAuthenticationService.login($scope.username, $scope.password).then( function () {
-                tdpAuthenticationService.setCredentials($scope.username, $scope.password);
-                $state.go('tdp');
-            }, function() {
-                $scope.error = true;
+            tdpAuthenticationService.login($scope.username, $scope.password, function (error) {
+                if (error) {
+                    $scope.error = true;
+                }
             });
         };
   });

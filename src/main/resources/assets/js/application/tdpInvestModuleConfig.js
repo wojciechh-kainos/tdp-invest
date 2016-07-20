@@ -2,21 +2,18 @@ define(['angular'
     , 'application/tdpInvestModule'
     , 'application/services/tdpChartConfigFactory'
     , 'application/services/tdpAuthenticationService'
+    , 'application/directives/tdpNavbarDirective'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestHomeController'
     , 'application/controllers/tdpInvestUploadController'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, RestangularProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function($stateProvider, RestangularProvider, flowFactoryProvider, $urlRouterProvider) {
         $stateProvider
             .state("tdp", {
-                url: "/tdp",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-main.html"
-                    }
-                }
+                abstract: true,
+                url: "/tdp"
             }).state("tdp.login", {
                   url: "/login",
                   views: {
@@ -62,16 +59,32 @@ define(['angular'
               }
             });
 
-        $urlRouterProvider.otherwise("tdp");
+        $urlRouterProvider.otherwise("tdp.home");
         RestangularProvider.setBaseUrl('/api');
 
-        function isAuthenticated($state, $cookieStore) {
-            var globals = $cookieStore.get('globals');
-            if (!globals.currentUser) {
-                $state.go('tdp');
+
+        function isAuthenticated($state, tdpAuthenticationService ) {
+            console.log("isauth");
+            if (!tdpAuthenticationService.isUserLoggedIn()) {
+                $state.go('tdp.home');
             }
         };
+
+        flowFactoryProvider.defaults = {
+          target: '/api/unit/loadData',
+          permanentErrors: [404, 500, 501],
+          testChunks: false,
+          maxChunkRetries: 1,
+          chunkRetryInterval: 5000,
+          simultaneousUploads: 4
+        };
     });
+
+    tdpInvestModule.run(function ($rootScope, $state, tdpAuthenticationService) {
+      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
+        tdpAuthenticationService.isUserLoggedIn();
+      });
+});
 
     return tdpInvestModule;
 });

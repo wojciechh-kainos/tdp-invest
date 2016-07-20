@@ -3,21 +3,20 @@ package services;
 import com.google.inject.Singleton;
 import domain.TdpIUnit;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-import java.text.ParseException;
+import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+
 
 @Singleton
 public class TdpInvestReadCSVFileService {
 
-  public List<TdpIUnit> readCSVFile(String fileName) {
+  public List<TdpIUnit> readCSVFile(Optional<InputStream> fileInputStream) {
     BufferedReader fileReader = null;
     final String DELIMITER = ",";
-
+    final String FILE_PATH = "/Users/malgorzatar/projects/tdp-invest/src/main/resources/data.csv";
     List<TdpIUnit> unitList = new ArrayList<>();
 
     String datePattern = "^(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[/]\\d{4}$";
@@ -25,9 +24,17 @@ public class TdpInvestReadCSVFileService {
     SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 
     try {
-      String line = "";
 
-      fileReader = new BufferedReader(new FileReader(fileName));
+      if (fileInputStream.isPresent()) {
+        InputStreamReader isr = new InputStreamReader(fileInputStream.get());
+        fileReader = new BufferedReader(isr);
+      }
+      else {
+       fileReader = new BufferedReader(new FileReader(FILE_PATH));
+      }
+
+
+      String line = "";
 
       while ((line = fileReader.readLine()) != null) {
         String[] tokens = line.split(DELIMITER);
@@ -58,5 +65,5 @@ public class TdpInvestReadCSVFileService {
 
     return unitList;
   }
-
 }
+

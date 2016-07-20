@@ -12,21 +12,21 @@ require.config({
         'ngTable': 'lib/ng-table/dist/ng-table.min',
         'highchart-theme': 'lib/highcharts/themes/dark-unica',
         'ngCookies': 'lib/angular-cookies/angular-cookies',
-        'ng-file-upload': 'lib/ng-file-upload/ng-file-upload.min',
-        //for non HTML5 browsers
-        'ng-file-upload-shim': 'lib/ng-file-upload/ng-file-upload-shim.min'
+        'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
+        'flow': 'lib/ng-flow/dist/ng-flow-standalone.min'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
         'uiRouter': ['angular'],
-        'highcharts-ng': ['angular', 'highcharts'],
+        'highcharts-ng': ['angular', 'highchart-theme'],
         'restangular': ['angular', 'lodash'],
         'ngTable': ['angular'],
         'ngCookies': ['angular'],
-        'ng-file-upload':['angular', 'ng-file-upload-shim'],
-        'highchart-theme': ['highchart-theme']
+        'highchart-theme': ['highcharts'],
+        'ui.bootstrap': ['angular'],
+        'flow': ['angular']
     },
     deps: ['application/bootstrap']
 });

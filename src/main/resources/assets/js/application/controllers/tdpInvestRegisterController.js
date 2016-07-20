@@ -2,13 +2,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
   tdpInvestModule.controller("tdpInvestRegisterController", function($scope, $state, tdpUserService) {
         $scope.register = function() {
             tdpUserService.register($scope.user)
-                .then(function (response) {
-                    if (response.success) {
-                        //FlashService.Success('Registration successful', true);
-                        $state.go('tdp.login');
-                    } else {
+                .then(function () {
+                    $state.go('tdp.login');
 
-                    }
+                }, function () {
+                    $scope.error = true;
                 });
         };
   });

@@ -7,10 +7,11 @@
     <link rel="stylesheet" href="js/lib/ng-table/dist/ng-table.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css
 ">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-    <h1>Application header</h1>
+<body flow-prevent-drop>
+    <tdp-navbar fieldname="currentUser"></tdp-navbar>
     <div ui-view></div>
-    <footer>Application footer</footer>
+    <footer class="text-center">Kainos © <script>document.write(new Date().getFullYear())</script></footer>
 </body>
 </html>

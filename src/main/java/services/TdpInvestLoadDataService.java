@@ -5,7 +5,9 @@ import com.google.inject.Inject;
 import com.google.inject.Singleton;
 import domain.TdpIUnit;
 
+import java.io.InputStream;
 import java.util.List;
+import java.util.Optional;
 
 @Singleton
 public class TdpInvestLoadDataService {
@@ -18,12 +20,22 @@ public class TdpInvestLoadDataService {
     this.csvReader = csvReader;
   }
 
-  public void saveFromLocalFile() {
-    List<TdpIUnit> unitList = csvReader.readCSVFile("/Users/malgorzatar/projects/tdp-invest/src/main/resources/data.csv");
-    for ( int i = 0; i < unitList.size(); i++ ) {
-      tdpIUnitDAO.create(unitList.get(i));
-      }
+  public void loadFromLocalFile() {
+    tdpIUnitDAO.deleteAll();
+    List<TdpIUnit> unitList = csvReader.readCSVFile(Optional.empty());
+    for (int i = 0; i < unitList.size(); i++) {
+      tdpIUnitDAO.add(unitList.get(i));
     }
   }
 
 
+  public void loadFromUploadedFile(InputStream fileInputStream) {
+    tdpIUnitDAO.deleteAll();
+    List<TdpIUnit> unitList = csvReader.readCSVFile(Optional.of(fileInputStream));
+    for (int i = 0; i < unitList.size(); i++) {
+      tdpIUnitDAO.add(unitList.get(i));
+      System.out.print(unitList.get(i).getValue() + " ");
+    }
+  }
+
+}
