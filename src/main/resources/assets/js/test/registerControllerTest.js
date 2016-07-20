@@ -1,7 +1,7 @@
-define(['angular', 'angularMocks', 'application/controllers/tdpInvestRegisterController', 'application/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegisterController', 'application/auth/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestRegisterController', function () {
-        beforeEach(angular.mock.module('auth'));
+        beforeEach(angular.mock.module('tdpInvestAuthModule'));
 
         var authService;
         var deferred;

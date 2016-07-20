@@ -1,4 +1,4 @@
-define(['angular', 'auth/tdpInvestAuthModule', 'auth/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestAuthModule) {
+define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestAuthModule) {
     tdpInvestAuthModule.service('tdpInvestAuthService', ['$cookieStore', '$http', 'tdpInvestBase64Service', function ($cookieStore, $http, tdpInvestBase64Service) {
         var service = {};
 

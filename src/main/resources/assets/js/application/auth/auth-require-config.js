@@ -2,21 +2,21 @@
 
 //noinspection JSFileReferences
 require.config({
-    baseUrl: '/', //jestesmy w auth
+    baseUrl: '/js/',
     paths: {
-        'angular': 'js/lib/angular/angular',
-        'uiRouter': 'js/lib/angular-ui-router/release/angular-ui-router',
-        'ngCookies': 'js/lib/angular-cookies/angular-cookies'
+        'angular': 'lib/angular/angular',
+        'uiRouter': 'lib/angular-ui-router/release/angular-ui-router',
+        'ngCookies': 'lib/angular-cookies/angular-cookies'
     },
     shim: {
         'angular': {
             exports: 'angular'
         },
-        'uiRouter' : ['angular'],
+        'uiRouter': ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
             deps: ['angular']
         }
     },
-    deps: ['auth/auth-bootstrap']
+    deps: ['application/auth/auth-bootstrap']
 });

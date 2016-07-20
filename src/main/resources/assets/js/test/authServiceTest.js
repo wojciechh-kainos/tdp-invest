@@ -1,7 +1,7 @@
-define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/auth/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestAuthService', function () {
-        beforeEach(angular.mock.module('auth'));
+        beforeEach(angular.mock.module('tdpInvestAuthModule'));
 
         var $httpBackend;
         var $service;
@@ -11,9 +11,9 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             $httpBackend = _$httpBackend_;
         }));
 
-        describe('When auth', function () {
+        describe('When logging in', function () {
             it('with valid credentials should succeed', function () {
-                $httpBackend.expectGET('/api/auth', undefined).respond(200, '');
+                $httpBackend.expectGET('/api/login', undefined).respond(200, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {
@@ -24,7 +24,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             });
 
             it('with invalid credentials should fail', function () {
-                $httpBackend.expectGET('/api/auth', undefined).respond(400, '');
+                $httpBackend.expectGET('/api/login', undefined).respond(400, '');
 
                 $service.login(undefined, undefined)
                     .then(function (response) {
@@ -35,7 +35,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
             });
         });
 
-        describe('When register', function () {
+        describe('When registering', function () {
             it('with valid credentials should succeed', function () {
                 $httpBackend.expectPOST('/api/register', undefined).respond(200, '');
 
@@ -59,7 +59,7 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
                 $httpBackend.flush();
             });
 
-            it('should fail when server error', function () {
+            it('should fail when server returns error', function () {
                 $httpBackend.expectPOST('/api/register', undefined).respond(500, '');
 
                 $service.register(undefined, undefined)

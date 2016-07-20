@@ -20,7 +20,7 @@ define(['angular'
                 }
             }
         });
-        // $urlRouterProvider.otherwise("/auth");
+        $urlRouterProvider.otherwise("");
 
     });
 

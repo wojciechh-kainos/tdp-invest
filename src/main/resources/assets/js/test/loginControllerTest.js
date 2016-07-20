@@ -1,27 +1,24 @@
-define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginController', 'application/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginController', 'application/auth/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestLoginController', function () {
-        beforeEach(angular.mock.module('auth'));
+        beforeEach(angular.mock.module('tdpInvestAuthModule'));
 
         var authService;
         var deferred;
-        var $state;
+        var $window;
         var $scope;
-        var $q;
 
-        beforeEach(inject(function ($controller, _$rootScope_, tdpInvestAuthService, _$q_, _$state_) {
-            $q = _$q_;
+        beforeEach(inject(function ($controller, _$rootScope_, tdpInvestAuthService, $q) {
             deferred = $q.defer();
             $scope = _$rootScope_.$new();
             authService = tdpInvestAuthService;
-            $state = _$state_;
+            $window = {location: {}};
 
-            spyOn($state, 'go');
             spyOn(authService, 'login').and.returnValue(deferred.promise);
             spyOn(authService, 'clearCredentials').and.returnValue('');
             spyOn(authService, 'setCredentials').and.returnValue('');
 
-            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService});
+            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService, $window: $window});
         }));
 
         describe('When logging in', function () {
@@ -32,7 +29,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect($state.go).toHaveBeenCalledWith('tdp');
+                expect($window.location.href).toBe("/");
             });
 
             it('with invalid credentials should fail', function () {
@@ -41,7 +38,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect($state.go).not.toHaveBeenCalled();
+                expect($scope.error).toBe("error");
             });
 
         });

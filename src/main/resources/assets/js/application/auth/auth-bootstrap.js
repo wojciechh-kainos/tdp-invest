@@ -1,7 +1,7 @@
 define([
     'angular',
-    'auth/tdpInvestAuthModule',
-    'auth/tdpInvestAuthModuleConfig'
+    'application/auth/tdpInvestAuthModule',
+    'application/auth/tdpInvestAuthModuleConfig'
 ], function (angular) {
     'use strict';
 

@@ -1,4 +1,4 @@
-define(['angular', 'auth/tdpInvestAuthModule', 'auth/services/tdpInvestAuthService'], function (angular, tdpInvestAuthModule) {
+define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/services/tdpInvestAuthService'], function (angular, tdpInvestAuthModule) {
     tdpInvestAuthModule.controller("tdpInvestRegisterController", function ($scope, tdpInvestAuthService, $state) {
 
         $scope.register = function () {
