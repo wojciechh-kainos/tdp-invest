@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directive/tdpInvestShowErrors',], function (angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directive/tdpInvestShowErrors'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', '$state', function ($scope, $stateParams, stockData, $state) {
 
 
