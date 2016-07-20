@@ -6,7 +6,14 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <include file="changelogs/initialCreateTables.xml"/>
-    <include file="changelogs/populateTables.xml"/>
-    <include file="changelogs/personTableChange.xml"/>
+
+    <changeSet id="5" author="marcint">
+
+        <addColumn tableName="tdpuser">
+            <column name="token" type="varchar(50)" />
+            <column name="token_expire" type="BYTEA" />
+        </addColumn>
+
+    </changeSet>
+
 </databaseChangeLog>
