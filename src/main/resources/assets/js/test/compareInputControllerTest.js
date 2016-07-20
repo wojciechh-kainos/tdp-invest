@@ -26,25 +26,18 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestCompareI
                 expect($scope.percentage).toEqual(5);
             });
 
-            it('parent vs child scope', function() {
+            it('has variables the same as parent', function() {
                 expect($scope.input).toEqual($scope.$parent.input);
                 expect($scope.percentage).toEqual($scope.$parent.percentage);
             });
 
-            it('parent vs child scope after child scope modification', function() {
-                expect($scope.input).toEqual($scope.$parent.input);
-                expect($scope.percentage).toEqual($scope.$parent.percentage);
-                $scope.input = 200;
-                expect($scope.input).toEqual(200);
-            });
-
-            it('parent vs child scope after child scope modification and $watch fired', function() {
+            it('runs function after $apply() invotaion and changes input', function() {
                 $scope.input = 200;
                 $scope.$apply();
                 expect($scope.input).toEqual($scope.$parent.input);
             });
 
-            it('parent vs child scope after child scope modification and $watch fired', function() {
+            it('runs function after $apply() invocation and changes percentage', function() {
                 $scope.percentage = 10;
                 $scope.$apply();
                 expect($scope.percentage).toEqual($scope.$parent.percentage);
