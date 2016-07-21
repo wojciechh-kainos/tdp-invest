@@ -16,15 +16,12 @@ import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.forms.MultiPartBundle;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
 import resources.TdpInvestCompareResource;
-import configuration.TdpInvestModule;
 import domain.TdpUser;
 import resources.TdpInvestAuthResource;
-import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
 
 
@@ -78,7 +75,6 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(TdpUser.class));
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
-        environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestAuthResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestCompareResource.class));
     }

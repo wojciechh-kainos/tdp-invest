@@ -4,8 +4,7 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.ProvisionException;
 import org.hibernate.SessionFactory;
-import services.DummyJob;
-import services.FirstImplementation;
+
 
 public class TdpInvestModule extends AbstractModule {
 
@@ -27,7 +26,6 @@ public class TdpInvestModule extends AbstractModule {
 
     @Override
     protected void configure() {
-        bind(DummyJob.class).to(FirstImplementation.class);
 
     }
 }

@@ -3,7 +3,6 @@ package resources;
 import framework.BaseTest;
 import org.junit.Before;
 import org.junit.Test;
-import services.SecondImplementation;
 
 
 import static junit.framework.TestCase.assertEquals;
