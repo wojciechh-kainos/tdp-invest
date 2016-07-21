@@ -17,7 +17,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 mode = data.mode;
             return mode === 'day' && (date.getDay() === 0 || date.getDay() === 6);
         }
-        
+
         $scope.format = 'yyyy-MM-dd';
 
         $scope.chartConfig = {
@@ -48,13 +48,12 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         };
 
 
-        function getValueAtDate(date){
+        function getValueAtDate(date) {
             var val = stockData.getData().find(function (unit) {
                 return unit[0] >= date.getTime();
             });
             return val[1];
         }
-
 
 
         $scope.fill = function () {
@@ -66,6 +65,17 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 captInterval: 30
             }
         };
+
+        // Swap start date with end date if start date is bigger than end date
+        function checkDateStartEnd() {
+            var form = $scope.form;
+            var startDate = form.startDate;
+            var endDate = form.endDate;
+            if (startDate > endDate) {
+                form.startDate = endDate;
+                form.endDate = startDate;
+            }
+        }
 
         function calculateStockInvestIncome() {
             var form = $scope.form;
@@ -79,14 +89,17 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             var daysPassed = (form.endDate.getTime() - form.startDate.getTime()) / 86400000;
             var capitalizations = Math.floor(daysPassed / form.captInterval);
             var intrestRatePerCaptInterval = form.interestRate * form.captInterval / 365;
-            return form.amount * (Math.pow((1 + intrestRatePerCaptInterval/100), capitalizations) - 1);
+            return form.amount * (Math.pow((1 + intrestRatePerCaptInterval / 100), capitalizations) - 1);
         }
-
 
         $scope.submit = function () {
             $scope.$broadcast('show-errors-check-validity');
 
-            if ($scope.compareForm.$invalid) { return; }
+            if ($scope.compareForm.$invalid) {
+                return;
+            }
+
+            checkDateStartEnd();
 
             $scope.chartConfig.series[0].data = [calculateDepositInvestIncome(), calculateStockInvestIncome()];
 
