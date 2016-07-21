@@ -3,7 +3,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         var datesTmp = [];
 
-        this.makeDate = function(date){
+        makeDate = function(date){
             var d = new Date(date);
             d.setHours(0,0,0,0);
             return new Date(d).getTime();
@@ -42,7 +42,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         this.getStockDataFromDates = function(dates, start_date, end_date){
             stock_data = [];
             for(i = 0; i < dates.length; i++){
-                if(makeDate(dates[i].date) >= makeDate(start_date) && makeDate(dates[i].date) <= makeDate(end_date)){
+                if(this.makeDate(dates[i].date) >= this.makeDate(start_date) && this.makeDate(dates[i].date) <= this.makeDate(end_date)){
                     stock_data.push({date : dates[i].date, price : dates[i].price});
                 }
             }
@@ -55,51 +55,51 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             if(dates === undefined){
                 return request;
             }
-            dates.sort(compareDates);
+            dates.sort(this.compareDates);
 
             var T0 = start_date;
             var TX = end_date;
             var tmp;
 
             if(dates.length == 0){
-                request.push(makeRequest(T0, TX));
+                request.push(this.makeRequest(T0, TX));
                 dates.push({p : T0, k : TX});
                 data = {dates : dates, requests : request};
                 return data;
             }
             for(var i = 0; i < dates.length; i++){
-                if(makeDate(T0) < makeDate(dates[i].p)){
-                    if(i != 0 && makeDate(T0) <= makeDate(dates[i - 1].k)){
-                        if(makeDate(TX) <= makeDate(dates[i - 1].k))
+                if(this.makeDate(T0) < this.makeDate(dates[i].p)){
+                    if(i != 0 && makeDate(T0) <= this.makeDate(dates[i - 1].k)){
+                        if(this.makeDate(TX) <= makeDate(dates[i - 1].k))
                             break;
                         T0 = dates[i-1].k;
                     }
-                    if(makeDate(TX) < makeDate(dates[i].p)){
-                        request.push(makeRequest(T0, TX));
+                    if(this.makeDate(TX) < this.makeDate(dates[i].p)){
+                        request.push(this.makeRequest(T0, TX));
                         dates.push({p : T0, k : TX});
-                        dates.sort(compareDates);
+                        dates.sort(this.compareDates);
                         break;
-                    }else if(makeDate(TX) <= makeDate(dates[i].k)){
-                        request.push(makeRequest(T0, dates[i].p));
+                    }else if(this.makeDate(TX) <= this.makeDate(dates[i].k)){
+                        request.push(this.makeRequest(T0, dates[i].p));
                         tmp = T0;
                         T0 = dates[i].k;
                         dates[i].p = tmp;
                         break;
                     }
-                    request.push(makeRequest(T0, dates[i].p));
+                    request.push(this.makeRequest(T0, dates[i].p));
                     tmp = T0;
                     T0 = dates[i].k;
                     dates[i].p = tmp;
                 }
                 if(i == dates.length - 1){
-                    if(makeDate(TX) > makeDate(dates[i].k))
-                        request.push(makeRequest(dates[i].k, TX));
+                    if(this.makeDate(TX) > this.makeDate(dates[i].k))
+                        request.push(this.makeRequest(dates[i].k, TX));
                         dates[i].k = TX;
                     break;
                 }
             }
 
-            dates = mergeDates(dates);
+            dates = this.mergeDates(dates);
 
             data = {dates : dates, requests : request};
 
@@ -120,7 +120,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
         this.getStockData = function(date1, date2, datesIntervals, datesAndPrices){
             getStockDataFromDates = this.getStockDataFromDates;
-            var data = createDateRequests(datesIntervals, date1, date2);
+            var data = this.createDateRequests(datesIntervals, date1, date2);
             if(data.requests[0] === undefined){
                 stockData = this.getStockDataFromDates(datesAndPrices, date1, date2);
                 var message = {stockData : stockData, datesIntervals : datesIntervals, datesAndPrices : datesAndPrices};
@@ -133,9 +133,9 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 for(i = 0; i < response.data.length; i++){
                     datesAndPrices.push({date : response.data[i].date, price : response.data[i].price});
                 }
-                datesAndPrices.sort(compareDatesAndPrices);
+                datesAndPrices.sort(this.compareDatesAndPrices);
                 datesIntervals = datesTmp;
-                stockData = getStockDataFromDates(datesAndPrices, date1, date2);
+                stockData = this.getStockDataFromDates(datesAndPrices, date1, date2);
                 var message = {stockData : stockData, datesIntervals : datesIntervals, datesAndPrices : datesAndPrices};
                 return message;
             });

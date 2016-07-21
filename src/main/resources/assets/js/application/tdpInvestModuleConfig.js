@@ -1,7 +1,6 @@
 define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestCompareController'
-    , 'application/controllers/tdpInvestDateController'
     , 'application/directives/tdpInvestCalendarDirective'
     , 'application/directives/tdpInvestTableDirective'
     , 'application/directives/tdpInvestChartDirective'
@@ -37,15 +36,6 @@ define(['angular'
                 },
                 resolve: {
                     redirectIfNotAuthenticated: _redirectIfNotAuthenticated
-                }
-            })
-            .state("date",{
-                url:"/date",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-date.html",
-                        controller: "tdpInvestDateController"
-                    }
                 }
             })
             .state("login", {
