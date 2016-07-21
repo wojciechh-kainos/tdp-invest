@@ -3,12 +3,13 @@
         <div class="container">
 
             <div class="navbar-header">
-                <a class="navbar-brand" ui-sref="tdp.dashboard">TDP Invest</a>
+                <a class="navbar-brand" ui-sref="tdp.home">TDP Invest</a>
             </div>
 
             <ul class="nav navbar-nav navbar-right">
+                <li ui-sref-active="active" ng-if="!$state.includes('tdp.home')"><a ui-sref="tdp.home">Funds</a></li>
                 <li ui-sref-active="active" ng-if="!$state.includes('tdp.home')"><a ui-sref="tdp.dashboard">Chart</a></li>
-                <li ui-sref-active="active"><a ui-sref="tdp.compare">Compare</a></li>
+                <li ui-sref-active="active" ng-if="!$state.includes('tdp.home')"><a ui-sref="tdp.compare">Compare</a></li>
                 <li ui-sref-active="active"><a ui-sref="login">Logout</a></li>
             </ul>
         </div>
