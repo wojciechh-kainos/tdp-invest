@@ -7,7 +7,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             $scope.loginPromise = tdpInvestAuthService.login($scope.username, $scope.password)
                 .then(function (response) {
                     if (response.success) {
-                        $state.go('compare');
+                        $state.go('upload');
                     } else {
                         $scope.error = response.message;
                     }

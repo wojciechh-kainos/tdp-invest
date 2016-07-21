@@ -32,7 +32,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginContro
                 $scope.login();
                 $scope.$apply();
 
-                expect($state.go).toHaveBeenCalledWith('compare');
+                expect($state.go).toHaveBeenCalledWith('upload');
             });
 
             it('with invalid credentials should fail', function () {
