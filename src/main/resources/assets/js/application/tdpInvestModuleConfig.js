@@ -44,7 +44,7 @@ define(['angular'
                 // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 stockDataService: "stockData",
                 stockDataPromise: function (stockDataService, $stateParams) {
-                    return stockDataService.getFundUnits($stateParams.id);
+                    return stockDataService.setCurrentFund($stateParams.id);
 
                 }
             }
@@ -63,18 +63,18 @@ define(['angular'
         $urlRouterProvider.otherwise("/login");
     }]);
 
-    function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
-        var defer = $q.defer();
-        if ($cookieStore.get('currentUser')) {
-            defer.resolve();
-        } else {
-            $timeout(function () {
-                $state.go("login");
-            });
-            defer.reject();
-        }
-        return defer.promise;
-    }
+    // function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+    //     var defer = $q.defer();
+    //     if ($cookieStore.get('currentUser')) {
+    //         defer.resolve();
+    //     } else {
+    //         $timeout(function () {
+    //             $state.go("login");
+    //         });
+    //         defer.reject();
+    //     }
+    //     return defer.promise;
+    // }
 
     tdpInvestModule.run(['$rootScope', '$state', 'tdpInvestAuthService', '$cookieStore', '$http',
         function ($rootScope, $state, tdpInvestAuthService, $cookieStore, $http) {

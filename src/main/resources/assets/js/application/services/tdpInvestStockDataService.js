@@ -2,6 +2,7 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
     tdpInvestModule.service('stockData', function ($http) {
         var data;
         var fundList;
+        var currentFundId;
 
 
         this.getData = function () {
@@ -9,7 +10,7 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
         };
 
         this.getFirst = function () {
-            return new Date(data[0][0]);
+            return new Date(fundList[currentFundId].units[0][0]);
         };
 
         this.getLast = function () {
@@ -32,17 +33,25 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             })
         }
 
-        this.getFundUnits = function (id) {
-            if (fundList[getFundIndex(id)].units === null)
-                return $http.get('/api/unit/select/' + id).then(
-                    function (response) {
-                        fundList[getFundIndex(id)].units = response.data;
-                        return fundList[getFundIndex(id)].units;
-                    },
-                    function (error) {
-                        return error;
-                    }
-                )
+        function loadFundUnits(fundIndex) {
+            return $http.get('/api/unit/select/' + fundList[fundIndex].id).then(
+                function (response) {
+                    fundList[fundIndex].units = response.data;
+                    return fundList[fundIndex].units;
+                },
+                function (error) {
+                    return error;
+                })
+        }
+
+        this.setCurrentFund = function (id) {
+            if (!(typeof id === 'undefined')) {
+                currentFundId = getFundIndex(id);
+
+                if (fundList[currentFundId].units === null) {
+                    return loadFundUnits(currentFundId);
+                }
+            }
         };
 
         this.loadFundList = $http.get('/api/fund').then(
@@ -57,6 +66,10 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
 
         this.getFunds = function () {
             return fundList;
+        };
+
+        this.getCurrentFund = function () {
+            return fundList[currentFundId];
         }
     })
 });

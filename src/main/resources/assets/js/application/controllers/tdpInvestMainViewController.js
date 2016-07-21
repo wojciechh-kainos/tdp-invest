@@ -1,8 +1,8 @@
 define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestMainViewController", function ($scope, stockData, $timeout) {
         var delayFilter;
-        $scope.test = "hello";
-        $scope.mydata = stockData.getData();
+        var fund = stockData.getCurrentFund();
+        $scope.mydata = fund.units;
         $scope.isInRange = function (dateMin, dateMax) {
             return function (item) {
                 if (typeof dateMin !== 'undefined' && typeof dateMin !== 'undefined') {
@@ -42,14 +42,14 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             },
             series: [],
             title: {
-                text: 'Hello'
+                text: fund.name
             },
             useHighStocks: true
         };
 
         $scope.chartConfig.series.push({
                 id: 1,
-                data: $scope.mydata
+                data: fund.units
             }
         );
     })
