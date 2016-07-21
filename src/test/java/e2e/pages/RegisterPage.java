@@ -7,14 +7,17 @@ public class RegisterPage extends BasePage {
 
     public RegisterPage() throws Exception {
         super();
-        path = "register";
+    }
+
+    @Override
+    public String getPartialUrl() {
+        return "register";
     }
 
     @Override
     public String getUniqueId() {
         return "registerPageContent";
     }
-
 
     public WebElement getUsernameField() {
         return driver.findElement(By.id("username"));

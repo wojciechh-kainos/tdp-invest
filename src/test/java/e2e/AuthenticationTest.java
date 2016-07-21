@@ -38,7 +38,7 @@ public class AuthenticationTest {
         loginPage.getLoginButton().click();
 
         loginPage.waitForElementToLoad(By.id(mainPage.getUniqueId()));
-        assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getUrl()));
+        assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getPartialUrl()));
 
         registerPage.open();
         registerPage.getUsernameField().sendKeys("test");

@@ -11,7 +11,6 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public abstract class BasePage {
 
     protected final String BASE_PATH = "http://localhost:9000/#/";
-    protected String path;
     protected WebDriver driver;
 
     public BasePage() throws Exception {
@@ -19,17 +18,16 @@ public abstract class BasePage {
     }
 
     public void open() {
-        String url = BASE_PATH + path;
-        this.driver.get(url);
+        this.driver.get(getFullUrl());
     }
 
     public void close() {
         this.driver.close();
     }
 
-    public String getUrl() {
-        return BASE_PATH + path;
-    }
+    public abstract String getPartialUrl();
+
+    public abstract String getUniqueId();
 
     public void waitForElementToLoad(By by){
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.presenceOfElementLocated(by));
@@ -39,9 +37,11 @@ public abstract class BasePage {
         (new WebDriverWait(driver, 10)).until(ExpectedConditions.visibilityOf(by));
     }
 
-    public abstract String getUniqueId();
-
     public String getCurrentUrl() {
         return driver.getCurrentUrl();
+    }
+
+    protected String getFullUrl() {
+        return BASE_PATH + getPartialUrl();
     }
 }

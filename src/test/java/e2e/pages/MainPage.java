@@ -7,6 +7,11 @@ public class MainPage extends BasePage {
     }
 
     @Override
+    public String getPartialUrl() {
+        return "tdp";
+    }
+
+    @Override
     public String getUniqueId() {
         return "mainPageContent";
     }

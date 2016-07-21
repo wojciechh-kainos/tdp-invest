@@ -7,7 +7,11 @@ public class LoginPage extends BasePage {
 
     public LoginPage() throws Exception {
         super();
-        path = "login";
+    }
+
+    @Override
+    public String getPartialUrl() {
+        return "login";
     }
 
     @Override
@@ -30,4 +34,5 @@ public class LoginPage extends BasePage {
     public WebElement getErrorAlert() {
         return driver.findElement(By.id("errorAlert"));
     }
+
 }
