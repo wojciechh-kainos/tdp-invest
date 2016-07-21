@@ -6,24 +6,26 @@ import com.wiredforcode.gradle.spawn.*
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'maven'
-apply plugin: 'gradle-one-jar'
+apply plugin: 'eu.appsatori.fatjar'
 apply plugin: 'com.wiredforcode.spawn'
 
 mainClassName = 'TdpInvestApplication'
 
 buildscript {
     repositories {
+        jcenter()
         mavenCentral()
         maven { url 'http://dl.bintray.com/vermeulen-mp/gradle-plugins' }
     }
     dependencies {
-        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+        classpath 'eu.appsatori:gradle-fatjar-plugin:0.3'
         classpath 'com.wiredforcode:gradle-spawn-plugin:0.6.0'
     }
 }
 
 project.ext {
     dropwizardVersion = '0.9.3'
+    configPath = './src/main/resources/app_config.yml'
 }
 
 repositories {
@@ -59,6 +61,7 @@ dependencies {
         'io.dropwizard:dropwizard-auth:' + dropwizardVersion,
         'io.dropwizard:dropwizard-db:' + dropwizardVersion,
         'io.dropwizard:dropwizard-forms:' + dropwizardVersion,
+        'io.dropwizard:dropwizard-migrations:' + dropwizardVersion,
         'com.github.dirkraft.dropwizard-file-assets:dropwizard-file-assets:0.0.2'
     )
 
@@ -88,8 +91,17 @@ dependencies {
     testCompile 'org.slf4j:jcl-over-slf4j:1.7.2'
 }
 
-task oneJar(type: OneJar) {
-    mainClass = mainClassName
+// Configure the fatJar task
+fatJar {
+    classifier 'fat'
+
+    // We need to add the main class to the manifest, otherwise the JAR won't start.
+    manifest {
+        attributes 'Main-Class': mainClassName
+    }
+
+    // We have to exclude signature files from the fat JAR, otherwise we'll get invalid signature file digest errors.
+    exclude 'META-INF/*.DSA', 'META-INF/*.RSA', 'META-INF/*.SF'
 }
 
 task startServer(type: SpawnProcessTask) {
@@ -99,10 +111,11 @@ task startServer(type: SpawnProcessTask) {
 
 task stopServer(type: KillProcessTask)
 
-run {
-    args 'server', './src/main/resources/app_config.yml'
+task migrate(type: JavaExec, dependsOn: fatJar) {
+    main = "-jar"
+    args = ["./build/libs/" + rootProject.name + "-" + version + "-fat.jar", "db", "migrate", configPath]
 }
 
-artifacts {
-    oneJar
+run {
+    args 'server', configPath
 }
