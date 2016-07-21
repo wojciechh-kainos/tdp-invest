@@ -9,7 +9,6 @@ require.config({
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstocks': 'lib/highcharts/highstock',
-        'highcharts': 'lib/highcharts/highcharts',
         'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
         'ngResource': 'lib/angular-resource/angular-resource',
         'ngModule': 'lib/ng-module/ng-module'
@@ -20,7 +19,7 @@ require.config({
         },
         'uiRouter': ['angular'],
         'ngResource': ['angular'],
-        'highcharts-ng': ['angular', 'highstocks', 'highcharts'],
+        'highcharts-ng': ['angular', 'highstocks'],
         'ui-bootstrap': ['angular'],
         'ngCookies': {
             exports: 'ngCookies',

@@ -4,6 +4,7 @@ define(['angular'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainViewController'
+    , 'application/controllers/tdpInvestHomeController'
     , 'application/services/tdpInvestStockDataService'
 ], function (angular, tdpInvestModule) {
     tdpInvestModule.config(['$stateProvider', '$urlRouterProvider', function ($stateProvider, $urlRouterProvider) {
@@ -17,7 +18,7 @@ define(['angular'
                     }
                 },
                 templateUrl: 'html/partials/tdp-invest-main.html'
-        }).state("login", {
+            }).state("login", {
             url: "/login",
             templateUrl: "html/partials/tdp-invest-login.html",
             controller: "tdpInvestLoginController"
@@ -36,11 +37,26 @@ define(['angular'
                 }
             }
         }).state("tdp.dashboard", {
-            url: "/dashboard",
+            url: '/dashboard/{id:int}',
             templateUrl: "html/partials/tdp-invest-dashboard.html",
             controller: "tdpInvestMainViewController",
             resolve: {
-                redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                stockDataService: "stockData",
+                stockDataPromise: function (stockDataService, $stateParams) {
+                    return stockDataService.getFundUnits($stateParams.id);
+
+                }
+            }
+        }).state("tdp.home", {
+            url: '/home',
+            templateUrl: "html/partials/tdp-invest-home.html",
+            controller: "tdpInvestHomeController",
+            resolve: {
+                stockDataService: "stockData",
+                stockDataPromise: function (stockDataService) {
+                    return stockDataService.loadFundList;
+                }
             }
         });
 

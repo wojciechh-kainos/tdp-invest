@@ -3,6 +3,8 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
         var data;
         var fundList;
 
+
+
         this.getData = function () {
             return data;
         };
@@ -24,15 +26,31 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
                 return error;
             }
         );
+
+        this.getFundUnits = function (id) {
+            return $http.get('/api/unit/select/' + id).then(
+                function (response) {
+                    data = response.data;
+                    return data;
+                },
+                function (error) {
+                    return error;
+                }
+            )
+        };
+
+        this.loadFundList = $http.get('/api/fund').then(
+            function (response) {
+                fundList = response.data;
+                return response;
+            },
+            function (error) {
+                return error;
+            }
+        );
         
-        // this.loadFundList = $http.get('/api/fund').then(
-        //     function (response) {
-        //         fundList = response.data;
-        //         return response;
-        //     },
-        //     function (error) {
-        //         return error;
-        //     }
-        // );
+        this.getFunds = function(){
+            return fundList;
+        }
     })
 });
