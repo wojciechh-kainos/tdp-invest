@@ -55,7 +55,6 @@ public class TdpInvestUnitResource {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@UnitOfWork
 	public Response uploadFile(
-			@Auth TdpUser tdpUser,
 			@FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail) throws URISyntaxException {
 		dataLoader.loadData(fileInputStream);

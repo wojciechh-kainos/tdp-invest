@@ -1,9 +1,17 @@
-<h2>Upload file</h2>
+<div class="panel panel-default col-md-6 col-md-offset-3">
+    <div class="panel-heading row">
+        <h3>Upload file</h3>
+    </div>
+    <div class="panel-body">
+        <form action="/api/unit/upload" method="post" enctype="multipart/form-data" ng-show="!showGif">
+            <h4>Select a file : </h4>
+            <div class="form-group">
+                <input type="file" name="file" size="50"/>
+            </div>
 
-<form action="/api/unit/upload" method="post" enctype="multipart/form-data">
+            <button class="btn btn-primary" type="submit" ng-click="showGif = true">Upload</button>
+        </form>
+        <p class="upload" ng-show="showGif"><span class="glyphicon glyphicon-repeat spin"></span><br>Uploading</p>
+    </div>
+</div>
 
-    <p>Select a file : <input type="file" name="file" size="50" /></p>
-
-    <input type="submit" value="Upload" />
-
-</form>

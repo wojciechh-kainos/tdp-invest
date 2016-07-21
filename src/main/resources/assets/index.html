@@ -28,7 +28,6 @@
                 <li><a href="#/upload"><i class="fa fa-home"></i> Upload</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li ng-show="isUserLoggedIn"><a href="#/tdp"><i class="fa fa-home"></i> Home</a></li>
                 <li ng-show="isUserLoggedIn"><a href="#/login"><i class="fa fa-shield"></i> Logout</a></li>
                 <li ng-show="!isUserLoggedIn"><a href="#/login"><i class="fa fa-shield"></i> Login</a></li>
                 <li ng-show="!isUserLoggedIn"><a href="#/register"><i class="fa fa-shield"></i> Register</a></li>
@@ -38,6 +37,6 @@
     </nav>
 </header>
 
-<div class="container" ui-view></div>
+    <div ui-view></div>
 </body>
 </html>
