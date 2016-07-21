@@ -1,43 +1,39 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestmentService', 'ng-table'], function(angular, tdpInvestModule){
-    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestmentService, NgTableParams){
+    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestmentService, NgTableParams, $filter){
 
         $scope.tableConfig = new NgTableParams({
-            count: 20
+            page: 1,
+            count: 10,
+            sorting: { id: 'asc' }
         }, {
-            counts: [],
-            getData: function(){
-                return getInvestments();
-            }
+            total: 0,
+            getData: function($defer, params){
+                tdpInvestmentService.getInvestments().then(function(response){
+                    // params.total(response.data.length);
+                    // $defer.resolve(response.data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                    var ordered = params.sorting() ?
+                        $filter('orderBy')(response.data, params.orderBy()) :
+                        response.data;
+                    params.total(ordered.length);
+                    $defer.resolve(ordered.slice((params.page() - 1) * params.count(), params.page() * params.count()));
+                });
+
+            },
+            defaultSort: "asc"
         });
 
-        // // var compareInvestment = function(dateStart, dateEnd, amount, annualRate){
-        // //     return tdpInvestmentService.getInvestmentTimeSeries(dateStart, dateEnd, amount, annualRate);
-        // };
-        
-        var getInvestments = function(){
-            return tdpInvestmentService
-                .getInvestments()
-                .then(function(response){
-                    return response.data;
-                });
-        };
-
-        $scope.showDate = function(ms){
-          return new Date(ms).toISOString().slice(0, 10);
-        };
-        
-        $scope.showAmount = function(row){
-            return "$" + row.amount.toFixed(2);
-        };
-        
         $scope.showRate = function(row){
             return (row.annualRate * 100).toFixed(2) + "%";
         };
 
-
         $scope.removeRow = function(dbId){
             tdpInvestmentService.deleteInvestment(dbId).then(function (success) {
-                $scope.tableConfig.reload();
+                $scope.tableConfig.reload().then(function(data){
+                    if (data.length === 0 && $scope.tableConfig.total() > 0){
+                        $scope.tableConfig.page($scope.tableConfig.page() - 1);
+                        $scope.tableConfig.reload();
+                    }
+                });
             });
         };
 
@@ -49,22 +45,30 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         };
 
         $scope.addRow = function(){
-            var investment = {amount: null, annualRate: null, startDate: null, endDate: null};
+            var investment = {amount: 0.0, annualRate: 0.0, startDate: null, endDate: null};
             tdpInvestmentService.postInvestment(investment).then(function(success){
                 $scope.tableConfig.reload();
             });
+        };
+
+        $scope.checkAmount = function(row){
+            if (row.hasOwnProperty("amount")){
+                var amount = row.amount;
+                if (amount == null) { return "Amount should not be empty"; }
+                if (amount < 0) { return "Amount have to be positive"; }
+                if (amount >= 1000000) { return "You are not a millionaire"; }
+            }
         };
 
         var mergeObjects = function(id, row){
             var idObj = {id: id};
             Object.keys(row).forEach(function(key){ idObj[key] = row[key]; });
 
+            if (idObj.hasOwnProperty("annualRate")){
+                idObj["annualRate"] = idObj["annualRate"] / 100;
+            }
+
             return idObj;
         };
-        
-
-        // var getInvestmentIndex = function(arrId){
-        //     return investments.map(function(x){ return x.id; }).indexOf(arrId);
-        // };
     });
 });
