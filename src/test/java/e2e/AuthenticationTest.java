@@ -6,7 +6,9 @@ import e2e.pages.RegisterPage;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.By;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertFalse;
 
 public class AuthenticationTest {
@@ -35,7 +37,7 @@ public class AuthenticationTest {
         loginPage.getPasswordField().sendKeys("test");
         loginPage.getLoginButton().click();
 
-        loginPage.waitForElementToLoad(mainPage.getUniqueByElement());
+        loginPage.waitForElementToLoad(By.id(mainPage.getUniqueId()));
         assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getUrl()));
 
         registerPage.open();
@@ -44,7 +46,7 @@ public class AuthenticationTest {
         registerPage.getRegisterButton().click();
 
         registerPage.waitForElementToShow(loginPage.getErrorAlert());
-        assertFalse("When user registers with already used credentials, the error message should become visible", registerPage.getErrorAlert().getCssValue("display").equals("none"));
+        assertTrue("When user registers with already used credentials, the error message should become visible", registerPage.getErrorAlert().isDisplayed());
     }
 
     @Test
@@ -53,7 +55,7 @@ public class AuthenticationTest {
         loginPage.getUsernameField().sendKeys("test2");
         loginPage.getPasswordField().sendKeys("test2");
         loginPage.getLoginButton().click();
-        assertFalse("When user logs in with bad credentials, the error message should become visible", loginPage.getErrorAlert().getCssValue("display").equals("none"));
+        assertTrue("When user logs in with bad credentials, the error message should become visible", loginPage.getErrorAlert().isDisplayed());
     }
 
     @AfterClass
