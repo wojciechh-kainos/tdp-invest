@@ -1,2 +1,12 @@
-<input type="file" file-model="fileToUpload"/>
-<button ng-click="uploadFile()">upload</button>
+
+<form class="form-horizontal" name="fileUploadForm">
+    <div class="row">
+        <div class="col-xs-3">
+            <div class="form-group">
+                    <input class="btn-lg btn-default btn-file" type="file" id="file" file-model="fileToUpload"/>
+            </div>
+
+                <button class="btn btn-default" ng-click="uploadFile()">Upload</button>
+        </div>
+    </div>
+</form>
