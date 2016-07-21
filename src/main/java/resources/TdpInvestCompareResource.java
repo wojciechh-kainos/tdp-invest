@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
+import domain.TdpUser;
 import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.json.JSONArray;
@@ -36,38 +37,9 @@ public class TdpInvestCompareResource {
 
     @POST
     @UnitOfWork
-    @Consumes(MediaType.APPLICATION_JSON)
-    public List<StockPrice> fetchRange(String json) throws ParseException, IOException {
-
-
-        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        Date dateFrom = sdf.parse(jsonObject.get("dateFrom").getAsString());
-        Date dateTo = sdf.parse(jsonObject.get("dateTo").getAsString());
-
-        System.out.println(jsonObject.get("dateFrom").getAsString());
-        System.out.println(jsonObject.get("dateTo").getAsString());
-        System.out.println(dateFrom.toString());
-        System.out.println(dateTo.toString());
-
-        DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        List<StockPrice> collection = new ArrayList<>();
-
-        List<TdpIUnit> units = new ArrayList<>();
-        units = tdpIUnitDAO.getDate(dateFrom, dateTo);
-
-        for(TdpIUnit unit : units){
-            collection.add(new StockPrice(dateFormat.format(unit.getDate()), unit.getValue()));
-        }
-
-        return collection;
-    }
-
-    @POST
-    @UnitOfWork
     @Path("/date")
     @Consumes(MediaType.APPLICATION_JSON)
-    public List<StockPrice> fetchRangeDate(String json) throws ParseException, IOException, JSONException {
+    public List<StockPrice> fetchRangeDate(@Auth TdpUser tdpUser, String json) throws ParseException, IOException, JSONException {
 
         JSONObject object = new JSONObject(json);
         JSONObject date = new JSONObject();
@@ -79,19 +51,17 @@ public class TdpInvestCompareResource {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
         JSONArray requests = object.getJSONArray("requests");
-        for(int i = 0; i < requests.length(); i++){
+        for (int i = 0; i < requests.length(); i++) {
             date = requests.getJSONObject(i);
             dateFrom = sdf.parse(date.getString("p"));
             dateTo = sdf.parse(date.getString("k"));
             units = tdpIUnitDAO.getDate(dateFrom, dateTo);
-            for(TdpIUnit unit : units){
+            for (TdpIUnit unit : units) {
                 collection.add(new StockPrice(dateFormat.format(unit.getDate()), unit.getValue()));
             }
         }
-        System.out.println("DO ZWRÓCENIA: " + collection);
         return collection;
     }
-
 
 
 }

@@ -1,6 +1,8 @@
 package resources;
 
 import com.google.inject.Inject;
+import domain.TdpUser;
+import io.dropwizard.auth.Auth;
 import services.DummyJob;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -23,8 +25,7 @@ public class TdpInvestPersonResource {
         return myJob;
     }
 
-    @GET
-    public String fetch(@PathParam("personId") String personId) {
-        return myJob.sayStm();
+    public String fetch(@Auth TdpUser u, @PathParam("personId") String personId) {
+        return personId;
     }
 }

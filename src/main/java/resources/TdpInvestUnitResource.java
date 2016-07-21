@@ -4,6 +4,8 @@ package resources;
 import dao.TdpIUnitDAO;
 import com.google.inject.Inject;
 import domain.TdpIUnit;
+import domain.TdpUser;
+import io.dropwizard.auth.Auth;
 import io.dropwizard.hibernate.UnitOfWork;
 import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
@@ -53,6 +55,7 @@ public class TdpInvestUnitResource {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@UnitOfWork
 	public Response uploadFile(
+			@Auth TdpUser tdpUser,
 			@FormDataParam("file") InputStream fileInputStream,
 			@FormDataParam("file") FormDataContentDisposition fileDetail) throws URISyntaxException {
 		dataLoader.loadData(fileInputStream);

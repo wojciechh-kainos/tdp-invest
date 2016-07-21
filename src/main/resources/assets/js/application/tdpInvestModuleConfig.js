@@ -11,7 +11,7 @@ define(['angular'
 
 
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
         $stateProvider
             .state("main", {
                 url: "/",
@@ -19,10 +19,10 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html",
                         controller: "tdpInvestCompareController"
-                    },
-                    "navbar": {
-                        templateUrl: "html/partials/tdp-invest-navbar.html"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
             })
             .state("compare", {
@@ -31,22 +31,10 @@ define(['angular'
                     "@": {
                         templateUrl: "html/partials/tdp-invest-compare.html",
                         controller: "tdpInvestCompareController"
-                    },
-                     "navbar": {
-                         templateUrl: "html/partials/tdp-invest-navbar.html"
-                     }
-                }
-            })
-
-            .state("sign-in",{
-                url:"/sign-in",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-sign-in.html"
-                    },
-                    "navbar":{
-                        templateUrl: "html/partials/tdp-invest-navbar-logout.html"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
             })
             .state("date",{
@@ -57,7 +45,8 @@ define(['angular'
                         controller: "tdpInvestDateController"
                     }
                 }
-            }).state("login", {
+            })
+            .state("login", {
                 url: "/login",
                 views: {
                     "@": {
@@ -65,7 +54,8 @@ define(['angular'
                         controller: "tdpInvestLoginController"
                     }
                 }
-            }).state("register", {
+            })
+            .state("register", {
                 url: "/register",
                 views: {
                     "@": {
@@ -73,16 +63,32 @@ define(['angular'
                         controller: "tdpInvestRegisterController"
                     }
                 }
-            }).state("upload", {
+             })
+            .state("upload", {
                 url: "/upload",
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-upload.html"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
-
             });
         $urlRouterProvider.otherwise("/login");
+
+       function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+            var defer = $q.defer();
+            if ($cookieStore.get('currentUser')) {
+                defer.resolve();
+            } else {
+                $timeout(function () {
+                    $state.go("login");
+                });
+                defer.reject();
+            }
+            return defer.promise;
+        }
     });
 
     return tdpInvestModule;
