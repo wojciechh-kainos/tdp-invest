@@ -1,5 +1,7 @@
 package e2e;
 
+import e2e.config.ConfigParser;
+import e2e.config.TestConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -10,9 +12,10 @@ public class WebDriverProvider {
     private static WebDriver driver = null;
 
     public static WebDriver getDriver() throws Exception {
+        TestConfiguration configuration  = ConfigParser.parseTestConfigFile();
         if (driver == null) {
             try {
-                System.setProperty("webdriver.chrome.driver", "chromedriver");
+                System.setProperty(configuration.getWebDriver(), configuration.getWebDriverProperty());
                 driver = new ChromeDriver();
                 driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             } catch (Exception exception) {

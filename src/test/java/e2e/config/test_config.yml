@@ -1,0 +1,5 @@
+defaultUrl: http://localhost:9000/#/
+
+webDriver: webdriver.chrome.driver
+
+webDriverProperty: chromedriver

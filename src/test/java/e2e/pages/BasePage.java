@@ -1,17 +1,18 @@
 package e2e.pages;
 
 import e2e.WebDriverProvider;
+import e2e.config.ConfigParser;
+import e2e.config.TestConfiguration;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-
 public abstract class BasePage {
-
-    protected final String BASE_PATH = "http://localhost:9000/#/";
+    private TestConfiguration configuration  = ConfigParser.parseTestConfigFile();
     protected WebDriver driver;
+    protected final String BASE_PATH = configuration.getDefaultUrl();
 
     public BasePage() throws Exception {
         this.driver = WebDriverProvider.getDriver();
