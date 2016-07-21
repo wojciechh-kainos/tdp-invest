@@ -9,7 +9,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return new Date(d).getTime();
         }
 
-        this.makeRequest = function(p, k){
+        makeRequest = function(p, k){
             return {p : p, k : k};
         }
 
@@ -25,7 +25,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             return -1;
         }
 
-        this.mergeDates = function(dates){
+        mergeDates = function(dates){
             var tmp;
             var i = 0;
             while(dates.length > i + 1){
@@ -42,7 +42,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
         this.getStockDataFromDates = function(dates, start_date, end_date){
             stock_data = [];
             for(i = 0; i < dates.length; i++){
-                if(this.makeDate(dates[i].date) >= this.makeDate(start_date) && this.makeDate(dates[i].date) <= this.makeDate(end_date)){
+                if(makeDate(dates[i].date) >= makeDate(start_date) && makeDate(dates[i].date) <= makeDate(end_date)){
                     stock_data.push({date : dates[i].date, price : dates[i].price});
                 }
             }
@@ -62,44 +62,44 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             var tmp;
 
             if(dates.length == 0){
-                request.push(this.makeRequest(T0, TX));
+                request.push(makeRequest(T0, TX));
                 dates.push({p : T0, k : TX});
                 data = {dates : dates, requests : request};
                 return data;
             }
             for(var i = 0; i < dates.length; i++){
-                if(this.makeDate(T0) < this.makeDate(dates[i].p)){
-                    if(i != 0 && makeDate(T0) <= this.makeDate(dates[i - 1].k)){
-                        if(this.makeDate(TX) <= makeDate(dates[i - 1].k))
+                if(makeDate(T0) < makeDate(dates[i].p)){
+                    if(i != 0 && makeDate(T0) <= makeDate(dates[i - 1].k)){
+                        if(makeDate(TX) <= makeDate(dates[i - 1].k))
                             break;
                         T0 = dates[i-1].k;
                     }
-                    if(this.makeDate(TX) < this.makeDate(dates[i].p)){
-                        request.push(this.makeRequest(T0, TX));
+                    if(makeDate(TX) < makeDate(dates[i].p)){
+                        request.push(makeRequest(T0, TX));
                         dates.push({p : T0, k : TX});
-                        dates.sort(this.compareDates);
+                        dates.sort(compareDates);
                         break;
-                    }else if(this.makeDate(TX) <= this.makeDate(dates[i].k)){
-                        request.push(this.makeRequest(T0, dates[i].p));
+                    }else if(makeDate(TX) <= makeDate(dates[i].k)){
+                        request.push(makeRequest(T0, dates[i].p));
                         tmp = T0;
                         T0 = dates[i].k;
                         dates[i].p = tmp;
                         break;
                     }
-                    request.push(this.makeRequest(T0, dates[i].p));
+                    request.push(makeRequest(T0, dates[i].p));
                     tmp = T0;
                     T0 = dates[i].k;
                     dates[i].p = tmp;
                 }
                 if(i == dates.length - 1){
-                    if(this.makeDate(TX) > this.makeDate(dates[i].k))
-                        request.push(this.makeRequest(dates[i].k, TX));
+                    if(makeDate(TX) > makeDate(dates[i].k))
+                        request.push(makeRequest(dates[i].k, TX));
                         dates[i].k = TX;
                     break;
                 }
             }
 
-            dates = this.mergeDates(dates);
+            dates = mergeDates(dates);
 
             data = {dates : dates, requests : request};
 
