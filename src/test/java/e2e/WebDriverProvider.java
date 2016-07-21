@@ -10,14 +10,14 @@ public class WebDriverProvider {
     private static WebDriver driver = null;
 
     public static WebDriver getDriver() throws Exception {
-        if(driver == null){
+        if (driver == null) {
             try {
                 System.setProperty("webdriver.chrome.driver", "chromedriver");
                 driver = new ChromeDriver();
-            }catch (Exception exception){
+                driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+            } catch (Exception exception) {
                 throw new Exception("Selenium chromedriver has not been found in project root path.");
             }
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         }
         return driver;
     }
