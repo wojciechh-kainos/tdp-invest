@@ -12,7 +12,7 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestTableCon
             _$rootScope_.receivedData = [ {"date":15,"value": 1 , "incomeFromFund": 2, "incomeFromInvestment": 7} ];
             _$rootScope_.dataFund = [2];
             _$rootScope_.dataInvest = [2];
-            _$state_.current.name = "root.home";
+            _$state_.current.name = "root.compare";
 
             $state = _$state_;
             $scope = _$rootScope_.$new();
@@ -47,7 +47,7 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestTableCon
             });
             it('sets current state correctly', function() {
                 $scope.$digest();
-                expect($scope.currentStateName).toEqual("root.home");
+                expect($scope.currentStateName).toEqual("root.compare");
             });
         });
     });

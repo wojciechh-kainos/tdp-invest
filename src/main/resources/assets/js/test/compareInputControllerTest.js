@@ -29,15 +29,15 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestCompareI
                 expect($scope.percentage).toEqual($scope.$parent.percentage);
             });
 
-            it('runs function after $apply() invotaion and changes input', function() {
+            it('runs function after $digest() invocation and changes input', function() {
                 $scope.input = 200;
-                $scope.$apply();
+                $scope.$digest();
                 expect($scope.input).toEqual($scope.$parent.input);
             });
 
-            it('runs function after $apply() invocation and changes percentage', function() {
+            it('runs function after $digest() invocation and changes percentage', function() {
                 $scope.percentage = 10;
-                $scope.$apply();
+                $scope.$digest();
                 expect($scope.percentage).toEqual($scope.$parent.percentage);
             });
         });

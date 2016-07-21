@@ -1,6 +1,8 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestTableController", function($scope, $state) {
 
+            $scope.$parent.receivedData = [];
+
         $scope.$watch('receivedData', function() {
               var data = $scope.$parent.receivedData;
               $scope.currentStateName = $state.current.name;

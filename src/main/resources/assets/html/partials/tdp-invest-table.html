@@ -1,5 +1,5 @@
 <link href="style.css" rel="stylesheet" />
-<table class="table table-fixed" ng-if="state == 'root.home'" >
+<table class="table table-fixed" ng-if="currentStateName == 'root.home'" >
     <thead>
     <tr>
         <th class="col-xs-6">Date</th>
@@ -7,14 +7,14 @@
     </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in receivedData">
+    <tr ng-repeat="row in receivedData track by row.id">
         <td class="col-xs-6">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
         <td class="col-xs-6">{{row[columns[valIndex]]}}</td>
     </tr>
     </tbody>
 </table>
 
-<table class="table table-fixed" ng-if="state == 'root.compare'" border="1">
+<table class="table table-fixed" ng-if="currentStateName == 'root.compare'" border="1">
     <thead>
         <tr>
             <th class="col-xs-5">Date</th>
@@ -23,7 +23,7 @@
         </tr>
     </thead>
     <tbody>
-    <tr ng-repeat="row in receivedData">
+    <tr ng-repeat="row in receivedData track by row.id">
         <td class="col-xs-5">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
         <td class="col-xs-3">{{row[columns[fundIndex]]}}</td>
         <td class="col-xs-4">{{row[columns[investIndex]]}}</td>
