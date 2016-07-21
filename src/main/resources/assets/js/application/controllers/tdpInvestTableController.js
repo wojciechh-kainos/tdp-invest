@@ -3,7 +3,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
 
             $scope.$parent.receivedData = [];
 
-        $scope.$watch('receivedData', function() {
+            $scope.$watch('receivedData', function() {
               var data = $scope.$parent.receivedData;
               $scope.currentStateName = $state.current.name;
 

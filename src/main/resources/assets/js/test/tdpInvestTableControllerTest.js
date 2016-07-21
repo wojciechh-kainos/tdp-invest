@@ -21,6 +21,9 @@ define( ['angular' , 'angularMocks' , 'application/controllers/tdpInvestTableCon
         describe('Check if controller', function(){
             beforeEach(function() {
                 $controller('tdpInvestTableController', { $scope: $scope , $state: $state});
+                $scope.$parent.receivedData = [ {"date":15,"value": 1 , "incomeFromFund": 2, "incomeFromInvestment": 7} ];
+                $scope.dataFund = [2];
+                $scope.dataInvest = [2];
             });
 
             it('has variable receiveData properly initialized from parent', function() {

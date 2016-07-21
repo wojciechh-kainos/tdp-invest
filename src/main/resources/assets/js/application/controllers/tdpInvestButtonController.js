@@ -6,7 +6,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         $scope.submitRequest = function() {
                 tdpInvestDataService.getRows(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate)
                 .then(function(response) {
-                    $scope.$parent.receivedData = response.data;
+                    $scope.$parent.receivedData = response;
                      if($state.current.name == "root.compare"){
                         var input = $scope.$parent.input;
                         var receivedData = $scope.$parent.receivedData

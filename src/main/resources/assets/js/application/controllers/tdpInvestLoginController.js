@@ -13,6 +13,5 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                     }
                 });
         };
-
     });
 });

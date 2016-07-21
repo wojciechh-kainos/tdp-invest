@@ -1,10 +1,9 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestModule) {
-    tdpInvestModule.service('tdpInvestAuthService', ['$cookieStore', '$http', '$rootScope', 'tdpInvestBase64Service', function ($cookieStore, $http, $rootScope, tdpInvestBase64Service) {
+    tdpInvestModule.service('tdpInvestAuthService', ['$q', '$cookieStore', '$http', '$rootScope', 'tdpInvestBase64Service', function ($q, $cookieStore, $http, $rootScope, tdpInvestBase64Service) {
         var service = {};
 
         service.login = function (username, password) {
             service.setCredentials(username, password);
-
             return $http.get('/api/login').then(function (res) {
                 service.setCredentials($cookieStore.get('currentUser').username, res.data);
                 res.success = true;

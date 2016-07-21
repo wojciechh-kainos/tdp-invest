@@ -1,9 +1,26 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-    tdpInvestModule.service("tdpInvestDataService", function($http) {
+    tdpInvestModule.service("tdpInvestDataService", function($http, $q) {
         this.getRows = function(url, startDate, endDate) {
-                var result = $http.get(url, {params: {startDate: startDate, endDate: endDate}});
-                return result;
+                return $http.get(url, {params: {startDate: startDate, endDate: endDate}}).then(function(response) {
+                        return response.data;
+                    }, function(failure) {
+                        return "getRows request has failed. Status code: " + failure.status;
+                    }
+                );
+        }
+
+        this.TESTINGPROMISES = function(url) {
+            return $http.get(url).then(function(response) {
+                return response.data;
+            }, function(failure) {
+                if(failure.status == "400") {
+                    return "There are no records for these input params";
                 }
+                if (failure.status == "500") {
+                    return "Server error!";
+                }
+            });
+        }
 
         this.calculateFundIncome = function (input , dataInc) {
                if (dataInc.length == 0) return result;
