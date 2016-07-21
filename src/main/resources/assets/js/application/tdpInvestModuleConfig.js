@@ -68,10 +68,9 @@ define(['angular'
 
 
         function _isAuthenticated($state, tdpAuthenticationService, toastr) {
-            console.log("isauth");
             if (!tdpAuthenticationService.isUserLoggedIn()) {
                 toastr.error('You need to sign in to view this page.', 'Error');
-                $state.go('tdp.home');
+                $state.go('tdp.login');
             }
         };
 
