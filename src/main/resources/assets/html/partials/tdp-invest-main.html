@@ -1,9 +1,9 @@
 <div class="well wrapper">
-    <div class="chart col-lg-8">
+    <div class="chart col-lg-9">
         <highchart config="chartConfig"></highchart>
     </div>
 
-    <div class="table-wrapper col-lg-4">
+    <div class="table-wrapper col-lg-3">
         <table class="table table-condensed table-bordered table-striped" ng-table="tableConfig.params" show-filter="true">
             <tr ng-repeat="row in $data">
                 <td title="'Date'" filter="{ date: 'text' }" sortable="'date'">{{ row.date | date: 'yyyy-MM-dd' }}</td>

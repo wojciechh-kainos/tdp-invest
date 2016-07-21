@@ -1,19 +1,6 @@
 <div class="well-wrapper">
-    <div id="compare-form" class="well col-lg-3 col-lg-offset-1">
-        <form>
-            <div class="form-group">
-                <label for="inputName">Name</label>
-                <input type="text" class="form-control" id="inputName" ng-model="name" placeholder="Name">
-            </div>
-            <div class="form-group">
-                <label for="inputValue">Email</label>
-                <input type="number" class="form-control" id="inputValue" ng-model="val" placeholder="Value">
-            </div>
-            <button ng-click="addInvestment(name, val)" id="add-btn" type="submit" class="btn btn-primary">Add</button>
-        </form>
-    </div>
 
-    <div id="investments-container" class="well col-lg-6 col-lg-offset-0">
+    <div id="investments-container" class="well">
         <h3>Investments</h3>
         <table id="investments-table" ng-table="tableConfig" show-filter="false" class="table table-condensed table-bordered table-striped">
             <tr style="font-weight: bold;">
