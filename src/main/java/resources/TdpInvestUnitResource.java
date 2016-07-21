@@ -14,6 +14,8 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.List;
 
 
@@ -52,9 +54,12 @@ public class TdpInvestUnitResource {
 	@UnitOfWork
 	public Response uploadFile(
 			@FormDataParam("file") InputStream fileInputStream,
-			@FormDataParam("file") FormDataContentDisposition fileDetail) {
+			@FormDataParam("file") FormDataContentDisposition fileDetail) throws URISyntaxException {
 		dataLoader.loadData(fileInputStream);
 
-		return Response.status(200).entity("file uploaded").build();
+		Response.ResponseBuilder builder;
+		builder = Response.seeOther(new URI("/#/compare"));
+
+		return builder.build();
 	}
 }
