@@ -7,7 +7,7 @@
             </div>
 
             <ul class="nav navbar-nav navbar-right">
-                <li ui-sref-active="active"><a ui-sref="tdp.dashboard">Chart</a></li>
+                <li ui-sref-active="active" ng-if="!$state.includes('tdp.home')"><a ui-sref="tdp.dashboard">Chart</a></li>
                 <li ui-sref-active="active"><a ui-sref="tdp.compare">Compare</a></li>
                 <li ui-sref-active="active"><a ui-sref="login">Logout</a></li>
             </ul>

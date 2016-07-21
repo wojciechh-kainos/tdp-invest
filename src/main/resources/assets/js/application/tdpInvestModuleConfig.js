@@ -37,7 +37,7 @@ define(['angular'
                 }
             }
         }).state("tdp.dashboard", {
-            url: '/dashboard/{id:int}',
+            url: '/dashboard?id',
             templateUrl: "html/partials/tdp-invest-dashboard.html",
             controller: "tdpInvestMainViewController",
             resolve: {

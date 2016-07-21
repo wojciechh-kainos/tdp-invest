@@ -27,11 +27,19 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             }
         );
 
+        function getFundIndex(id){
+            return fundList.findIndex(function (item) {
+                return item.id == id;
+            })
+        }
+
         this.getFundUnits = function (id) {
+
+            if(fundList[getFundIndex(id)].units === null)
             return $http.get('/api/unit/select/' + id).then(
                 function (response) {
-                    data = response.data;
-                    return data;
+                    fundList[getFundIndex(id)].units = response.data;
+                    return response;
                 },
                 function (error) {
                     return error;
