@@ -19,7 +19,6 @@
         </div>
 
         <div>
-
             <div ng-repeat="file in $flow.files" class="transfer-box">
                 {{file.relativePath}} ({{file.size}}bytes)
                 <div class="progress progress-striped" ng-class="{active: file.isUploading()}">
@@ -48,7 +47,7 @@
             </div>
         </div>
     </div>
-    <div class="padding-20">
-        <div ng-show="isAdded" class="bg-success">File uploaded</div>
-    </div>
+
+    <h2>Clear Database</h2>
+    <button id="clear-button" ng-click="clear()" class="btn-danger">DO IT</button>
 </div>

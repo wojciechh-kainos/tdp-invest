@@ -1,7 +1,6 @@
 "use strict";
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitService'], function(angular, tdpInvestModule) {
   tdpInvestModule.controller("tdpInvestHomeController", function($rootScope, $scope, ChartConfigFactory, tdpUnitService, NgTableParams) {
-      $scope.investmentValue = 5000;
       $scope.chartConfig = {};
       $scope.maxDate = null;
       $scope.minDate = null;
@@ -12,24 +11,22 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
       var processData = function (data) {
         if (data.length == 0) {
             console.log("NO DATA");
+            $scope.dataError = true;
             return;
         }
         var fundSeries = [];
         var categories = [];
-        var value = parseInt($scope.investmentValue);
         var unit = [];
 
         var plainData = data.plain();
-        var unitAmount = value / plainData[0].value;
 
         for (var i = 0; i < plainData.length; i++) {
-          var countedValue = (unitAmount * plainData[i].value).toFixed(2);
           var dateToFormat = new Date(plainData[i].date);
           var formattedDate = dateToFormat.getDate() + '/' + (dateToFormat.getMonth() + 1) + '/' +  dateToFormat.getFullYear();
 
-          fundSeries.push(parseFloat(countedValue));
+          fundSeries.push(parseFloat(plainData[i].value));
           categories.push(formattedDate);
-          unit.push({value: parseFloat(countedValue), date: formattedDate});
+          unit.push({value: parseFloat(plainData[i].value), date: formattedDate});
         }
 
 
@@ -88,7 +85,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
         }
       };
 
-      $scope.chartConfig = ChartConfigFactory('Profit', 'from fund investment of ' + $scope.investmentValue + ' PLN', [], []);
+      $scope.chartConfig = ChartConfigFactory('Investment fund', 'Unit value over time', [], []);
       $scope.updateChart();
 
       $scope.$watch("dt", function(value, oldValue){

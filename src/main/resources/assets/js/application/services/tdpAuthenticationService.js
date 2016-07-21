@@ -41,20 +41,22 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserS
 
         var isUserLoggedIn = function() {
             if ($rootScope.currentUser) {
-                return true
+                return true;
+            } else {
+                return false;
             }
+        };
 
+        var checkCookies = function() {
             var globals = $cookieStore.get('globals');
             if (globals) {
                 $rootScope.currentUser = {
                     name: globals.currentUser.username
                 };
-                return true;
             }
-
-            return false;
         };
 
+        this.checkCookies = checkCookies;
         this.isUserLoggedIn = isUserLoggedIn;
         this.login = login;
         this.setCredentials = setCredentials;

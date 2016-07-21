@@ -9,6 +9,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
     $rootScope.title = "Compare";
 
     var processData = function(data) {
+      if (data.length == 0) {
+        console.log("NO DATA");
+        return;
+      }
+      
       var bankSeries = [];
       var fundSeries = [];
       var categories = [];

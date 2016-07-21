@@ -9,6 +9,7 @@ import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 import org.glassfish.jersey.media.multipart.FormDataParam;
 import services.TdpInvestLoadDataService;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -59,6 +60,16 @@ public class TdpInvestUnitResource {
           @FormDataParam("file") InputStream fileInputStream,
           @FormDataParam("file") FormDataContentDisposition fileDetail) {
     dataLoader.loadFromUploadedFile(fileInputStream);
+    return Response.status(Response.Status.CREATED).build();
+
+  }
+
+  @GET
+  @Path("/clear")
+  @RolesAllowed("ADMIN")
+  @UnitOfWork
+  public Response clearDB() {
+    tdpIUnitDAO.deleteAll();
     return Response.status(Response.Status.CREATED).build();
 
   }

@@ -2,7 +2,7 @@
     <div class="container">
         <a ui.sref="tdp.home" class="navbar-brand">TDP</a>
         <a ui-sref="tdp.home" class="navbar-text">Home</a>
-        <a ui-sref="tdp.upload" class="navbar-text">Upload</a>
+        <a ui-sref="tdp.upload" ng-show="user.name" class="navbar-text">Upload</a>
         <a ui-sref="tdp.compare" class="navbar-text">Compare</a>
         <div class="login navbar-right" ng-show="user.name">
             <p class="navbar-text">Hello, {{user.name}}</p>

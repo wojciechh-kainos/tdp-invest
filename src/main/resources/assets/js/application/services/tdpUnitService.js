@@ -21,7 +21,12 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                      });
         };
 
+        var clearDatabase = function() {
+            return Restangular.one('unit/clear').get();
+        };
+
         return {
+            clearDatabase: clearDatabase,
             getAll: getAll,
             getAllWithinRange: getAllWithinRange,
             uploadFile: uploadFile

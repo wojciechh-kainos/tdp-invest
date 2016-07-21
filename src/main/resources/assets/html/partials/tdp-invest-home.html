@@ -2,12 +2,7 @@
 <div class="center-block wrapper">
     <h2>Home</h2>
     <div class="row">
-        <div class="col-md-3">
-            <label>Value of investment:</label><br>
-            <input ng-model="investmentValue"  class="form-control"/>
-
-        </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label>Pick the start date:</label>
                 <p class="input-group">
                     <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
@@ -18,7 +13,7 @@
               </span>
                 </p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <label>Pick the finish date:</label>
                 <p class="input-group">
                     <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
@@ -29,14 +24,17 @@
               </span>
                 </p>
         </div>
-        <div class="col-md-3">
+        <div class="col-md-4">
             <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg btn-block show-me-btn">Show me!</button>
         </div>
     </div>
 
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" ng-hide="dataError">
             <highchart config="chartConfig"></highchart>
+        </div>
+        <div id="no-data-div" class="col-md-12" ng-show="dataError">
+            <span>NO DATA</span>
         </div>
     </div>
 

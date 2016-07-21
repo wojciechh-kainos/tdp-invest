@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-  tdpInvestModule.controller("tdpInvestLoginController", function($scope, $state, tdpAuthenticationService) {
+  tdpInvestModule.controller("tdpInvestLoginController", function($scope, $state, tdpAuthenticationService, toastr) {
         (function initController() {
             // reset login status
             tdpAuthenticationService.clearCredentials();

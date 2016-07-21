@@ -13,7 +13,8 @@ require.config({
         'highchart-theme': 'lib/highcharts/themes/dark-unica',
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
-        'flow': 'lib/ng-flow/dist/ng-flow-standalone.min'
+        'flow': 'lib/ng-flow/dist/ng-flow-standalone.min',
+        'toastr': 'lib/angular-toastr/dist/angular-toastr.tpls'
     },
     shim: {
         'angular': {
@@ -26,7 +27,8 @@ require.config({
         'ngCookies': ['angular'],
         'highchart-theme': ['highcharts'],
         'ui.bootstrap': ['angular'],
-        'flow': ['angular']
+        'flow': ['angular'],
+        'toastr': ['angular']
     },
     deps: ['application/bootstrap']
 });

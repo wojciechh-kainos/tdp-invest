@@ -9,12 +9,16 @@ define(['angular'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
 ], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, RestangularProvider, flowFactoryProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function($stateProvider, RestangularProvider, flowFactoryProvider, $urlRouterProvider, toastrConfig) {
         $stateProvider
             .state("tdp", {
                 abstract: true,
-                url: "/tdp"
-            }).state("tdp.login", {
+                url: "/tdp",
+                resolve: {
+                    isUserLoggedIn: _isUserLoggedIn
+                 }
+            })
+            .state("tdp.login", {
                   url: "/login",
                   views: {
                       "@": {
@@ -53,7 +57,7 @@ define(['angular'
                   templateUrl: "html/partials/tdp-invest-upload.html",
                   controller: "tdpInvestUploadController",
                   resolve: {
-                    isAuthenticated: isAuthenticated
+                    isAuthenticated: _isAuthenticated
                   }
                 }
               }
@@ -63,11 +67,16 @@ define(['angular'
         RestangularProvider.setBaseUrl('/api');
 
 
-        function isAuthenticated($state, tdpAuthenticationService ) {
+        function _isAuthenticated($state, tdpAuthenticationService, toastr) {
             console.log("isauth");
             if (!tdpAuthenticationService.isUserLoggedIn()) {
+                toastr.error('You need to sign in to view this page.', 'Error');
                 $state.go('tdp.home');
             }
+        };
+
+        function _isUserLoggedIn(tdpAuthenticationService) {
+            tdpAuthenticationService.checkCookies();
         };
 
         flowFactoryProvider.defaults = {
@@ -78,13 +87,21 @@ define(['angular'
           chunkRetryInterval: 5000,
           simultaneousUploads: 4
         };
+
+
+         angular.extend(toastrConfig, {
+            autoDismiss: false,
+            containerId: 'toast-container',
+            maxOpened: 0,
+            newestOnTop: true,
+            positionClass: 'toast-top-right',
+            preventDuplicates: false,
+            preventOpenDuplicates: false,
+            target: 'body'
+          });
+
     });
 
-    tdpInvestModule.run(function ($rootScope, $state, tdpAuthenticationService) {
-      $rootScope.$on("$stateChangeStart", function(event, toState, toParams, fromState, fromParams){
-        tdpAuthenticationService.isUserLoggedIn();
-      });
-});
 
     return tdpInvestModule;
 });
