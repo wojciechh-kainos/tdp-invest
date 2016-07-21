@@ -49,7 +49,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
                         });
                     }, function (response) {
                         if (response.status > 0)
-                            $scope.errorMsg = response.status + ': ' + response.data;
+                            $scope.errorMsg = response.status + ': ' + response.data.message;
                     }, function (evt) {
                         file.progress = Math.min(100, parseInt(100.0 *
                                                  evt.loaded / evt.total));

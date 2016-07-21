@@ -8,7 +8,6 @@ import java.io.*;
 
 public final class CSVParser {
     public static String CSVtoJSON(InputStream input) throws JSONException, IOException {
-        System.out.println("CSVtoJSON running!");
         long x;
         double y;
         JSONArray point;
