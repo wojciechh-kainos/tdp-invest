@@ -8,7 +8,11 @@ public class LoginPage extends BasePage {
     public LoginPage() throws Exception {
         super();
         path = "login";
-        uniqueId = "loginPageUnique";
+    }
+
+    @Override
+    public String getUniqueId() {
+        return "loginPageContent";
     }
 
     public WebElement getUsernameField() {
@@ -25,9 +29,5 @@ public class LoginPage extends BasePage {
 
     public WebElement getErrorAlert() {
         return driver.findElement(By.id("errorAlert"));
-    }
-
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
     }
 }

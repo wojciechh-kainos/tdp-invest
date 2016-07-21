@@ -4,6 +4,10 @@ public class MainPage extends BasePage {
 
     public MainPage() throws Exception {
         super();
-        uniqueId = "mainPageUnique";
+    }
+
+    @Override
+    public String getUniqueId() {
+        return "mainPageContent";
     }
 }

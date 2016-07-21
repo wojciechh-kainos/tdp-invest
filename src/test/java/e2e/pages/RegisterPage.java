@@ -10,6 +10,10 @@ public class RegisterPage extends BasePage {
         path = "register";
     }
 
+    @Override
+    public String getUniqueId() {
+        return "registerPageContent";
+    }
 
 
     public WebElement getUsernameField() {
@@ -26,9 +30,5 @@ public class RegisterPage extends BasePage {
 
     public WebElement getErrorAlert() {
         return driver.findElement(By.id("errorAlert"));
-    }
-
-    public String getCurrentUrl() {
-        return driver.getCurrentUrl();
     }
 }
