@@ -12,10 +12,8 @@ define(['angular'
             .state("tdp", {
                 url: "/tdp",
                 resolve: {
-                    stockDataService: "stockData",
-                    stockDataPromise: function (stockDataService) {
-                        return stockDataService.promise;
-                    }
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+
                 },
                 templateUrl: 'html/partials/tdp-invest-main.html'
             }).state("login", {
@@ -41,11 +39,9 @@ define(['angular'
             templateUrl: "html/partials/tdp-invest-dashboard.html",
             controller: "tdpInvestMainViewController",
             resolve: {
-                // redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 stockDataService: "stockData",
                 stockDataPromise: function (stockDataService, $stateParams) {
                     return stockDataService.setCurrentFund($stateParams.id);
-
                 }
             }
         }).state("tdp.home", {
@@ -63,18 +59,17 @@ define(['angular'
         $urlRouterProvider.otherwise("/login");
     }]);
 
-    // function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
-    //     var defer = $q.defer();
-    //     if ($cookieStore.get('currentUser')) {
-    //         defer.resolve();
-    //     } else {
-    //         $timeout(function () {
-    //             $state.go("login");
-    //         });
-    //         defer.reject();
-    //     }
-    //     return defer.promise;
-    // }
+    function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
+        var defer = $q.defer();
+        console.log("call");
+        if ($cookieStore.get('currentUser')) {
+            defer.resolve();
+        } else {
+            $state.go("login");
+            defer.reject();
+        }
+        return defer.promise;
+    }
 
     tdpInvestModule.run(['$rootScope', '$state', 'tdpInvestAuthService', '$cookieStore', '$http',
         function ($rootScope, $state, tdpInvestAuthService, $cookieStore, $http) {
