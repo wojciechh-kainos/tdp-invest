@@ -11,7 +11,8 @@ require.config({
         'highstocks': 'lib/highcharts/highstock',
         'highcharts': 'lib/highcharts/highcharts',
         'ui-bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls',
-        'ngResource': 'lib/angular-resource/angular-resource'
+        'ngResource': 'lib/angular-resource/angular-resource',
+        'ngModule': 'lib/ng-module/ng-module'
     },
     shim: {
         'angular': {
@@ -23,6 +24,10 @@ require.config({
         'ui-bootstrap': ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
+            deps: ['angular']
+        },
+        'ngModule': {
+            exports: 'ngModule',
             deps: ['angular']
         }
     },

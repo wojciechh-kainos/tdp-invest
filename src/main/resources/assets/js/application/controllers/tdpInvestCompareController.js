@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directive/tdpInvestShowErrors'], function (angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestStockDataService', 'ui-bootstrap', 'application/directives/tdpInvestShowErrors', 'application/directives/tdpInvestValidateDate'], function (angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", ['$scope', '$stateParams', 'stockData', '$state', function ($scope, $stateParams, stockData, $state) {
         $scope.dateFirst = stockData.getFirst();
         $scope.dateLast = stockData.getLast();
@@ -46,7 +46,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             ]
 
         };
-
 
 
         function getValueAtDate(date){

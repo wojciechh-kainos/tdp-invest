@@ -13,15 +13,16 @@
 
                         <p class="input-group">
                             <input id="start_date" name="start_date" ng-model="form.startDate" class="form-control"
-                                   placeholder={{format}} uib-datepicker-popup={{format}}
-                                   datepicker-options="dateOptions"
-                                   is-open="showDp1" min="{{dateFirst | date:'yyyy-MM-dd' }}" max="{{dateLast | date:'yyyy-MM-dd' }}" required="true"/>
+                                   placeholder={{format}} uib-datepicker-popup={{format}} datepicker-options="dateOptions"
+                                   is-open="showDp1" value="{{dateFirst | date:'yyyy-MM-dd' }}" min="{{dateFirst | date:'yyyy-MM-dd' }}" max="{{dateLast | date:'yyyy-MM-dd' }}"
+                                   validate-date required="true"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="showDp1 = !showDp1"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
                         <span class="help-block">Investment start date</span>
+                        <span class="help-block" ng-if="compareForm.start_date.$error.validateDate">Data input must be in range of {{dateFirst | date:'yyyy-MM-dd' }} to {{dateLast | date:'yyyy-MM-dd' }}</span>
                     </div>
                 </div>
 
@@ -33,15 +34,16 @@
 
                         <p class="input-group">
                             <input id="end_date" name="end_date" ng-model="form.endDate" class="form-control"
-                                   placeholder={{format}} uib-datepicker-popup={{format}}
-                                   datepicker-options="dateOptions"
-                                   is-open="showDp2" min="{{dateFirst | date:'yyyy-MM-dd' }}" max="{{dateLast | date:'yyyy-MM-dd' }}" ng-required="true"/>
+                                   placeholder={{format}} uib-datepicker-popup={{format}} datepicker-options="dateOptions"
+                                   is-open="showDp2" value="{{dateLast | date:'yyyy-MM-dd' }}" min="{{dateFirst | date:'yyyy-MM-dd'}}" max="{{dateLast | date:'yyyy-MM-dd'}}"
+                                   validate-date ng-required="true"/>
                             <span class="input-group-btn">
                                 <button type="button" class="btn btn-default" ng-click="showDp2 = !showDp2"><i
                                         class="glyphicon glyphicon-calendar"></i></button>
                             </span>
                         </p>
                         <span class="help-block">Investment end date</span>
+                        <span class="help-block" ng-if="compareForm.end_date.$error.validateDate">Data input must be in range of {{dateFirst | date:'yyyy-MM-dd' }} to {{dateLast | date:'yyyy-MM-dd' }}</span>
                     </div>
                 </div>
 
@@ -81,7 +83,8 @@
                 <div class="form-group">
                     <div class="col-md-7 col-md-offset-4">
                         <button id="button1id" type="submit" class="btn btn-success">Calculate</button>
-                        <button id="button2id" ng-click="fill()" class="btn btn-danger">Reset</button>
+                        <button id="button2id" type="reset" class="btn btn-danger">Reset</button>
+                        <button id="button3id" ng-click="fill()" class="btn btn-danger">Fill</button>
                     </div>
                 </div>
 

@@ -25,7 +25,8 @@ require.config({
         'ngResource': 'lib/angular-resource/angular-resource',
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'requireJS': 'lib/requirejs/require',
-        'karma-requireJS': 'lib/karma-require'
+        'karma-requireJS': 'lib/karma-require',
+        'ngModule': 'lib/ng-module/ng-module'
     },
     shim: {
         'angular': {
@@ -36,7 +37,11 @@ require.config({
         'ngResource': ['angular'],
         'highcharts-ng': ['angular', 'highstocks'],
         'ui-bootstrap': ['angular'],
-        'ngCookies': ['angular']
+        'ngCookies': ['angular'],
+        'ngModule': {
+            exports: 'ngModule',
+            deps: ['angular']
+        }
     },
     // dynamically load all test files
     deps: allTestFiles,

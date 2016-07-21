@@ -15,14 +15,14 @@ define(['angular', 'application/tdpInvestModule', 'ui-bootstrap'], function (ang
                 // only apply the has-error class after the user leaves the text box
                 inputNgEl.bind('blur', function () {
                     el.toggleClass('has-error', formCtrl[inputName].$invalid);
-                })
+                });
 
-                scope.$on('show-errors-check-validity', function() {
+                scope.$on('show-errors-check-validity', function () {
                     el.toggleClass('has-error', formCtrl[inputName].$invalid);
                 });
 
-                scope.$on('show-errors-reset', function() {
-                    $timeout(function() {
+                scope.$on('show-errors-reset', function () {
+                    $timeout(function () {
                         el.removeClass('has-error');
                     }, 0, false);
                 });
