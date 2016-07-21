@@ -11,7 +11,8 @@ require.config({
         'ui-bootstrap' : 'lib/angular-bootstrap/ui-bootstrap-tpls',
         'angularMocks': 'lib/angular-mocks/angular-mocks',
         'eonasdan-bootstrap-datetimepicker' : 'lib/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker',
-        'ngCookies': 'lib/angular-cookies/angular-cookies'
+        'ngCookies': 'lib/angular-cookies/angular-cookies',
+        'moment-js' : 'lib/moment/min/moment.min'
 
     },
     shim: {
@@ -21,6 +22,7 @@ require.config({
         'uiRouter' : ['angular'],
         'highcharts-ng': ['angular', 'highcharts'],
         'ui-bootstrap' : ['angular'],
+        'moment-js' : ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
             deps: ['angular']
