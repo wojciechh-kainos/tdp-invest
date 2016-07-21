@@ -2,6 +2,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
     tdpInvestModule.directive('tdpTable', function() {
             var controller = ['$scope', function($scope) {
 
+        $scope.$watch('stockData', function(){
                     $scope.sortType = 'price';
                     $scope.reverse = false;
                     $scope.sortTable = function(sortType) {
@@ -22,7 +23,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
                         $scope.filteredStockData = $scope.stockData.slice(begin, end);
                     });
-
+                });
             }];
 
         return {
