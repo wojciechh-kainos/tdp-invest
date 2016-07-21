@@ -4,7 +4,6 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
         var fundList;
 
 
-
         this.getData = function () {
             return data;
         };
@@ -14,7 +13,7 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
         };
 
         this.getLast = function () {
-            return new Date(data[data.length-1][0]);
+            return new Date(data[data.length - 1][0]);
         };
 
         this.promise = $http.get('/api/unit/select/1').then(
@@ -27,37 +26,36 @@ define(['angular', 'application/tdpInvestModule'], function (angular, tdpInvestM
             }
         );
 
-        function getFundIndex(id){
+        function getFundIndex(id) {
             return fundList.findIndex(function (item) {
                 return item.id == id;
             })
         }
 
         this.getFundUnits = function (id) {
-
-            if(fundList[getFundIndex(id)].units === null)
-            return $http.get('/api/unit/select/' + id).then(
-                function (response) {
-                    fundList[getFundIndex(id)].units = response.data;
-                    return response;
-                },
-                function (error) {
-                    return error;
-                }
-            )
+            if (fundList[getFundIndex(id)].units === null)
+                return $http.get('/api/unit/select/' + id).then(
+                    function (response) {
+                        fundList[getFundIndex(id)].units = response.data;
+                        return fundList[getFundIndex(id)].units;
+                    },
+                    function (error) {
+                        return error;
+                    }
+                )
         };
 
         this.loadFundList = $http.get('/api/fund').then(
             function (response) {
                 fundList = response.data;
-                return response;
+                return fundList;
             },
             function (error) {
                 return error;
             }
         );
-        
-        this.getFunds = function(){
+
+        this.getFunds = function () {
             return fundList;
         }
     })
