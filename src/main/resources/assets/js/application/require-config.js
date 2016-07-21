@@ -9,7 +9,6 @@ require.config({
         'highcharts': 'lib/highcharts/highcharts',
         'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng',
         'highstock': 'lib/highcharts/highstock',
-        'data': 'charts/input-data',
         'chart-config': 'charts/chart-config',
         'ngFileUpload' : 'lib/ng-file-upload/ng-file-upload',
         'ng-table': 'lib/ng-table/dist/ng-table',
@@ -22,12 +21,8 @@ require.config({
         'angular': {
             exports: 'angular'
         },
-        'data': {
-            exports: 'inputData'
-        },
         'chart-config': {
-            exports: 'chartConfig',
-            deps: ['data']
+            exports: 'chartConfig'
         },
         'uiRouter': ['angular'],
         'ngFileUpload': ['angular'],

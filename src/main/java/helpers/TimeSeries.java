@@ -15,7 +15,7 @@ public final class TimeSeries {
         while(!date.isAfter(endDate)){
             point = new JSONArray();
             value = futureValue(datesDiffInDays(startDate, date), amount, annualRate);
-            point.put(date);
+            point.put(date.getMillis());
             point.put(value);
             output.put(point);
             date = date.plusDays(1);

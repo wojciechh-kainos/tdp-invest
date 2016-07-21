@@ -1,7 +1,7 @@
-define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
     var data;
     var btnHidden='';
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpInvestmentService, $filter) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, $filter) {
 
         $scope.hidden=btnHidden;
         //***chart***
