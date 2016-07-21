@@ -25,7 +25,7 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegist
         describe('When registering', function () {
 
             it('with valid credentials should succeed', function () {
-                deferred.resolve({success: true});
+                deferred.resolve({});
 
                 $scope.register();
                 $scope.$apply();
@@ -34,7 +34,7 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegist
             });
 
             it('when user already exists should fail', function () {
-                deferred.resolve({success: false, message: "error"});
+                deferred.reject({message: "error"});
 
                 $scope.register();
                 $scope.$apply();

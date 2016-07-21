@@ -24,7 +24,7 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginC
         describe('When logging in', function () {
 
             it('with valid credentials should succeed', function () {
-                deferred.resolve({success: true});
+                deferred.resolve({});
 
                 $scope.login();
                 $scope.$apply();
@@ -33,7 +33,7 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginC
             });
 
             it('with invalid credentials should fail', function () {
-                deferred.resolve({success: false, message: "error"});
+                deferred.reject({message: "error"});
 
                 $scope.login();
                 $scope.$apply();

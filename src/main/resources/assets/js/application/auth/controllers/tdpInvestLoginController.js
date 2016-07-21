@@ -5,14 +5,11 @@ define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/ser
 
         $scope.login = function () {
             $scope.loginPromise = tdpInvestAuthService.login($scope.username, $scope.password)
-                .then(function (response) {
-                    if (response.success) {
-                        $window.location.href = "/";
-                    } else {
-                        $scope.error = response.message;
-                    }
+                .then(function () {
+                    $window.location.href = "/";
+                }, function (response) {
+                    $scope.error = response.message;
                 });
         };
-
     });
 });

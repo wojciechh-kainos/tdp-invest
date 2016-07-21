@@ -3,14 +3,11 @@ define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/ser
 
         $scope.register = function () {
             $scope.registerPromise = tdpInvestAuthService.register($scope.username, $scope.password)
-                .then(function (response) {
-                    if (response.success) {
-                        $state.go('login');
-                    }
-                    else {
-                        $scope.error = response.message;
-                    }
+                .then(function () {
+                    $state.go('login');
+                }, function (response) {
+                    $scope.error = response.message;
                 });
-        }
+        };
     });
 });

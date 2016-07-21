@@ -1,29 +1,27 @@
 define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/services/tdpInvestBase64Service', 'ngCookies'], function (angular, tdpInvestAuthModule) {
-    tdpInvestAuthModule.service('tdpInvestAuthService', ['$cookieStore', '$http', 'tdpInvestBase64Service', function ($cookieStore, $http, tdpInvestBase64Service) {
+    tdpInvestAuthModule.service('tdpInvestAuthService', ['$cookieStore', '$http', '$q', 'tdpInvestBase64Service', function ($cookieStore, $http, $q, tdpInvestBase64Service) {
         var service = {};
 
         service.login = function (username, password) {
             service.setCredentials(username, password);
 
             return $http.get('/api/login').then(function (res) {
-                service.setCredentials($cookieStore.get('currentUser').username, res.data);
-                res.success = true;
-                return res;
+                service.setCredentials(username, res.data);
+                return res.data;
             }, function () {
                 service.clearCredentials();
-                return {success: false, message: "Wrong email or password."};
+                return $q.reject({message: "Wrong email or password."});
             });
         };
 
         service.register = function (username, password) {
-            return $http.post('/api/register', {mail: username, password: password}).then(function (res) {
-                res.success = true;
-                return res;
+            return $http.post('/api/register', {mail: username, password: password}).then(function (response) {
+                return response;
             }, function (response) {
                 if (response.status == 409) {
-                    return {success: false, message: "Email address already in use."};
+                    return $q.reject({message: "Email address already in use."});
                 }
-                return {success: false, message: "Registration failed."};
+                return $q.reject({message: "Registration failed."});
             });
         };
 
