@@ -49,7 +49,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
 
 
         function getValueAtDate(date) {
-            var val = stockData.getData().find(function (unit) {
+            var val = stockData.getCurrentFund().units.find(function (unit) {
                 return unit[0] >= date.getTime();
             });
             return val[1];
