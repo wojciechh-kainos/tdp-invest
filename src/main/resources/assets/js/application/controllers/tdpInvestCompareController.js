@@ -4,6 +4,7 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
         $scope.start_date = '2015-08-15';
         $scope.end_date = '2016-07-20';
 
+
         $scope.input_value = 200;
         $scope.interest_rate = 3;
 
@@ -15,6 +16,9 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
 
         $scope.datesAndPrices = [];
         $scope.datesIntervals = [];
+
+        if($scope.datesAndPrices.length == 0)
+            $scope.error = "You should firstly upload file. Please click 'Upload' link on navbar above.";
 
         $scope.isNumber = function (n){
             if(!isNaN(n))
@@ -29,6 +33,9 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
                 $scope.datesAndPrices = response.datesAndPrices;
                 $scope.datesIntervals = response.datesIntervals;
                 console.log(response);
+                if($scope.datesAndPrices.length > 0){
+                    $scope.error = "";
+                }
             });
         }
 
