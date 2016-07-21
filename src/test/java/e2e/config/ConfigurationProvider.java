@@ -6,10 +6,8 @@ import com.google.inject.Singleton;
 import io.dropwizard.configuration.ConfigurationException;
 import io.dropwizard.configuration.ConfigurationFactory;
 import io.dropwizard.jackson.Jackson;
-import io.dropwizard.testing.ResourceHelpers;
 import io.dropwizard.validation.BaseValidator;
 
-import javax.print.URIException;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
