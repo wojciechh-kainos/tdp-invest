@@ -11,7 +11,7 @@ public class LoginPage extends BasePage {
 
     @Override
     public String getPartialUrl() {
-        return "auth#/login";
+        return "#/login";
     }
 
     @Override

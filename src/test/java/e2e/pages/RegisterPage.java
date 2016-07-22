@@ -11,7 +11,7 @@ public class RegisterPage extends BasePage {
 
     @Override
     public String getPartialUrl() {
-        return "auth#/register";
+        return "#/register";
     }
 
     @Override

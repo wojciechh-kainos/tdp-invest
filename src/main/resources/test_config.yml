@@ -1,7 +1,7 @@
-defaultUrl: http://localhost:9000/
+defaultUrl: http://localhost:9007/
 
 webDriver: webdriver.chrome.driver
 
 webDriverProperty: chromedriver
 
-apiUrl: http://localhost:9000/api/
+apiUrl: http://localhost:9007/api/
