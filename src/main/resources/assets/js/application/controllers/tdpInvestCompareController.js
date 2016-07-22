@@ -9,8 +9,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             total: 0,
             getData: function($defer, params){
                 tdpInvestmentService.getInvestments().then(function(response){
-                    // params.total(response.data.length);
-                    // $defer.resolve(response.data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     var ordered = params.sorting() ?
                         $filter('orderBy')(response.data, params.orderBy()) :
                         response.data;
@@ -29,6 +27,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         $scope.removeRow = function(dbId){
             tdpInvestmentService.deleteInvestment(dbId).then(function (success) {
                 $scope.tableConfig.reload().then(function(data){
+                    //necessary when you delete all rows on a certain page
                     if (data.length === 0 && $scope.tableConfig.total() > 0){
                         $scope.tableConfig.page($scope.tableConfig.page() - 1);
                         $scope.tableConfig.reload();
