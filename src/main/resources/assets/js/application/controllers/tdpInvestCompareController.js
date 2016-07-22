@@ -1,8 +1,8 @@
-define(['angular', 'application/tdpInvestModule',  'application/services/tdpInvestCreateRequestsService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestCreateRequestsService) {
+define(['angular', 'application/tdpInvestModule',  'application/services/tdpInvestCreateRequestsService', 'angular-moment', 'moment'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestCreateRequestsService, moment) {
 
-        $scope.start_date = '2015-08-15';
-        $scope.end_date = '2016-07-20';
+        $scope.start_date = moment('2015-07-15').format('YYYY-MM-DD');
+        $scope.end_date = moment('2016-07-20').format('YYYY-MM-DD');
 
 
         $scope.input_value = 200;
