@@ -14,7 +14,8 @@ require.config({
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'moment-timezone' : 'lib/moment-timezone/moment-timezone',
         'angular-moment' : 'lib/angular-moment/angular-moment',
-        'moment' : 'lib/moment/moment'
+        'moment' : 'lib/moment/moment',
+        'angular-file-upload' : 'lib/angular-file-upload/dist/angular-file-upload.min'
 
     },
     shim: {
@@ -27,6 +28,7 @@ require.config({
         'moment' : ['angular'],
         'moment-timezone' : ['angular', 'moment'],
         'angular-moment' : ['angular', 'moment-timezone'],
+        'angular-file-upload' : ['angular'],
         'ngCookies': {
             exports: 'ngCookies',
             deps: ['angular']
