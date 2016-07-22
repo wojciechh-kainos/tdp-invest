@@ -1,5 +1,5 @@
 <div class="form-group col-md-12">
-    <label class="col-md-4 control-label" for="newStockValue">Input:</label>
+    <label class="col-md-4 control-label" for="newStockValue">Stock value:</label>
     <div class="col-md-4 input-group">
         <input name="newStockValue" id="newStockValue" type="text" class="form-control"
                ng-model="newStockValue"/>
@@ -8,15 +8,14 @@
 </div>
 
 <div class="form-group col-md-12">
-    <label class="col-md-4 control-label" for="newStockDate">Interest Rate:</label>
+    <label class="col-md-4 control-label" for="newStockDate">Stock date:</label>
     <div class="col-md-4 input-group">
         <input name="newStockDate" type="text" id="newStockDate" class="form-control"
                ng-model="newStockDate"/>
-        <div class="input-group-addon">%</div>
     </div>
 </div>
 
 <div class="form-group col-md-12">
-    <button class="btn col-md-10" ng-click="setInvestData(showInvest(start_date, end_date, input_value, interest_rate));">Show stock prices
+    <button class="btn btn-primary col-md-10" ng-click="addNewStock(newStockDate, newStockValue)">Add new stock
     </button>
 </div>

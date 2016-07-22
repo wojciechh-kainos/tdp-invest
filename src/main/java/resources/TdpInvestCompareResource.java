@@ -63,5 +63,24 @@ public class TdpInvestCompareResource {
         return collection;
     }
 
+    @POST
+    @UnitOfWork
+    @Path("/add")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public void addStock(String json) throws ParseException {
+        JsonObject jsonObject = new JsonParser().parse(json).getAsJsonObject();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        Date newStockDate = sdf.parse(jsonObject.get("newStockDate").getAsString());
+        Double newStockValue = jsonObject.get("newStockValue").getAsDouble();
+
+        TdpIUnit newStock = new TdpIUnit();
+        newStock.setDate(newStockDate);
+        newStock.setValue(newStockValue);
+        tdpIUnitDAO.create(newStock);
+        System.out.print(newStock.toString());
+        System.out.print(newStockDate);
+        System.out.print(newStockValue);
+    }
+
 
 }

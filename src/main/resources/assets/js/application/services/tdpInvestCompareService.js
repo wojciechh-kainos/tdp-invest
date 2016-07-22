@@ -15,6 +15,19 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             }
             return $http.post("/api/compare/date", data, config);
         };
+
+        this.addNewStock = function(newStockDate, newStockValue) {
+            var data = {
+                            newStockDate: newStockDate,
+                            newStockValue: newStockValue
+                        };
+                        var config = {
+                            headers : {
+                                'Content-Type': 'application/json;charset=utf-8;'
+                            }
+                        }
+                        return $http.post("/api/compare/add", data, config);
+        }
     })
 
 

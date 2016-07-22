@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule',  'application/services/tdpInvestCreateRequestsService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestCreateRequestsService) {
+    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestCreateRequestsService, tdpInvestCompareService) {
 
         $scope.start_date = '2015-08-15';
         $scope.end_date = '2016-07-20';
@@ -37,6 +37,11 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
                     $scope.error = "";
                 }
             });
+        }
+
+        $scope.addNewStock = function(date,value) {
+        tdpInvestCompareService.addNewStock(date,value);
+        $scope.stockData.push({date:date, value: value})
         }
 
 
