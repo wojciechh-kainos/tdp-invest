@@ -6,6 +6,9 @@ import java.time.ZonedDateTime;
 
 @Entity
 @Table(name = "TdpUser")
+@NamedQueries({
+        @NamedQuery(name = "TdpUser.delete",
+                query = "delete from TdpUser where email = :email")})
 public class TdpUser implements Principal {
 
     @Id

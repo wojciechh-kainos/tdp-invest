@@ -30,4 +30,10 @@ public final class TestConfiguration {
     public void setWebDriverProperty(String webDriverProperty) {
         this.webDriverProperty = webDriverProperty;
     }
+
+    private String apiUrl;
+
+    public String getApiUrl() { return apiUrl; }
+
+    public void setApiUrl(String apiUrl) {  this.apiUrl = apiUrl; }
 }
