@@ -13,7 +13,25 @@ var chartConfig = {
             enabled: true
         }
     },
-    series: [],
+    series: [
+        {
+            name: "Fund",
+            data: [],
+            tooltip: {
+            valueDecimals: 2,
+            valuePrefix: "$",
+            xDateFormat: '%y-%m-%d'
+            }
+        },
+        {
+            name: "Fund",
+            data: [],
+            tooltip: {
+                valueDecimals: 2,
+                valuePrefix: "$",
+                xDateFormat: '%y-%m-%d'
+            }
+        }],
     title: {
         text: 'Time series'
     },

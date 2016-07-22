@@ -1,9 +1,7 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
     var data;
-    var btnHidden='';
     tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, $filter) {
 
-        $scope.hidden=btnHidden;
         //***chart***
         $scope.chartConfig = chartConfig;
 
@@ -30,22 +28,13 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                     file.upload.then(function (response) {
                         $timeout(function () {
                             //update chart
-                            $scope.chartConfig.series.push({
-                                                                   name: "Fund",
-                                                                   data: response.data,
-                                                                   tooltip: {
-                                                                       valueDecimals: 2,
-                                                                       valuePrefix: "$",
-                                                                       xDateFormat: '%y-%m-%d'
-                                                                   }
-                                                               });
+                            $scope.chartConfig.series[0].data = response.data;
+
                             //update table
                             data = response.data.map(function(row){ return {date: $filter('date')(row[0], "yyyy-MM-dd"), val: row[1]}; });
                             $scope.tableConfig  = {
                                 params: new NgTableParams({count: 10}, { counts: [], data: data })
                             };
-                            $scope.hidden="hidden";
-                            btnHidden="hidden";
                         });
                     }, function (response) {
                         if (response.status > 0)

@@ -11,8 +11,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             total: 0,
             getData: function ($defer, params) {
                 tdpInvestmentService.getInvestments().then(function (response) {
-                    // params.total(response.data.length);
-                    // $defer.resolve(response.data.slice((params.page() - 1) * params.count(), params.page() * params.count()));
                     var ordered = params.sorting() ?
                         $filter('orderBy')(response.data, params.orderBy()) :
                         response.data;
@@ -82,17 +80,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         };
 
         $scope.plot =function(row){
-            //$scope.test = "test " + ;
             tdpInvestmentService.getInvestmentTimeSeries(row.startDate, row.endDate, row.amount, row.annualRate).then(function(response){
-                $scope.chartConfig.series.push({
-                    name: "Fund",
-                    data: response.data,
-                    tooltip: {
-                        valueDecimals: 2,
-                        valuePrefix: "$",
-                        xDateFormat: '%y-%m-%d'
-                    }
-                });
+                $scope.chartConfig.series[1].data = response.data;
             });
 
         }
