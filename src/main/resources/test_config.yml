@@ -1,0 +1,7 @@
+defaultUrl: http://localhost:9003/
+
+webDriver: webdriver.chrome.driver
+
+webDriverProperty: chromedriver
+
+apiUrl: http://localhost:9003/api/

@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, $stateParams, tdpDataService) {
+    tdpInvestModule.controller("tdpInvestFrontController", function($scope, $stateParams, tdpDataService) {
 
         var investData = [];
         var startDate = false;
