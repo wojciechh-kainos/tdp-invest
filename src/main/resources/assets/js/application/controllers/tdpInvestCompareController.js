@@ -41,7 +41,7 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
 
         $scope.addNewStock = function(date,value) {
         tdpInvestCompareService.addNewStock(date,value);
-        $scope.stockData.push({date:date, value: value})
+        $scope.stockData.push({date:date, value: value});
         }
 
 
