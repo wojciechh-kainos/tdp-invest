@@ -42,7 +42,8 @@ define(['angular'
                 stockDataService: "stockData",
                 stockDataPromise: function (stockDataService, $stateParams) {
                     return stockDataService.setCurrentFund($stateParams.id);
-                }
+                },
+                redirectIfNotAuthenticated: _redirectIfNotAuthenticated
             }
         }).state("tdp.home", {
             url: '/home',
@@ -52,7 +53,8 @@ define(['angular'
                 stockDataService: "stockData",
                 stockDataPromise: function (stockDataService) {
                     return stockDataService.loadFundList;
-                }
+                },
+                redirectIfNotAuthenticated: _redirectIfNotAuthenticated
             }
         });
 
