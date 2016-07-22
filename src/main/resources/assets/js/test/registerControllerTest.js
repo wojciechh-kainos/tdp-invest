@@ -1,7 +1,7 @@
-define(['angular', 'angularMocks', 'application/controllers/tdpInvestRegisterController', 'application/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegisterController', 'application/auth/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestRegisterController', function () {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('tdpInvestAuthModule'));
 
         var authService;
         var deferred;
@@ -22,26 +22,26 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestRegisterCon
             $controller('tdpInvestRegisterController', {$scope: $scope, tdpAuthService: authService});
         }));
 
-        describe('When registering', function () {
-
-            it('with valid credentials should succeed', function () {
-                deferred.resolve({success: true});
+        describe('When registering with valid credentials', function () {
+            it('should redirect to login page', function () {
+                deferred.resolve({});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($state.go).toHaveBeenCalledWith('login');
             });
+        });
 
-            it('when user already exists should fail', function () {
-                deferred.resolve({success: false, message: "error"});
+        describe('When registering when email already taken', function () {
+            it('should display error message', function () {
+                deferred.reject({message: "error"});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($scope.error).toEqual("error");
             });
-
         });
     });
 });

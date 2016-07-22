@@ -1,7 +1,8 @@
 define([
     'angular',
     'application/tdpInvestModule',
-    'application/tdpInvestModuleConfig'
+    'application/tdpInvestModuleConfig',
+    'application/directives/tdpInvestNavbarDirective'
 ], function (angular) {
     'use strict';
 
