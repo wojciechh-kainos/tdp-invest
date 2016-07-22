@@ -22,9 +22,8 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegist
             $controller('tdpInvestRegisterController', {$scope: $scope, tdpAuthService: authService});
         }));
 
-        describe('When registering', function () {
-
-            it('with valid credentials should succeed', function () {
+        describe('When registering with valid credentials', function () {
+            it('should redirect to login page', function () {
                 deferred.resolve({});
 
                 $scope.register();
@@ -32,8 +31,10 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegist
 
                 expect($state.go).toHaveBeenCalledWith('login');
             });
+        });
 
-            it('when user already exists should fail', function () {
+        describe('When registering when email already taken', function () {
+            it('should display error message', function () {
                 deferred.reject({message: "error"});
 
                 $scope.register();
@@ -41,7 +42,6 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestRegist
 
                 expect($scope.error).toEqual("error");
             });
-
         });
     });
 });

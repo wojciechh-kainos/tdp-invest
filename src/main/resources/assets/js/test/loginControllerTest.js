@@ -15,15 +15,12 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginC
             $window = {location: {}};
 
             spyOn(authService, 'login').and.returnValue(deferred.promise);
-            spyOn(authService, 'clearCredentials').and.returnValue('');
-            spyOn(authService, 'setCredentials').and.returnValue('');
 
             $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService, $window: $window});
         }));
 
-        describe('When logging in', function () {
-
-            it('with valid credentials should succeed', function () {
+        describe('When logging in with valid credentials', function () {
+            it('should redirect to root directory', function () {
                 deferred.resolve({});
 
                 $scope.login();
@@ -31,8 +28,10 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginC
 
                 expect($window.location.href).toBe("/");
             });
+        });
 
-            it('with invalid credentials should fail', function () {
+        describe('When logging in with invalid credentials', function () {
+            it('should display error message', function () {
                 deferred.reject({message: "error"});
 
                 $scope.login();
@@ -40,7 +39,6 @@ define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginC
 
                 expect($scope.error).toBe("error");
             });
-
         });
     });
 });

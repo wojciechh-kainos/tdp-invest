@@ -8,20 +8,22 @@ define(['angular', 'application/auth/tdpInvestAuthModule', 'application/auth/ser
             return $http.get('/api/login').then(function (res) {
                 service.setCredentials(username, res.data);
                 return res.data;
-            }, function () {
-                service.clearCredentials();
-                return $q.reject({message: "Wrong email or password."});
+            }, function (err) {
+                err.message = "Wrong email or password.";
+                return $q.reject(err);
             });
         };
 
         service.register = function (username, password) {
             return $http.post('/api/register', {mail: username, password: password}).then(function (response) {
                 return response;
-            }, function (response) {
-                if (response.status == 409) {
-                    return $q.reject({message: "Email address already in use."});
+            }, function (err) {
+                if (err.status == 409) {
+                    err.message = "Email address already in use.";
+                } else {
+                    err.message = "Registration failed.";
                 }
-                return $q.reject({message: "Registration failed."});
+                return $q.reject(err);
             });
         };
 

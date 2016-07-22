@@ -7,7 +7,6 @@ define(['angular'
         $stateProvider
             .state("tdp", {
                 abstract: true,
-                // url: "",
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html"
@@ -16,34 +15,30 @@ define(['angular'
                 resolve: {
                     redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
-            }).state("tdp.front", {
-            url: "",
-            views: {
-                "main@tdp": {
-                    templateUrl: "html/partials/tdp-invest-front.html"
-                }
-            }
-        })
-            .state("tdp.person", {
-                url: "^/person/{personId}",
-                views: {
-                    "main@tdp": {
-                        templateUrl: "html/partials/tdp-invest-person.html",
-                        controller: "tdpInvestPersonController"
+                }).state("tdp.front", {
+                    url: "",
+                    views: {
+                        "main@tdp": {
+                            templateUrl: "html/partials/tdp-invest-front.html"
+                        }
                     }
-                }
-            });
+                }).state("tdp.person", {
+                    url: "^/person/{personId}",
+                    views: {
+                        "main@tdp": {
+                            templateUrl: "html/partials/tdp-invest-person.html",
+                            controller: "tdpInvestPersonController"
+                        }
+                    }
+                });
     });
 
     function _redirectIfNotAuthenticated($cookieStore, $window, $http) {
-
         var user = $cookieStore.get('currentUser') || {};
 
         if (!user) {
             $window.location.href = "/auth";
-        }
-
-        else {
+        } else {
             $http.defaults.headers.common['Authorization'] = 'Basic ' + user.authdata; // jshint ignore:line
 
             return $http.get('/api/login').then(undefined, function () {
