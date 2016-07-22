@@ -6,6 +6,7 @@ import com.google.inject.Inject;
 import domain.TdpUnit;
 import io.dropwizard.hibernate.UnitOfWork;
 
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -28,8 +29,8 @@ public class TdpInvestUnitResource {
     }
 
     @GET
+    @RolesAllowed("USER")
     @Path("/{id}")
-    @UnitOfWork
     public TdpUnit fetchOne(@PathParam("id") Long id) {
         return tdpUnitDAO.findById(id);
     }

@@ -6,8 +6,13 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
          http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.0.xsd">
 
-    <include file="changelogs/initialCreateTables.xml"/>
-    <include file="changelogs/populateTables.xml"/>
-    <include file="changelogs/personTableChange.xml"/>
-    <include file="changelogs/personTableChangeRole.xml"/>
+
+    <changeSet id="6" author="marcint">
+
+        <addColumn tableName="tdpuser">
+            <column name="role" type="varchar(50)" />
+        </addColumn>
+
+    </changeSet>
+
 </databaseChangeLog>

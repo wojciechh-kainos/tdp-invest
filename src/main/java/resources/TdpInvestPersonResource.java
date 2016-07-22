@@ -5,6 +5,8 @@ import domain.TdpUser;
 import io.dropwizard.auth.Auth;
 import services.DummyJob;
 
+import javax.annotation.security.DenyAll;
+import javax.annotation.security.RolesAllowed;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -26,8 +28,9 @@ public class TdpInvestPersonResource {
         return myJob;
     }
 
+    @DenyAll
     @GET
-    public String fetch(@Auth TdpUser u, @PathParam("personId") String personId) {
+    public String fetch(@PathParam("personId") String personId) {
         return personId;
     }
 }

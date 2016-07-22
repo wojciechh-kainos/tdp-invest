@@ -1,4 +1,5 @@
 import auth.TdpInvestAuthenticator;
+import auth.TdpInvestAuthorizer;
 import auth.TdpInvestPasswordStore;
 import auth.TdpInvestUnauthorizedHandler;
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
@@ -72,8 +73,12 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
                 new Object[]{guiceBundle.getInjector().getInstance(TdpUserDAO.class),
                         guiceBundle.getInjector().getInstance(TdpInvestPasswordStore.class)});
 
+        TdpInvestAuthorizer authorizer = new TdpInvestAuthorizer();
+
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpUser>()
                 .setAuthenticator(authenticator)
+                .setAuthorizer(authorizer)
+                .setRealm("SUPER SECRET STUFF")
                 //.setUnauthorizedHandler(guiceBundle.getInjector().getInstance(TdpInvestUnauthorizedHandler.class))
                 .buildAuthFilter()));
 

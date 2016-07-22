@@ -25,6 +25,9 @@ public class TdpUser implements Principal {
     @Column(name = "TOKEN_EXPIRE")
     private ZonedDateTime tokenExpire;
 
+    @Column(name = "ROLE", length = 50)
+    private String role;
+
     public TdpUser(){};
 
     public TdpUser(String mail, String password) { this.mail = mail; this.password = password; }
@@ -65,6 +68,14 @@ public class TdpUser implements Principal {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
     @Override
