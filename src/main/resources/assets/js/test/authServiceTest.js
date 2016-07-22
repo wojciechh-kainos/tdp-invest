@@ -1,7 +1,7 @@
-define(['angular', 'angularMocks', 'application/auth/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestAuthService', function () {
-        beforeEach(angular.mock.module('tdpInvestAuthModule'));
+        beforeEach(angular.mock.module('tdpInvestModule'));
 
         var $httpBackend;
         var service;
