@@ -1,7 +1,7 @@
 package e2e;
 
 import e2e.pages.LoginPage;
-import e2e.pages.MainPage;
+import e2e.pages.FrontPage;
 import e2e.pages.RegisterPage;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,7 +18,7 @@ public class AuthenticationTest {
     public static final String INVALID_TEST_CREDENTIAL = "test2";
     private static LoginPage loginPage;
     private static RegisterPage registerPage;
-    private static MainPage mainPage;
+    private static FrontPage frontPage;
     private static DatabaseHelper databaseHelper;
 
     @Before
@@ -26,7 +26,7 @@ public class AuthenticationTest {
         cleanDatabase();
         registerPage = new RegisterPage();
         loginPage = new LoginPage();
-        mainPage = new MainPage();
+        frontPage = new FrontPage();
     }
 
     @Test
@@ -43,7 +43,7 @@ public class AuthenticationTest {
         loginPage.getPasswordField().sendKeys(VALID_TEST_CREDENTIAL);
         loginPage.getLoginButton().click();
 
-        loginPage.waitForElementToLoad(By.id(mainPage.getUniqueId()));
+        loginPage.waitForElementToLoad(By.id(frontPage.getUniqueId()));
         assertFalse("When user logs in with correct credentials, user is redirected to tdp.", loginPage.getCurrentUrl().equals(loginPage.getPartialUrl()));
 
         registerPage.open();

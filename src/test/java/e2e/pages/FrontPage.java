@@ -1,8 +1,8 @@
 package e2e.pages;
 
-public class MainPage extends BasePage {
+public class FrontPage extends BasePage {
 
-    public MainPage() throws Exception {
+    public FrontPage() throws Exception {
         super();
     }
 
@@ -13,6 +13,6 @@ public class MainPage extends BasePage {
 
     @Override
     public String getUniqueId() {
-        return "mainPageContent";
+        return "frontPageContent";
     }
 }
