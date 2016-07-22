@@ -32,7 +32,7 @@ require.config({
       },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
-      'ngCookies': ['angular']
+      'ngCookies': ['angular'],
       'highcharts-ng': ['angular' , 'highcharts'],
       'ui-bootstrap': ['angular'],
   },

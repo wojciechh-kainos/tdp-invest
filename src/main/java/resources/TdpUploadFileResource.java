@@ -47,10 +47,10 @@ public class TdpUploadFileResource {
                 insertDataToDb(path);
             } catch (IOException e) {
                 e.printStackTrace();
-                return Response.status(200).entity("File not saved to server").build();
+                return Response.status(400).build();
             }
 
-            return Response.status(200).entity("File saved to server").build();
+            return Response.status(200).build();
         }
 
         private void insertDataToDb(String path) throws IOException {

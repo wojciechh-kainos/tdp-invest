@@ -43,7 +43,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     counter += 1;
                 }
 
-                $scope.gain = gain;
+                $scope.gain = gain.toFixed(2);
                 var stockValuesList = []
 
                 var stockGain = $scope.amount;
@@ -53,7 +53,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     stockValuesList.push(stockGain);
                     stockGain = unitNumber * $scope.investData[i].value;
                 }
-
+                $scope.stockGain = stockValuesList[stockValuesList.length-1].toFixed(2);
                 prepareChart('investmentChart', dateList, valuesList, stockValuesList);
 
             }
