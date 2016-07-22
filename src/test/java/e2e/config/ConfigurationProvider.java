@@ -3,15 +3,12 @@ package e2e.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.common.io.Resources;
 import com.google.inject.Singleton;
-import io.dropwizard.configuration.ConfigurationException;
 import io.dropwizard.configuration.ConfigurationFactory;
 import io.dropwizard.jackson.Jackson;
 import io.dropwizard.validation.BaseValidator;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.URI;
-import java.net.URISyntaxException;
 
 @Singleton
 public class ConfigurationProvider {
@@ -24,16 +21,12 @@ public class ConfigurationProvider {
 
     private static TestConfiguration config;
 
-    private static TestConfiguration parseFile() {
-        try {
-            URI path = Resources.getResource("test_config.yml").toURI();
-            return factory.build(new File(path));
-        } catch (IOException | URISyntaxException | ConfigurationException e) {
-            return null;
-        }
+    private static TestConfiguration parseFile() throws Exception {
+        URI path = Resources.getResource("test_config.yml").toURI();
+        return factory.build(new File(path));
     }
 
-    public static TestConfiguration getConfig() {
+    public static TestConfiguration getConfig() throws Exception {
         if (config == null) {
             config = parseFile();
         }
