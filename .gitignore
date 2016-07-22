@@ -32,6 +32,7 @@ libs/
 tmp/
 node_modules/
 jaxws/jaxws-client/src/main/
+postgres/
 
 # OS Files #
 .DS_Store
@@ -104,3 +105,5 @@ derby.log
 ######################
 
 .factorypath
+chromedriver
+classes/

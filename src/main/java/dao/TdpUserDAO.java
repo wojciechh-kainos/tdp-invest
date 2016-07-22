@@ -64,4 +64,8 @@ public class TdpUserDAO extends AbstractDAO<TdpUser> {
         user.setToken(passwordStore.createHash(token).substring(21));
         return persist(user).getToken();
     }
+
+    public void delete(String email) {
+        namedQuery("TdpUser.delete").setParameter("email", email).executeUpdate();
+    }
 }
