@@ -1,19 +1,15 @@
 package resources;
 
 import DAO.TdpIInvestmentDAO;
-import com.codahale.metrics.annotation.Timed;
 import com.google.inject.Inject;
 import domain.TdpIInvestment;
 import helpers.TimeSeries;
 import io.dropwizard.hibernate.UnitOfWork;
-import model.Fund;
-import org.apache.commons.lang3.NotImplementedException;
 import org.joda.time.DateTime;
+import org.json.JSONException;
 
-import javax.transaction.Transactional;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 import java.util.Date;
 import java.util.List;
 
@@ -74,14 +70,12 @@ public class TdpInvestInvestmentResource {
 
     @GET
     @Path("/timeseries")
-    public List<Fund> fetchInvestmentTimeSeries(@QueryParam("startDate")long startDate,
-                                                @QueryParam("endDate")long endDate,
-                                                @QueryParam("amount")double amount,
-                                                @QueryParam("annualRate")double annualRate){
+    public String fetchInvestmentTimeSeries(@QueryParam("startDate")long startDate,
+                                            @QueryParam("endDate")long endDate,
+                                            @QueryParam("amount")double amount,
+                                            @QueryParam("annualRate")double annualRate) throws JSONException {
 
-        TimeSeries ts = new TimeSeries(new DateTime(startDate), new DateTime(endDate), amount, annualRate);
-
-        return ts.getTimeSeries();
+        return TimeSeries.createTimeSeries(new DateTime(startDate), new DateTime(endDate), amount, annualRate);
     }
 
     private Date convertToDate(String s){ return s == null ? null : DateTime.parse(s).toDate(); }

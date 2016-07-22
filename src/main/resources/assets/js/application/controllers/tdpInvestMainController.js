@@ -1,7 +1,7 @@
-define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
     var data;
     var btnHidden='';
-    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, tdpInvestmentService, $filter) {
+    tdpInvestModule.controller("tdpInvestMainController", function($scope, NgTableParams, Upload, $timeout, $filter) {
 
         $scope.hidden=btnHidden;
         //***chart***
@@ -49,7 +49,7 @@ define(['angular', 'application/tdpInvestModule', 'ng-table', 'application/servi
                         });
                     }, function (response) {
                         if (response.status > 0)
-                            $scope.errorMsg = response.status + ': ' + response.data;
+                            $scope.errorMsg = response.status + ': ' + response.data.message;
                     }, function (evt) {
                         file.progress = Math.min(100, parseInt(100.0 *
                                                  evt.loaded / evt.total));

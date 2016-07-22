@@ -1,51 +1,55 @@
 <div class="well-wrapper">
-    <div id="investments-container" class="well col-lg-6 col-lg-offset-1">
-        <h3>Investments</h3>
-        <table id="investments-table" ng-table="tableConfig" show-filter="false" class="table table-condensed table-bordered table-striped">
-            <colgroup>
-                <col width ="20%"/>
-                <col width ="20%"/>
-                <col width ="30%"/>
-                <col width ="30%"/>
-            </colgroup>
-            <tr ng-repeat="row in $data">
-                <td data-title="'Amount'" sortable="'amount'">
-                    <span editable-text="row.amount" e-name="amount" e-form="rowform" onbeforesave="checkAmount(rowform.$data)" e-required>
-                        {{ row.amount | currency: '$' || 'empty' }}
-                    </span>
-                </td>
-                <td data-title="'Rate'" sortable="'annualRate'">
-                    <span editable-range="row.annualRate" e-min="0" e-max="200" e-step="1" e-name="annualRate" e-form="rowform" e-required>
-                        {{ showRate(row) || 'empty' }}
-                    </span>
-                </td>
-                <td data-title="'From date'" sortable="'startDate'">
-                    <span editable-date="row.startDate" e-name="startDate" e-form="rowform" e-required>
-                        {{ row.startDate | date: 'yyyy-MM-dd' || 'empty' }}
-                    </span>
-                </td>
-                <td data-title="'To date'" sortable="'endDate'">
-                    <span editable-date="row.endDate" e-name="endDate" e-form="rowform" e-required>
-                        {{ row.endDate | date: 'yyyy-MM-dd' || 'empty' }}
-                    </span>
-                </td>
-                <td style="white-space: nowrap;">
-                    <!--form-->
-                    <form editable-form name="rowform" onaftersave="saveRow(rowform.$data, row.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == row">
-                        <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
-                            save
-                        </button>
-                        <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
-                            cancel
-                        </button>
-                    </form>
-                    <div class="buttons" ng-show="!rowform.$visible">
-                        <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
-                        <button class="btn btn-danger" ng-click="removeRow(row.id)">delete</button>
-                    </div>
-                </td>
-            </tr>
-        </table>
-        <button class="btn btn-success" ng-click="addRow()">Add row</button>
+    <div id="investments-container" class="well col-lg-10 col-lg-offset-1">
+        <div id="table-wrapper">
+            <h3>Investments</h3>
+            <table id="investments-table" ng-table="tableConfig" show-filter="false" class="table table-condensed table-bordered table-striped">
+                <tr ng-repeat="row in $data">
+                    <td data-title="'Amount'" sortable="'amount'">
+                        <span editable-text="row.amount" e-name="amount" e-form="rowform" onbeforesave="checkAmount(rowform.$data)" e-required>
+                            {{ row.amount | currency: '$' || 'empty' }}
+                        </span>
+                    </td>
+                    <td data-title="'Rate'" sortable="'annualRate'">
+                        <span editable-range="row.annualRate" e-min="0" e-max="200" e-step="1" e-name="annualRate" e-form="rowform" e-required>
+                            {{ showRate(row) || 'empty' }}
+                        </span>
+                    </td>
+                    <td data-title="'From date'" sortable="'startDate'">
+                        <span editable-date="row.startDate" e-name="startDate" e-form="rowform" e-required>
+                            {{ row.startDate | date: 'yyyy-MM-dd' || 'empty' }}
+                        </span>
+                    </td>
+                    <td data-title="'To date'" sortable="'endDate'">
+                        <span editable-date="row.endDate" e-name="endDate" e-form="rowform" e-required>
+                            {{ row.endDate | date: 'yyyy-MM-dd' || 'empty' }}
+                        </span>
+                    </td>
+                    <td style="white-space: nowrap;">
+                        <!--form-->
+                        <form editable-form name="rowform" onaftersave="saveRow(rowform.$data, row.id)" ng-show="rowform.$visible" class="form-buttons form-inline" shown="inserted == row">
+                            <button type="submit" ng-disabled="rowform.$waiting" class="btn btn-primary">
+                                save
+                            </button>
+                            <button type="button" ng-disabled="rowform.$waiting" ng-click="rowform.$cancel()" class="btn btn-default">
+                                cancel
+                            </button>
+                        </form>
+                        <div class="buttons" ng-show="!rowform.$visible">
+                            <button class="btn btn-default" target="_blank" ng-click="plot(rowform.$data)">plot</button>
+                            <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                            <button class="btn btn-danger" ng-click="removeRow(row.id)">delete</button>
+                        </div>
+                    </td>
+                </tr>
+            </table>
+            <div id="add-row">
+                <button class="btn btn-success" ng-click="addRow()">Add row</button>
+            </div>
+            <br />
+        </div>
+        {{test}}
+        <div class="investment-chart col-lg-9">
+            <highchart config="chartConfig"></highchart>
+        </div>
     </div>
 </div>
