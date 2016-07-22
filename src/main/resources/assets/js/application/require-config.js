@@ -28,7 +28,7 @@ require.config({
         'highchart-theme': ['highcharts'],
         'ui.bootstrap': ['angular'],
         'flow': ['angular'],
-        'toastr': ['angular']
+        'toastr': ['angular'],
     },
     deps: ['application/bootstrap']
 });

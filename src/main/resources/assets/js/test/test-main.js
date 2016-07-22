@@ -18,17 +18,36 @@ require.config({
   paths: {
       'angular': 'lib/angular/angular.min',
       'angularMocks': 'lib/angular-mocks/angular-mocks',
+      'restangular': 'lib/restangular/dist/restangular.min',
+      'lodash': 'lib/lodash/dist/lodash.min',
       'uiRouter': 'lib/angular-ui-router/release/angular-ui-router.min',
       'highcharts': 'lib/highcharts/highcharts',
-      'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min'
+      'highcharts-ng': 'lib/highcharts-ng/dist/highcharts-ng.min',
+      'ngTable': 'lib/ng-table/dist/ng-table.min',
+      'highchart-theme': 'lib/highcharts/themes/dark-unica',
+      'ngCookies': 'lib/angular-cookies/angular-cookies',
+      'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
+      'flow': 'lib/ng-flow/dist/ng-flow-standalone.min',
+      'toastr': 'lib/angular-toastr/dist/angular-toastr.tpls'
   },
   shim: {
       'angular': {
           exports: 'angular'
       },
+      'restangular': ['angular', 'lodash'],
+      'lodash': {
+        exports: "_"
+      },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],
-      'highcharts-ng': ['angular', 'highcharts']
+      'highcharts-ng': ['angular', 'highcharts'],
+      'ngTable': ['angular'],
+      'ngCookies': ['angular'],
+      'highchart-theme': ['highcharts'],
+      'ui.bootstrap': ['angular'],
+      'flow': ['angular'],
+      'toastr': ['angular'],
+
   },
   // dynamically load all test files
   deps: allTestFiles,

@@ -9,7 +9,6 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 import services.TdpInvestLoadDataService;
-import services.TdpInvestReadCSVFileService;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,6 +25,8 @@ public class TdpInvestUnitResourceTest{
 
 	@Mock
 	TdpInvestLoadDataService mockloadDataService;
+
+	//SUT
 	TdpInvestUnitResource resource;
 
 	private static List<TdpIUnit> stubDB;
