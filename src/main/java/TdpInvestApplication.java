@@ -16,7 +16,6 @@ import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
 import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
-import io.dropwizard.migrations.DbCommand;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -53,7 +52,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
-        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html", "TdpInvest"));
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets/js/application/auth", "/auth/", "index.html", "Auth"));
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
 
