@@ -18,7 +18,7 @@ define(['angular', 'application/tdpInvestModule',  'application/services/tdpInve
         $scope.datesIntervals = [];
 
         if($scope.datesAndPrices.length == 0)
-            $scope.error = "You should firstly upload file. Please click 'Upload' link on navbar above.";
+            $scope.error = "No data detected. Please check 'Upload' on hthe navbar above.";
 
         $scope.isNumber = function (n){
             if(!isNaN(n))
