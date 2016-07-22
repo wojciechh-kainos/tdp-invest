@@ -22,26 +22,26 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestRegisterCon
             $controller('tdpInvestRegisterController', {$scope: $scope, tdpAuthService: authService});
         }));
 
-        describe('When registering with valid credentials', function () {
-            it('should redirect to login page', function () {
-                deferred.resolve({});
+        describe('When registering', function () {
+
+            it('with valid credentials should succeed', function () {
+                deferred.resolve({success: true});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($state.go).toHaveBeenCalledWith('login');
             });
-        });
 
-        describe('When registering when email already taken', function () {
-            it('should display error message', function () {
-                deferred.reject({message: "error"});
+            it('when user already exists should fail', function () {
+                deferred.resolve({success: false, message: "error"});
 
                 $scope.register();
                 $scope.$apply();
 
                 expect($scope.error).toEqual("error");
             });
+
         });
     });
 });

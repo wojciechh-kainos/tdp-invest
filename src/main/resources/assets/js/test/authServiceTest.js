@@ -4,86 +4,69 @@ define(['angular', 'angularMocks', 'application/services/tdpInvestAuthService'],
         beforeEach(angular.mock.module('tdpInvestModule'));
 
         var $httpBackend;
-        var service;
+        var $service;
 
         beforeEach(inject(function (_tdpInvestAuthService_, _$httpBackend_) {
-            service = _tdpInvestAuthService_;
+            $service = _tdpInvestAuthService_;
             $httpBackend = _$httpBackend_;
-
-            spyOn(service, 'setCredentials');
-            spyOn(service, 'clearCredentials');
         }));
 
-        describe('When logging in with valid credentials', function () {
-            it('should set cookie with username and token', function () {
-                var testLogin = function(result) {
-                    expect(result).toEqual('token');
-                    expect(service.setCredentials).toHaveBeenCalledWith('username', 'token');
-                };
+        describe('When login', function () {
+            it('with valid credentials should succeed', function () {
+                $httpBackend.expectGET('/api/login', undefined).respond(200, '');
 
-                $httpBackend.expectGET('/api/login', undefined).respond(200, 'token');
-
-                service.login('username', 'password').then(testLogin);
+                $service.login(undefined, undefined)
+                    .then(function (response) {
+                        expect(response.success).toEqual(true);
+                    });
 
                 $httpBackend.flush();
             });
-        });
 
-        describe('When logging in with invalid credentials', function () {
-            it('should return error message', function () {
-                var testLogin = function(result) {
-                    expect(result).not.toBeNull();
-                    expect(result.error).toEqual('Wrong email or password.');
-                };
-
+            it('with invalid credentials should fail', function () {
                 $httpBackend.expectGET('/api/login', undefined).respond(400, '');
 
-                service.login('username', 'password').then(testLogin);
+                $service.login(undefined, undefined)
+                    .then(function (response) {
+                        expect(response.success).toEqual(false);
+                    });
 
                 $httpBackend.flush();
             });
         });
 
-        describe('When registering with valid credentials', function () {
-            it('should return success response code', function () {
-                var testRegister = function(result) {
-                    expect(result).not.toBeNull();
-                    expect(result.status).toEqual(200);
-                };
-
+        describe('When register', function () {
+            it('with valid credentials should succeed', function () {
                 $httpBackend.expectPOST('/api/register', undefined).respond(200, '');
 
-                service.register(undefined, undefined).then(testRegister);
+                $service.register(undefined, undefined)
+                    .then(function (response) {
+                        expect(response.success).toEqual(true);
+                    });
 
                 $httpBackend.flush();
             });
-        });
 
-        describe('When registering with email already in use', function () {
-            it('should return error message', function () {
-                var testRegister = function(result) {
-                    expect(result).not.toBeNull();
-                    expect(result.error).toEqual('Email address already in use.');
-                };
-
+            it('with email already in use should fail', function () {
                 $httpBackend.expectPOST('/api/register', undefined).respond(409, '');
 
-                service.register(undefined, undefined).then(testRegister);
+                $service.register(undefined, undefined)
+                    .then(function (response) {
+                        expect(response.success).toEqual(false);
+                        expect(response.message).toEqual("Email address already in use.");
+                    });
 
                 $httpBackend.flush();
             });
-        });
 
-        describe('When registering and server returns error', function () {
-            it('should return error message', function () {
-                var testRegister = function(result) {
-                    expect(result).not.toBeNull();
-                    expect(result.error).toEqual('Registration failed.');
-                };
-
+            it('should fail when server error', function () {
                 $httpBackend.expectPOST('/api/register', undefined).respond(500, '');
 
-                service.register(undefined, undefined).then(testRegister);
+                $service.register(undefined, undefined)
+                    .then(function (response) {
+                        expect(response.success).toEqual(false);
+                        expect(response.message).toEqual("Registration failed.");
+                    });
 
                 $httpBackend.flush();
             });
