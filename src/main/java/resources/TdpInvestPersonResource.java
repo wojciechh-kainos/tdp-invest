@@ -28,7 +28,6 @@ public class TdpInvestPersonResource {
         return myJob;
     }
 
-    @DenyAll
     @GET
     public String fetch(@PathParam("personId") String personId) {
         return personId;

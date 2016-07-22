@@ -19,6 +19,7 @@ import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import org.glassfish.jersey.server.filter.RolesAllowedDynamicFeature;
 import resources.TdpInvestFundResource;
 import domain.TdpUser;
 import resources.TdpInvestAuthResource;
@@ -79,9 +80,10 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
                 .setAuthenticator(authenticator)
                 .setAuthorizer(authorizer)
                 .setRealm("SUPER SECRET STUFF")
-                //.setUnauthorizedHandler(guiceBundle.getInjector().getInstance(TdpInvestUnauthorizedHandler.class))
+                .setUnauthorizedHandler(guiceBundle.getInjector().getInstance(TdpInvestUnauthorizedHandler.class))
                 .buildAuthFilter()));
 
+        environment.jersey().register(new RolesAllowedDynamicFeature());
         environment.jersey().register(new AuthValueFactoryProvider.Binder<>(TdpUser.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestPersonResource.class));

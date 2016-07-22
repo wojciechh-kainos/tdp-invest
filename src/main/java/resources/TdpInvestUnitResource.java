@@ -30,6 +30,7 @@ public class TdpInvestUnitResource {
 
     @GET
     @RolesAllowed("USER")
+    @UnitOfWork
     @Path("/{id}")
     public TdpUnit fetchOne(@PathParam("id") Long id) {
         return tdpUnitDAO.findById(id);

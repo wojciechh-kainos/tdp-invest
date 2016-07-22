@@ -8,7 +8,7 @@ public class FrontPage extends BasePage {
 
     @Override
     public String getPartialUrl() {
-        return "#tdp/home";
+        return "#/login";
     }
 
     @Override
