@@ -6,13 +6,11 @@ import io.dropwizard.auth.AuthenticationException;
 import domain.TdpUser;
 import dao.TdpUserDAO;
 import io.dropwizard.hibernate.UnitOfWork;
+import io.dropwizard.jersey.params.IntParam;
 import org.hibernate.FlushMode;
 import org.hibernate.HibernateException;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.Path;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -44,6 +42,13 @@ public class TdpInvestAuthResource {
         } catch (HibernateException e) { // user already exists in a database
             return Response.status(Response.Status.CONFLICT).build();
         }
+    }
+
+    @DELETE
+    @UnitOfWork(flushMode = FlushMode.MANUAL)
+    @Path("/{email}")
+    public void delete(@PathParam("email") String email) {
+            tdpUserDAO.delete(email);
     }
 
 }
