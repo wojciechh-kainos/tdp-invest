@@ -39,10 +39,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             });
         };
 
-        $scope.editRow = function(rowform){
-            rowform.$show();
-        };
-
         $scope.saveRow = function (row, dbId) {
             var investment = mergeObjects(dbId, row);
             tdpInvestmentService.editInvestment(investment).then(function (response) {
@@ -57,10 +53,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                     var currentPage = Math.floor($scope.tableConfig.total() / $scope.tableConfig.count());
                     currentPage = currentPage === 0 ? currentPage + 1 : currentPage;
 
-                    if (data.length === $scope.tableConfig.count() && $scope.tableConfig.total() > 0 && $scope.tableConfig.total() % 2 === 1){
-                        $scope.tableConfig.page(currentPage + 1);
-                    } else{
-                        // $scope.tableConfig.page(currentPage);
+                    if (data.length === $scope.tableConfig.count() &&
+                            $scope.tableConfig.total() > 0 &&
+                            (currentPage * $scope.tableConfig.count() - $scope.tableConfig.total()) < 0){
+                        currentPage += 1;
+                        $scope.tableConfig.page(currentPage);
                     }
                     $scope.tableConfig.reload();
                 });
@@ -78,6 +75,17 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 }
                 if (amount >= 1000000) {
                     return "You are not a millionaire";
+                }
+            }
+        };
+
+        $scope.checkDate = function (row) {
+            if (row.hasOwnProperty("startDate") && row.hasOwnProperty("endDate")){
+                var startDate = row.startDate;
+                var endDate = row.endDate;
+
+                if (startDate >= endDate) {
+                    return "Starting date have to be smaller than ending date"
                 }
             }
         };
