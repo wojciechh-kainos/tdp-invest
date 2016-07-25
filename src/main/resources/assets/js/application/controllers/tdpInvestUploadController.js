@@ -1,17 +1,17 @@
-define(['angular', 'application/tdpInvestModule', 'angular-file-upload'], function (angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestUploadController", function ($scope, $state, FileUploader, $http) {
+define(['angular', 'application/tdpInvestModule', 'angular-file-upload', 'ngCookies', 'application/services/tdpInvestBase64Service'], function (angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestUploadController", function ($scope, $state, FileUploader, $http, $cookieStore, tdpInvestBase64Service) {
         $scope.showGif = false;
         $scope.uploader = new FileUploader();
         $scope.uploader.url="/api/unit/upload";
+        $scope.uploader.headers = {'Authorization' : 'Basic ' + $cookieStore.get("currentUser").authdata};
 
-        $scope.uploadFile = function(item){
-            console.dir(item.file);
-            var file = new FormData();
-            file.append('file', item.file)
-            $http.post("api/unit/upload", file, {'Content-type' : 'multipart/form-data'});
+        $scope.uploader.onProgressAll = function(){
+            $scope.showGif = true;
         }
 
-
+        $scope.uploader.onCompleteAll = function(){
+            $state.go('main');
+        }
 
     });
 });
