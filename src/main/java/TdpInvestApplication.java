@@ -1,15 +1,20 @@
 import auth.TdpInvestAuthenticator;
+import auth.TdpInvestPasswordStore;
+import auth.TdpInvestUnauthorizedHandler;
 import com.github.dirkraft.dropwizard.fileassets.FileAssetsBundle;
 import com.hubspot.dropwizard.guice.GuiceBundle;
 import configuration.TdpInvestApplicationConfiguration;
 import configuration.TdpInvestModule;
 import domain.TdpIInvestment;
+import DAO.TdpUserDAO;
 import domain.TdpIUnit;
 import io.dropwizard.Application;
 import io.dropwizard.auth.AuthDynamicFeature;
+import io.dropwizard.auth.AuthValueFactoryProvider;
 import io.dropwizard.auth.basic.BasicCredentialAuthFilter;
 import io.dropwizard.db.DataSourceFactory;
 import io.dropwizard.hibernate.HibernateBundle;
+import io.dropwizard.hibernate.UnitOfWorkAwareProxyFactory;
 import io.dropwizard.migrations.MigrationsBundle;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
@@ -18,6 +23,7 @@ import resources.TdpInvestConvertResource;
 import resources.TdpInvestInvestmentResource;
 import domain.TdpUser;
 import resources.TdpInvestAuthResource;
+import resources.TdpInvestPersonResource;
 import resources.TdpInvestUnitResource;
 
 
@@ -43,7 +49,8 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
-        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html", "TdpInvest"));
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets/js/application/auth", "/auth/", "index.html", "Auth"));
         bootstrap.addBundle(hibernateBundle);
         bootstrap.addBundle(migrationsBundle);
 
@@ -59,9 +66,16 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
         module.setSessionFactory(hibernateBundle.getSessionFactory());
 
 
+        TdpInvestAuthenticator authenticator = new UnitOfWorkAwareProxyFactory(hibernateBundle).create(TdpInvestAuthenticator.class,
+                new Class[]{TdpUserDAO.class, TdpInvestPasswordStore.class},
+                new Object[]{guiceBundle.getInjector().getInstance(TdpUserDAO.class),
+                        guiceBundle.getInjector().getInstance(TdpInvestPasswordStore.class)});
+
         environment.jersey().register(new AuthDynamicFeature(new BasicCredentialAuthFilter.Builder<TdpUser>()
-                .setAuthenticator(guiceBundle.getInjector().getInstance(TdpInvestAuthenticator.class))
+                .setAuthenticator(authenticator)
+                .setUnauthorizedHandler(guiceBundle.getInjector().getInstance(TdpInvestUnauthorizedHandler.class))
                 .buildAuthFilter()));
+        environment.jersey().register(new AuthValueFactoryProvider.Binder<>(TdpUser.class));
 
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestUnitResource.class));
         environment.jersey().register(guiceBundle.getInjector().getInstance(TdpInvestInvestmentResource.class));

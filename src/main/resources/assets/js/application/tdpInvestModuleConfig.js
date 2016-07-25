@@ -1,49 +1,54 @@
 define(['angular'
     , 'application/tdpInvestModule'
-    , 'application/controllers/tdpInvestLoginController'
-    , 'application/controllers/tdpInvestRegisterController'
-    , 'application/controllers/tdpInvestNavbarController'
+    , 'application/directives/tdpInvestNavbarDirective'
     , 'application/controllers/tdpInvestInvestmentController'
     , 'application/controllers/tdpInvestCompareController'
     , 'application/controllers/tdpInvestMainController'
-], function(angular, tdpInvestModule) {
-    tdpInvestModule.config(function($stateProvider, $urlRouterProvider) {
+], function (angular, tdpInvestModule) {
+    tdpInvestModule.config(function ($stateProvider) {
         $stateProvider
             .state("tdp", {
-                url: "/tdp",
+                abstract: true,
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-main.html",
                         controller: "tdpInvestMainController"
                     }
+                },
+                resolve: {
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
                 }
-            }).state("compare", {
-                url: "/compare",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-compare.html",
-                        controller: "tdpInvestCompareController"
-                    }
+            }).state("tdp.front", {
+            url: "",
+            views: {
+                "main@tdp": {
+                    templateUrl: "html/partials/tdp-invest-front.html"
                 }
-            }).state("login", {
-                url: "/login",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-login.html",
-                        controller: "tdpInvestLoginController"
-                    }
+            }
+        }).state("tdp.compare", {
+            url: "/compare",
+            views: {
+                "@": {
+                    templateUrl: "html/partials/tdp-invest-compare.html",
+                    controller: "tdpInvestCompareController"
                 }
-            }).state("register", {
-                url: "/register",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-register.html",
-                        controller: "tdpInvestRegisterController"
-                    }
-                }
-            });
-        $urlRouterProvider.otherwise("/login");
+            }
+        });
     });
+
+    function _redirectIfNotAuthenticated($cookieStore, $window, $http) {
+        var user = $cookieStore.get('currentUser') || {};
+
+        if (!user) {
+            $window.location.href = "/auth";
+        } else {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + user.authdata; // jshint ignore:line
+
+            return $http.get('/api/login').then(undefined, function () {
+                $window.location.href = "/auth";
+            });
+        }
+    }
 
     return tdpInvestModule;
 });
