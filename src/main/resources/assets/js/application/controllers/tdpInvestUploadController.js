@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'angular-file-upload', 'ngCookies', 'application/services/tdpInvestBase64Service'], function (angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestUploadController", function ($scope, $state, FileUploader, $http, $cookieStore, tdpInvestBase64Service) {
+define(['angular', 'application/tdpInvestModule', 'angular-file-upload', 'ngCookies', ], function (angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestUploadController", function ($scope, $state, FileUploader, $http, $cookieStore) {
         $scope.showGif = false;
         $scope.error = false;
         $scope.uploader = new FileUploader();

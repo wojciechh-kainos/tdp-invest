@@ -118,3 +118,8 @@ task migrate(type: JavaExec, dependsOn: fatJar) {
 run {
     args 'server', configPath
 }
+
+task testWithoutSelenium(type: Test){
+    include "**/**"
+    exclude "**/e2e**"
+}

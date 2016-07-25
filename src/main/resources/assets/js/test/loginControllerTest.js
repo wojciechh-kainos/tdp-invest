@@ -1,49 +1,48 @@
-define(['angular', 'angularMocks', 'application/controllers/tdpInvestLoginController', 'application/services/tdpInvestAuthService'], function (angular) {
+define(['angular', 'angularMocks', 'application/auth/controllers/tdpInvestLoginController', 'application/auth/services/tdpInvestAuthService'], function (angular) {
 
     describe('tdpInvestLoginController', function () {
-        beforeEach(angular.mock.module('tdpInvestModule'));
+        beforeEach(angular.mock.module('tdpInvestAuthModule'));
 
         var authService;
         var deferred;
-        var $state;
+        var $window;
         var $scope;
-        var $q;
 
-        beforeEach(inject(function ($controller, _$rootScope_, tdpInvestAuthService, _$q_, _$state_) {
-            $q = _$q_;
+        beforeEach(inject(function ($controller, _$rootScope_, tdpInvestAuthService, $q) {
             deferred = $q.defer();
             $scope = _$rootScope_.$new();
             authService = tdpInvestAuthService;
-            $state = _$state_;
+            $window = {location: {}};
 
-            spyOn($state, 'go');
             spyOn(authService, 'login').and.returnValue(deferred.promise);
-            spyOn(authService, 'clearCredentials').and.returnValue('');
-            spyOn(authService, 'setCredentials').and.returnValue('');
 
-            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService});
+            $controller('tdpInvestLoginController', {$scope: $scope, tdpAuthService: authService, $window: $window});
         }));
 
-        describe('When logging in', function () {
-
-            it('with valid credentials should succeed', function () {
-                deferred.resolve({success: true});
+        describe('When logging in with valid credentials', function () {
+            it('should redirect to root directory', function () {
+                deferred.resolve({});
 
                 $scope.login();
                 $scope.$apply();
 
+<<<<<<< HEAD
                 expect($state.go).toHaveBeenCalledWith('upload');
+=======
+                expect($window.location.href).toBe("/");
+>>>>>>> master
             });
+        });
 
-            it('with invalid credentials should fail', function () {
-                deferred.resolve({success: false, message: "error"});
+        describe('When logging in with invalid credentials', function () {
+            it('should display error message', function () {
+                deferred.reject({message: "error"});
 
                 $scope.login();
                 $scope.$apply();
 
-                expect($state.go).not.toHaveBeenCalled();
+                expect($scope.error).toBe("error");
             });
-
         });
     });
 });

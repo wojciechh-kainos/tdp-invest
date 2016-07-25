@@ -1,4 +1,4 @@
-define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpInvestCompareService', 'angular-moment'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpInvestCompareService'], function(angular, tdpInvestModule) {
     tdpInvestModule.directive('tdpCalendar', function() {
         var controller = ['$scope', function($scope) {
 
