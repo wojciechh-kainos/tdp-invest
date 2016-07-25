@@ -20,10 +20,10 @@ module.exports = function(config) {
       'test/test-main.js'
     ],
 
-
     // list of files to exclude
     exclude: [
-      'application/require-config.js'
+      'application/require-config.js',
+      'lib/**/test/*.js'
     ],
 
 
@@ -58,12 +58,12 @@ module.exports = function(config) {
 
     // start these browsers
     // available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
-    browsers: ['PhantomJS'],
+    browsers: ['Chrome'],
 
 
     // Continuous Integration mode
     // if true, Karma captures browsers, runs the tests and exits
-    singleRun: true,
+    singleRun: false,
 
     // Concurrency level
     // how many browser should be started simultaneous

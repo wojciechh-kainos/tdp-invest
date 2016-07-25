@@ -11,8 +11,8 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
             tdpAuthenticationService.clearCredentials();
             $state.go('tdp.home');
         }
-        scope.$watch('$root.' + attributes.fieldname, function(newVal) {
-            scope.user = scope.$root[attributes.fieldname];
+        scope.$watch(tdpAuthenticationService.isUserLoggedIn, function(newVal) {
+            scope.user = tdpAuthenticationService.getCurrentUser();
         });
       },
     };

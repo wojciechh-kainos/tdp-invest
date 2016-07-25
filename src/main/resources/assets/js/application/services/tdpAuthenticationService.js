@@ -1,16 +1,10 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserService', 'application/services/tdpBase64Service'], function(angular, tdpInvestModule) {
-    tdpInvestModule.service("tdpAuthenticationService", function($http, $state, $cookieStore, $rootScope, tdpUserService, Restangular, tdpBase64Service) {
+    tdpInvestModule.service("tdpAuthenticationService", function($state, $cookieStore, $rootScope, tdpUserService, Restangular, tdpBase64Service) {
+
+        var currentUser = {};
 
         var login = function(username, password, errorCallback) {
-            tdpUserService.login({username:username, password:password}).then(function () {
-                           setCredentials(username, password);
-                           $state.go('tdp.home');
-                           console.log("user logged in");
-                           console.log($rootScope.currentUser);
-                       }, function() {
-                           console.log("user login fail");
-                           errorCallback(true);
-                       });
+            return tdpUserService.login({username:username, password:password});
         };
 
         var setCredentials = function(username, password) {
@@ -23,7 +17,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserS
                 }
             };
 
-            $rootScope.currentUser = {
+            currentUser = {
                 name: globals.currentUser.username
             };
 
@@ -35,28 +29,29 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUserS
 
         var clearCredentials = function() {
             $cookieStore.remove('globals');
-            $rootScope.currentUser = undefined;
+            currentUser = {};
             Restangular.setDefaultHeaders({});
         };
 
         var isUserLoggedIn = function() {
-            if ($rootScope.currentUser) {
-                return true;
-            } else {
-                return false;
-            }
+            return currentUser.name ? true : false;
         };
 
         var checkCookies = function() {
             var globals = $cookieStore.get('globals');
             if (globals) {
-                $rootScope.currentUser = {
+                currentUser = {
                     name: globals.currentUser.username
                 };
             }
         };
 
+        var getCurrentUser = function() {
+            return currentUser;
+        }
+
         this.checkCookies = checkCookies;
+        this.getCurrentUser = getCurrentUser;
         this.isUserLoggedIn = isUserLoggedIn;
         this.login = login;
         this.setCredentials = setCredentials;
