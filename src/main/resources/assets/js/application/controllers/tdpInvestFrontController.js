@@ -38,7 +38,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                 }
 
                 var date = new Date(record.date.year + "-" + record.date.monthValue + "-" + record.date.dayOfMonth);
-                if(date > startDate && date < endDate)
+                if(date >= startDate && date <= endDate)
                        return true;
                 return false;
         }
@@ -81,9 +81,15 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
 
         function getDateString(date) {
-            var newDate = new Date(date.year + "-" + date.monthValue + "-" + date.dayOfMonth);
-            return newDate.toISOString().slice(0,10).replace(/-/g,".");
+            return  date.dayOfMonth + "." + date.monthValue + "." + date.year;
         };
+
+        $scope.show = function(){
+            if(typeof $scope.dataForView != 'undefined'){
+                return $scope.dataForView.length > $scope.numPerPage;
+            }
+            return false;
+        }
 
         $scope.dateOptions = {
             formatYear: 'yy',
