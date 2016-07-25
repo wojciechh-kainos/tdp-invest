@@ -1,12 +1,11 @@
 package resources;
 
-<<<<<<< HEAD
+import org.junit.runner.RunWith;
+
 import auth.TdpInvestAuthenticator;
 import com.google.common.base.Optional;
 import DAO.TdpUserDAO;
-=======
-import dao.TdpUserDAO;
->>>>>>> origin/master
+import DAO.TdpUserDAO;
 import domain.TdpUser;
 import io.dropwizard.auth.AuthenticationException;
 import org.hibernate.HibernateException;

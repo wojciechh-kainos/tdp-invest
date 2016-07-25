@@ -1,88 +1,70 @@
 define(['angular'
     , 'application/tdpInvestModule'
     , 'application/controllers/tdpInvestPersonController'
-    , 'application/controllers/tdpInvestLoginController'
-    , 'application/controllers/tdpInvestRegisterController'
-    , 'application/controllers/tdpInvestNavbarController'
+    , 'application/directives/tdpInvestNavbarDirective'
+    , 'application/controllers/tdpInvestIndexController'
+    , 'application/controllers/tdpInvestDateController'
+    , 'application/controllers/tdpInvestButtonController'
     , 'application/controllers/tdpInvestChartController'
     , 'application/controllers/tdpInvestTableController'
-    , 'application/controllers/tdpInvestDateController'
-    , 'application/controllers/tdpInvestIndexController'
     , 'application/controllers/tdpInvestCompareInputController'
-    , 'application/controllers/tdpInvestButtonController'
+
 ], function (angular, tdpInvestModule) {
-    tdpInvestModule.config(function ($stateProvider, $urlRouterProvider) {
+    tdpInvestModule.config(function ($stateProvider) {
         $stateProvider
-            .state("root", {
-                url: "/",
-                abstract: "true",
-                templateUrl: 'html/partials/tdp-invest.html',
-                controller: 'tdpInvestIndexController',
+            .state("tdp", {
+                abstract: true,
+                views: {
+                    "@": {
+                        templateUrl: "html/partials/tdp-invest.html",
+                        controller: 'tdpInvestIndexController'
+                    }
+                },
                 resolve: {
-                        redirectIfNotAuthenticated: _redirectIfNotAuthenticated
-                    }
-            })
-                .state("root.home", {
-                    url: "^/home",
-                    views: {
-                         "table@root": {
-                             templateUrl: "html/partials/tdp-invest-table.html",
-                              controller: "tdpInvestTableController"
-                              }
-                    },
-                    resolve: {
-                    }
+                    redirectIfNotAuthenticated: _redirectIfNotAuthenticated
+                }
+                }).state("tdp.home", {
+                                      url: "^/home",
+                                      views: {
+                                           "table@tdp": {
+                                               templateUrl: "html/partials/tdp-invest-table.html",
+                                                controller: "tdpInvestTableController"
+                                                }
+                                      },
+                                      resolve: {
+                                      }
 
-                })
-                .state("root.compare", {
-                    url: "^/compare",
-                    views: {
-                         "table@root": {
-                             templateUrl: "html/partials/tdp-invest-table.html",
-                              controller: "tdpInvestTableController"
-                              },
-                         "userData@root": {
-                             templateUrl: "html/partials/tdp-invest-userData.html",
-                             controller: "tdpInvestCompareInputController"
-                             }
-                    },
-                    resolve: {
-                    }
-                })
-            .state("login", {
-                url: "/login",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-login.html",
-                        controller: "tdpInvestLoginController"
-                    }
-                }
-            })
-            .state("register", {
-                url: "/register",
-                views: {
-                    "@": {
-                        templateUrl: "html/partials/tdp-invest-register.html",
-                        controller: "tdpInvestRegisterController"
-                    }
-                }
+                                  })
+                                  .state("tdp.compare", {
+                                      url: "^/compare",
+                                      views: {
+                                           "table@tdp": {
+                                               templateUrl: "html/partials/tdp-invest-table.html",
+                                                controller: "tdpInvestTableController"
+                                                },
+                                           "userData@tdp": {
+                                               templateUrl: "html/partials/tdp-invest-userData.html",
+                                               controller: "tdpInvestCompareInputController"
+                                               }
+                                      },
+                                      resolve: {
+                                      }
+                                  })
+    });
+
+    function _redirectIfNotAuthenticated($cookieStore, $window, $http) {
+        var user = $cookieStore.get('currentUser') || {};
+
+        if (!user) {
+            $window.location.href = "/auth";
+        } else {
+            $http.defaults.headers.common['Authorization'] = 'Basic ' + user.authdata; // jshint ignore:line
+
+            return $http.get('/api/login').then(undefined, function () {
+                $window.location.href = "/auth";
             });
-        $urlRouterProvider.otherwise("/login");
-
-        function _redirectIfNotAuthenticated($q, $state, $cookieStore) {
-            var defer = $q.defer();
-            if ($cookieStore.get('currentUser')) {
-                defer.resolve();
-            } else {
-                $timeout(function () {
-                    $state.go("login");
-                });
-                defer.reject();
-            }
-            return defer.promise;
         }
-
-    })
+    }
 
     return tdpInvestModule;
 });

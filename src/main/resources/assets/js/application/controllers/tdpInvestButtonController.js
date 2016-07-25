@@ -7,7 +7,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
                 tdpInvestDataService.getRows(dataUrl, $scope.$parent.startDate, $scope.$parent.endDate)
                 .then(function(response) {
                     $scope.$parent.receivedData = response;
-                     if($state.current.name == "root.compare"){
+                     if($state.current.name == "tdp.compare"){
                         var input = $scope.$parent.input;
                         var receivedData = $scope.$parent.receivedData
                         var result = tdpInvestDataService.calculateFundIncome(input,receivedData);

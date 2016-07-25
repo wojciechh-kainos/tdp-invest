@@ -53,9 +53,10 @@ public class TdpInvestApplication extends Application<TdpInvestApplicationConfig
 
     @Override
     public void initialize(Bootstrap<TdpInvestApplicationConfiguration> bootstrap) {
-        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html"));
-        bootstrap.addBundle(migrationsBundle);
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets", "/", "index.html", "TdpInvest"));
+        bootstrap.addBundle(new FileAssetsBundle("src/main/resources/assets/js/application/auth", "/auth/", "index.html", "Auth"));
         bootstrap.addBundle(hibernateBundle);
+        bootstrap.addBundle(migrationsBundle);
 
         guiceBundle = GuiceBundle.<TdpInvestApplicationConfiguration>newBuilder()
                 .addModule(module)

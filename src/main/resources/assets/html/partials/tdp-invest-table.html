@@ -1,6 +1,6 @@
 <link href="style.css" rel="stylesheet" />
 
-<table class="table table-fixed" ng-if="currentStateName == 'root.home'" >
+<table class="table table-fixed" ng-if="currentStateName == 'tdp.home'" >
     <thead>
     <tr>
         <th class="col-xs-6">Date</th>
@@ -8,8 +8,8 @@
     </tr>
     </thead>
 </table>
-<div style="height:200px; overflow:auto;" ng-if="currentStateName == 'root.home'">
-<table class="table table-fixed" ng-if="currentStateName == 'root.home'">
+<div style="height:200px; overflow:auto;" ng-if="currentStateName == 'tdp.home'">
+<table class="table table-fixed" ng-if="currentStateName == 'tdp.home'">
     <tbody>
     <tr ng-repeat="row in receivedData track by row.id">
         <td class="col-xs-6">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>
@@ -19,7 +19,7 @@
 </table>
     </div>
 
-<table class="table table-fixed" ng-if="currentStateName == 'root.compare'">
+<table class="table table-fixed" ng-if="currentStateName == 'tdp.compare'">
     <thead>
     <tr>
         <th class="col-xs-5">Date</th>
@@ -29,8 +29,8 @@
     </thead>
 </table>
 
-<div style="height:200px; overflow:auto;" ng-if="currentStateName == 'root.compare'">
-<table class="table table-fixed" ng-if="currentStateName == 'root.compare'">
+<div style="height:200px; overflow:auto;" ng-if="currentStateName == 'tdp.compare'">
+<table class="table table-fixed" ng-if="currentStateName == 'tdp.compare'">
     <tbody>
         <tr ng-repeat="row in receivedData track by row.date">
         <td class="col-xs-5">{{row[columns[dateIndex]] | date: 'yyyy-MM-dd'}}</td>

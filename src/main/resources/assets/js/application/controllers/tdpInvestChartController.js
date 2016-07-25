@@ -16,7 +16,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
            for (var i = 0 ; i < length ; i++) {
                 var now = new Date(dataForChart[i][keys[dateIndex]]);
                 var now_utc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-                if($state.current.name == "root.home"){
+                if($state.current.name == "tdp.home"){
                     customDataHome.push([now_utc , dataForChart[i][keys[valIndex]]]);
                 }else
                     customDataHome.push([now_utc , $scope.$parent.dataInvest[i]]);
@@ -25,7 +25,7 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                 }
            }
 
-           if($state.current.name == "root.compare") {
+           if($state.current.name == "tdp.compare") {
                 $scope.chartConfig.series = [{
                     name: "Home",
                     data: customDataHome},
