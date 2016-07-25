@@ -6,7 +6,7 @@
                 <tr ng-repeat="row in $data">
                     <td data-title="'Amount'" sortable="'amount'">
                         <span editable-text="row.amount" e-name="amount" e-form="rowform" onbeforesave="checkAmount(rowform.$data)" e-required>
-                            {{ row.amount | currency: '$' || 'empty' }}
+                            {{ (row.amount | currency: '$') || 'empty' }}
                         </span>
                     </td>
                     <td data-title="'Rate'" sortable="'annualRate'">
@@ -16,12 +16,12 @@
                     </td>
                     <td data-title="'From date'" sortable="'startDate'">
                         <span editable-date="row.startDate" e-name="startDate" e-form="rowform" e-required>
-                            {{ row.startDate | date: 'yyyy-MM-dd' || 'empty' }}
+                            {{ (row.startDate | date: 'yyyy-MM-dd') || 'empty' }}
                         </span>
                     </td>
                     <td data-title="'To date'" sortable="'endDate'">
                         <span editable-date="row.endDate" e-name="endDate" e-form="rowform" e-required>
-                            {{ row.endDate | date: 'yyyy-MM-dd' || 'empty' }}
+                            {{ (row.endDate | date: 'yyyy-MM-dd') || 'empty' }}
                         </span>
                     </td>
                     <td style="white-space: nowrap;">
@@ -35,8 +35,8 @@
                             </button>
                         </form>
                         <div class="buttons" ng-show="!rowform.$visible">
-                            <button class="btn btn-default" target="_blank" ng-click="plot(rowform.$data)">plot</button>
-                            <button class="btn btn-primary" ng-click="rowform.$show()">edit</button>
+                            <button class="btn btn-default" target="_blank" ng-click="plot(rowform.$data, row)">plot</button>
+                            <button class="btn btn-primary" ng-click="editRow(rowform)">edit</button>
                             <button class="btn btn-danger" ng-click="removeRow(row.id)">delete</button>
                         </div>
                     </td>

@@ -28,7 +28,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
         };
 
         $scope.removeRow = function (dbId) {
-            tdpInvestmentService.deleteInvestment(dbId).then(function (success) {
+            tdpInvestmentService.deleteInvestment(dbId).then(function (response) {
                 $scope.tableConfig.reload().then(function (data) {
                     //necessary when you delete all rows on a certain page
                     if (data.length === 0 && $scope.tableConfig.total() > 0){
@@ -39,17 +39,31 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpInves
             });
         };
 
+        $scope.editRow = function(rowform){
+            rowform.$show();
+        };
+
         $scope.saveRow = function (row, dbId) {
             var investment = mergeObjects(dbId, row);
-            tdpInvestmentService.editInvestment(investment).then(function (success) {
+            tdpInvestmentService.editInvestment(investment).then(function (response) {
                 $scope.tableConfig.reload();
             })
         };
 
         $scope.addRow = function () {
             var investment = {amount: 0.0, annualRate: 0.0, startDate: null, endDate: null};
-            tdpInvestmentService.postInvestment(investment).then(function (success) {
-                $scope.tableConfig.reload();
+            tdpInvestmentService.postInvestment(investment).then(function (response) {
+                $scope.tableConfig.reload().then(function (data) {
+                    var currentPage = Math.floor($scope.tableConfig.total() / $scope.tableConfig.count());
+                    currentPage = currentPage === 0 ? currentPage + 1 : currentPage;
+
+                    if (data.length === $scope.tableConfig.count() && $scope.tableConfig.total() > 0 && $scope.tableConfig.total() % 2 === 1){
+                        $scope.tableConfig.page(currentPage + 1);
+                    } else{
+                        // $scope.tableConfig.page(currentPage);
+                    }
+                    $scope.tableConfig.reload();
+                });
             });
         };
 
