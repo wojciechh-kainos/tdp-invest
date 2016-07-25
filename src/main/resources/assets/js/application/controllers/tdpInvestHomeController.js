@@ -19,6 +19,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
         var unit = [];
 
         var plainData = data.plain();
+        console.log(plainData);
 
         for (var i = 0; i < plainData.length; i++) {
           var dateToFormat = new Date(plainData[i].date);
