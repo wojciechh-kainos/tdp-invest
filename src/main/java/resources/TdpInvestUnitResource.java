@@ -23,7 +23,6 @@ import java.util.List;
 public class TdpInvestUnitResource {
   private TdpIUnitDAO tdpIUnitDAO;
   private TdpInvestLoadDataService dataLoader;
-  private TdpIDateRange tdpIDateRange;
 
   @Inject
   public TdpInvestUnitResource(TdpIUnitDAO tdpIUnitDAO, TdpInvestLoadDataService dataLoader) {
@@ -47,9 +46,9 @@ public class TdpInvestUnitResource {
   @GET
   @Path("/loadData")
   @UnitOfWork
-  public String test() {
+  public Response readFile() {
     dataLoader.loadFromLocalFile();
-    return "x";
+    return Response.status(Response.Status.CREATED).build();
   }
 
   @POST
@@ -61,7 +60,6 @@ public class TdpInvestUnitResource {
           @FormDataParam("file") FormDataContentDisposition fileDetail) {
     dataLoader.loadFromUploadedFile(fileInputStream);
     return Response.status(Response.Status.CREATED).build();
-
   }
 
   @GET
@@ -79,7 +77,6 @@ public class TdpInvestUnitResource {
   @Consumes(MediaType.APPLICATION_JSON)
   @UnitOfWork
   public List<TdpIUnit> fetchAllWithinRange(TdpIDateRange tdpIDateRange) {
-
     return tdpIUnitDAO.findAllWithinRange(tdpIDateRange);
   }
 
