@@ -52,9 +52,11 @@
         </div>
     </form>
 </div>
-
-<div class="alert alert-info" ng-show="gain">
-    <h4>Investment gain: {{gain}}</h4>
-    <h4>Stock gain: {{stockGain}}</h4>
+<div class="alert alert-danger" id="errorAlert" ng-show="error">{{error}}</div>
+<div ng-hide="error">
+    <div class="alert alert-info" ng-show="gain">
+        <h4>Investment gain: {{gain}}</h4>
+        <h4>Stock gain: {{stockGain}}</h4>
+    </div>
+    <div id="investmentChart">Upload data for chart</div>
 </div>
-<div id="investmentChart">Upload data for chart</div>

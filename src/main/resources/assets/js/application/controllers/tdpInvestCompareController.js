@@ -5,57 +5,65 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
             $scope.investData = response.data;
         });
 
+        $scope.error = ""
+
         $scope.submit = function(){
 
-            if(typeof $scope.start !== undefined && typeof $scope.end !== undefined){
+            if(formValidation()){
 
-                var valuesList = [];
-                var dateList = [];
+                if(typeof $scope.start !== undefined && typeof $scope.end !== undefined){
 
-                var startDate = new Date($scope.startDate);
-                var endDate = new Date($scope.endDate);
-                var countedDate = startDate;
+                    var valuesList = [];
+                    var dateList = [];
 
-                var gain = $scope.amount;
-                var daysInYear = 365;
+                    var startDate = new Date($scope.startDate);
+                    var endDate = new Date($scope.endDate);
+                    var countedDate = startDate;
 
-                var days = dateDiffInDays(startDate, endDate);
-                var investOptionInDays = Math.floor(daysInYear / $scope.investOption);
-                var counter = 1;
-                var investPeriodsInYearNumber = $scope.investOption;
-                var investPercent = $scope.annualInterest/100;
+                    var gain = $scope.amount;
+                    var daysInYear = 365;
 
-                dateList.push(getDateString(startDate));
-                valuesList.push(gain);
+                    var days = dateDiffInDays(startDate, endDate);
+                    var investOptionInDays = Math.floor(daysInYear / $scope.investOption);
+                    var counter = 1;
+                    var investPeriodsInYearNumber = $scope.investOption;
+                    var investPercent = $scope.annualInterest/100;
 
-                for(i = 0; i <= days; i++){
-
-                    if(counter == investOptionInDays || investOptionInDays == 1){
-                        gain = gain * ((investPercent/investPeriodsInYearNumber) + 1);
-                        counter = 1;
-                    }
-
+                    dateList.push(getDateString(startDate));
                     valuesList.push(gain);
 
-                    countedDate = new Date(countedDate.setDate(countedDate.getDate()+1));
-                    dateList.push(getDateString(countedDate));
+                    for(i = 0; i <= days; i++){
 
-                    counter += 1;
+                        if(counter == investOptionInDays || investOptionInDays == 1){
+                            gain = gain * ((investPercent/investPeriodsInYearNumber) + 1);
+                            counter = 1;
+                        }
+
+                        valuesList.push(gain);
+
+                        countedDate = new Date(countedDate.setDate(countedDate.getDate()+1));
+                        dateList.push(getDateString(countedDate));
+
+                        counter += 1;
+                    }
+
+                    $scope.gain = gain.toFixed(2);
+                    var stockValuesList = []
+
+                    var stockGain = $scope.amount;
+                    var unitNumber = $scope.amount / $scope.investData[0].value;
+
+                    for(i = 1; i < days; i++){
+                        stockValuesList.push(stockGain);
+                        stockGain = unitNumber * $scope.investData[i].value;
+                    }
+                    $scope.stockGain = stockValuesList[stockValuesList.length-1].toFixed(2);
+                    prepareChart('investmentChart', dateList, valuesList, stockValuesList);
+
                 }
-
-                $scope.gain = gain.toFixed(2);
-                var stockValuesList = []
-
-                var stockGain = $scope.amount;
-                var unitNumber = $scope.amount / $scope.investData[0].value;
-
-                for(i = 1; i < days; i++){
-                    stockValuesList.push(stockGain);
-                    stockGain = unitNumber * $scope.investData[i].value;
-                }
-                $scope.stockGain = stockValuesList[stockValuesList.length-1].toFixed(2);
-                prepareChart('investmentChart', dateList, valuesList, stockValuesList);
-
+            }
+            else{
+                   $scope.error = "Invalid input data";
             }
         }
 
@@ -95,6 +103,21 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                         }]
                     });
         }
+
+       function formValidation(){
+
+                if($scope.annualInterest < 0 || $scope.annualInterest == undefined)
+                    return false;
+
+                if($scope.amount < 0 || $scope.amount == undefined)
+                    return false;
+
+                if($scope.investOption == undefined)
+                    return false;
+
+                $scope.error = ""
+                return true;
+            }
 
         var _MS_PER_DAY = 1000 * 60 * 60 * 24;
 
