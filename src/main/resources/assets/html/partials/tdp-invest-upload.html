@@ -3,6 +3,7 @@
         <h3>Upload file</h3>
     </div>
     <div class="panel-body">
+        <p class="error" ng-show="error">File upload failed. Remember that format of the file should be csv.</p>
         <div ng-show="!showGif">
             <input type="file" nv-file-select uploader="uploader"/><br/>
             <ul>
