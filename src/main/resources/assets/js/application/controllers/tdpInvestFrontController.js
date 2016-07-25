@@ -81,7 +81,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
 
         function getDateString(date) {
-            return  date.dayOfMonth + "." + date.monthValue + "." + date.year;
+            return  ("0" + date.dayOfMonth).slice(-2) + "." + ("0" + date.monthValue).slice(-2) + "." + date.year;
         };
 
         $scope.show = function(){

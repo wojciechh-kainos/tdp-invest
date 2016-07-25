@@ -1,7 +1,8 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpUploadService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestUploadController", function($scope, $stateParams, tdpUploadService) {
 
-        $scope.alert = ""
+        $scope.alert = "";
+        $scope.fileName = "";
         $scope.uploadFile = function(){
             var file = $scope.fileToUpload;
             $scope.uploadPromise = tdpUploadService.uploadFile(file)
