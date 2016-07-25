@@ -9,7 +9,7 @@ define(['angular'
     , 'application/controllers/tdpInvestLoginController'
     , 'application/controllers/tdpInvestRegisterController'
     , 'application/controllers/tdpInvestNavbarController'
-    , 'application/controllers/tdpInvestUpdateController'
+    , 'application/controllers/tdpInvestUploadController'
 
 
 ], function (angular, tdpInvestModule) {
@@ -62,7 +62,7 @@ define(['angular'
                 views: {
                     "@": {
                         templateUrl: "html/partials/tdp-invest-upload.html",
-                        controller : "tdpInvestUpdateController"
+                        controller: "tdpInvestUploadController"
                     }
                 },
                 resolve: {

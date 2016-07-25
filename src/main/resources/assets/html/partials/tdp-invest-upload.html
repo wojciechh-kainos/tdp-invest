@@ -3,15 +3,18 @@
         <h3>Upload file</h3>
     </div>
     <div class="panel-body">
-        <form action="/api/unit/upload" method="post" enctype="multipart/form-data" ng-show="!showGif">
-            <h4>Select a file : </h4>
-            <div class="form-group">
-                <input type="file" name="file" size="50"/>
-            </div>
-
-            <button class="btn btn-primary" type="submit" ng-click="showGif = true">Upload</button>
-        </form>
+        <p class="error" ng-show="error">File upload failed. Remember that format of the file should be csv.</p>
+        <div ng-show="!showGif">
+            <input type="file" nv-file-select uploader="uploader"/><br/>
+            <ul>
+                <li ng-repeat="item in uploader.queue">
+                    Name: <span ng-bind="item.file.name"></span><br/>
+                    <button ng-click="item.upload()" class="btn btn-primary">Upload</button>
+                </li>
+            </ul>
+        </div>
         <p class="upload" ng-show="showGif"><span class="glyphicon glyphicon-repeat spin"></span><br>Uploading</p>
     </div>
 </div>
+
 

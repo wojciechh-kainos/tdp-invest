@@ -1,7 +1,7 @@
 define(['angular', 'application/tdpInvestModule',  'application/services/tdpInvestCreateRequestsService'], function(angular, tdpInvestModule) {
     tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpInvestCreateRequestsService, tdpInvestCompareService) {
 
-        $scope.start_date = '2015-08-15';
+        $scope.start_date = '2015-07-15';
         $scope.end_date = '2016-07-20';
 
 

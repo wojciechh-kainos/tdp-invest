@@ -1,8 +1,8 @@
-define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpInvestCompareService'], function(angular, tdpInvestModule) {
+define(['angular', 'application/tdpInvestModule', 'ui-bootstrap', 'application/services/tdpInvestCompareService', 'angular-moment'], function(angular, tdpInvestModule) {
     tdpInvestModule.directive('tdpCalendar', function() {
         var controller = ['$scope', function($scope) {
 
-            $scope.start_date = new Date(2015, 7, 15);
+            $scope.start_date = new Date(2015, 8, 15);
             $scope.end_date = new Date();
 
             $scope.today = function() {
