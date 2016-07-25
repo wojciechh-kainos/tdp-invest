@@ -20,10 +20,10 @@ module.exports = function(config) {
       'test/test-main.js'
     ],
 
-
     // list of files to exclude
     exclude: [
-      'application/require-config.js'
+      'application/require-config.js',
+      'lib/**/test/*.js'
     ],
 
 

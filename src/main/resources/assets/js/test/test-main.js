@@ -36,7 +36,7 @@ require.config({
       },
       'restangular': ['angular', 'lodash'],
       'lodash': {
-        exports: "_"
+        exports: '_'
       },
       'angularMocks': ['angular'],
       'uiRouter' : ['angular'],

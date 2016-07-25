@@ -8,7 +8,7 @@ define(['angular', 'angularMocks', 'restangular','application/controllers/tdpInv
         var $scope;
         var $q;
 
-        beforeEach(inject(function ($controller, _$rootScope_, _$q_) {
+        beforeEach(inject(function ($controller, _$rootScope_, _$q_, tdpAuthenticationService) {
             $q = _$q_;
             $scope = _$rootScope_.$new();
             deferred = $q.defer();
