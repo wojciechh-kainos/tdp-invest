@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestFrontController", function($scope, $stateParams, tdpDataService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService', 'application/services/tdpChartService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestFrontController", function($scope, $stateParams, tdpDataService, tdpChartService) {
 
         var investData = [];
         var startDate = false;
@@ -55,30 +55,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                    valuesList.push(recordList[i].value)
                }
 
-               createChart(dateList, valuesList);
+               tdpChartService.createChart(dateList, valuesList);
         }
-
-        function createChart(dateList, valuesList){
-            Highcharts.chart('container', {
-                xAxis: {
-                    title: {
-                        text: 'Date'
-                    },
-                    categories: dateList
-                },
-                yAxis: {
-                     title: {
-                            text: 'Value'
-                     }
-                },
-                series: [{
-                    data: valuesList,
-                    name: 'Stock',
-                    step: 'left'
-                }]
-                });
-        };
-
 
         function getDateString(date) {
             return  date.dayOfMonth + "." + date.monthValue + "." + date.year;
