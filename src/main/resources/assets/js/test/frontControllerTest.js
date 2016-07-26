@@ -23,7 +23,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestFrontContro
                 {
                     date : {
                         dayOfMonth : 3,
-                        dayOfWeek : "THURSDAY",
+                        dayOfWeek : "WEDNESDAY",
                         dayOfYear : 308,
                         month : "NOVEMBER",
                         monthValue: 11,
@@ -57,14 +57,15 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestFrontContro
         });
 
         describe('When submitting form of select date range', function () {
+
             it('should show expected filtered table', function () {
                 deferred.resolve(allData);
-                $scope.$apply();
-
                 $scope.startDate = "Thu Nov 04 2004 00:00:00 GMT+0100 (CET)";
                 $scope.endDate ="Sun Nov 07 2004 00:00:00 GMT+0100 (CET)";
                 $scope.submitRange();
-                expect($scope.dataForView).toEqual(expectedFilteredData)
+                $scope.$apply();
+
+                setTimeout(function() { expect($scope.dataForView).toEqual(expectedFilteredData); done() }, 1000);
             });
         });
 
