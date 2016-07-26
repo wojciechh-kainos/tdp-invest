@@ -3,10 +3,13 @@
     <div class="col-xs-3">
         <form class="form-horizontal" name="fileUploadForm">
             <div class="form-group">
-                    <input type="file" id="file" file-model="fileToUpload"/>
+                <input type="file" id="file" file-model="fileToUpload" style="display: none;" />
+                <input class="btn btn-default" type="button" value="Choose file" onclick="document.getElementById('file').click();" />
             </div>
-
+            <div class="form-group">
+                <div class="alert alert-info" ng-show="fileToUpload">{{fileToUpload.name}}</div>
                 <button class="btn btn-default" ng-click="uploadFile()">Upload</button>
+            </div>
         </form>
     </div>
 </p>
