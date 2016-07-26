@@ -24,7 +24,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestFrontContro
                     date : {
                         dayOfMonth : 3,
                         dayOfWeek : "THURSDAY",
-                        dayOfYear : 309,
+                        dayOfYear : 308,
                         month : "NOVEMBER",
                         monthValue: 11,
                         year: 2004
@@ -35,6 +35,7 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestFrontContro
         };
 
         var expectedData = allData.data;
+        var expectedFilteredData = [allData.data[0]];
 
         beforeEach(inject(function ($controller, _$rootScope_, tdpDataService, tdpChartService, $q) {
             deferred = $q.defer();
@@ -55,8 +56,17 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestFrontContro
             });
         });
 
+        describe('When submitting form of select date range', function () {
+            it('should show expected filtered table', function () {
+                deferred.resolve(allData);
+                $scope.$apply();
 
-
+                $scope.startDate = "Thu Nov 04 2004 00:00:00 GMT+0100 (CET)";
+                $scope.endDate ="Sun Nov 07 2004 00:00:00 GMT+0100 (CET)";
+                $scope.submitRange();
+                expect($scope.dataForView).toEqual(expectedFilteredData)
+            });
+        });
 
     });
 });
