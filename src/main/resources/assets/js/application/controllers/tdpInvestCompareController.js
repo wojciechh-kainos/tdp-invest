@@ -9,7 +9,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
 
         $scope.submit = function(){
 
-            if(formValidation()){
+            if($scope.formValidation()){
 
                 if(typeof $scope.start !== undefined && typeof $scope.end !== undefined){
 
@@ -72,7 +72,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
         };
 
 
-        function prepareChart(type, date, investValues, stockValues ){
+       function prepareChart(type, date, investValues, stockValues ){
                 Highcharts.chart(type, {
                         title: {
                             text: 'Investment chart'
@@ -104,7 +104,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     });
         }
 
-       function formValidation(){
+       $scope.formValidation = function(){
 
                 if($scope.annualInterest < 0 || $scope.annualInterest == undefined)
                     return false;
