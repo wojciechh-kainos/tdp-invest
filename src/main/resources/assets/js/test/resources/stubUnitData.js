@@ -1,25 +1,40 @@
-define([], function() {
-    var stubUnitData = {};
+define([],
+	function(){
+        var data = [{
+          date:885423600000,
+          id:1,
+          value: 99.86}, {
+          date:885510000000,
+          id:2,
+          value: 99.86}, {
+          date:885769200000,
+          id:3,
+          value: 99.80}, {
+          date:885855600000,
+          id:4,
+          value: 99.46}, {
+          date:885942000000,
+          id:5,
+          value: 100.46}, {
+          date:886028400000,
+          id:6,
+          value: 101.46}
+        ];
 
-    var testData = [{date:883954800000,
-                     id:1,
-                     value:100},
-                    {date:884041200000,
-                      id:2,
-                      value:100},
-                    {date:884127600000,
-                      id:3,
-                      value:100},
-                    {date:884214000000,
-                      id:4,
-                      value:100}];
+		var getData = function() {
+		  return data;
+		};
 
-    stubUnitData.getAll = function() {
-        return testData;
-    };
-    stubUnitData.getAllWithinRange = function() {
-        return testData.slice(1,3);
-    };
+		var getDataWithinRange = function() {
+          return data.slice(1, 4);
+        };
 
-    return stubUnitData;
-});
+        var stubUnitData = {
+          getData: getData,
+          getDataWithinRange: getDataWithinRange
+        };
+
+        return stubUnitData;
+
+	}
+);

@@ -2,8 +2,6 @@
 define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitService'], function(angular, tdpInvestModule) {
   tdpInvestModule.controller("tdpInvestHomeController", function($rootScope, $scope, ChartConfigFactory, tdpUnitService, NgTableParams) {
       $scope.chartConfig = {};
-      $scope.maxDate = null;
-      $scope.minDate = null;
 
       $rootScope.title = "Home";
 
@@ -32,8 +30,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
 
 
         if (!$scope.dt && !$scope.dt2) {
-          $scope.dt = $scope.minDate = $scope.dateOptions.minDate = new Date(plainData[0].date);
-          $scope.dt2 = $scope.maxDate = $scope.dateOptions.maxDate = new Date(plainData[plainData.length - 1].date);
+          $scope.dt = $scope.minDate = new Date(plainData[0].date);
+          $scope.dt2 = $scope.maxDate = new Date(plainData[plainData.length - 1].date);
         }
 
         $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries, turboThreshold: 0}];
@@ -46,32 +44,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
           { field: "value", title: "Value", sortable: "value", show: true },
         ];
       }
-
-      ////////////////////////////////datepicker:
-
-      $scope.dateOptions = {
-       formatYear: 'yy',
-       maxDate: $scope.maxDate,
-       minDate: $scope.minDate,
-       startingDay: 1,
-       showWeeks: false
-      };
-
-      $scope.open1 = function() {
-        $scope.popup1.opened = true;
-      };
-
-      $scope.popup1 = {
-        opened: false
-      };
-
-      $scope.open2 = function() {
-        $scope.popup2.opened = true;
-      };
-
-      $scope.popup2 = {
-        opened: false
-      };
 
       //////////////////////////////////chart:
       $scope.updateChart = function(minDate, maxDate) {
@@ -89,6 +61,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
       $scope.chartConfig = ChartConfigFactory('Investment fund', 'Unit value over time', [], []);
       $scope.updateChart();
 
+      ////////////////////////////////datepicker:
       $scope.$watch("dt", function(value, oldValue){
         if(oldValue != undefined) {
           var newMinDate = new Date(value);

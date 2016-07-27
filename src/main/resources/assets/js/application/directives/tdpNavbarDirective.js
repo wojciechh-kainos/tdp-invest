@@ -1,5 +1,5 @@
 define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestModule) {
-  tdpInvestModule.directive('tdpNavbar', function($rootScope, tdpAuthenticationService, $state) {
+  tdpInvestModule.directive('tdpNavbar', function(tdpAuthenticationService, $state) {
     return {
       restrict: 'E',
       scope: {

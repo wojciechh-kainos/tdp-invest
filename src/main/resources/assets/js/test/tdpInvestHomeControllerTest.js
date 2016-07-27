@@ -23,23 +23,22 @@ define(['angular', 'stubUnitData', 'angularMocks', 'application/controllers/tdpI
 
         describe('When updating chart', function () {
             it('with with no range set should get all', inject(function () {
-                deferred.resolve({plain: function() { return stubUnitData.getAll();}});
+                deferred.resolve({plain: function() { return stubUnitData.getData();}});
 
                 scope.updateChart();
                 scope.$apply();
 
-                expect(scope.chartConfig.series[0].data.length).toEqual(4);
-
+                expect(scope.chartConfig.series[0].data.length).toEqual(6);
                 expect(tdpUnitService.getAll).toHaveBeenCalled();
             }));
 
             it('with with given range should get range', inject(function () {
-                deferred.resolve({plain: function() { return stubUnitData.getAllWithinRange();}});
+                deferred.resolve({plain: function() { return stubUnitData.getDataWithinRange();}});
 
-                scope.updateChart(884041200000, 884127600000);
+                scope.updateChart(885510000000, 884127600000);
                 scope.$apply();
 
-                expect(scope.chartConfig.series[0].data.length).toEqual(2);
+                expect(scope.chartConfig.series[0].data.length).toEqual(3);
                 expect(tdpUnitService.getAllWithinRange).toHaveBeenCalled();
             }));
 

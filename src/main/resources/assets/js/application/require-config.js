@@ -14,7 +14,8 @@ require.config({
         'ngCookies': 'lib/angular-cookies/angular-cookies',
         'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
         'flow': 'lib/ng-flow/dist/ng-flow-standalone.min',
-        'toastr': 'lib/angular-toastr/dist/angular-toastr.tpls'
+        'toastr': 'lib/angular-toastr/dist/angular-toastr.tpls',
+        'stubUnitData': 'test/resources/stubUnitData'
     },
     shim: {
         'angular': {
@@ -29,6 +30,9 @@ require.config({
         'ui.bootstrap': ['angular'],
         'flow': ['angular'],
         'toastr': ['angular'],
+        'stubUnitData': {
+          exports: 'stubUnitData'
+        }
     },
     deps: ['application/bootstrap']
 });

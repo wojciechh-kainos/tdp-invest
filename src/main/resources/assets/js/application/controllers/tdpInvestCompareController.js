@@ -3,8 +3,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
     $scope.investmentValue = 5000;
     $scope.investmentPercent = 3;
     $scope.chartConfig = {};
-    $scope.maxDate = null;
-    $scope.minDate = null;
 
     $rootScope.title = "Compare";
 
@@ -39,8 +37,8 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
       }
 
       if (!$scope.dt && !$scope.dt2) {
-        $scope.dt = $scope.minDate = $scope.dateOptions.minDate = new Date(plainData[0].date);
-        $scope.dt2 = $scope.maxDate = $scope.dateOptions.maxDate = new Date(plainData[plainData.length - 1].date);
+        $scope.dt = $scope.minDate = new Date(plainData[0].date);
+        $scope.dt2 = $scope.maxDate = new Date(plainData[plainData.length - 1].date);
       }
 
       $scope.chartConfig.series = [{name: 'funds investment', data: fundSeries, turboThreshold: 0}, {name: 'bank investment', data: bankSeries, turboThreshold: 0}];
@@ -64,32 +62,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
     $scope.updateChart();
 
   ////////////////////////////////datepicker:
-
-    $scope.dateOptions = {
-      formatYear: 'yy',
-      maxDate: $scope.maxDate,
-      minDate: $scope.minDate,
-      startingDay: 1,
-      showWeeks: false
-    };
-
-    $scope.open1 = function() {
-      $scope.popup1.opened = true;
-    };
-
-    $scope.popup1 = {
-      opened: false
-    };
-
-    $scope.open2 = function() {
-      $scope.popup2.opened = true;
-    };
-
-    $scope.popup2 = {
-      opened: false
-    };
-
-
     $scope.$watch("dt", function(value, oldValue){
       if(oldValue != undefined) {
         var newMinDate = new Date(value);
@@ -100,11 +72,11 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpUnitS
     });
 
     $scope.$watch("dt2",function(value, oldValue){
-    if(oldValue != undefined) {
-      var newMaxDate = new Date(value);
-      $scope.maxDate = newMaxDate;
+      if(oldValue != undefined) {
+        var newMaxDate = new Date(value);
+        $scope.maxDate = newMaxDate;
 
-      $scope.updateChart($scope.minDate, $scope.maxDate);
+        $scope.updateChart($scope.minDate, $scope.maxDate);
       }
     });
   });
