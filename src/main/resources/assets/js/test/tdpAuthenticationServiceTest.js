@@ -4,16 +4,12 @@ define(['angular', 'angularMocks', 'restangular', 'application/services/tdpBase6
         beforeEach(angular.mock.module('tdpInvestModule'));
 
         var deferred;
-        var scope;
-        var $q;
         var tdpBase64Service;
         var Restangular;
         var cookieStore;
         var tdpAuthenticationService;
 
-        beforeEach(inject(function (_$q_, _tdpBase64Service_, _Restangular_, _$cookieStore_, _tdpAuthenticationService_) {
-            $q = _$q_;
-            deferred = $q.defer();
+        beforeEach(inject(function (_tdpBase64Service_, _Restangular_, _$cookieStore_, _tdpAuthenticationService_) {
             tdpBase64Service = _tdpBase64Service_;
             Restangular = _Restangular_;
             cookieStore = _$cookieStore_;

@@ -4,25 +4,11 @@
     <div class="row">
         <div class="col-md-4">
             <label>Pick the start date:</label>
-                <p class="input-group">
-                    <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt" is-open="popup1.opened"
-                           datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open1()">
-                    <i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                </p>
+                <tdp-datepicker ng-model="dt" min-date="minDate" max-date="maxDate"></tdp-datepicker>
         </div>
         <div class="col-md-4">
             <label>Pick the finish date:</label>
-                <p class="input-group">
-                    <input type="text" class="form-control" show-button-bar="false" uib-datepicker-popup ng-model="dt2" is-open="popup2.opened"
-                           datepicker-options="dateOptions" close-text="Close" alt-input-formats="altInputFormats" />
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open2()">
-                    <i class="glyphicon glyphicon-calendar"></i></button>
-              </span>
-                </p>
+            <tdp-datepicker ng-model="dt2" min-date="minDate" max-date="maxDate"></tdp-datepicker>
         </div>
         <div class="col-md-4">
             <button ng-click="updateChart(minDate, maxDate)" class="btn btn-primary btn-lg btn-block show-me-btn">Show me!</button>
