@@ -20,5 +20,39 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                    }]
               });
         }
+
+
+        this.createChartWithTwoSeries = function(type, date, investValues, stockValues ){
+             Highcharts.chart(type, {
+                     title: {
+                         text: 'Investment chart'
+                     },
+
+                     xAxis: {
+                         title: {
+                              text: 'Year'
+                         },
+                         categories: date
+                     },
+
+                     yAxis: {
+                          title: {
+                                 text: 'Value'
+                          }
+                     },
+
+                     series: [{
+                         data: investValues,
+                         name: 'Investment',
+                         step: 'left'
+                     },
+                     {
+                         data: stockValues,
+                         name: 'Stock',
+                         step: 'left'
+                     }]
+                 });
+     }
+
     })
 });

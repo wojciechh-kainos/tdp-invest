@@ -1,5 +1,5 @@
-define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService'], function(angular, tdpInvestModule) {
-    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpDataService) {
+define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataService', 'application/services/tdpChartService', 'application/services/tdpInvestmentService'], function(angular, tdpInvestModule) {
+    tdpInvestModule.controller("tdpInvestCompareController", function($scope, $stateParams, tdpDataService, tdpChartService, tdpInvestmentService, $q) {
 
         tdpDataService.getInvestData().then(function(response){
             $scope.investData = response.data;
@@ -16,92 +16,26 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                     var valuesList = [];
                     var dateList = [];
 
-                    var startDate = new Date($scope.startDate);
-                    var endDate = new Date($scope.endDate);
-                    var countedDate = startDate;
+                    $q.all([tdpInvestmentService.getCountedInvestment($scope.startDate,$scope.endDate,
+                                                                            $scope.amount,  $scope.investOption,  $scope.annualInterest ),
+                            tdpInvestmentService.getCountedStockInvestment($scope.startDate,$scope.endDate,
+                                                                                 $scope.amount, $scope.investData)])
+                            .then(function(response){
 
-                    var gain = $scope.amount;
-                    var daysInYear = 365;
+                                        var investmentResponse = response[0];
+                                        var stockResponse = response[1];
 
-                    var days = dateDiffInDays(startDate, endDate);
-                    var investOptionInDays = Math.floor(daysInYear / $scope.investOption);
-                    var counter = 1;
-                    var investPeriodsInYearNumber = $scope.investOption;
-                    var investPercent = $scope.annualInterest/100;
-
-                    dateList.push(getDateString(startDate));
-                    valuesList.push(gain);
-
-                    for(i = 0; i <= days; i++){
-
-                        if(counter == investOptionInDays || investOptionInDays == 1){
-                            gain = gain * ((investPercent/investPeriodsInYearNumber) + 1);
-                            counter = 1;
-                        }
-
-                        valuesList.push(gain);
-
-                        countedDate = new Date(countedDate.setDate(countedDate.getDate()+1));
-                        dateList.push(getDateString(countedDate));
-
-                        counter += 1;
-                    }
-
-                    $scope.gain = gain.toFixed(2);
-                    var stockValuesList = []
-
-                    var stockGain = $scope.amount;
-                    var unitNumber = $scope.amount / $scope.investData[0].value;
-
-                    for(i = 1; i < days; i++){
-                        stockValuesList.push(stockGain);
-                        stockGain = unitNumber * $scope.investData[i].value;
-                    }
-                    $scope.stockGain = stockValuesList[stockValuesList.length-1].toFixed(2);
-                    prepareChart('investmentChart', dateList, valuesList, stockValuesList);
+                                        $scope.gain = investmentResponse.gain.toFixed(2);
+                                        $scope.stockGain = stockResponse.stockGain.toFixed(2);
+                                        tdpChartService.createChartWithTwoSeries('investmentChart', investmentResponse.dateList,
+                                                                                    investmentResponse.valuesList, stockResponse.stockValuesList);
+                            });
 
                 }
             }
             else{
                    $scope.error = "Invalid input data";
             }
-        }
-
-        function getDateString(date) {
-                return date.toISOString().slice(0,10).replace(/-/g,".");
-        };
-
-
-       function prepareChart(type, date, investValues, stockValues ){
-                Highcharts.chart(type, {
-                        title: {
-                            text: 'Investment chart'
-                        },
-
-                        xAxis: {
-                            title: {
-                                 text: 'Year'
-                            },
-                            categories: date
-                        },
-
-                        yAxis: {
-                             title: {
-                                    text: 'Value'
-                             }
-                        },
-
-                        series: [{
-                            data: investValues,
-                            name: 'Investment',
-                            step: 'left'
-                        },
-                        {
-                            data: stockValues,
-                            name: 'Stock',
-                            step: 'left'
-                        }]
-                    });
         }
 
        $scope.formValidation = function(){
@@ -118,14 +52,6 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
                 $scope.error = ""
                 return true;
             }
-
-        var _MS_PER_DAY = 1000 * 60 * 60 * 24;
-
-        function dateDiffInDays(a, b) {
-              var utc1 = Date.UTC(a.getFullYear(), a.getMonth(), a.getDate());
-              var utc2 = Date.UTC(b.getFullYear(), b.getMonth(), b.getDate());
-              return Math.floor((utc2 - utc1) / _MS_PER_DAY);
-        }
 
         $scope.dateOptions = {
             formatYear: 'yy',
@@ -144,7 +70,7 @@ define(['angular', 'application/tdpInvestModule', 'application/services/tdpDataS
         $scope.format = 'dd.MM.yyyy';
         $scope.altInputFormats = ['M!/d!/yyyy'];
 
-         $scope.popup1 = {
+        $scope.popup1 = {
             opened: false
         };
 

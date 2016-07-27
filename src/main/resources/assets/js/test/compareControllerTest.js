@@ -23,11 +23,10 @@ define(['angular', 'angularMocks', 'application/controllers/tdpInvestCompareCont
                    ]
             };
 
-        beforeEach(inject(function ($controller, _$rootScope_, tdpDataService, tdpChartService, $q) {
+        beforeEach(inject(function ($controller, _$rootScope_, tdpDataService, $q) {
             deferred = $q.defer();
             $scope = _$rootScope_.$new();
             dataService = tdpDataService;
-
             spyOn(dataService, 'getInvestData').and.returnValue(deferred.promise);
             var controller = $controller('tdpInvestCompareController', {$scope: $scope, tdpDataService: dataService});
 
