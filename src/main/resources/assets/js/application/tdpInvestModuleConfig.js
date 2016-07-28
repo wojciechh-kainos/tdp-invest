@@ -64,7 +64,7 @@ define(['angular'
               }
             });
 
-        $urlRouterProvider.otherwise("tdp.home");
+        $urlRouterProvider.otherwise("/tdp/home");
         RestangularProvider.setBaseUrl('/api');
 
 

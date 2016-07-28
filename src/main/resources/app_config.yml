@@ -12,10 +12,10 @@ database:
   driverClass: org.postgresql.Driver
 
   # the username
-  user: malgorzatar
+  user: dawidkw
 
   # the JDBC URL
-  url: jdbc:postgresql://localhost/malgorzatar
+  url: jdbc:postgresql://localhost/dawidkw
 
   # any properties specific to your JDBC driver:
   properties:

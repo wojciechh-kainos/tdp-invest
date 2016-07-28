@@ -8,7 +8,9 @@ import java.security.Principal;
 @Table(name="users")
 @NamedQueries({
 		@NamedQuery(name = "TdpIUser.findByUsername",
-				query = "select u from TdpIUser u where username = :username")})
+				query = "select u from TdpIUser u where username = :username"),
+		@NamedQuery(name = "TdpIUser.deleteByUsername",
+				query = "delete from TdpIUser where username = :username")})
 public class TdpIUser implements Principal{
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,0 +1,7 @@
+defaultUrl: http://localhost:9002/#/tdp
+
+webDriver: webdriver.chrome.driver
+
+webDriverProperty: chromedriver
+
+apiUrl: http://localhost:9002/api

@@ -1,8 +1,8 @@
-<div class="container-fluid">
+<div class="container-fluid" id="loginPageContent">
     <div class="col-md-6 col-md-offset-3">
         <h2>Login</h2>
         <form name="form" ng-submit="login()" role="form">
-            <div ng-show="error" class="alert alert-danger">
+            <div ng-show="error" class="alert alert-danger" id="errorAlert">
                 <strong>Error!</strong> Incorrect username/password.
             </div>
             <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
@@ -16,7 +16,7 @@
                 <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
             </div>
             <div class="form-actions">
-                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary">Login</button>
+                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" id="loginButton">Login</button>
                 <a ui-sref="tdp.register" class="btn btn-link">Register</a>
             </div>
         </form>

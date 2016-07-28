@@ -36,6 +36,15 @@ public class TdpInvestAuthResource {
 		}
 	}
 
+	@DELETE
+	@Path("/delete/{username}")
+	@UnitOfWork
+	public Response delete(@PathParam("username") String username) {
+		userDAO.deleteByUsername(username);
+		return Response.status(Response.Status.OK).build();
+
+	}
+
 	@GET
 	@Path("/valid")
 	public String valid(@Auth TdpIUser tdpUser) throws AuthenticationException {

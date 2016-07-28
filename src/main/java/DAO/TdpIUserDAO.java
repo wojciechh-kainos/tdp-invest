@@ -24,4 +24,7 @@ public class TdpIUserDAO extends AbstractDAO<TdpIUser> {
 	public TdpIUser findByUsername(String username) {
 		return uniqueResult(namedQuery("TdpIUser.findByUsername").setParameter("username", username));
 	}
+	public int deleteByUsername(String username) {
+		return namedQuery("TdpIUser.deleteByUsername").setParameter("username", username).executeUpdate();
+	}
 }
