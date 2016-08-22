@@ -9,5 +9,14 @@ define(['angular', 'application/tdpInvestModule'], function(angular, tdpInvestMo
                    $scope.error = true;
                });
         };
+
+        $scope.events = [
+            { id:1, text:"Task A-12458",
+              start_date: new Date(2016, 06, 30, 9, 0),
+              end_date: new Date(2016, 06, 30, 16, 0) },
+            { id:2, text:"Task A-83473",
+              start_date: new Date(2016, 06, 28, 9, 0),
+              end_date: new Date(2016, 06, 30, 16, 0) }
+          ];
   });
 });

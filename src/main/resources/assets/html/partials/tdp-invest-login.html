@@ -1,24 +1,971 @@
-<div class="container-fluid" id="loginPageContent">
-    <div class="col-md-6 col-md-offset-3">
-        <h2>Login</h2>
-        <form name="form" ng-submit="login()" role="form">
-            <div ng-show="error" class="alert alert-danger" id="errorAlert">
-                <strong>Error!</strong> Incorrect username/password.
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': form.username.$dirty && form.username.$error.required }">
-                <label for="username">Username</label>
-                <input type="text" name="username" id="username" class="form-control" ng-model="username" required />
-                <span ng-show="form.username.$dirty && form.username.$error.required" class="help-block">Username is required</span>
-            </div>
-            <div class="form-group" ng-class="{ 'has-error': form.password.$dirty && form.password.$error.required }">
-                <label for="password">Password</label>
-                <input type="password" name="password" id="password" class="form-control" ng-model="password" required />
-                <span ng-show="form.password.$dirty && form.password.$error.required" class="help-block">Password is required</span>
-            </div>
-            <div class="form-actions">
-                <button type="submit" ng-disabled="form.$invalid" class="btn btn-primary" id="loginButton">Login</button>
-                <a ui-sref="tdp.register" class="btn btn-link">Register</a>
-            </div>
-        </form>
-    </div>
+<div class="timeline-contaniner">
+    <table class="outer">
+        <thead>
+            <tr class="outer-row">
+                <td class="outer-cell"></td>
+                <td class="outer-cell">
+                    <table class="header-table">
+                        <tr>
+                            <td></td>
+                            <td class="spacing"></td><td>WJ</td>
+                            <td class="spacing"></td><td>AJ</td>
+                            <td class="spacing"></td><td>KJ</td>
+                            <td class="spacing"></td><td>UJ</td>
+                            <td class="spacing"></td><td>LJ</td>
+                            <td class="spacing"></td><td>ZJ</td>
+                            <td class="spacing">
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </thead>
+        <tbody>
+            <tr class="outer-row">
+                <td class="outer-cell">MONDAY</td>
+                <td class="outer-cell">
+                    <table class="inner">
+                        <tr>
+                            <td class="times">09:00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="times">09:30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="outer-row">
+                <td class="outer-cell">TUESDAY</td>
+                <td class="outer-cell">
+                    <table class="inner">
+                        <tr>
+                            <td class="times">09:00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="times">09:30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="outer-row">
+                <td class="outer-cell">WEDNESDAY</td>
+                <td class="outer-cell">
+                    <table class="inner">
+                        <tr>
+                            <td class="times">09:00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="times">09:30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="outer-row">
+                <td>THURSDAY</td>
+                <td class="outer-cell">
+                    <table class="inner">
+                        <tr>
+                            <td class="times">09:00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="times">09:30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="outer-row">
+                <td class="outer-cell">FRIDAY</td>
+                <td class="outer-cell">
+                    <table class="inner">
+                        <tr>
+                            <td class="times">09:00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td>
+
+                        </tr>
+                        <tr>
+                            <td class="times">09:30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">10.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">11.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">12.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">13.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+                            <td class="spacing"></td><td class="green slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">14.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="green"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">15.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.00</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+
+                            <td class="spacing"></td>
+                        </tr>
+                        <tr>
+                            <td class="times">16.30</td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="red slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                            <td class="spacing"></td><td class="slot"></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
 </div>
+
+<style>
+
+    .outer {
+        margin: auto;
+    }
+    .outer, .outer-cell {
+        border: 1px solid black;
+        text-align: center;
+    }
+
+    .header-table td{
+        font-size: 16px !important;
+        padding-top: 5px;
+        padding-bottom: 5px;
+    }
+    .inner td {
+        border-bottom: 0.1px dashed black;
+    }
+    .inner td, .header-table td {
+        width: 25px;
+        height: 9px;
+        font-size: 6.5px ;
+        font-weight: bold;
+    }
+
+    .spacing {
+        width: 15px !important;
+    }
+    .inner tr:last-child * {
+        border-bottom: none;
+    }
+
+    .red {
+        background-color: #ff3823;
+    }
+
+    .green {
+        background-color: #72bb53;
+    }
+</style>

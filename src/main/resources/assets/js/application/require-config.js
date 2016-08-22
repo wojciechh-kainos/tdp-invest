@@ -15,7 +15,8 @@ require.config({
         'ui.bootstrap': 'lib/angular-bootstrap/ui-bootstrap-tpls.min',
         'flow': 'lib/ng-flow/dist/ng-flow-standalone.min',
         'toastr': 'lib/angular-toastr/dist/angular-toastr.tpls',
-        'stubUnitData': 'test/resources/stubUnitData'
+        'stubUnitData': 'test/resources/stubUnitData',
+        'scheduler': 'lib/scheduler/codebase/dhtmlxscheduler'
     },
     shim: {
         'angular': {

@@ -32,3 +32,8 @@ a:hover {
     font-family: "'Unica One', sans-serif";
 
 }
+
+.yellow_section {
+    background-color: #ffa749;
+    opacity: 0.25;
+}
